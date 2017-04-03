@@ -1,2 +1,9 @@
+.header .logo-box a {
+  display: block; }
+  .header .logo-box a img {
+    height: 40px; }
+body {
+  font-size: 15px;
+  line-height: 24px; }
 
 /*# sourceMappingURL=app.css.map*/

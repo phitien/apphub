@@ -1,3 +1,7 @@
+import '../sass/styles.scss'
+
+import React from 'react'
+import {Router} from 'react-router'
 import Application from './Application'
 
 export default class RoutesApplication extends Application {

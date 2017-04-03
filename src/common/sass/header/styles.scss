@@ -1,0 +1,14 @@
+.header {
+  height: 82px;display: flex;flex-direction: row;align-items: center;justify-content: space-between;
+  .logo-box {
+    a {
+      display: block;
+      img {
+        height: 36px;
+      }
+    }
+  }
+  .search-box {
+    flex: 1;
+  }
+}

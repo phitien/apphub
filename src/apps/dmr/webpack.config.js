@@ -49,6 +49,7 @@ module.exports = {
             template: 'template/index.html'
         }),
         new CopyWebpackPlugin([
+            { from: rootPath + '/src/static', to: rootPath + '/public/static' },
             { from: rootPath + '/node_modules/patternfly/dist', to: rootPath + '/public/patternfly' }
         ])
     ]

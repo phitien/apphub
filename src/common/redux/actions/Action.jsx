@@ -1,12 +1,12 @@
 export default class Action {
     constructor(type) {
-        this.type = type
+        this.__type = type
     }
     get fn() {
-        if (!this.type) throw 'Action has no type'
+        if (!this.__type) throw 'Action has no type'
         return (data) => {return (dispatch) => {
             dispatch({
-                type: this.type,
+                type: this.__type,
                 data
             })
         }}

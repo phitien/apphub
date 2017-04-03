@@ -1,4 +1,4 @@
 export default class UserProfile {
-    get isLogged() {return false}
+    get isLogged() {return true}
     get displayName() {return 'Phi Tien'}
 }

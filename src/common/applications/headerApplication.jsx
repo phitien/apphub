@@ -1,5 +1,6 @@
 import '../sass/header/styles.scss'
 
+import React from 'react'
 import Application from './Application'
 import headerReducer from '../redux/reducers/headerReducer'
 import Header from '../redux/components/Header'

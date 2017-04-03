@@ -6,7 +6,7 @@ export default class LogoBox extends Component {
     render() {
         return <div className={this.className}>
             <a>
-                <img className='svg-image' width='144' height='60' alt='Standard Chartered' src='/public/images/standard_chartered_logo_svg.svg'/>
+                <img className='svg-image' alt='Standard Chartered' src='/public/static/images/standard_chartered_logo_svg.svg'/>
             </a>
         </div>
     }

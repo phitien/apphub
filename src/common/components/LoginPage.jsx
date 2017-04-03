@@ -1,16 +1,14 @@
 import React from 'react'
 import Page from './Page'
-import {TextField, RaisedButton} from 'react-form'
+import {TextField, RaisedButton} from 'material-ui'
 
 export default class LoginPage extends Page {
     get componentClassName() {return `container-fluid page login-page`}
-    get children() {
-        return <div className={this.className}>
-            <form>
-                <TextField hintText='User account' floatingLabelText='User account'/><br />
-                <TextField hintText='Password' floatingLabelText='Password'/><br />
-                <RaisedButton label="Primary" primary={true}/>
-            </form>
-        </div>
-    }
+    children = () => <form className='login-form'>
+        <TextField type='text' hintText='User account' floatingLabelText='User account' fullWidth={true}/>
+        <br/>
+        <TextField type='password' hintText='Password' floatingLabelText='Password' fullWidth={true}/>
+        <br/>
+        <RaisedButton label="Login" primary={true} fullWidth={true}/>
+    </form>
 }

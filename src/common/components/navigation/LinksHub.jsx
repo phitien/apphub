@@ -3,12 +3,9 @@ import Component from '../Component'
 
 export default class LinksHub extends Component {
     get componentClassName() {return 'links-hub'}
-    get children() {return !this.util.user.isLogged ? null :
-        <div>LinksHub</div>
-    }
-    render() {
-        return <div className={this.className}>
-            {this.children}
+    children = () => <div>Links Hub</div>
+    render = () => !this.util.user.isLogged ? null :
+        <div className={this.className}>
+            {this.children()}
         </div>
-    }
 }

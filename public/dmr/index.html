@@ -9,18 +9,32 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/public/patternfly/css/patternfly.min.css" >
-  <link rel="stylesheet" href="/public/patternfly/css/patternfly-additions.min.css" >
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--link rel="stylesheet" href="/public/patternfly/css/patternfly.min.css">
+  <link rel="stylesheet" href="/public/patternfly/css/patternfly-additions.min.css">
   <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src="/public/patternfly/js/patternfly.min.js"></script>
+  <script src="/public/patternfly/js/patternfly.min.js"></script-->
 
 <link href="/public/dmr/app.css" rel="stylesheet"></head>
 <body>
-
-  <div id='header'></div>
-  <div id='container'></div>
-  <div id='footer'></div>
+  <script>
+    var WebFontConfig = {
+      google: { families: [ 'Roboto:400,300,500:latin' ] }
+    };
+    (function() {
+      var wf = document.createElement('script');
+      wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+      '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+      wf.type = 'text/javascript';
+      wf.async = 'true';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(wf, s);
+    })();
+  </script>
+  <div id="header"></div>
+  <div id="container"></div>
+  <div id="footer"></div>
 
 <script type="text/javascript" src="/public/dmr/app.js"></script></body>
 </html>
