@@ -21,7 +21,7 @@ class LinksHub extends Component {
                     {item.title}
                     {item.children && item.children.length > 0 ? <i className='material-icons'>chevron_right</i> : null}
                 </a>
-                <div className='description'>{item.description}</div>
+                {!item.description ? null : <div className='description'>{item.description}</div>}
                 {this.renderMenu(item.children)}
             </li>)}
         </ul>
