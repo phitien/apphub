@@ -1,0 +1,21 @@
+[{
+  "title": "Data Model Repositories",
+  "description": "",
+  "url": "/public/dmr/search",
+  "children": [{
+    "title": "Dashboard",
+    "description": "",
+    "url": "/public/dmr",
+    "children": []
+  },{
+    "title": "Search",
+    "description": "Search for models",
+    "url": "/public/dmr/search",
+    "children": []
+  }]
+},{
+  "title": "Exception Manager",
+  "description": "",
+  "url": "/public/exception",
+  "children": []
+}]

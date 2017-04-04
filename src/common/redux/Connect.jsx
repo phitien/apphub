@@ -6,12 +6,13 @@ export default class Connect {
         this.__klass = klass
     }
     get mapStateToProps() {return (state, ownProps) => {
-        return state
+        return state ? state : {menus: [], modal: null}
     }}
     get mapDispatchToProps() {return (dispatch, ownProps) => {
         return {
-            addModal: (new Action('ADD_MODAL')).fn,
-            removeModal: (new Action('REMOVE_MODAL')).fn
+            addMenus: (new Action(dispatch, 'ADD_MENUS')).fn,
+            addModal: (new Action(dispatch, 'ADD_MODAL')).fn,
+            removeModal: (new Action(dispatch, 'REMOVE_MODAL')).fn
         }
     }}
     get klass() {

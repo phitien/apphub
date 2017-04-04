@@ -3,12 +3,11 @@ import Page from './Page'
 import {TextField, RaisedButton} from 'material-ui'
 
 export default class LoginPage extends Page {
-    get componentClassName() {return `container-fluid page login-page`}
+    get pageClassName() {return `login-page`}
     children = () => <form className='login-form'>
-        <TextField type='text' hintText='User account' floatingLabelText='User account' fullWidth={true}/>
-        <br/>
-        <TextField type='password' hintText='Password' floatingLabelText='Password' fullWidth={true}/>
-        <br/>
+        <h1>Sign in</h1>
+        <TextField type='text' hintText='User account' fullWidth={true}/>
+        <TextField type='password' hintText='Password' fullWidth={true} style={{marginTop: 12, marginBottom: 12}}/>
         <RaisedButton label="Login" primary={true} fullWidth={true}/>
     </form>
 }

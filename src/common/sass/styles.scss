@@ -1,12 +1,24 @@
+@import "./constants/__init__.scss";
+.default-box {
+  background-color: $bg-color;
+  color: $text-color;
+}
+.grey-box {
+  background-color: $bg-grey-color;
+  color: $text-grey-color;
+}
+.dark-box {
+  background-color: $bg-dark-color;
+  color: $text-dark-color;
+}
+
 html {
   height: 100%;
 }
 body {
-  font-size: 15px;
-  line-height: 24px;
-  margin: 0;
-  padding: 12px;
-  min-height: 100%;display: flex;flex-direction: column;
+  @extend .default-box;
+  font-family: sans-serif;font-size: $font-size;
+  margin: 0;padding: 0;min-height: 100%;display: flex;flex-direction: column;
   #header,#container,#footer {width: 100%;}
   #container {
     flex: 1;display: flex;flex-direction: column;
@@ -16,12 +28,20 @@ body {
         flex: 1;display: flex;flex-direction: column;
       }
       .login-page {
-        justify-content: flex-end;
+        align-items: center;justify-content: center;
         .login-form {
           width: 30%;
-          margin: 0 48px 48px;
+          padding: 24px;
+          border-radius: 3px;
+          background-color: rgba(255, 255, 255, .9);
+          h1 {
+            color: $blue;
+          }
         }
       }
     }
   }
 }
+a {cursor: pointer;}
+h1,h2 {font-weight: normal;}
+h3,h4,h5 {font-weight: normal;}

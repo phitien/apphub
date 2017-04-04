@@ -18,14 +18,25 @@ router.use(function(req, res, next) {
 	next();
 });
 
+// on routes that end in /menus
+// ----------------------------------------------------
+router.route('/menus')
+	.get(function(req, res) {
+    fs.readFile(`src/json/menus.json`, 'utf8', function (err, data) {
+      if (err) console.log(err);
+      res.setHeader('Content-Type', 'application/json');
+      res.send(data);
+    });
+	});
+
 // on routes that end in /users/:user_id
 // ----------------------------------------------------
 router.route('/users/:user_id')
-	// get the user with that id
 	.get(function(req, res) {
-    fs.readFile(`/src/json/users/user-${req.params.user_id}.json`, 'utf8', function (err, data) {
+    fs.readFile(`src/json/users/user-${req.params.user_id}.json`, 'utf8', function (err, data) {
       if (err) console.log(err);
-      res.json(data);
+      res.setHeader('Content-Type', 'application/json');
+      res.send(data);
     });
 	});
 

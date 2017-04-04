@@ -3,7 +3,8 @@ import Component from './Component'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 export default class Page extends Component {
-    get componentClassName() {return `container-fluid page`}
+    get componentClassName() {return `container-fluid light-dark-box page ${this.pageClassName}`}
+    get pageClassName() {return ''}
     children = () => this.props.children
     modal = () => this.props.modal
     render = () => <MuiThemeProvider><div className={this.className}>

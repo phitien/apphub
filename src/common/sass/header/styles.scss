@@ -1,10 +1,38 @@
+@import "../constants/__init__.scss";
+
 .header {
-  height: 82px;display: flex;flex-direction: row;align-items: center;justify-content: space-between;
+  height: $header-height - 2*$margin;padding: $margin;position: relative;display: flex;flex-direction: row;align-items: center;
+  .links-hub {
+    .icon {display: flex;align-items: center;}
+    ul.menus {
+      position: fixed;top: $header-height;left: 0;bottom: 0;width: 240px;z-index: 10;
+      display: block;margin: 0;padding: $margin 0;background-color: #f4f4f4;
+      li {
+        display: block;margin: 0;padding: 0 $margin;
+        a {display: flex;align-items: center;justify-content: space-between;padding: 0 0 8px 0;
+          &:hover {
+            color: $blue;
+          }
+        }
+        ul {
+          display: none;
+        }
+        &:hover {
+          &.has-children {
+            ul {
+              position: absolute;left: 100%;top: 0;
+              display: block;margin: 0;padding: $margin 0;border: 1px solid #cecece;
+            }
+          }
+        }
+      }
+    }
+  }
   .logo-box {
+    margin: 0 $margin;
     a {
-      display: block;
       img {
-        height: 36px;
+        height: $header-height - 2*$margin;
       }
     }
   }

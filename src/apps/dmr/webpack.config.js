@@ -22,7 +22,12 @@ module.exports = {
         }],
     },
     devServer:{
-        contentBase: 'public'
+        contentBase: 'public',
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
+          'Access-Control-Allow-Headers': 'X-Requested-With, content-type, Authorization'
+        }
     },
     resolve: {
         extensions: ['.js', '.jsx']
@@ -50,6 +55,7 @@ module.exports = {
         }),
         new CopyWebpackPlugin([
             { from: rootPath + '/src/static', to: rootPath + '/public/static' },
+            { from: rootPath + '/src/json', to: rootPath + '/public/api' },
             { from: rootPath + '/node_modules/patternfly/dist', to: rootPath + '/public/patternfly' }
         ])
     ]
