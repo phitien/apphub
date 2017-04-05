@@ -18,7 +18,51 @@
     "xpath": "xpath",
     "context": "context",
     "description": "description",
-    "children": []
+    "children": [{
+      "model": "Node1.1",
+      "type": "node1.1",
+      "field": "node1.1",
+      "consumner": "consumner",
+      "source": "consumner",
+      "product": "product",
+      "xpath": "xpath",
+      "context": "context",
+      "description": "description",
+      "children": []
+    },{
+      "model": "Node1.2",
+      "type": "node1.2",
+      "field": "node1.2",
+      "consumner": "consumner",
+      "source": "consumner",
+      "product": "product",
+      "xpath": "xpath",
+      "context": "context",
+      "description": "description",
+      "children": [{
+        "model": "Node1.2.1",
+        "type": "node1.2.1",
+        "field": "node1.2.1",
+        "consumner": "consumner",
+        "source": "consumner",
+        "product": "product",
+        "xpath": "xpath",
+        "context": "context",
+        "description": "description",
+        "children": []
+      },{
+        "model": "Node1.2.2",
+        "type": "node1.2.2",
+        "field": "node1.2.2",
+        "consumner": "consumner",
+        "source": "consumner",
+        "product": "product",
+        "xpath": "xpath",
+        "context": "context",
+        "description": "description",
+        "children": []
+      }]
+    }]
   },{
     "model": "Node2",
     "type": "node2",

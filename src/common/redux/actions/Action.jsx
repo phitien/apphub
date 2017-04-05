@@ -41,7 +41,7 @@ export class LoadMenusAction extends Action {
 export class UpdateMenusAction extends Action {
     get type() {return CONSTANTS.UPDATE_MENUS}
     beforeDispatch = (data) => {
-        console.log(data)
+        // console.log(data)
     }
 }
 export class LoginAction extends Action {

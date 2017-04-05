@@ -2,12 +2,12 @@ import '../sass/header/styles.scss'
 
 import React from 'react'
 import Application from './Application'
-import navigationReducer from '../redux/reducers/navigationReducer'
+import reducer from '../redux/reducers/reducer'
 import Header from '../components/navigation/Header'
 
 class HeaderApplication extends Application {
     get container() {return 'header'}
-    get reduxStore() {return this.createStore(navigationReducer)}
+    get reduxStore() {return this.createStore(reducer)}
     get children() {return <Header/>}
     afterRender = (e) => addEventListener('beforeunload', this.onBeforeUnload)
     onBeforeUnload = (e) => {

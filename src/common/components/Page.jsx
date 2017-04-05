@@ -1,6 +1,9 @@
 import React from 'react'
 import Component from './Component'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import injectTapEventPlugin from 'react-tap-event-plugin'
+
+injectTapEventPlugin()
 
 export default class Page extends Component {
     get componentClassName() {return `container-fluid grey-box page ${this.pageClassName}`}

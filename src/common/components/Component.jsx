@@ -18,7 +18,7 @@ export default class Component extends React.Component {
     componentWillUnmount() {this.__mounted = false}
     refresh() {
         if (this.__mounted) {
-            this.setState({refresh: !this.state.refresh})
+            this.setState(this.state)
         }
     }
     setError(field, msg) {

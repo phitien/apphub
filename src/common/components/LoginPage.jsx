@@ -36,7 +36,7 @@ class LoginPage extends Page {
         <TextField type='password' ref={e => this.passwordInput = e}  style={{marginTop: 12, marginBottom: 12}}
             errorText={this.state.validationErrors.password}
             hintText='Password' fullWidth={true} />
-        <RaisedButton label="Login" primary={true} fullWidth={true} onClick={this.onLogin}/>
+        <RaisedButton label='Login' primary={true} fullWidth={true} onClick={this.onLogin}/>
     </form>
 }
 export default (new Connect(LoginPage)).klass

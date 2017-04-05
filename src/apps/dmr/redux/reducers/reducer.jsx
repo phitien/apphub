@@ -1,11 +1,14 @@
 import {DMRCONSTANTS} from '../actions/Action'
+import assign from 'object-assign'
 
-const reducer = (state = {root: null}, action) => {
+const reducer = (state = {}, action) => {
     switch (action.type) {
         case DMRCONSTANTS.LOADED_ROOT:
-            return {root: action.data}
+            return assign({}, state, {root: action.data})
+        case DMRCONSTANTS.TOOGLE_LEFT_SIDEBAR:
+            return assign({}, state, {hideLeftSidebar: action.data})
         default:
-            return state
+            return assign({}, state)
     }
 }
 

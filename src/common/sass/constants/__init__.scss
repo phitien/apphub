@@ -1,2 +1,23 @@
 @import "./colors.scss";
 @import "./variables.scss";
+
+.default-box {
+  background-color: $bg-color;
+  color: $text-color;
+}
+.grey-box {
+  background-color: $bg-grey-color;
+  color: $text-grey-color;
+}
+.lightgrey-box {
+  background-color: $bg-lightgrey-color;
+  color: $text-lightgrey-color;
+}
+.dark-box {
+  background-color: $bg-dark-color;
+  color: $text-dark-color;
+}
+.lightdark-box {
+  background-color: $bg-lightdark-color;
+  color: $text-lightdark-color;
+}

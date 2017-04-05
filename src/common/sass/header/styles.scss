@@ -13,10 +13,8 @@
       margin: 0;padding: $margin 0;border-left: 1px solid $grey;border-right: 1px solid $grey;
       li {
         display: block;margin: 0;padding: 0;
-        a {display: flex;align-items: center;justify-content: space-between;margin-bottom: 8px;padding: 0 $margin;line-height: 28px;
-          &:hover {
-            color: $blue;
-          }
+        a {
+          display: flex;align-items: center;justify-content: space-between;margin-bottom: 8px;padding: 0 $margin;line-height: 28px;
         }
         .description {
           font-size: 12px;font-style: italic;line-height: 18px;opacity: .5;margin-bottom: 8px;padding: 0 $margin/2;
