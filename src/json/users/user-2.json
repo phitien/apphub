@@ -1,4 +1,8 @@
 {
-  "display_name": "Phi Tien",
-  "rights": ["approve"]
+  "email": "ductien.phi@sc.com",
+  "account": "1560258",
+  "firstName": "Tien",
+  "lastName": "Phi",
+  "displayName": "Phi Tien",
+  "rights": ["request"]
 }

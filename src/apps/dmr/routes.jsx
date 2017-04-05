@@ -1,11 +1,11 @@
 import {RouteEnterLoginRequired} from '../../common/routes/RouteEnterLoginRequired'
 import DmrViewport from './components/Viewport'
 import LandingPage from './components/landing/Page'
-/**NEW_PAGE**/
+import SearchPage from './components/search/Page'
 
-const rootPaths = ['/public/dmr']
+const rootPaths = ['/dmr']
 const subRoutes = [
-/**NEW_PAGE_ROUTE**/
+    {path: 'search', component: SearchPage, onEnter: RouteEnterLoginRequired}
 ]
 const routes = []
 

@@ -2,11 +2,19 @@ $green: rgba(26, 149, 48, 1);
 $greena: rgba(26, 149, 48, .5);
 $blue:  rgba(50, 200, 254, 1);
 $bluea:  rgba(50, 200, 254, .5);
-$grey: #f4f4f4;
+
+$grey: rgba(238, 238, 238, 1);
+$lightgrey: #f4f4f4;
+$dark: #212121;
+$lightdark: #444444;
 
 $bg-color: #ffffff;
 $bg-grey-color: $grey;
-$bg-dark-color: #040404;
+$bg-lightgrey-color: $lightgrey;
+$bg-dark-color: $dark;
+$bg-lightdark-color: $lightdark;
 $text-color: #333333;
 $text-grey-color: #333333;
+$text-lightgrey-color: #333333;
 $text-dark-color: #f3f3f3;
+$text-lightdark-color: #f3f3f3;

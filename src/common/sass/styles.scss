@@ -7,9 +7,17 @@
   background-color: $bg-grey-color;
   color: $text-grey-color;
 }
+.lightgrey-box {
+  background-color: $bg-lightgrey-color;
+  color: $text-lightgrey-color;
+}
 .dark-box {
   background-color: $bg-dark-color;
   color: $text-dark-color;
+}
+.lightdark-box {
+  background-color: $bg-lightdark-color;
+  color: $text-lightdark-color;
 }
 
 html {
@@ -42,6 +50,6 @@ body {
     }
   }
 }
-a {cursor: pointer;}
+a {cursor: pointer;text-decoration: none;color: inherit;}
 h1,h2 {font-weight: normal;}
 h3,h4,h5 {font-weight: normal;}

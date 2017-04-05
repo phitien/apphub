@@ -1,11 +1,12 @@
 import React from 'react'
 import Component from '../Component'
+import Connect from '../../redux/Connect'
 
-export default class SearchBox extends Component {
+class SearchBox extends Component {
     get componentClassName() {return 'search-box'}
     children = () => <div>Search Box</div>
-    render = () => !this.util.user.isLogged ? null :
-        <div className={this.className}>
-            {this.children()}
+    render = () => <div className={this.className}>
+            {!this.util.user.isLogged ? null :this.children()}
         </div>
 }
+export default (new Connect(SearchBox)).klass

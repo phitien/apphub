@@ -1,20 +1,31 @@
 import {connect} from 'react-redux'
-import Action from './actions/Action'
+import Action, {CONSTANTS, LoginAction, LoggedInAction, LogoutAction, LoadMenusAction, UpdateMenusAction} from './actions/Action'
+import util from '../../core/util'
 
 export default class Connect {
     constructor(klass) {
         this.__klass = klass
+        this.getActions = this.getActions.bind(this)
+    }
+    get util() {return util}
+    getDefaultProps() {
+        return {}
     }
     get mapStateToProps() {return (state, ownProps) => {
-        return state ? state : {menus: [], modal: null}
+        return state
     }}
-    get mapDispatchToProps() {return (dispatch, ownProps) => {
+    getActions(dispatch, ownProps) {
         return {
-            addMenus: (new Action(dispatch, 'ADD_MENUS')).fn,
-            addModal: (new Action(dispatch, 'ADD_MODAL')).fn,
-            removeModal: (new Action(dispatch, 'REMOVE_MODAL')).fn
+            userLogin: (new LoginAction(dispatch)).fn,
+            userLoggedIn: (new LoggedInAction(dispatch)).fn,
+            userLogout: (new LogoutAction(dispatch)).fn,
+            loadMenus: (new LoadMenusAction(dispatch)).fn,
+            updateMenus: (new UpdateMenusAction(dispatch)).fn,
+            addModal: (new Action(dispatch, CONSTANTS.ADD_MODAL)).fn,
+            removeModal: (new Action(dispatch, CONSTANTS.REMOVE_MODAL)).fn
         }
-    }}
+    }
+    get mapDispatchToProps() {return (dispatch, ownProps) => this.getActions(dispatch, ownProps)}
     get klass() {
         return connect(this.mapStateToProps, this.mapDispatchToProps)(this.__klass)
     }

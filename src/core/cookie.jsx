@@ -1,4 +1,5 @@
 import cookie from 'react-cookie'
+import assign from 'object-assign'
 
 class Cookie {
     value = (name, value, opts) => {
@@ -6,11 +7,11 @@ class Cookie {
             return cookie.load(name)
         }
         else if (value === null) {
-            cookie.remove(name, opts)
+            cookie.remove(name, assign({ path: '/' }, opts))
             dispatchEvent(new CustomEvent('cookie_deleted', {name}))
         }
         else {
-            cookie.save(name, value, opts)
+            cookie.save(name, value, assign({ path: '/' }, opts))
             dispatchEvent(new CustomEvent('cookie_updated', {name, value}))
          }
     }
