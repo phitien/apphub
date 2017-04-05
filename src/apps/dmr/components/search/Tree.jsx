@@ -15,6 +15,7 @@ class Tree extends Component {
           modal={false}
           open={this.state.node ? true : false}
           onRequestClose={this.closeDetail}
+          contentStyle={{width: 1024, maxWidth: 'none'}}
           autoScrollBodyContent={true}
         >
           <Detail node={this.state.node}/>
