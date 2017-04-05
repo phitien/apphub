@@ -30,7 +30,7 @@ export default class Action {
     }
     run(data) {this.fn(data)}
 }
-const loadMenus = (util, dispatcher) => util.query(util.user.isLogged ? '/static/api/user-menus.json' : '/static/api/menus.json', null, {
+const loadMenus = (util, dispatcher) => util.query(util.user.isLogged ? '/static/dmr/api/user-menus.json' : '/static/dmr/api/menus.json', null, {
     success: (new UpdateMenusAction(dispatcher)).fn
 })
 
@@ -47,7 +47,7 @@ export class UpdateMenusAction extends Action {
 export class LoginAction extends Action {
     get type() {return CONSTANTS.USER_LOGIN}
     beforeDispatch = (data) => {
-        this.util.query('/static/api/login.json', data, {
+        this.util.query('/static/dmr/api/login.json', data, {
             success: (new LoggedInAction(this.dispatcher)).fn
         })
     }

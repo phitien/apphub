@@ -1,5 +1,3 @@
-import '../sass/footer/styles.scss'
-
 import React from 'react'
 import Application from './Application'
 import reducer from '../redux/reducers/reducer'

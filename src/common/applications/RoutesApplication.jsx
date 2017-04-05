@@ -1,5 +1,3 @@
-import '../sass/styles.scss'
-
 import React from 'react'
 import {Router} from 'react-router'
 import Application from './Application'

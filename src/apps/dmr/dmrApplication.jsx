@@ -1,4 +1,4 @@
-import './sass/styles.scss'
+// import './sass/styles.scss'
 
 import React from 'react'
 import RoutesApplication from '../../common/applications/RoutesApplication'

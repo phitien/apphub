@@ -9,7 +9,7 @@ export const DMRCONSTANTS = {
 export class LoadRootAction extends Action {
     get type() {return DMRCONSTANTS.LOAD_ROOT}
     beforeDispatch = (data) => {
-        this.util.query('/static/api/tree.json', {}, {
+        this.util.query('/static/dmr/api/tree.json', {}, {
             success: (new LoadedRootAction(this.dispatcher)).fn
         })
     }
