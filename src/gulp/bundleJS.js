@@ -6,7 +6,7 @@ var browserify = require('browserify');
 var babelify = require('babelify');
 var assign = require('object-assign');
 
-function buildJS(entry, dest) {
+function buildJS(entry, dest, excludes) {
     var bundleConfig = {
         entries: [entry],
         extensions: ['.jsx'],
@@ -15,17 +15,20 @@ function buildJS(entry, dest) {
         noBundleExternal: true,
         transform: [babelify],
     };
-    var _bundle = browserify(bundleConfig);
+    var bundler = browserify(bundleConfig);
+    excludes.forEach(function (lib) {
+        bundler.external(lib);
+    });
     function doBundle() {
-        return _bundle
+        return bundler
             .bundle()
-            .pipe(source('app.js'))
+            .pipe(source('zzz.js'))
             .pipe(buffer())
             // .pipe(sourcemaps.init())
             // .pipe(sourcemaps.write('./'))
             .pipe(gulp.dest(dest))
     }
-    _bundle.on('update', doBundle);
+    bundler.on('update', doBundle);
     return doBundle();
 }
 

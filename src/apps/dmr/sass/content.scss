@@ -1,0 +1,21 @@
+.page {
+  .content {
+    padding: $margin;padding-left: $left-sidebar-width + $margin;
+    .interface-systems {
+      display: flex;justify-content: center;
+      .interface-system {
+        display: flex;align-items: center;justify-content: center;flex-direction: column;
+        margin: $margin/2;height: 60px;min-width: 150px;
+        border: 1px solid #fff;background-color: #fff;
+        &:hover {
+          background-color: $lightgrey;
+        }
+      }
+    }
+  }
+}
+.page.has-left-sidebar-collapsed {
+  .content {
+    padding-left: $left-sidebar-width-collapsed + $margin;
+  }
+}

@@ -8,7 +8,7 @@ function bundleCSS(entry, dest) {
   return gulp.src(entry)
   // .pipe(sourcemaps.init())
   .pipe(sass().on('error', sass.logError))
-  .pipe(concat('app.css'))
+  .pipe(concat('zzz.css'))
   // .pipe(sourcemaps.write('./'))
   .pipe(gulp.dest(dest))
 }

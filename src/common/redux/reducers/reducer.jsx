@@ -3,15 +3,15 @@ import assign from 'object-assign'
 
 export default (state, action) => {
     switch (action.type) {
-        case CONSTANTS.USER_LOGOUT:
+        case CONSTANTS.UserLogoutAction:
             return assign({}, state, {user: null})
-        case CONSTANTS.USER_LOGGEDIN:
+        case CONSTANTS.UserLoggedInAction:
             return assign({}, state, {user: action.data})
-        case CONSTANTS.UPDATE_MENUS:
+        case CONSTANTS.UpdateMenusAction:
             return assign({}, state, {menus: action.data})
-        case CONSTANTS.ADD_MODAL:
+        case CONSTANTS.AddModalToView:
             return assign({}, state, {modal: action.data})
-        case CONSTANTS.REMOVE_MODAL:
+        case CONSTANTS.RemoveModalFromView:
             return assign({}, state, {modal: null})
         default:
             return assign({}, state)

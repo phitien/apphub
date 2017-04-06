@@ -13,7 +13,7 @@ export default class REQUEST {
         method = method ? method.toLowerCase() : 'get'
         this.__options = {url, method}
     }
-    execute = () => when(axios(this.__options))
+    execute = () => this.exe = when(axios(this.__options))
     option = (n, v) => {
         assign(this.__options, {n: v})
         return this

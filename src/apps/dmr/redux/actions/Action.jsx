@@ -1,22 +1,49 @@
 import Action, {CONSTANTS} from '../../../../common/redux/actions/Action'
 
 export const DMRCONSTANTS = {
-    LOAD_ROOT: 'LOAD_ROOT',
-    LOADED_ROOT: 'LOADED_ROOT',
-    TOOGLE_LEFT_SIDEBAR: 'TOOGLE_LEFT_SIDEBAR'
+    LoadRootTreeAction: 'LoadRootTreeAction',
+    LoadedRootTreeAction: 'LoadedRootTreeAction',
+    LoadSubTreeAction: 'LoadSubTreeAction',
+    LoadedSubTreeAction: 'LoadedSubTreeAction',
+    ToggleLeftSidebarAction: 'ToggleLeftSidebarAction',
+    LoadInterfaceSystemsAction: 'LoadInterfaceSystemsAction',
+    LoadedInterfaceSystemsAction: 'LoadedInterfaceSystemsAction',
 }
 
-export class LoadRootAction extends Action {
-    get type() {return DMRCONSTANTS.LOAD_ROOT}
-    beforeDispatch = (data) => {
-        this.util.query('/static/dmr/api/tree.json', {}, {
-            success: (new LoadedRootAction(this.dispatcher)).fn
+export class ToggleLeftSidebarAction extends Action {
+    get type() {return DMRCONSTANTS.ToggleLeftSidebarAction}
+}
+
+export class LoadRootTreeAction extends Action {
+    get type() {return DMRCONSTANTS.LoadRootTreeAction}
+    beforeDispatch(data) {
+        this.util.query('/static/dmr/api/tree-lv-0.json', {}, {
+            success: (new LoadedRootTreeAction(this.dispatcher)).fn
         })
     }
 }
-export class LoadedRootAction extends Action {
-    get type() {return DMRCONSTANTS.LOADED_ROOT}
+export class LoadedRootTreeAction extends Action {
+    get type() {return DMRCONSTANTS.LoadedRootTreeAction}
 }
-export class ToggleLeftSidebarAction extends Action {
-    get type() {return DMRCONSTANTS.TOOGLE_LEFT_SIDEBAR}
+export class LoadSubTreeAction extends Action {
+    get type() {return DMRCONSTANTS.LoadSubTreeAction}
+    beforeDispatch(node, lv) {
+        this.util.query(`/static/dmr/api/tree-lv-${lv}.json`, {}, {
+            success: (new LoadedSubTreeAction(this.dispatcher)).fn
+        })
+    }
+}
+export class LoadedSubTreeAction extends Action {
+    get type() {return DMRCONSTANTS.LoadedSubTreeAction}
+}
+export class LoadInterfaceSystemsAction extends Action {
+    get type() {return DMRCONSTANTS.LoadInterfaceSystemsAction}
+    beforeDispatch(data) {
+        this.util.query('/static/dmr/api/interface-systems.json', {}, {
+            success: (new LoadedInterfaceSystemsAction(this.dispatcher)).fn
+        })
+    }
+}
+export class LoadedInterfaceSystemsAction extends Action {
+    get type() {return DMRCONSTANTS.LoadedInterfaceSystemsAction}
 }

@@ -5,7 +5,7 @@ import Tree from './Tree'
 import Search from './Search'
 
 class LeftPanel extends Component {
-    get componentClassName() {return `lightdark-box left-sidebar ${this.props.hideLeftSidebar ? 'collapsed' : 'expanded'}`}
+    get componentClassName() {return `lightdark-box left-sidebar`}
     render = () => <div className={this.className}>
         <Search/>
         <Tree/>

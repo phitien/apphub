@@ -1,60 +1,60 @@
 import React from 'react'
 import Component from '../../../../common/components/Component'
 import DmrConnect from '../../redux/Connect'
-import Detail from './Detail'
-import {Dialog, FlatButton} from 'material-ui'
 
 class Tree extends Component {
     get componentClassName() {return 'tree'}
-    get root() {return this.props.root}
-    closeDetail = () => this.setState({node: null})
-    detail() {
-        return !this.state || !this.state.node ? null : <Dialog
-          title={this.state.node.model}
-          actions={[<FlatButton label='Close' primary={true} onClick={this.closeDetail}/>]}
-          modal={false}
-          open={this.state.node ? true : false}
-          onRequestClose={this.closeDetail}
-          contentStyle={{width: 1024, maxWidth: 'none'}}
-          autoScrollBodyContent={true}
-        >
-          <Detail node={this.state.node}/>
-        </Dialog>
+    get root() {
+        if (!this.state.root) this.state.root = this.props.root
+        return this.state.root
     }
-    componentDidMount() {this.props.loadRoot()}
+    get subTree() {return this.props.subTree}
+    componentDidMount() {this.props.loadRootTree()}
+    shouldComponentUpdate(nextProps, nextState) {
+        if(this.state.selectedNode && nextProps.subTree) {
+            this.traverse(this.state.root, nextProps.subTree)
+        }
+        return true
+    }
+    traverse(node, subTree) {
+        if (node == this.state.selectedNode && !node.children.length) {
+            node.children = subTree
+        }
+        else {
+            node.children.map(n => this.traverse(n, subTree))
+        }
+    }
     toggleLeftSidebar = () => this.props.toggleLeftSidebar({data: !this.props.hideLeftSidebar})
-    toggleNode(node, e) {
+    toggleNode(node, lv, e) {
         node.collapsed = !node.collapsed
         this.setState(this.state)
     }
-    openDetail(node, e) {
+    loadSubTree(node, lv, e) {
         e.preventDefault()
         e.stopPropagation()
-        this.setState({node})
+        this.setState({selectedNode: node})
+        this.props.loadSubTree(node, lv)
     }
-    tree = (node,i) => {
-        return <li key={i} className='node'>
-            <div className='node-name' onClick={this.toggleNode.bind(this, node)}>
-                <a onClick={this.openDetail.bind(this, node)}>{node.model} ({node.children.length})</a>
-            </div>
-            {!node.collapsed && node.children && node.children.length ? <ul>
-                {node.children.map((item,i) => this.tree(item,i))}
-            </ul> : null}
-        </li>
-    }
-    collapsedTree = (node,i) => <li key={i} className='node'>
-        <div className='node-name' onClick={this.openDetail.bind(this, node)}>
+    tree = (node,lv,i) => <li key={i} className={`node node-lv-${lv}`}>
+        <div className='node-name' onClick={this.toggleNode.bind(this, node, lv)}>
+            <a onClick={this.loadSubTree.bind(this, node, lv)}>{node.model} ({node.count})</a>
+        </div>
+        {!node.collapsed && node.children && node.children.length ? <ul>
+            {node.children.map((item,i) => this.tree(item,lv+1,i))}
+        </ul> : null}
+    </li>
+    collapsedTree = (node,lv,i) => <li key={i} className={`node node-lv-${lv}`}>
+        <div className='node-name' onClick={this.loadSubTree.bind(this, node, lv)}>
             {node.model}
         </div>
         {!node.collapsed && node.children && node.children.length ? <ul>
-            {node.children.map((item,i) => this.collapsedTree(item,i))}
+            {node.children.map((item,i) => this.collapsedTree(item,lv+1,i))}
         </ul> : null}
     </li>
     render = () => <div className={this.className}>
-        <ul>
-            {!this.root ? null : (this.props.hideLeftSidebar ? this.collapsedTree(this.root, 0) : this.tree(this.root, 0))}
+        <ul className='root'>
+            {!this.root ? null : (this.props.hideLeftSidebar ? this.collapsedTree(this.root, 0, 0) : this.tree(this.root, 0, 0))}
         </ul>
-        {this.detail()}
     </div>
 }
 

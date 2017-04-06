@@ -7,7 +7,6 @@ package sc.com.apphub.server;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 /**
@@ -19,11 +18,6 @@ public class Application extends WebMvcConfigurerAdapter {
         SpringApplication.run(Application.class, args);
     }
 
-    private static final String[]CLASSPATH_RESOURCE_LOCATIONS = {
-            "classpath:/META-INF/resources/","classpath:/resources/",
-            "classpath:/static/","classpath:/static/app/","classpath:/public/"
-    };
-
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         if (!registry.hasMappingForPattern("/webjars/**")) {
@@ -33,14 +27,19 @@ public class Application extends WebMvcConfigurerAdapter {
         if (!registry.hasMappingForPattern("/**")) {
             registry.addResourceHandler("/**").addResourceLocations(CLASSPATH_RESOURCE_LOCATIONS);
         }
+        registry.addResourceHandler("/static/**")
+                .addResourceLocations("file:////Users/phitien/apphub/public/static/")
+                .setCachePeriod(0);
     }
 
-    @Override
-    public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/dmr").setViewName("forward:/dmr/index.html");
-        registry.addViewController("/dmr/").setViewName("forward:/dmr/index.html");
-        registry.addViewController("/dmr/search").setViewName("forward:/dmr/index.html");
-        registry.addViewController("/dmr/search/").setViewName("forward:/dmr/index.html");
-    }
+    private static final String[]CLASSPATH_RESOURCE_LOCATIONS = {
+            "classpath:/META-INF/resources/","classpath:/resources/",
+            "classpath:/static/","classpath:/static/app/","classpath:/public/"
+    };
+
+//    @Override
+//    public void addViewControllers(ViewControllerRegistry registry) {
+//        registry.addViewController("/dmr/**").setViewName("dmr");
+//    }
 
 }

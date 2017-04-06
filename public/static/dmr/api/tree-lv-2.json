@@ -1,0 +1,37 @@
+{
+  "model": "Cross assests.2",
+  "type": "cross assests.2",
+  "field": "cross assests.2",
+  "consumner": "consumner",
+  "source": "consumner",
+  "product": "product",
+  "xpath": "xpath",
+  "context": "context",
+  "description": "description",
+  "count": 2,
+  "children": [{
+    "model": "Cross assests.2.1",
+    "type": "cross assests.2.1",
+    "field": "cross assests.2.1",
+    "consumner": "consumner",
+    "source": "consumner",
+    "product": "product",
+    "xpath": "xpath",
+    "context": "context",
+    "description": "description",
+    "count": 0,
+    "children": []
+  },{
+    "model": "Cross assests.2.2",
+    "type": "cross assests.2.2",
+    "field": "cross assests.2.2",
+    "consumner": "consumner",
+    "source": "consumner",
+    "product": "product",
+    "xpath": "xpath",
+    "context": "context",
+    "description": "description",
+    "count": 0,
+    "children": []
+  }]
+}
