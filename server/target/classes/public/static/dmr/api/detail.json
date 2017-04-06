@@ -1,0 +1,12 @@
+{
+  "model": "Node2",
+  "type": "node2",
+  "field": "node2",
+  "consumner": "consumner",
+  "source": "consumner",
+  "product": "product",
+  "xpath": "xpath",
+  "context": "context",
+  "description": "description",
+  "children": []
+}

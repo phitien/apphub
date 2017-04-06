@@ -3,7 +3,7 @@ var bundleCSS = require('../../../gulp/bundleCSS');
 
 var gulp = require('gulp');
 var inject = require('gulp-inject');
-var replace = require(`gulp-replace`);
+var replace = require('gulp-replace');
 var runSequence = require('run-sequence');
 var livereload = require('gulp-livereload')
 
@@ -11,13 +11,15 @@ var NAME = 'dmr';
 var APP = '/' + NAME;
 
 var SRC = './src';
+var SRC_STATIC = SRC + '/static';
 var SRC_APPS = SRC + '/apps';
 var SRC_APP = SRC_APPS + APP;
 var SRC_TEMPLATE = SRC_APP + '/template';
 var SRC_MOCK = SRC_APP + '/mock';
+var SRC_STATIC_APP = SRC_APP + '/static';
 
 var STATIC = '/static';
-var PUBLIC = './public';
+var PUBLIC = './server/src/main/resources/public';
 var PUBLIC_STATIC = PUBLIC + STATIC;
 var PUBLIC_STATIC_APP = PUBLIC_STATIC + APP;
 
@@ -28,12 +30,24 @@ gulp.task(NAME + ':css', function() {
   return bundleCSS(SRC_APP + '/sass/styles.scss', PUBLIC_STATIC_APP);
 });
 gulp.task(NAME + ':copy', function() {
-  return gulp.src([
+  gulp.src([
+    SRC_STATIC + '/*',
+    SRC_STATIC + '/**/*',
+    SRC_STATIC + '/**/**/*',
+  ])
+  .pipe(gulp.dest(PUBLIC_STATIC));
+  gulp.src([
+    SRC_STATIC_APP + '/*',
+    SRC_STATIC_APP + '/**/*',
+    SRC_STATIC_APP + '/**/**/*',
+  ])
+  .pipe(gulp.dest(PUBLIC_STATIC_APP));
+  gulp.src([
     SRC_MOCK + '/*',
     SRC_MOCK + '/**/*',
     SRC_MOCK + '/**/**/*',
   ])
-  .pipe(gulp.dest(PUBLIC_STATIC_APP + '/api'))
+  .pipe(gulp.dest(PUBLIC_STATIC_APP + '/api'));
 });
 gulp.task(NAME + ':inject', function() {
   return gulp.src(SRC_TEMPLATE + '/index.html')
