@@ -1,6 +1,6 @@
 import React from 'react'
 import Component from '../Component'
-import Connect from '../../redux/Connect'
+import DefaultConnect from '../../redux/Connect'
 import LinksHub from './LinksHub'
 import LogoBox from './LogoBox'
 import SearchBox from './SearchBox'
@@ -10,6 +10,7 @@ import UserBox from './UserBox'
 
 class Header extends Component {
     get componentClassName() {return 'dark-box header'}
+    componentDidMount() {this.props.executeLoadPageInfoAction()}
     render = () => <div className={this.className}>
         <LinksHub/>
         <LogoBox/>
@@ -19,4 +20,4 @@ class Header extends Component {
         <Help/>
     </div>
 }
-export default (new Connect(Header)).klass
+export default (new DefaultConnect(Header)).klass

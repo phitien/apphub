@@ -1,14 +1,15 @@
 {
-  "title": "Applications Hub",
-  "menus": [{
-    "title": "Data Model Repositories",
-    "description": "",
+  "body": [{
+    "title": "DMR",
+    "app": "DMR",
+    "description": "Data Models Repositories",
     "url": "/dmr/search",
-    "children": []
+    "subNodes": []
   },{
-    "title": "Exception Manager",
-    "description": "",
-    "url": "/exception",
-    "children": []
+    "title": "EM",
+    "app": "EM",
+    "description": "Exception Management",
+    "url": "/em",
+    "subNodes": []
   }]
 }

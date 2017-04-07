@@ -2,9 +2,9 @@ var gulp = require('gulp');
 var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
 var browserify = require('browserify');
-// var sourcemaps = require('gulp-sourcemaps');
 var babelify = require('babelify');
 var assign = require('object-assign');
+var sourcemaps = require('gulp-sourcemaps');
 
 function buildJS(entry, dest, excludes) {
     var bundleConfig = {
@@ -24,8 +24,8 @@ function buildJS(entry, dest, excludes) {
             .bundle()
             .pipe(source('zzz.js'))
             .pipe(buffer())
-            // .pipe(sourcemaps.init())
-            // .pipe(sourcemaps.write('./'))
+            .pipe(sourcemaps.init())
+            .pipe(sourcemaps.write('./'))
             .pipe(gulp.dest(dest))
     }
     bundler.on('update', doBundle);

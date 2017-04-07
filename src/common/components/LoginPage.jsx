@@ -1,7 +1,7 @@
 import React from 'react'
 import Page from './Page'
 import {TextField, RaisedButton} from 'material-ui'
-import Connect from '../redux/Connect'
+import DefaultConnect from '../redux/Connect'
 
 class LoginPage extends Page {
     get pageClassName() {return `login-page`}
@@ -22,14 +22,14 @@ class LoginPage extends Page {
     }
     onLogin = (e) => {
         if (this.validate()) {
-            this.props.userLogin({
+            this.props.executeUserLoginAction({
                 account: this.accountInput.getValue(),
                 password: this.passwordInput.getValue()
             })
         }
     }
     children = () => <form className='login-form'>
-        <h1>Sign in</h1>
+        <h1>Sign in to {this.props.pageTitle}</h1>
         <TextField type='text' ref={e => this.accountInput = e}
             errorText={this.state.validationErrors.account}
             hintText='Account' fullWidth={true} />
@@ -39,4 +39,4 @@ class LoginPage extends Page {
         <RaisedButton label='Login' primary={true} fullWidth={true} onClick={this.onLogin}/>
     </form>
 }
-export default (new Connect(LoginPage)).klass
+export default (new DefaultConnect(LoginPage)).klass

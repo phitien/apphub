@@ -7,9 +7,9 @@ import {IconMenu, MenuItem, IconButton} from 'material-ui'
 class SidebarLeftSearch extends Component {
     get componentClassName() {return 'sidebar-left-search'}
     get views() {return ['Hierarchy', 'Product']}
-    toggleSidebarLeft = () => this.props.toggleSidebarLeft({data: !this.props.hideSidebarLeft})
+    toggleSidebarLeft = () => this.props.executeToggleSidebarLeftAction({data: !this.props.hideSidebarLeft})
     switchSidebarLeftView(view) {
-        this.props.switchSidebarLeftView({data: view})
+        this.props.executeSwitchSidebarLeftViewAction({data: view})
     }
     renderSwitchViewMenu = () => <IconMenu
         iconButtonElement={<IconButton style={{padding: '0', color: '#ffffff', width: 24}}><i className='material-icons'>more_vert</i></IconButton>}>

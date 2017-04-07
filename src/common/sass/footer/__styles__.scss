@@ -4,4 +4,5 @@
   >div {
     height: 100%;display: flex;align-items: center;justify-content: center;padding: 0 $margin/2;
   }
+  .version {font-size: 9px;font-style: italic;color: $green;&:hover {color: $blue;}}
 }

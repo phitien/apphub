@@ -1,35 +1,12 @@
-import {connect} from 'react-redux'
-import Action, {
-    CONSTANTS,
-    UserLoginAction,
-    UserLogoutAction,
-    LoadPageInfoAction,
-} from './actions/Action'
-import util from '../../core/util'
+import Connect from '../../core/redux/Connect'
+import * as Actions from './Action'
 
-export default class Connect {
-    constructor(klass) {
-        this.__klass = klass
-        this.getActions = this.getActions.bind(this)
-    }
-    get util() {return util}
-    getDefaultProps() {
-        return {}
-    }
-    get mapStateToProps() {return (state, ownProps) => {
-        return state
-    }}
+export default class DefaultConnect extends Connect {
     getActions(dispatch, ownProps) {
-        return {
-            userLogin: (new UserLoginAction(dispatch)).fn,
-            userLogout: (new UserLogoutAction(dispatch)).fn,
-            loadPageInfo: (new LoadPageInfoAction(dispatch)).fn,
-            addModal: (new Action(dispatch, CONSTANTS.AddModalToView)).fn,
-            removeModal: (new Action(dispatch, CONSTANTS.RemoveModalFromView)).fn
-        }
-    }
-    get mapDispatchToProps() {return (dispatch, ownProps) => this.getActions(dispatch, ownProps)}
-    get klass() {
-        return connect(this.mapStateToProps, this.mapDispatchToProps)(this.__klass)
+        return this.util.assign(
+            {},
+            super.getActions(dispatch, ownProps),
+            this.extractActions(Actions, dispatch, ownProps)
+        )
     }
 }

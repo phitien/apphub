@@ -1,6 +1,7 @@
 import React from 'react'
 import Component from '../Component'
-import Connect from '../../redux/Connect'
+import DefaultConnect from '../../redux/Connect'
+import Menu from '../Menu'
 
 class UserBox extends Component {
     get componentClassName() {return 'user-box'}
@@ -11,7 +12,7 @@ class UserBox extends Component {
         </div>
     },{
         title: 'Logout',
-        onClick: () => this.props.userLogout()
+        onClick: () => this.props.executeUserLogoutAction()
     }]}
     children = () => <div className='wrapper'>
         <div className='icon'>
@@ -20,11 +21,11 @@ class UserBox extends Component {
             </div>
             <i className='material-icons'>person</i>
         </div>
-        {this.renderMenu(this.menus, 'lightgrey-box menus')}
+        <Menu menus={this.menus} className='lightgrey-box menus' subMenuClassName='lightgrey-box'/>
     </div>
     render = () => !this.util.user.isLogged ? null :
         <div className={this.className}>
             {this.children()}
         </div>
 }
-export default (new Connect(UserBox)).klass
+export default (new DefaultConnect(UserBox)).klass

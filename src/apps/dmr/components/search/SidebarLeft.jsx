@@ -9,7 +9,7 @@ class SidebarLeft extends Component {
     get componentClassName() {return `lightdark-box sidebar-left`}
     render = () => <div className={this.className}>
         <SidebarLeftSearch/>
-        {this.props.sidebarLeftView == 'Hierarchy' ? <Hierarchy/> : <Product/>}
+        {this.props.sidebarLeftViewName == 'Hierarchy' ? <Hierarchy/> : <Product/>}
     </div>
 }
 

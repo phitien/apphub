@@ -84,6 +84,17 @@
     color: #32c8fe; }
     .header .links-hub:hover ul.menus, .header .user-box:hover ul.menus {
       display: block; }
+  .header .links-hub .icon i {
+    margin-right: 5px; }
+  .header .links-hub .icon img {
+    height: 32px;
+    margin-right: 5px; }
+  .header .links-hub .icon h3 {
+    color: #ffffff;
+    font-size: 14px;
+    text-transform: uppercase; }
+    .header .links-hub .icon h3:hover {
+      color: #32c8fe; }
   .header .user-box .user-info {
     padding: 8px;
     line-height: 18px;
@@ -101,11 +112,13 @@
     border: 1px solid #eeeeee; }
     .header .user-box ul.menus li:hover a {
       background-color: #eeeeee; }
-  .header .logo-box a img {
-    height: 40px; }
-  .header .logo-box h3 {
-    color: #1a9530;
-    margin: 0 16px; }
+  .header .logo-box {
+    display: none; }
+    .header .logo-box a img {
+      height: 40px; }
+    .header .logo-box h3 {
+      color: #1a9530;
+      margin: 0 16px; }
   .header .search-box {
     flex: 1; }
     .header .search-box .wrapper {
@@ -136,12 +149,19 @@
     align-items: center;
     justify-content: center;
     padding: 0 8px; }
+  .footer .version {
+    font-size: 9px;
+    font-style: italic;
+    color: #1a9530; }
+    .footer .version:hover {
+      color: #32c8fe; }
 
 html {
   height: 100%; }
 
 body {
-  font-family: sans-serif;
+  font-family: 'Roboto', sans-serif;
+  -webkit-font-smoothing: antialiased;
   font-size: 14px;
   line-height: 24px;
   margin: 0;
@@ -151,6 +171,17 @@ body {
   flex-direction: column; }
   body #header, body #container, body #footer {
     width: 100%; }
+  body #footer {
+    position: relative; }
+    body #footer:after {
+      content: '';
+      display: block;
+      height: 1px;
+      width: 100%;
+      background-color: #212121;
+      position: absolute;
+      top: 0;
+      left: 0; }
   body #container {
     flex: 1;
     display: flex;
@@ -335,3 +366,8 @@ input[type=text], input[type=password], input[type=email], input[type=url] {
 .page.has-sidebar-right-collapsed .sidebar-right {
   width: 24px;
   padding: 0; }
+
+.page .content .products-list .columns-selection .choices .choice {
+  display: inline-block !important;
+  width: auto !important;
+  margin-right: 16px; }

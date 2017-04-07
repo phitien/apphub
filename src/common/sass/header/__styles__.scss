@@ -34,6 +34,13 @@
       ul.menus {display: block;}
     }
   }
+  .links-hub .icon {
+    i {margin-right: 5px;}
+    img {height: 32px;margin-right: 5px;}
+    h3 {color: #ffffff;font-size: 14px;text-transform: uppercase;
+      &:hover {color: $blue;}
+    }
+  }
   .user-box {
     .user-info {padding: $margin/2;line-height: 18px;display: flex;}
     .display-name {}
@@ -50,6 +57,7 @@
     }
   }
   .logo-box {
+    display: none;
     a {
       img {
         height: $logo-height;

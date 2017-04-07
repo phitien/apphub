@@ -15,7 +15,7 @@ export default class REQUEST {
     }
     execute = () => this.exe = when(axios(this.__options))
     option = (n, v) => {
-        assign(this.__options, {n: v})
+        this.__options[n] = v
         return this
     }
     headers = (headers) => this.option('headers', assign(this.defaultHeaders, headers))

@@ -31,21 +31,6 @@ export default class Component extends React.Component {
         this.setState(this.state)
         return true
     }
-    renderMenu(menus, className = '') {return !menus || menus.length <= 0 ? null :
-        <ul className={className}>{menus.map((item, i) => {
-            let props = item.onClick ? {onClick: item.onClick} : {href: item.url ? item.url : '#'}
-            return item.html ? <li key={i} className={`${item.children && item.children.length > 0 ? 'has-children' : ''}`}>{item.html}</li> :
-            <li key={i} className={`${item.children && item.children.length > 0 ? 'has-children' : ''}`}>
-                <a {...props}>
-                    {item.title}
-                    {item.children && item.children.length > 0 ? <i className='material-icons'>chevron_right</i> : null}
-                </a>
-                {!item.description ? null : <div className='description'>{item.description}</div>}
-                {this.renderMenu(item.children, 'lightgrey-box')}
-            </li>
-            })}
-        </ul>
-    }
     get dom() {return ReactDOM.findDOMNode(this)}
     get util() {return util}
     get componentClassName() {return ''}

@@ -10,7 +10,7 @@ class Hierarchy extends Component {
             this.props.rootHierarchy)
     }
     get subHierarchy() {return this.props.subHierarchy}
-    componentDidMount() {if (!this.props.rootHierarchy) this.props.loadRootHierarchy()}
+    componentDidMount() {if (!this.props.rootHierarchy) this.props.executeLoadRootHierarchyAction()}
     shouldComponentUpdate(nextProps, nextState) {
         if(this.state.selectedNode && nextProps.subHierarchy) {
             this.traverse(this.state.rootHierarchy, nextProps.subHierarchy)
@@ -25,27 +25,21 @@ class Hierarchy extends Component {
             node.subNodes.map(n => this.traverse(n, subHierarchy))
         }
     }
-    toggleSidebarLeft = () => this.props.toggleSidebarLeft({data: !this.props.hideSidebarLeft})
+    toggleSidebarLeft = () => this.props.executeToggleSidebarLeftAction({data: !this.props.hideSidebarLeft})
     loadSubHierarchy(node, lv, e) {
         e.preventDefault()
         e.stopPropagation()
         this.state.selectedNode = node
-        this.props.loadSubHierarchy(node, lv)
-    }
-    loadHierarchyDetail(node, lv, e) {
-        e.preventDefault()
-        e.stopPropagation()
-        this.state.selectedNode = node
-        this.props.searchDataElements(node)
+        this.props.executeLoadSubHierarchyAction(node, lv)
     }
     canExpand = (node) => true
     renderIcon = (node, lv) => {
-        return <i className='material-icons' onClick={this.loadSubHierarchy.bind(this, node, lv)}>{!this.canExpand(node) ? 'remove' : node.expanded ? 'remove' : 'add'}</i>
+        return <i className='material-icons'>{!this.canExpand(node) ? 'remove' : node.expanded ? 'remove' : 'add'}</i>
     }
     renderHierarchy = (node,lv,i) => <li key={i} className={`node node-lv-${lv}`}>
-        <div className='node-name'>
+        <div className='node-name' onClick={this.loadSubHierarchy.bind(this, node, lv)}>
             {this.renderIcon(node, lv)}
-            <a onClick={this.loadHierarchyDetail.bind(this, node, lv)}>{node.name} {node.subNodes ? `(${node.subNodes.length})` : ''}</a>
+            <a>{node.name} {node.subNodes ? `(${node.subNodes.length})` : ''}</a>
         </div>
         {node.expanded && node.subNodes && node.subNodes.length ? <ul>
             {node.subNodes.map((item,i) => this.renderHierarchy(item,lv+1,i))}

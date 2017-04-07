@@ -1,0 +1,27 @@
+{
+  "body": [{
+    "title": "DMR",
+    "app": "DMR",
+    "description": "Data Models Repositories",
+    "url": "/dmr/search",
+    "subNodes": [{
+      "title": "DMR - Dashboard",
+      "app": "DMR",
+      "description": "Data Models Statistic",
+      "url": "/dmr",
+      "subNodes": []
+    },{
+      "title": "DMR - Search",
+      "app": "DMR",
+      "description": "Products Search",
+      "url": "/dmr/search",
+      "subNodes": []
+    }]
+  },{
+    "title": "EM",
+    "app": "EM",
+    "description": "Exception Management",
+    "url": "/em",
+    "subNodes": []
+  }]
+}

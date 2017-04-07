@@ -1,6 +1,6 @@
 import React from 'react'
 import Component from '../Component'
-import Connect from '../../redux/Connect'
+import DefaultConnect from '../../redux/Connect'
 
 class Notification extends Component {
     get componentClassName() {return 'notification'}
@@ -15,4 +15,4 @@ class Notification extends Component {
         </div>
 }
 
-export default (new Connect(Notification)).klass
+export default (new DefaultConnect(Notification)).klass
