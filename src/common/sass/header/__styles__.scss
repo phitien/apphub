@@ -7,7 +7,7 @@
   .links-hub,.user-box {
     ul.menus {
       display: none;
-      position: fixed;top: $header-height;left: 0;bottom: $footer-height;width: $left-sidebar-width;z-index: 10;
+      position: fixed;top: $header-height;left: 0;bottom: $footer-height;width: $sidebar-width;z-index: 10;
       margin: 0;padding: $margin 0;border-left: 1px solid $grey;border-right: 1px solid $grey;
       li {
         display: block;margin: 0;padding: 0;
@@ -19,8 +19,8 @@
         }
         ul {
           display: none;
-          position: absolute;top: 0;left: 100%;bottom: 0;width: $left-sidebar-width;z-index: 10;
-          width: $left-sidebar-width;margin: 0;padding: $margin 0;border-left: 1px solid $grey;border-right: 1px solid $grey;
+          position: absolute;top: 0;left: 100%;bottom: 0;width: $sidebar-width;z-index: 10;
+          width: $sidebar-width;margin: 0;padding: $margin 0;border-left: 1px solid $grey;border-right: 1px solid $grey;
         }
         &:hover {
           > ul {
@@ -39,7 +39,7 @@
     .display-name {}
     .email {font-size: 12px;font-style: italic;}
     ul.menus {
-      position: absolute;top: $header-height;right: 0;bottom: initial;left: initial;width: $left-sidebar-width;border: 1px solid $grey;
+      position: absolute;top: $header-height;right: 0;bottom: initial;left: initial;width: $sidebar-width;border: 1px solid $grey;
       li {
         &:hover {
           a {

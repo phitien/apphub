@@ -1,0 +1,14 @@
+{
+  "title": "Applications Hub",
+  "menus": [{
+    "title": "Data Model Repositories",
+    "description": "",
+    "url": "/dmr/search",
+    "children": []
+  },{
+    "title": "Exception Manager",
+    "description": "",
+    "url": "/exception",
+    "children": []
+  }]
+}

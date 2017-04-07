@@ -43,3 +43,8 @@ h3,h4,h5 {font-weight: normal;}
 input[type=text],input[type=password],input[type=email],input[type=url] {
   height: $line-height;border: none;outline: none;border-radius: 3px;padding: 0 3px;
 }
+.page {
+  .wrapper {
+    flex: 1;
+  }
+}

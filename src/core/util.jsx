@@ -56,22 +56,26 @@ class Util {
 
     request = (url, method, data, opts) => {
         if (url) {
+            function run(o, payload) {
+                if (typeof o == 'function') o(payload)
+                else if (Array.isArray(o)) o.map(f => run(f, payload))
+            }
             opts = this.assign({}, {
                 beforeExecute: () => {},
                 afterExecute: () => {},
                 success: (res) => {},
                 failure: (res) => {}
             }, opts)
-            opts.beforeExecute()
+            run(opts.beforeExecute)
             return new REQUEST(url, method).data(data).execute()
             .then(res => {
-                try {opts.afterExecute()} catch(e) {console.log(e)}
-                try {opts.success(res)} catch(e) {console.log(e)}
+                try {run(opts.afterExecute)} catch(e) {console.log('request:afterExecute', e)}
+                try {run(opts.success, res)} catch(e) {console.log('request:success', e)}
                 return res
             })
             .catch(res => {
-                try {opts.afterExecute()} catch(e) {console.log(e)}
-                try {opts.failure(res)} catch(e) {console.log(e)}
+                try {run(opts.afterExecute)} catch(e) {console.log('request:afterExecute', e)}
+                try {run(opts.failure, res)} catch(e) {console.log('request:failure', e)}
                 return res
             })
         }

@@ -1,6 +1,8 @@
 .page {
   .content {
-    padding: $margin;padding-left: $left-sidebar-width + $margin;
+    padding-top: $margin;padding-bottom: $margin;
+    padding-left: $sidebar-width + $margin;
+    padding-right: 2*$margin;
     .interface-systems {
       display: flex;justify-content: center;
       .interface-system {
@@ -14,8 +16,12 @@
     }
   }
 }
-.page.has-left-sidebar-collapsed {
+.page.has-sidebar-left-collapsed {
   .content {
-    padding-left: $left-sidebar-width-collapsed + $margin;
+    padding-left: $sidebar-left-width-collapsed + $margin;
+  }
+}
+.page.has-sidebar-right-collapsed {
+  .content {
   }
 }

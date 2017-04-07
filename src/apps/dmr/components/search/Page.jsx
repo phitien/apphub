@@ -1,14 +1,17 @@
 import React from 'react'
 import Page from '../../../../common/components/Page'
 import DmrConnect from '../../redux/Connect'
-import LeftPanel from './LeftPanel'
+import SidebarLeft from './SidebarLeft'
 import Content from './Content'
+import SidebarRight from './SidebarRight'
 
 class SearchPage extends Page {
-    get pageClassName() {return `${this.props.hideLeftSidebar ? 'has-left-sidebar-collapsed' : 'has-left-sidebar'}`}
+    get pageClassName() {
+        return `${this.props.hideSidebarLeft ? 'has-sidebar-left-collapsed' : 'has-sidebar-left'} ${this.props.hideSidebarRight ? 'has-sidebar-right-collapsed' : 'has-sidebar-right'}`}
     children = () => <div className='wrapper'>
-        <LeftPanel/>
+        <SidebarLeft/>
         <Content/>
+        <SidebarRight/>
     </div>
 }
 

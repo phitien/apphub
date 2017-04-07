@@ -1,12 +1,22 @@
 import Connect from '../../../common/redux/Connect'
-import {LoadRootTreeAction, LoadSubTreeAction, ToggleLeftSidebarAction, LoadInterfaceSystemsAction} from './actions/Action'
+import {
+    LoadRootHierarchyAction,
+    LoadSubHierarchyAction,
+    ToggleSidebarLeftAction, ToggleSidebarRightAction,
+    LoadInterfaceSystemsAction,
+    SwitchSidebarLeftViewAction,
+    SearchDataElementsAction,
+} from './actions/Action'
 
 export default class DmrConnect extends Connect {
     getActions(dispatch, ownProps) {
         return this.util.assign({}, super.getActions(dispatch, ownProps), {
-            loadRootTree: (new LoadRootTreeAction(dispatch)).fn,
-            loadSubTree: (new LoadSubTreeAction(dispatch)).fn,
-            toggleLeftSidebar: (new ToggleLeftSidebarAction(dispatch)).fn,
+            searchDataElements: (new SearchDataElementsAction(dispatch)).fn,
+            switchSidebarLeftView: (new SwitchSidebarLeftViewAction(dispatch)).fn,
+            loadRootHierarchy: (new LoadRootHierarchyAction(dispatch)).fn,
+            loadSubHierarchy: (new LoadSubHierarchyAction(dispatch)).fn,
+            toggleSidebarLeft: (new ToggleSidebarLeftAction(dispatch)).fn,
+            toggleSidebarRight: (new ToggleSidebarRightAction(dispatch)).fn,
             loadInterfaceSystems: (new LoadInterfaceSystemsAction(dispatch)).fn,
         })
     }

@@ -1,0 +1,26 @@
+{
+  "body": {
+    "id": 1,
+    "name": "Cross Assest",
+    "template": null,
+    "subNodes": [{
+      "desc": "Trade",
+      "id": 7,
+      "name": "Trade",
+      "parentId": 1,
+      "template": null
+    },{
+      "desc": "Header",
+      "id": 8,
+      "name": "Header",
+      "parentId": 1,
+      "template": null
+    },{
+      "desc": "Payload",
+      "id": 9,
+      "name": "Payload",
+      "parentId": 1,
+      "template": null
+    }]
+  }
+}

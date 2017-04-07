@@ -1,68 +1,59 @@
 import util from '../../../core/util'
 
 export const CONSTANTS = {
-    UserLoginAction: 'UserLoginAction',
-    UserLoggedInAction: 'UserLoggedInAction',
-    UserLogoutAction: 'UserLogoutAction',
-    UserLoggedOutAction: 'UserLoggedOutAction',
     AddModalToView: 'AddModalToView',
     RemoveModalFromView: 'RemoveModalFromView',
-    UpdateMenusAction: 'UpdateMenusAction',
-    LoadMenusAction: 'LoadMenusAction',
 }
+
 export default class Action {
     constructor(dispatch, type) {
         this.__dispatcher = dispatch
-        this.__type = type
+        this.__type = type ? type : this.constructor.name
+        CONSTANTS[this.type] = this.type
     }
-    beforeDispatch(data) {}
-    afterDispatch(data) {}
+    beforeDispatch(payload) {}
+    afterDispatch(payload) {}
+    getData(payload) {
+        return this.util.assign({}, payload, {type: this.type})
+    }
     get util() {return util}
     get type() {return this.__type}
     get dispatcher() {return this.__dispatcher}
     get fn() {
         if (!this.type) throw 'Action has no type'
-        return (function(data) {
+        return (function(payload) {
             this.beforeDispatch.apply(this, arguments)
-            this.dispatcher(this.util.assign({}, data, {type: this.type}))
+            this.dispatcher(this.getData(payload))
             this.afterDispatch.apply(this, arguments)
         }).bind(this)
     }
-    run(data) {this.fn(data)}
-}
-const loadMenus = (util, dispatcher) => util.query(util.user.isLogged ? '/static/dmr/api/user-menus.json' : '/static/dmr/api/menus.json', null, {
-    success: (new UpdateMenusAction(dispatcher)).fn
-})
-
-export class LoadMenusAction extends Action {
-    get type() {return CONSTANTS.LoadMenusAction}
-    beforeDispatch = (data) => loadMenus(this.util, this.dispatcher)
-}
-export class UpdateMenusAction extends Action {
-    get type() {return CONSTANTS.UpdateMenusAction}
-    beforeDispatch = (data) => {
-        // console.log(data)
+    static run(action) {
+        if (Array.isArray(arguments) && arguments.length) arguments.shift()
+        action.fn.apply(action, arguments)
     }
 }
-export class UserLoginAction extends Action {
-    get type() {return CONSTANTS.UserLoginAction}
-    beforeDispatch = (data) => {
-        this.util.query('/static/dmr/api/login.json', data, {
-            success: (new UserLoggedInAction(this.dispatcher)).fn
+
+export class LoadPageInfoAction extends Action {
+    beforeDispatch(payload) {
+        this.util.query(this.util.user.isLogged ? '/static/dmr/api/user-page.json' : '/static/dmr/api/page.json', {}, {
+            success: (new Action(this.dispatcher, 'LoadedPageInfoAction')).fn
         })
     }
 }
-export class UserLoggedInAction extends Action {
-    get type() {return CONSTANTS.UserLoggedInAction}
-    beforeDispatch = (data) => {
-        this.util.user.load(data.data)
-        loadMenus(this.util, this.dispatcher)
+export class UserLoginAction extends Action {
+    beforeDispatch(payload) {
+        this.util.query('/static/dmr/api/login.json', payload, {
+            success: [
+                (res) => this.util.user.load(res.data),
+                (new Action(this.dispatcher, 'UserLoggedInAction')).fn,
+                (new LoadPageInfoAction(this.dispatcher)).fn
+            ]
+        })
     }
 }
 export class UserLogoutAction extends Action {
-    get type() {return CONSTANTS.UserLogoutAction}
-    beforeDispatch = (data) => {
+    beforeDispatch(payload) {
         this.util.user.unload()
-        loadMenus(this.util, this.dispatcher)
+        Action.run(new LoadPageInfoAction(this.dispatcher))
     }
 }

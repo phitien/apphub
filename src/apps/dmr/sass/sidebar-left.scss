@@ -1,0 +1,57 @@
+.page {
+  .sidebar-left {
+    position: fixed;top: $header-height;width: $sidebar-width - $margin;bottom: $footer-height;left: 0;padding: 0 $margin/2;
+    display: flex;flex-direction: column;justify-content: flex-start;align-items: flex-start;
+    >*{width: 100%;}
+    .sidebar-left-search {
+      height: $bar-height;
+      display: flex;flex-direction: row;justify-content: space-between;align-items: center;
+      input {flex: 1;margin: 0 3px;}
+    }
+    .hierarchy {
+      width: 100%;display: block;margin: 0;padding: 0;flex: 1;
+      .node-name {
+        display: flex;flex-direction: row;align-items: center;
+        line-height: 30px;
+      }
+      ul {
+        width: 100%;display: block;margin: 0;padding: 0;
+        li.node {cursor: pointer;display: block;margin: 0;padding: 0;}
+        li.node .node-name i {font-size: 12px;margin-right: 5px;}
+        li.node-lv-0 > .node-name:first-child {display: none;}
+        li.node-lv-1 > .node-name a:before {content: ''}
+        li.node-lv-2 > .node-name a:before {content: ':.  '}
+        li.node-lv-3 > .node-name a:before {content: ':..  '}
+        li.node-lv-4 > .node-name a:before {content: ':...  '}
+      }
+    }
+  }
+}
+.page.has-sidebar-left-collapsed {
+  .sidebar-left {
+    width: $sidebar-left-width-collapsed;padding: 0;
+    .sidebar-left-search {justify-content: center;}
+    .hierarchy {
+      ul {
+        li.node-lv-1 {
+          i {display: none;}
+          .node-name {
+            @extend .grey-box;
+            height: 28px;width: 28px;overflow: hidden;margin: 5px auto;border-radius: 50%;
+            display: flex;align-items: center;justify-content: center;
+            font-size: 4px;white-space: nowrap;
+            &:hover {
+              @extend .default-box;
+              font-size: 12px;border-radius: 0;width: 100px;overflow: visible;padding: 0 3px;
+              display: block;
+              a:before {display: none;}
+            }
+          }
+        }
+        li.node-lv-1 > .node-name a {color: $node-level-1-color;}
+        li.node-lv-2 > .node-name a {color: $node-level-2-color;}
+        li.node-lv-3 > .node-name a {color: $node-level-3-color;}
+      }
+    }
+  }
+}

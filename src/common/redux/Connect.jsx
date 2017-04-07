@@ -1,5 +1,10 @@
 import {connect} from 'react-redux'
-import Action, {CONSTANTS, UserLoginAction, UserLoggedInAction, UserLogoutAction, LoadMenusAction, UpdateMenusAction} from './actions/Action'
+import Action, {
+    CONSTANTS,
+    UserLoginAction,
+    UserLogoutAction,
+    LoadPageInfoAction,
+} from './actions/Action'
 import util from '../../core/util'
 
 export default class Connect {
@@ -17,10 +22,8 @@ export default class Connect {
     getActions(dispatch, ownProps) {
         return {
             userLogin: (new UserLoginAction(dispatch)).fn,
-            userLoggedIn: (new UserLoggedInAction(dispatch)).fn,
             userLogout: (new UserLogoutAction(dispatch)).fn,
-            loadMenus: (new LoadMenusAction(dispatch)).fn,
-            updateMenus: (new UpdateMenusAction(dispatch)).fn,
+            loadPageInfo: (new LoadPageInfoAction(dispatch)).fn,
             addModal: (new Action(dispatch, CONSTANTS.AddModalToView)).fn,
             removeModal: (new Action(dispatch, CONSTANTS.RemoveModalFromView)).fn
         }
