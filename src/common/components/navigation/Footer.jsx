@@ -1,6 +1,6 @@
 import React from 'react'
 import Component from '../Component'
-import DefaultConnect from '../../redux/Connect'
+import Connect from '../../redux/Connect'
 import Version from './Version'
 
 class Footer extends Component {
@@ -9,4 +9,4 @@ class Footer extends Component {
         <Version/>
     </div>
 }
-export default (new DefaultConnect(Footer)).klass
+export default (new Connect(Footer)).klass

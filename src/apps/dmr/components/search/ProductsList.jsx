@@ -1,6 +1,6 @@
 import React from 'react'
 import Component from '../../../../common/components/Component'
-import DmrConnect from '../../redux/Connect'
+import Connect from '../../redux/Connect'
 import ReactTable from 'react-table'
 import {Toggle} from 'material-ui'
 
@@ -43,4 +43,4 @@ class ProductsList extends Component {
     </div>
 }
 
-export default (new DmrConnect(ProductsList)).klass
+export default (new Connect(ProductsList)).klass

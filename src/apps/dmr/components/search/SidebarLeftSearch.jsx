@@ -1,6 +1,6 @@
 import React from 'react'
 import Component from '../../../../common/components/Component'
-import DmrConnect from '../../redux/Connect'
+import Connect from '../../redux/Connect'
 import {TextField, RaisedButton} from 'material-ui'
 import {IconMenu, MenuItem, IconButton} from 'material-ui'
 
@@ -25,4 +25,4 @@ class SidebarLeftSearch extends Component {
     </div>
 }
 
-export default (new DmrConnect(SidebarLeftSearch)).klass
+export default (new Connect(SidebarLeftSearch)).klass

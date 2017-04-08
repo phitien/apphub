@@ -1,6 +1,6 @@
 import React from 'react'
 import Component from '../../../../common/components/Component'
-import DmrConnect from '../../redux/Connect'
+import Connect from '../../redux/Connect'
 
 class Hierarchy extends Component {
     get componentClassName() {return 'hierarchy'}
@@ -52,4 +52,4 @@ class Hierarchy extends Component {
     </div>
 }
 
-export default (new DmrConnect(Hierarchy)).klass
+export default (new Connect(Hierarchy)).klass

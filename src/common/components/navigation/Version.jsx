@@ -1,6 +1,6 @@
 import React from 'react'
 import Component from '../Component'
-import DefaultConnect from '../../redux/Connect'
+import Connect from '../../redux/Connect'
 
 class Version extends Component {
     get componentClassName() {return 'version'}
@@ -8,4 +8,4 @@ class Version extends Component {
         Version 0.0.1
     </div>
 }
-export default (new DefaultConnect(Version)).klass
+export default (new Connect(Version)).klass

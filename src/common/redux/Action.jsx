@@ -24,7 +24,7 @@ export class UserLoginAction extends Action {
         this.util.query('/static/dmr/api/login.json', payload, {
             success: [
                 (res) => this.util.user.load(res.data),
-                (new UserLoggedInAction(this.dispatcher)).fn
+                (new UserLoggedInAction(this.dispatcher)).fn,
                 (new LoadPageInfoAction(this.dispatcher)).fn
             ]
         })

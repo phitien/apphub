@@ -1,6 +1,6 @@
 import React from 'react'
 import Component from '../../../../common/components/Component'
-import DmrConnect from '../../redux/Connect'
+import Connect from '../../redux/Connect'
 import ProductsList from './ProductsList'
 import InterfaceSystems from './InterfaceSystems'
 
@@ -11,4 +11,4 @@ class Content extends Component {
     </div>
 }
 
-export default (new DmrConnect(Content)).klass
+export default (new Connect(Content)).klass

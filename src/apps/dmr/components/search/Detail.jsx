@@ -1,6 +1,6 @@
 import React from 'react'
 import Component from '../../../../common/components/Component'
-import DmrConnect from '../../redux/Connect'
+import Connect from '../../redux/Connect'
 import {Tabs, Tab} from 'material-ui/Tabs'
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table'
 
@@ -44,4 +44,4 @@ class Detail extends Component {
     </div>
 }
 
-export default (new DmrConnect(Detail)).klass
+export default (new Connect(Detail)).klass

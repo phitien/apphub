@@ -1,6 +1,6 @@
 import React from 'react'
 import Component from '../Component'
-import DefaultConnect from '../../redux/Connect'
+import Connect from '../../redux/Connect'
 import LinksHub from './LinksHub'
 import LogoBox from './LogoBox'
 import SearchBox from './SearchBox'
@@ -20,4 +20,4 @@ class Header extends Component {
         <Help/>
     </div>
 }
-export default (new DefaultConnect(Header)).klass
+export default (new Connect(Header)).klass

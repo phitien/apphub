@@ -1,7 +1,7 @@
 import React from 'react'
 import Page from './Page'
 import {TextField, RaisedButton} from 'material-ui'
-import DefaultConnect from '../redux/Connect'
+import Connect from '../redux/Connect'
 
 class LoginPage extends Page {
     get pageClassName() {return `login-page`}
@@ -39,4 +39,4 @@ class LoginPage extends Page {
         <RaisedButton label='Login' primary={true} fullWidth={true} onClick={this.onLogin}/>
     </form>
 }
-export default (new DefaultConnect(LoginPage)).klass
+export default (new Connect(LoginPage)).klass

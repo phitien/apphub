@@ -6,7 +6,7 @@ var browserify = require('browserify');
 
 module.exports = function (dest, libs) {
     var bundler = browserify({
-        debug: true,
+        debug: false,
     });
     libs.forEach(function(lib) {
         bundler.require(lib);

@@ -1,6 +1,6 @@
 import React from 'react'
 import Component from '../../../../common/components/Component'
-import DmrConnect from '../../redux/Connect'
+import Connect from '../../redux/Connect'
 import SidebarRightSearch from './SidebarRightSearch'
 
 class SidebarRight extends Component {
@@ -14,4 +14,4 @@ class SidebarRight extends Component {
     </div>
 }
 
-export default (new DmrConnect(SidebarRight)).klass
+export default (new Connect(SidebarRight)).klass

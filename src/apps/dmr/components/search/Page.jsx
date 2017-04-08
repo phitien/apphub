@@ -1,6 +1,6 @@
 import React from 'react'
 import Page from '../../../../common/components/Page'
-import DmrConnect from '../../redux/Connect'
+import Connect from '../../redux/Connect'
 import SidebarLeft from './SidebarLeft'
 import Content from './Content'
 import SidebarRight from './SidebarRight'
@@ -15,4 +15,4 @@ class SearchPage extends Page {
     </div>
 }
 
-export default (new DmrConnect(SearchPage)).klass
+export default (new Connect(SearchPage)).klass

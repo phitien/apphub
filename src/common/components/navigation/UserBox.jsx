@@ -1,6 +1,6 @@
 import React from 'react'
 import Component from '../Component'
-import DefaultConnect from '../../redux/Connect'
+import Connect from '../../redux/Connect'
 import Menu from '../Menu'
 
 class UserBox extends Component {
@@ -28,4 +28,4 @@ class UserBox extends Component {
             {this.children()}
         </div>
 }
-export default (new DefaultConnect(UserBox)).klass
+export default (new Connect(UserBox)).klass

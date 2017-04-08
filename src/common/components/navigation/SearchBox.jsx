@@ -1,6 +1,6 @@
 import React from 'react'
 import Component from '../Component'
-import DefaultConnect from '../../redux/Connect'
+import Connect from '../../redux/Connect'
 
 class SearchBox extends Component {
     get componentClassName() {return 'search-box'}
@@ -12,4 +12,4 @@ class SearchBox extends Component {
             {!this.util.user.isLogged ? null :this.children()}
         </div>
 }
-export default (new DefaultConnect(SearchBox)).klass
+export default (new Connect(SearchBox)).klass

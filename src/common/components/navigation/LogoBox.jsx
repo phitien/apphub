@@ -1,6 +1,6 @@
 import React from 'react'
 import Component from '../Component'
-import DefaultConnect from '../../redux/Connect'
+import Connect from '../../redux/Connect'
 
 class LogoBox extends Component {
     get componentClassName() {return 'logo-box'}
@@ -13,4 +13,4 @@ class LogoBox extends Component {
         </div>
     }
 }
-export default (new DefaultConnect(LogoBox)).klass
+export default (new Connect(LogoBox)).klass

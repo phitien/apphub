@@ -1,6 +1,6 @@
 import React from 'react'
 import Component from '../../../../common/components/Component'
-import DmrConnect from '../../redux/Connect'
+import Connect from '../../redux/Connect'
 
 class InterfaceSystem extends Component {
     get componentClassName() {return 'interface-system'}
@@ -11,4 +11,4 @@ class InterfaceSystem extends Component {
     </div>
 }
 
-export default (new DmrConnect(InterfaceSystem)).klass
+export default (new Connect(InterfaceSystem)).klass

@@ -20,7 +20,11 @@ export default class Connect {
         return actions
     }
     get util() {return util}
-    get mapStateToProps() {return (state, ownProps) => this.util.assign({}, this.getDefaultProps, state)}
+    get mapStateToProps() {return (state, ownProps) => {
+        const newProps = this.util.assign({}, this.getDefaultProps)
+        if (state) Object.keys(state).map(k => this.util.assign(newProps, state[k]))
+        return newProps
+    }}
     get mapDispatchToProps() {return (dispatch, ownProps) => this.getActions(dispatch, ownProps)}
     get klass() {return connect(this.mapStateToProps, this.mapDispatchToProps)(this.__klass)}
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import Component from '../Component'
-import DefaultConnect from '../../redux/Connect'
+import Connect from '../../redux/Connect'
 import Menu from '../Menu'
 
 class LinksHub extends Component {
@@ -13,9 +13,11 @@ class LinksHub extends Component {
         </div>
         <Menu menus={this.props.pageInfo} className='lightgrey-box menus' subMenuClassName='lightgrey-box'/>
     </div>
-    render = () => <div className={this.className}>
-        {this.children()}
-    </div>
+    render = () => {
+        return <div className={this.className}>
+            {this.children()}
+        </div>
+    }
 }
 
-export default (new DefaultConnect(LinksHub)).klass
+export default (new Connect(LinksHub)).klass

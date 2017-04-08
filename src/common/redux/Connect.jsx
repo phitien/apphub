@@ -1,12 +1,12 @@
-import Connect from '../../core/redux/Connect'
-import * as Actions from './Action'
+import {default as DefaultConnect} from '../../core/redux/Connect'
+import * as actions from './Action'
 
-export default class DefaultConnect extends Connect {
+export default class Connect extends DefaultConnect {
     getActions(dispatch, ownProps) {
         return this.util.assign(
             {},
             super.getActions(dispatch, ownProps),
-            this.extractActions(Actions, dispatch, ownProps)
+            this.extractActions(actions, dispatch, ownProps)
         )
     }
 }
