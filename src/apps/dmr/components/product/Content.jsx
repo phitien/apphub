@@ -1,13 +1,12 @@
 import React from 'react'
 import Component from '../../../../common/components/Component'
 import Connect from '../../redux/Connect'
-import ProductsList from './ProductsList'
-import InterfaceSystems from './InterfaceSystems'
+import Detail from './Detail'
 
 class Content extends Component {
     get componentClassName() {return `content`}
     render = () => <div className={this.className}>
-        <ProductsList/>
+        <Detail/>
     </div>
 }
 

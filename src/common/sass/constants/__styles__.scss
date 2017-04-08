@@ -21,3 +21,8 @@
   background-color: $bg-lightdark-color;
   color: $text-lightdark-color;
 }
+.table {
+  .pagination{display: flex;align-items: center;justify-content: flex-end;}
+  .pagination-navi{display: flex;align-items: center;input {width: 50px !important;text-align: right;}}
+  .pagination-pagesize{display: flex;align-items: center;margin-left: $margin;input {width: 50px !important;text-align: right;}}
+}

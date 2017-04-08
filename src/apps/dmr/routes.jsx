@@ -1,18 +1,20 @@
 import {RouteEnterLoginRequired} from '../../common/routes/RouteEnterLoginRequired'
-import DmrViewport from './components/Viewport'
+import Viewport from './components/Viewport'
 import LandingPage from './components/landing/Page'
-import SearchPage from './components/search/Page'
+import ProductsPage from './components/products/Page'
+import ProductPage from './components/product/Page'
 
 const hierarchyPaths = ['/dmr']
 const subRoutes = [
-    {path: 'search', component: SearchPage, onEnter: RouteEnterLoginRequired}
+    {path: 'products', component: ProductsPage, onEnter: RouteEnterLoginRequired},
+    {path: 'products/:id', component: ProductPage, onEnter: RouteEnterLoginRequired}
 ]
 const routes = []
 
 hierarchyPaths.map(hierarchy => {
     routes.push({
         path: hierarchy,
-        component: DmrViewport,
+        component: Viewport,
         indexRoute: {
             component: LandingPage
         },

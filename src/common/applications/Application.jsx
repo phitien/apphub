@@ -8,9 +8,16 @@ export default class Application {
     get container() {throw 'No container id provided'}
     get children() {throw 'No children'}
     afterRender = () => {}
-    render = (store) => ReactDOM.render(
-        <Provider store={store}>{this.children}</Provider>,
-        document.getElementById(this.container),
-        this.afterRender
-    )
+    render = (store) => {
+        try {
+            ReactDOM.render(
+                <Provider store={store}>{this.children}</Provider>,
+                document.getElementById(this.container),
+                this.afterRender
+            )
+        }
+        catch(e) {
+            console.error(e)
+        }
+    }
 }

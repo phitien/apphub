@@ -1,11 +1,11 @@
 import React from 'react'
 import Page from '../../../../common/components/Page'
 import Connect from '../../redux/Connect'
-import SidebarLeft from './SidebarLeft'
+import SidebarLeft from '../SidebarLeft'
+import SidebarRight from '../SidebarRight'
 import Content from './Content'
-import SidebarRight from './SidebarRight'
 
-class SearchPage extends Page {
+class ProductPage extends Page {
     get pageClassName() {
         return `${this.props.hideSidebarLeft ? 'has-sidebar-left-collapsed' : 'has-sidebar-left'} ${this.props.hideSidebarRight ? 'has-sidebar-right-collapsed' : 'has-sidebar-right'}`}
     children = () => <div className='wrapper'>
@@ -15,4 +15,4 @@ class SearchPage extends Page {
     </div>
 }
 
-export default (new Connect(SearchPage)).klass
+export default (new Connect(ProductPage)).klass

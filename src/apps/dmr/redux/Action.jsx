@@ -35,3 +35,11 @@ export class SearchDataElementsAction extends Action {
     }
 }
 export class SearchedDataElementsAction extends Action {}
+export class LoadModelDetailAction extends Action {
+    beforeDispatch(payload, lv) {
+        this.util.query(`/static/dmr/api/data-elements.json`, {}, {
+            success: (new LoadedModelDetailAction(this.dispatcher)).fn
+        })
+    }
+}
+export class LoadedModelDetailAction extends Action {}

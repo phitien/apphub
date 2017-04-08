@@ -3,8 +3,13 @@ import Component from './Component'
 
 export default class Menu extends Component {
     get componentClassName() {return ''}
-    renderMenu = (menus, className, subMenuClassName) => !menus || !menus.length ? <ul style={{display: 'none !important'}}></ul> : <ul className={className}>{menus.map((item, i) => {
-        let props = item.onClick ? {onClick: item.onClick} : {href: item.url ? item.url : '#'}
+    renderMenu = (menus, className, subMenuClassName) => !menus || !menus.length ? null : <ul className={className}>{menus.map((item, i) => {
+        let props = item.onClick ?
+            {onClick: item.onClick} :
+            {href: item.url, onClick: (e) => {
+                e.preventDefault();
+                if (item.url) this.util.history.push(item.url)
+            }}
         return item.html ? <li key={i} className={`${item.subNodes && item.subNodes.length > 0 ? 'has-children' : ''}`}>{item.html}</li> :
         <li key={i} className={`${item.subNodes && item.subNodes.length > 0 ? 'has-children' : ''}`}>
             <a {...props}>

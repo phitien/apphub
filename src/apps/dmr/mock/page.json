@@ -1,12 +1,12 @@
 {
   "body": [{
-    "title": "DMR",
+    "title": "Data Models Repositories",
     "app": "DMR",
     "description": "Data Models Repositories",
-    "url": "/dmr/search",
+    "url": "/dmr/products",
     "subNodes": []
   },{
-    "title": "EM",
+    "title": "Exception Management",
     "app": "EM",
     "description": "Exception Management",
     "url": "/em",

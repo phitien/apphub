@@ -3,22 +3,22 @@
     "title": "DMR",
     "app": "DMR",
     "description": "Data Models Repositories",
-    "url": "/dmr/search",
+    "url": "/dmr",
     "subNodes": [{
-      "title": "DMR - Dashboard",
+      "title": "Dashboard",
       "app": "DMR",
       "description": "Data Models Statistic",
       "url": "/dmr",
       "subNodes": []
     },{
-      "title": "DMR - Search",
+      "title": "Products",
       "app": "DMR",
-      "description": "Products Search",
-      "url": "/dmr/search",
+      "description": "Products List",
+      "url": "/dmr/products",
       "subNodes": []
     }]
   },{
-    "title": "EM",
+    "title": "Exception Management",
     "app": "EM",
     "description": "Exception Management",
     "url": "/em",

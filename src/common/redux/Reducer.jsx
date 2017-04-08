@@ -29,14 +29,16 @@ export class LoadedPageInfoActionReducer extends Reducer {
     }
     getTitle(nodes, value) {
         return nodes.reduce((value, node) => {
-            if (node.url == location.pathname)
-                return value = node.title
-            return node.subNodes && node.subNodes.length ? this.getTitle(node.subNodes, value) : value
+            if (location.pathname == node.url)
+                return value = node.subNodes && node.subNodes.length ? this.getTitle(node.subNodes, value) : node.title
+            if (location.pathname.indexOf(node.url) >= 0)
+                return value = node.subNodes && node.subNodes.length ? this.getTitle(node.subNodes, value) : node.title
+            return node.subNodes && node.subNodes.length ? this.getAppName(node.subNodes, value) : value
         }, value)
     }
     getAppName(nodes, value) {
         return nodes.reduce((value, node) => {
-            if (node.url == location.pathname)
+            if (location.pathname.indexOf(node.url) >= 0)
                 return value = node.app
             return node.subNodes && node.subNodes.length ? this.getAppName(node.subNodes, value) : value
         }, value)

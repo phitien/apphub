@@ -29,7 +29,7 @@ class LoginPage extends Page {
         }
     }
     children = () => <form className='login-form'>
-        <h1>Sign in to {this.props.pageTitle}</h1>
+        <h1>Sign in to {this.props.appName}</h1>
         <TextField type='text' ref={e => this.accountInput = e}
             errorText={this.state.validationErrors.account}
             hintText='Account' fullWidth={true} />

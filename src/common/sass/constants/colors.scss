@@ -1,3 +1,4 @@
+$red: #F44336;
 $green: rgba(26, 149, 48, 1);
 $greena: rgba(26, 149, 48, .5);
 $blue:  rgba(50, 200, 254, 1);
@@ -19,6 +20,6 @@ $text-lightgrey-color: #333333;
 $text-dark-color: #f3f3f3;
 $text-lightdark-color: #f3f3f3;
 
-$node-level-1-color: red;
-$node-level-2-color: green;
-$node-level-3-color: blue;
+$node-level-1-color: $green;
+$node-level-2-color: $red;
+$node-level-3-color: $dark;

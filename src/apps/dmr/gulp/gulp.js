@@ -105,11 +105,11 @@ gulp.task(NAME + ':watch', function() {
 });
 gulp.task(NAME + '', function() {
   return runSequence(
-    NAME + ':clean',
-    NAME + ':vendor',
+    // NAME + ':clean',
+    // NAME + ':vendor',
     NAME + ':js',
     NAME + ':css',
     NAME + ':copy',
-    NAME + ':inject',
+    // NAME + ':inject',
     NAME + ':watch')
 });

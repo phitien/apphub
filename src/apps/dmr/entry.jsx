@@ -1,3 +1,5 @@
+// import './sass/styles.scss'
+
 import assign from 'object-assign'
 
 import CONSTANTS, {register as registerAction} from '../../core/redux/CONSTANTS'
@@ -19,9 +21,9 @@ import HeaderApplication from '../../common/applications/HeaderApplication'
 const headerApplication = new HeaderApplication()
 headerApplication.render(store)
 
-import DmrApplication from './DmrApplication'
-const dmrApplication = new DmrApplication()
-dmrApplication.render(store)
+import Application from './Application'
+const application = new Application()
+application.render(store)
 
 import FooterApplication from '../../common/applications/FooterApplication'
 const footerApplication = new FooterApplication()
