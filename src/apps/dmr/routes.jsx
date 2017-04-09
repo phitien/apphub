@@ -16,6 +16,7 @@ hierarchyPaths.map(hierarchy => {
     routes.push({
         path: hierarchy,
         component: Viewport,
+        onChange: (prev, next) => dispatchEvent(new CustomEvent('url_changed', {detail: {prev, next}})),
         indexRoute: {
             component: LandingPage
         },

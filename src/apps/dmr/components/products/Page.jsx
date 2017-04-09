@@ -8,7 +8,10 @@ import Content from './Content'
 class ProductsPage extends Page {
     get pageClassName() {
         return `${this.props.hideSidebarLeft ? 'has-sidebar-left-collapsed' : 'has-sidebar-left'} ${this.props.hideSidebarRight ? 'has-sidebar-right-collapsed' : 'has-sidebar-right'}`}
-    componentDidMount() {this.props.executeLoadRootHierarchyAction(this.props.routeParams.id)}
+    componentDidMount() {
+        addEventListener('url_changed', (e) => this.props.routeParams.id != e.detail.next.params.id ? this.props.executeLoadRootHierarchyAction(e.detail.next.params.id) : false)
+        this.props.executeLoadRootHierarchyAction(this.props.routeParams.id)
+    }
     children = () => <div className='wrapper'>
         <SidebarLeft/>
         <Content/>
