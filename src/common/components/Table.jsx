@@ -1,13 +1,14 @@
 import React from 'react'
 import {Table as MaterialTable, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn as TableCell}
   from 'material-ui/Table'
-import {TextField, IconButton} from 'material-ui'
+import {IconButton} from 'material-ui'
 import Component from './Component'
+import TextField from './TextField'
 
 export default class Table extends Component {
     get componentClassName() {return 'table'}
-    get tableProps() {
-        return this.util.assign(this.defaultProps, this.props)
+    get cmpProps() {
+        return this.util.assignDeep(this.defaultProps, this.props)
     }
     get defaultProps() {
         return {
@@ -19,66 +20,73 @@ export default class Table extends Component {
             cellRenderer: function(row, col) {return <div>{row[col.field]}</div>}.bind(this),
         }
     }
-    get cellStyle() {return this.util.assign({}, {height: this.tableProps.rowHeight})}
+    get lineHeightStyle() {return this.util.assign({}, {height: this.cmpProps.rowHeight})}
+    headerCellStyle(col) {return this.util.assign(this.lineHeightStyle, {width: col.width ? col.width : 'auto'})}
+    get cellStyle() {return this.util.assign(this.lineHeightStyle, {})}
+    get buttonStyle() {return this.util.assign(this.lineHeightStyle, {display: 'flex', alignItem: 'center'})}
 
-    pagination = () => //!this.tableProps.showPagination ? null :
-        <TableRow style={this.cellStyle}>
-            <TableCell style={this.cellStyle} colSpan={this.tableProps.columns.length}>
+    header = () =>
+        <TableHeader
+            displaySelectAll={this.cmpProps.showCheckboxes}
+            adjustForCheckbox={this.cmpProps.showCheckboxes}
+            enableSelectAll={this.cmpProps.enableSelectAll}>
+            <TableRow style={this.cellStyle}>
+                {this.cmpProps.columns.map((col,i) => <TableHeaderColumn key={i} tooltip={col.tooltip}
+                    style={this.headerCellStyle(col)}>{col.name}</TableHeaderColumn>)}
+            </TableRow>
+            {this.filters()}
+        </TableHeader>
+    filters = () => //!this.cmpProps.showFilters ? null :
+        <TableRow style={this.lineHeightStyle}>
+            {this.cmpProps.columns.map((col,i) =>
+            <TableHeaderColumn style={this.cellStyle} key={i} tooltip={col.tooltip}>
+                <TextField hintText={`Enter ${col.name}`} fullWidth={true} underlineShow={true}
+                    style={{height: '24px', fontSize: '12px'}}
+                    hintStyle={{bottom: '0'}}
+                    />
+            </TableHeaderColumn>)}
+        </TableRow>
+    body = () => //!this.data || this.data.length ? null :
+        <TableBody
+            displayRowCheckbox={this.cmpProps.showCheckboxes}
+            deselectOnClickaway={this.cmpProps.deselectOnClickaway}
+            showRowHover={this.cmpProps.showRowHover}
+            stripedRows={this.cmpProps.stripedRows}
+        >
+          {this.cmpProps.data.map((row,i) => <TableRow style={this.lineHeightStyle} key={i} selected={row.selected}>
+              {this.cmpProps.columns.map((col,j) => <TableCell style={this.cellStyle} key={j}>{this.cmpProps.cellRenderer(row,col)}</TableCell>)}
+          </TableRow>)}
+        </TableBody>
+    footer = () =>
+        <TableFooter adjustForCheckbox={this.cmpProps.showCheckboxes}>
+            {this.pagination()}
+        </TableFooter>
+    pagination = () => //!this.cmpProps.showPagination ? null :
+        <TableRow style={this.lineHeightStyle}>
+            <TableCell style={this.cellStyle} colSpan={this.cmpProps.columns.length}>
                 <div className='pagination'>
                     <div className='pagination-navi'>
-                        <IconButton><i className='material-icons'>chevron_left</i></IconButton>
+                        <IconButton style={this.buttonStyle}><i className='material-icons'>chevron_left</i></IconButton>
                         <div className='pagination-pageInfo'>
-                            <TextField type='number' min={1} name='current_page' style={{width: 'auto'}} defaultValue={this.tableProps.currentPage}/>/{this.tableProps.totalPage}
+                            <TextField type='number' min={1} style={{width: 'auto'}} defaultValue={this.cmpProps.currentPage}/>/{this.cmpProps.totalPage}
                         </div>
-                        <IconButton><i className='material-icons'>chevron_right</i></IconButton>
+                        <IconButton style={this.buttonStyle}><i className='material-icons'>chevron_right</i></IconButton>
                     </div>
                     <div className='pagination-pagesize'>
-                        <TextField type='number' min={10} name='page-size' style={{width: 'auto'}} defaultValue={this.tableProps.pageSize}/>/page
+                        <TextField type='number' min={10} style={{width: 'auto'}} defaultValue={this.cmpProps.pageSize}/>/page
                     </div>
                 </div>
             </TableCell>
         </TableRow>
-    filters = () => //!this.tableProps.showFilters ? null :
-        <TableRow style={this.cellStyle}>
-            {this.tableProps.columns.map((col,i) =>
-            <TableHeaderColumn style={this.cellStyle} key={i} tooltip={col.tooltip}>
-                <TextField hintText={`Enter ${col.name}`} fullWidth={true}/>
-            </TableHeaderColumn>)}
-        </TableRow>
-    header = () =>
-        <TableHeader
-            displaySelectAll={this.tableProps.showCheckboxes}
-            adjustForCheckbox={this.tableProps.showCheckboxes}
-            enableSelectAll={this.tableProps.enableSelectAll}>
-            <TableRow style={this.cellStyle}>
-                {this.tableProps.columns.map((col,i) => <TableHeaderColumn style={this.cellStyle} key={i} tooltip={col.tooltip}
-                    style={this.util.assign({}, {width: col.width ? col.width : 'auto'})}>{col.name}</TableHeaderColumn>)}
-            </TableRow>
-            {this.filters()}
-        </TableHeader>
-    body = () => //!this.data || this.data.length ? null :
-        <TableBody
-            displayRowCheckbox={this.tableProps.showCheckboxes}
-            deselectOnClickaway={this.tableProps.deselectOnClickaway}
-            showRowHover={this.tableProps.showRowHover}
-            stripedRows={this.tableProps.stripedRows}
-        >
-          {this.tableProps.data.map((row,i) => <TableRow style={this.cellStyle} key={i} selected={row.selected}>
-              {this.tableProps.columns.map((col,j) => <TableCell style={this.cellStyle} key={j}>{this.tableProps.cellRenderer(row,col)}</TableCell>)}
-          </TableRow>)}
-        </TableBody>
-    footer = () =>
-        <TableFooter adjustForCheckbox={this.tableProps.showCheckboxes}>
-            {this.pagination()}
-        </TableFooter>
+
     render = () =>
         <div className={this.className}>
-            <MaterialTable height={this.tableProps.height}
-                fixedHeader={this.tableProps.fixedHeader} fixedFooter={this.tableProps.fixedFooter}
-                selectable={this.tableProps.selectable} multiSelectable={this.tableProps.multiSelectable}
-                onCellClick={this.tableProps.onCellClick} onCellHover={this.tableProps.onCellHover}
-                onCellHoverExit={this.tableProps.onCellHoverExit} onRowHover={this.tableProps.onRowHover}
-                onRowHoverExit={this.tableProps.onRowHoverExit} onRowSelection={this.tableProps.onRowSelection}
+            <MaterialTable height={this.cmpProps.height}
+                fixedHeader={this.cmpProps.fixedHeader} fixedFooter={this.cmpProps.fixedFooter}
+                selectable={this.cmpProps.selectable} multiSelectable={this.cmpProps.multiSelectable}
+                onCellClick={this.cmpProps.onCellClick} onCellHover={this.cmpProps.onCellHover}
+                onCellHoverExit={this.cmpProps.onCellHoverExit} onRowHover={this.cmpProps.onRowHover}
+                onRowHoverExit={this.cmpProps.onRowHoverExit} onRowSelection={this.cmpProps.onRowSelection}
                 >
                 {this.header()}
                 {this.body()}

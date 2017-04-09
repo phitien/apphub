@@ -1,6 +1,7 @@
 import React from 'react'
 import Component from '../../../common/components/Component'
 import Connect from '../redux/Connect'
+import {Link} from 'react-router'
 
 class Hierarchy extends Component {
     get componentClassName() {return 'hierarchy'}
@@ -10,7 +11,6 @@ class Hierarchy extends Component {
             this.props.rootHierarchy)
     }
     get subHierarchy() {return this.props.subHierarchy}
-    componentDidMount() {if (!this.props.rootHierarchy) this.props.executeLoadRootHierarchyAction()}
     shouldComponentUpdate(nextProps, nextState) {
         if(this.state.selectedNode && nextProps.subHierarchy) {
             this.traverse(this.state.rootHierarchy, nextProps.subHierarchy)
@@ -26,20 +26,19 @@ class Hierarchy extends Component {
         }
     }
     toggleSidebarLeft = () => this.props.executeToggleSidebarLeftAction({data: !this.props.hideSidebarLeft})
-    loadSubHierarchy(node, lv, e) {
-        e.preventDefault()
-        e.stopPropagation()
-        this.state.selectedNode = node
-        this.props.executeLoadSubHierarchyAction(node, lv)
-    }
     canExpand = (node) => true
     renderIcon = (node, lv) => {
         return <i className='material-icons'>{!this.canExpand(node) ? 'remove' : node.expanded ? 'remove' : 'add'}</i>
     }
     renderHierarchy = (node,lv,i) => <li key={i} className={`node node-lv-${lv}`}>
-        <div className='node-name' onClick={this.loadSubHierarchy.bind(this, node, lv)}>
+        <div className='node-name'>
             {this.renderIcon(node, lv)}
-            <a>{node.name} {node.subNodes ? `(${node.subNodes.length})` : ''}</a>
+            <Link to={`/dmr/products/${node.id}`} className='name'>
+                {node.name} {node.subNodes ? `(${node.subNodes.length})` : ''}
+            </Link>
+            <Link to={`/dmr/product/${node.id}`} className='open'>
+                <i className='material-icons' title='Open'>get_app</i>
+            </Link>
         </div>
         {node.expanded && node.subNodes && node.subNodes.length ? <ul>
             {node.subNodes.map((item,i) => this.renderHierarchy(item,lv+1,i))}

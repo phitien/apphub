@@ -15,7 +15,7 @@
       }
     }
     .view-settings {
-      display: flex;
+      display: flex;margin-bottom: $margin;
       .columns-selection {flex: 1;}
       .switch-view {
         width: 70px !important;

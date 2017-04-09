@@ -1,6 +1,4 @@
 import {connect} from 'react-redux'
-import {createStore, combineReducers, applyMiddleware} from 'redux'
-import thunk from 'redux-thunk'
 import util from '../util'
 
 export default class Connect {
@@ -14,8 +12,11 @@ export default class Connect {
     extractActions(o, dispatch, ownProps) {
         const actions = {}
         Object.keys(o).map(name => {
-            const instance = new o[name](dispatch)
-            actions[`execute${name}`] = instance.fn
+            const klass = o[name]
+            if (klass && typeof klass == 'function') {
+                const action = new klass()
+                actions[`execute${name}`] = action.getFn(dispatch)
+            }
         })
         return actions
     }
@@ -25,7 +26,10 @@ export default class Connect {
         if (state) Object.keys(state).map(k => this.util.assign(newProps, state[k]))
         return newProps
     }}
-    get mapDispatchToProps() {return (dispatch, ownProps) => this.getActions(dispatch, ownProps)}
+    get mapDispatchToProps() {return (dispatch, ownProps) => {
+        console.log(this.getActions(dispatch, ownProps))
+        return this.getActions(dispatch, ownProps)
+    }}
     get klass() {return connect(this.mapStateToProps, this.mapDispatchToProps)(this.__klass)}
 
     static createStore(reducer) {

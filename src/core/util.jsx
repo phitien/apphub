@@ -2,6 +2,7 @@ import {browserHistory} from 'react-router'
 import lodash from 'lodash'
 import moment from 'moment'
 import assign from 'object-assign'
+import assignDeep from 'object-assign-deep'
 import REQUEST from './Request'
 import cookie from './cookie'
 import user from './user'
@@ -9,6 +10,7 @@ import user from './user'
 class Util {
     get user() {return user}
     get assign() {return assign}
+    get assignDeep() {return assignDeep}
     get lodash() {return lodash}
     get history() {return browserHistory}
     get cookie() {return cookie}

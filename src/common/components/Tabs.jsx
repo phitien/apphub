@@ -24,7 +24,7 @@ class Tabs extends Component {
                 <RaisedButton key={i} onClick={() => this.setState({activeIndex: i})} label={this.getTitle(tab,i)}
                     className={`tab ${i==this.activeIndex?'active':''}`} primary={i==this.activeIndex}/>)}
             </div>
-            <div className='step-content'>
+            <div className='tab-content'>
                 {this.getContent(this.props.children[this.activeIndex], this.activeIndex)}
             </div>
         </div> : null

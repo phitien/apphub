@@ -3,6 +3,7 @@ import Component from '../../../../common/components/Component'
 import Connect from '../../redux/Connect'
 import Tabs from '../../../../common/components/Tabs'
 import Table from '../../../../common/components/Table'
+import Card from '../../../../common/components/Card'
 
 class Detail extends Component {
     get componentClassName() {return 'product'}
@@ -12,11 +13,19 @@ class Detail extends Component {
         <Tabs linear={false}>
             <tab>
                 <title>Logical</title>
-                <content>TODO Show Logical fields</content>
+                <content>
+                    <Card title='Logical Model' subtitle='Logical model fields'>
+                        TODO Show Logical fields
+                    </Card>
+                </content>
             </tab>
             <tab>
                 <title>Physical</title>
-                <content>TODO Show Physical fields</content>
+                <content>
+                    <Card title='Physical Model'>
+                        TODO Show Physical fields
+                    </Card>
+                </content>
             </tab>
         </Tabs>
     </div>

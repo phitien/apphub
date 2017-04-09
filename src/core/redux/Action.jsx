@@ -1,31 +1,37 @@
 import util from '../util'
-import CONSTANTS from './CONSTANTS'
+import {getStoreInstance} from './Store'
+
+let __dispatcher = null
 
 export default class Action {
-    constructor(dispatch, type) {
-        this.__dispatcher = dispatch
-        this.__type = type ? type : this.constructor.name
-        CONSTANTS[this.type] = this.type
-    }
     beforeDispatch(payload) {}
     afterDispatch(payload) {}
     getData(payload) {
-        return this.util.assign({}, payload, {type: this.type})
+        return this.util.assign({}, payload, {type: this.constructor.name})
     }
-    dispatch(payload) {this.dispatcher(this.getData(payload))}
     get util() {return util}
-    get type() {return this.__type}
-    get dispatcher() {return this.__dispatcher}
-    get fn() {
-        if (!this.type) throw 'Action has no type'
+    get store() {return getStoreInstance()}
+    get dispatcher() {return __dispatcher}
+    set dispatcher(v) {__dispatcher = !__dispatcher ? v : __dispatcher}
+    getFn(dispatch) {
+        this.dispatcher = dispatch
         return (function(payload) {
             this.beforeDispatch.apply(this, arguments)
-            this.dispatch(payload)
+            Action.dispatch(this.getData(payload))
             this.afterDispatch.apply(this, arguments)
         }).bind(this)
     }
-    static run(action) {
-        if (Array.isArray(arguments) && arguments.length) arguments.shift()
-        action.fn.apply(action, arguments)
+    static dispatch(payload) {
+        __dispatcher(payload)
+    }
+    static run(klass) {
+        const args = []
+        if (arguments.length) {
+            for (var i=1;i < arguments.length;i++) {
+                args.push(arguments[i])
+            }
+        }
+        const action = new klass()
+        action.getFn().apply(action, args)
     }
 }

@@ -1,13 +1,11 @@
 import util from '../util'
-import REDUCERS from './REDUCERS'
+import {getStoreInstance} from './Store'
 
 export default class Reducer {
     get util() {return util}
     get defaultState() {return {}}
-    constructor(name) {
-        REDUCERS[this.constructor.name] = (state = this.defaultState, action) => this.transform(state, action)
-    }
-    transform(state, action) {
+    get store() {return getStoreInstance()}
+    transform(state = this.defaultState, action) {
         return `${action.type}Reducer` == this.constructor.name
             ? this.matchedTransform(state, action)
             : this.notMatchedTransform(state, action)

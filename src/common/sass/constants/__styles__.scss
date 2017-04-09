@@ -22,7 +22,12 @@
   color: $text-lightdark-color;
 }
 .table {
+  font-size: 11px;
   .pagination{display: flex;align-items: center;justify-content: flex-end;}
-  .pagination-navi{display: flex;align-items: center;input {width: 50px !important;text-align: right;}}
-  .pagination-pagesize{display: flex;align-items: center;margin-left: $margin;input {width: 50px !important;text-align: right;}}
+  .pagination-navi, .pagination-pagesize {
+    display: flex;align-items: center;
+    input {width: 36px !important;text-align: center;font-size: 15px !important;}
+    button {display: flex !important;align-items: center !important;border: 0 !important;padding: 0 5px !important;width: auto !important;}
+  }
+  .pagination-pagesize{margin-left: $margin;}
 }

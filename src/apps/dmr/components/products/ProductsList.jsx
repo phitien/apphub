@@ -40,7 +40,7 @@ class ProductsList extends Component {
             onToggle={this.onToggle.bind(this, item)}/>)}</div>
     </div>
     cellRenderer = (row,col) => {
-        if (col.field == 'name') return <Link to={`/dmr/products/${row.id}`}>{row[col.field]}</Link>
+        if (col.field == 'name') return <Link to={`/dmr/product/${row.id}`}>{row[col.field]}</Link>
         return <div>{row[col.field]}</div>
     }
     render = () => <div className={this.className}>
@@ -54,7 +54,7 @@ class ProductsList extends Component {
                 uncheckedIcon={<i className='material-icons'>grid_on</i>}
               />
         </div>
-        <Table
+        <Table height='auto'
             columns={this.columns.filter(item => item.show)}
             data={this.data.data}
             cellRenderer={this.cellRenderer}
