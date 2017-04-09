@@ -27,7 +27,6 @@ export default class Connect {
         return newProps
     }}
     get mapDispatchToProps() {return (dispatch, ownProps) => {
-        console.log(this.getActions(dispatch, ownProps))
         return this.getActions(dispatch, ownProps)
     }}
     get klass() {return connect(this.mapStateToProps, this.mapDispatchToProps)(this.__klass)}

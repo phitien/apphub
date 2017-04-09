@@ -5,30 +5,20 @@ import {Link} from 'react-router'
 
 class Hierarchy extends Component {
     get componentClassName() {return 'hierarchy'}
-    get rootHierarchy() {
-        return this.state.rootHierarchy = this.util.assign(
+    get hierarchy() {
+        return this.state.hierarchy = this.util.assign(
             {id: null, name: null, template: null, subNodes: [], expanded: true},
-            this.props.rootHierarchy)
-    }
-    get subHierarchy() {return this.props.subHierarchy}
-    shouldComponentUpdate(nextProps, nextState) {
-        if(this.state.selectedNode && nextProps.subHierarchy) {
-            this.traverse(this.state.rootHierarchy, nextProps.subHierarchy)
-        }
-        return true
-    }
-    traverse(node, subHierarchy) {
-        if (node == this.state.selectedNode && subHierarchy.id == node.id) {
-            this.util.assign(node, subHierarchy, {expanded: !subHierarchy.subNodes || !subHierarchy.subNodes.length ? false : !node.expanded})
-        }
-        else if (node.subNodes) {
-            node.subNodes.map(n => this.traverse(n, subHierarchy))
-        }
+            this.props.hierarchy)
     }
     toggleSidebarLeft = () => this.props.executeToggleSidebarLeftAction({data: !this.props.hideSidebarLeft})
-    canExpand = (node) => true
+    expandNode(node) {
+        node.expanded = !node.expanded
+        this.state.selectedNode = node
+        this.setState(this.state)
+        this.props.executeLoadSubHierarchyAction(node)
+    }
     renderIcon = (node, lv) => {
-        return <i className='material-icons'>{!this.canExpand(node) ? 'remove' : node.expanded ? 'remove' : 'add'}</i>
+        return <i className='material-icons' onClick={this.expandNode.bind(this, node)}>{node.expanded ? 'remove' : 'add'}</i>
     }
     renderHierarchy = (node,lv,i) => <li key={i} className={`node node-lv-${lv}`}>
         <div className='node-name'>
@@ -46,7 +36,7 @@ class Hierarchy extends Component {
     </li>
     render = () => <div className={this.className}>
         <ul className='hierarchy'>
-            {!this.rootHierarchy ? null : this.renderHierarchy(this.rootHierarchy, 0, 0)}
+            {!this.hierarchy ? null : this.renderHierarchy(this.hierarchy, 0, 0)}
         </ul>
     </div>
 }

@@ -8,7 +8,7 @@ import {Link} from 'react-router'
 class ProductsList extends Component {
     get componentClassName() {return 'products-list'}
     get data() {return {
-        data: this.props.subHierarchy ? this.props.subHierarchy.subNodes : [],
+        data: this.props.currentHierarchy ? this.props.currentHierarchy.subNodes : [],
     }}
     get columns() {return this.state.columns}
     init() {
