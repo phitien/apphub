@@ -1,3 +1,4 @@
+import config from '../config/config'
 import Action from '../../../core/redux/Action'
 
 export class SwitchSidebarLeftViewAction extends Action {}
@@ -6,7 +7,7 @@ export class ToggleSidebarRightAction extends Action {}
 export class SetCurrentHierarchyAction extends Action {}
 export class LoadRootHierarchyAction extends Action {
     beforeDispatch(id) {
-        this.util.query('/static/dmr/api/hierarchy.json', {product: ''}, {
+        this.util.query(config.api.urls.hierarchy, {product: ''}, {
             success: (res) => {
                 Action.run(LoadedRootHierarchyAction, res)
                 const subNodes = this.store.getState().LoadedRootHierarchyActionReducer.hierarchy.subNodes
@@ -36,7 +37,7 @@ export class LoadSubHierarchyAction extends Action {
     }
     beforeDispatch(node, id) {
         if (!node.loaded) {
-            this.util.query(`/static/dmr/api/hierarchy-${node.id}.json`, {product: node.path}, {
+            this.util.query(config.api.urls.hierarchy, {product: node.path}, {
                 success: (res) => {
                     this.util.assign(node, res.data.body, {loaded: true})
                     this.afterLoad(node, id, res)
@@ -57,14 +58,6 @@ export class LoadInterfaceSystemsAction extends Action {
     }
 }
 export class LoadedInterfaceSystemsAction extends Action {}
-export class SearchDataElementsAction extends Action {
-    beforeDispatch(payload) {
-        this.util.query('/static/dmr/api/data-elements.json', payload, {
-            success: (new SearchedDataElementsAction()).getFn()
-        })
-    }
-}
-export class SearchedDataElementsAction extends Action {}
 export class LoadModelDetailAction extends Action {
     beforeDispatch(payload, lv) {
         this.util.query(`/static/dmr/api/data-elements.json`, {}, {
@@ -73,3 +66,11 @@ export class LoadModelDetailAction extends Action {
     }
 }
 export class LoadedModelDetailAction extends Action {}
+export class SearchDataElementsAction extends Action {
+    beforeDispatch(payload) {
+        this.util.query('/static/dmr/api/data-elements.json', payload, {
+            success: (new SearchedDataElementsAction()).getFn()
+        })
+    }
+}
+export class SearchedDataElementsAction extends Action {}

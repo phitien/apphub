@@ -34,16 +34,12 @@ export default class Table extends Component {
                 {this.cmpProps.columns.map((col,i) => <TableHeaderColumn key={i} tooltip={col.tooltip}
                     style={this.headerCellStyle(col)}>{col.name}</TableHeaderColumn>)}
             </TableRow>
-            {this.filters()}
+            {this.toobar()}
         </TableHeader>
-    filters = () => //!this.cmpProps.showFilters ? null :
+    toobar = () => 
         <TableRow style={this.lineHeightStyle}>
-            {this.cmpProps.columns.map((col,i) =>
-            <TableHeaderColumn style={this.cellStyle} key={i} tooltip={col.tooltip}>
-                <TextField hintText={`Enter ${col.name}`} fullWidth={true} underlineShow={true}
-                    style={{height: '24px', fontSize: '12px'}}
-                    hintStyle={{bottom: '0'}}
-                    />
+            <TableHeaderColumn style={this.cellStyle}  colSpan={this.cmpProps.columns.length}>
+                {this.cmpProps.toobar}
             </TableHeaderColumn>)}
         </TableRow>
     body = () => //!this.data || this.data.length ? null :

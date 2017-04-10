@@ -4,6 +4,7 @@ import Connect from '../../redux/Connect'
 import Table from '../../../../common/components/Table'
 import {Toggle, Checkbox} from 'material-ui'
 import {Link} from 'react-router'
+import TextField from '../../../../common/components/TextField'
 
 class ProductsList extends Component {
     get componentClassName() {return 'products-list'}
@@ -28,6 +29,11 @@ class ProductsList extends Component {
             name: 'Description',
             field: 'desc',
             show: true
+        }, {
+            tooltip: '',
+            name: 'Xpath',
+            field: 'path',
+            optional: true
         }]
     }
     onToggle(item, e, checked) {
@@ -43,6 +49,8 @@ class ProductsList extends Component {
         if (col.field == 'name') return <Link to={`/dmr/product/${row.id}`}>{row[col.field]}</Link>
         return <div>{row[col.field]}</div>
     }
+    tableToolbar = () =>
+        <TextField hintText='Enter name, description or xpath' fullWidth={true} underlineShow={true}/>
     render = () => <div className={this.className}>
         <div className='view-settings'>
             {this.renderColumnsSelection()}
@@ -58,6 +66,7 @@ class ProductsList extends Component {
             columns={this.columns.filter(item => item.show)}
             data={this.data.data}
             cellRenderer={this.cellRenderer}
+            toobar={this.tableToolbar()}
         />
     </div>
 }

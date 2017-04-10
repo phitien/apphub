@@ -1,5 +1,6 @@
 // import './sass/styles.scss'
 import assign from 'object-assign'
+import evn from './evn'
 import {getStoreInstance} from '../../core/redux/Store'
 import * as DefaultReducers from '../../common/redux/Reducer'
 import * as DrmReducers from './redux/Reducer'

@@ -7,7 +7,6 @@ var inject = require('gulp-inject');
 var replace = require('gulp-replace');
 var rename = require('gulp-rename');
 var runSequence = require('run-sequence');
-var livereload = require('gulp-livereload');
 var clean = require('gulp-clean');
 var connect = require('gulp-connect');
 
@@ -89,29 +88,34 @@ gulp.task(NAME + ':inject', function() {
   .pipe(gulp.dest(HTML_DIR_JAVA, {overwrite: true}))
 });
 gulp.task(NAME + ':watch', function() {
-  livereload.listen()
   gulp.watch([SRC + '/**/*.jsx',SRC + '/**/**/*.jsx',SRC + '/**/**/**/*.jsx',SRC + '/**/**/**/**/*.jsx',SRC + '/**/**/**/**/**/*.jsx',SRC + '/**/**/**/**/**/**/*.jsx'], function() {
-    runSequence(NAME + ':js')
+    runSequence(NAME + ':js', NAME + ':reload')
   })
   gulp.watch([SRC + '/**/*.scss',SRC + '/**/**/*.scss',SRC + '/**/**/**/*.scss',SRC + '/**/**/**/**/*.scss',SRC + '/**/**/**/**/**/*.scss',SRC + '/**/**/**/**/**/**/*.scss'], function() {
-    runSequence(NAME + ':css')
+    runSequence(NAME + ':css', NAME + ':reload')
   })
   gulp.watch(SRC_TEMPLATE + '/*.html', function() {
-      runSequence(NAME + ':inject')
+      runSequence(NAME + ':inject', NAME + ':reload')
   })
   gulp.watch(SRC_MOCK + '/*.json', function() {
-      runSequence(NAME + ':copy')
+      runSequence(NAME + ':copy', NAME + ':reload')
   })
-  gulp.watch(PUBLIC_STATIC_APP + '/*.css').on('change', livereload.reload)
-  gulp.watch(PUBLIC_STATIC_APP + '/*.js').on('change', livereload.reload)
-  gulp.watch(PUBLIC + APP + '/*.html').on('change', livereload.reload)
+});
+gulp.task(NAME + ':reload', function() {
+  gulp.src([
+    PUBLIC_STATIC_APP + '/*.css',
+    PUBLIC_STATIC_APP + '/*.js',
+    PUBLIC + APP + '/*.html'
+  ]).pipe(connect.reload());
 });
 gulp.task(NAME + ':server', function() {
   return connect.server({
-        root: './public',
-        port: 2000,
-        fallback: './public/dmr/index.html'
-    });
+    name: 'Dev server',
+    root: './public',
+    port: 2000,
+    livereload: true,
+    fallback: './public/dmr/index.html'
+  });
 });
 gulp.task(NAME + ':build', function() {
   return runSequence(
