@@ -4,8 +4,8 @@ var buffer = require('vinyl-buffer');
 var browserify = require('browserify');
 var babelify = require('babelify');
 var assign = require('object-assign');
-var gutil = require('gulp-util');
-var sourcemaps = require('gulp-sourcemaps');
+// var gutil = require('gulp-util');
+// var sourcemaps = require('gulp-sourcemaps');
 
 function buildJS(entry, dest, excludes) {
     var bundleConfig = {
@@ -22,12 +22,12 @@ function buildJS(entry, dest, excludes) {
     });
     function doBundle() {
         return bundler
-            .on('error', gutil.log.bind(gutil, 'Browserify Error'))
+            // .on('error', gutil.log.bind(gutil, 'Browserify Error'))
             .bundle()
             .pipe(source('zzz.js'))
             .pipe(buffer())
-            .pipe(sourcemaps.init())
-            .pipe(sourcemaps.write('./'))
+            // .pipe(sourcemaps.init())
+            // .pipe(sourcemaps.write('./'))
             .pipe(gulp.dest(dest))
     }
     bundler.on('update', doBundle);
