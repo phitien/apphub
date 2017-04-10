@@ -4,11 +4,13 @@ import Connect from '../redux/Connect'
 import Hierarchy from './Hierarchy'
 import Product from './Product'
 import SidebarLeftSearch from './SidebarLeftSearch'
+import SidebarLeftExpandButton from './SidebarLeftExpandButton'
 
 class SidebarLeft extends Component {
     get componentClassName() {return `lightdark-box sidebar-left`}
     render = () => <div className={this.className}>
-        <SidebarLeftSearch/>
+        {this.props.hideSidebarLeft ? <SidebarLeftExpandButton/> : null}
+        {this.props.hideSidebarLeft ? null : <SidebarLeftSearch/>}
         {this.props.sidebarLeftViewName == 'Hierarchy' ? <Hierarchy/> : <Product/>}
     </div>
 }

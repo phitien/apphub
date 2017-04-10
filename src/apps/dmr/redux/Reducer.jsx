@@ -1,5 +1,13 @@
 import Reducer from '../../../core/redux/Reducer'
 
+export class SetDataElementColumnsActionReducer extends Reducer {
+    get defaultState() {
+        return {dataElementColumns: []}
+    }
+    matchedTransform(state, action) {
+        return this.util.assign({}, state, {dataElementColumns: action.data})
+    }
+}
 export class SetCurrentHierarchyActionReducer extends Reducer {
     get defaultState() {
         return {currentHierarchy: null, componentTitle: null}

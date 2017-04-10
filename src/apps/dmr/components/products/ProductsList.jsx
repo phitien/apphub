@@ -1,6 +1,5 @@
 import React from 'react'
 import {Link} from 'react-router'
-import {Toggle, Checkbox} from 'material-ui'
 import {TableRow, TableRowColumn as TableCell} from 'material-ui/Table'
 import Component from '../../../../common/components/Component'
 import Connect from '../../redux/Connect'
@@ -14,26 +13,17 @@ class ProductsList extends Component {
     get data() {return {
         data: this.props.searchDataElementsResults ? this.props.searchDataElementsResults : [],
     }}
-    get columns() {return this.state.columns}
-    init() {
-        this.state.columns = [
+    get columns() {return this.props.dataElementColumns}
+    componentDidMount() {
+        this.props.executeSetDataElementColumnsAction({data: [
             {name: 'ID',field: 'id',width: '40px',optional: true,},
             {name: 'Name',field: 'name',show: true,},
             {name: 'Type',field: 'dataType',show: true,optional: true,},
             {name: 'Description',field: 'description',show: true,optional: true,},
             {name: 'Validation Rule',field: 'validationRule',show: false,optional: true,},
             {name: 'Workflow',field: 'workflow',show: false,optional: true,},
-        ]
+        ]})
     }
-    onToggle(item, e, checked) {
-        item.show = checked
-        this.setState(this.state)
-    }
-    renderColumnsSelection = () => <div className='columns-selection'>
-        <div className='choices'>{this.columns.filter(item => item.optional).map((item,i) => <Toggle key={i} className='choice' labelPosition='right'
-            label={item.name} toggled={item.show} disabled={!item.optional}
-            onToggle={this.onToggle.bind(this, item)}/>)}</div>
-    </div>
     fieldRenderer(row,i,col,j) {
         if (col.field == 'name') return <Link target='_blank' to={`/dmr/product/${row.id}`}>{row[col.field]}</Link>
         if (col.field == 'dataType') return <Link>{row[col.field].dataType}</Link>
@@ -84,9 +74,6 @@ class ProductsList extends Component {
     </div>}
     render = () => <div className={this.className}>
         <div className='view-toolbar'>
-            <div className='view-toolbar-settings'>
-                {this.renderColumnsSelection()}
-            </div>
             <TextField className='seach-field' hintText='Enter name, description or xpath' fullWidth={true}
                 inputStyle={{paddingLeft: '24px', paddingRight: '24px'}}
                 hintStyle={{paddingLeft: '24px', paddingRight: '24px'}}

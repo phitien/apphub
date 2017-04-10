@@ -1,17 +1,6 @@
 .page .content .products-list {
   .view-toolbar {
     .seach-field {}
-    .view-toolbar-settings {
-      display: flex;margin-bottom: $margin;display: none;
-      .columns-selection {
-        flex: 1;
-        .choices {
-          .choice {
-            display: inline-block !important;width: auto !important;margin-right: $margin;
-          }
-        }
-      }
-    }
   }
   .output-models {padding: 12px 0;}
   .model-attributes {

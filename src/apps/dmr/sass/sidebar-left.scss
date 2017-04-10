@@ -32,6 +32,7 @@
 .page.has-sidebar-left-collapsed {
   .sidebar-left {
     width: $sidebar-left-width-collapsed;padding: 0;
+    >*{width: auto;margin: auto;}
     .sidebar-left-search {justify-content: center;}
     .hierarchy {
       ul {
