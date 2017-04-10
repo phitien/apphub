@@ -9,6 +9,7 @@ var rename = require('gulp-rename');
 var runSequence = require('run-sequence');
 var livereload = require('gulp-livereload');
 var clean = require('gulp-clean');
+var webserver = require('gulp-webserver');
 
 var NAME = 'dmr';
 var APP = '/' + NAME;
@@ -26,7 +27,8 @@ var PUBLIC = './public';
 // var PUBLIC = './server/src/main/resources/templates';
 var PUBLIC_STATIC = PUBLIC + STATIC;
 var PUBLIC_STATIC_APP = PUBLIC_STATIC + APP;
-var HTML_DIR = './server/src/main/resources/templates';
+// var HTML_DIR = './server/src/main/resources/templates';
+var HTML_DIR = './public' + APP;
 
 var VENDOR_LIBS = [
   'react', 'react-dom', 'react-router', 'flux', 'events',
@@ -82,7 +84,7 @@ gulp.task(NAME + ':inject', function() {
       '<script src="'+filepath.replace(PUBLIC.substr(1),'')+'"></script>'
     }
   }))
-  .pipe(rename(APP + '.html'))
+  // .pipe(rename(APP + '.html'))
   .pipe(gulp.dest(HTML_DIR, {overwrite: true}))
 });
 gulp.task(NAME + ':watch', function() {
@@ -103,6 +105,19 @@ gulp.task(NAME + ':watch', function() {
   gulp.watch(PUBLIC_STATIC_APP + '/*.js').on('change', livereload.reload)
   gulp.watch(PUBLIC + APP + '/*.html').on('change', livereload.reload)
 });
+gulp.task(NAME + ':server', function() {
+  gulp.src('./public')
+      .pipe(webserver({
+        port: 2000,
+        livereload: true,
+        directoryListing: {
+          enable: false,
+          path: 'public'
+        },
+        open: 'http://localhost:2000/dmr',
+        fallback: 'index.html',
+      }));
+});
 gulp.task(NAME + '', function() {
   return runSequence(
     // NAME + ':clean',
@@ -110,6 +125,7 @@ gulp.task(NAME + '', function() {
     NAME + ':js',
     NAME + ':css',
     NAME + ':copy',
-    // NAME + ':inject',
-    NAME + ':watch')
+    NAME + ':inject',
+    NAME + ':watch',
+    NAME + ':server')
 });
