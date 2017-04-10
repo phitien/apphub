@@ -2,10 +2,13 @@ import Reducer from '../../../core/redux/Reducer'
 
 export class SetCurrentHierarchyActionReducer extends Reducer {
     get defaultState() {
-        return {currentHierarchy: null}
+        return {currentHierarchy: null, componentTitle: null}
     }
     matchedTransform(state, action) {
-        return this.util.assign({}, state, {currentHierarchy: action.data})
+        return this.util.assign({}, state, {
+            currentHierarchy: action.data,
+            componentTitle: action.data ? action.data.name : null
+        })
     }
 }
 export class SearchedDataElementsActionReducer extends Reducer {
@@ -13,7 +16,7 @@ export class SearchedDataElementsActionReducer extends Reducer {
         return {searchDataElementsResults: null}
     }
     matchedTransform(state, action) {
-        return this.util.assign({}, state, {searchDataElementsResults: action.data})
+        return this.util.assign({}, state, {searchDataElementsResults: action.data.body})
     }
 }
 export class SwitchSidebarLeftViewActionReducer extends Reducer {

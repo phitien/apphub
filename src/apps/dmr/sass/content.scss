@@ -14,18 +14,6 @@
         }
       }
     }
-    .view-settings {
-      display: flex;margin-bottom: $margin;
-      .columns-selection {flex: 1;}
-      .switch-view {
-        width: 70px !important;
-        >div {
-          justify-content: flex-end;
-          >label {float: none !important;width: auto !important;}
-          >div {margin: 0 0 0 3px !important;float: none !important;}
-        }
-      }
-    }
   }
 }
 .page.has-sidebar-left-collapsed {

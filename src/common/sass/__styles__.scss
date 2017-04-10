@@ -34,7 +34,7 @@ body {
           border-radius: 3px;
           background-color: rgba(255, 255, 255, .9);
           h1 {
-            color: $blue;
+            color: $primary;
           }
         }
       }
@@ -42,13 +42,13 @@ body {
   }
 }
 a {cursor: pointer;text-decoration: none;color: inherit;
-  &:hover {color: $blue;}
+  &:hover {color: $primary;}
 }
 i {cursor: pointer;
-  &:hover {color: $blue;}
+  &:hover {color: $primary;}
 }
-h1,h2 {font-weight: normal;}
-h3,h4,h5 {font-weight: normal;}
+h1,h2 {font-weight: normal;color: $blue;}
+h3,h4,h5 {font-weight: normal;color: $blue;}
 input[type=text],input[type=password],input[type=email],input[type=url] {
   height: $line-height;border: none;outline: none;border-radius: 3px;padding: 0 3px;
 }

@@ -4,5 +4,17 @@
     .content {
       flex: 1;
     }
+    .breadcrumbs {
+      display: flex;align-items: flex-start;justify-content: space-between;
+      h2 {margin: 0 0 $margin;color: $primary;}
+      .switch-view {
+        width: 70px !important;
+        >div {
+          justify-content: flex-end;
+          >label {float: none !important;width: auto !important;}
+          >div {margin: 0 0 0 3px !important;float: none !important;}
+        }
+      }
+    }
   }
 }

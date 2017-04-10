@@ -1,31 +1,20 @@
 import React from 'react'
-import {FlatButton, Paper} from 'material-ui'
 import Component from './Component'
 
 export default class Card extends Component {
     get componentClassName() {return 'card'}
-    get cmpProps() {
-        return this.util.assignDeep(this.defaultProps, this.props)
-    }
-    get defaultProps() {
-        return {
-            title: null, subtitle: null,
-        }
-    }
-    header = () => !this.cmpProps.title ? null :
-        <div className='card-header'>
-            <h3>{this.cmpProps.title}</h3>
+    header = () =>
+        <div className='card-header' style={{display: !this.props.title ? 'none' : ''}}>
+            <h3>{this.props.title}</h3>
             {this.subtitle()}
         </div>
-    subtitle = () => !this.cmpProps.subtitle ? null :
-        <label>{this.cmpProps.subtitle}</label>
-    content = () =>
+    subtitle = () =>
+        <label style={{display: !this.props.subtitle ? 'none' : ''}}>{this.props.subtitle}</label>
+    render = () => <div className={this.className}>
+        {this.header()}
         <div className='card-content'>
-            {this.cmpProps.children}
+            {this.props.children}
         </div>
-    render = () =>
-        <div className={this.className}>
-            {this.header()}
-            {this.content()}
-        </div>
+    </div>
+
 }

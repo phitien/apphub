@@ -1,40 +1,29 @@
 import React from 'react'
+import {Link} from 'react-router'
+import {Toggle, Checkbox} from 'material-ui'
+import {TableRow, TableRowColumn as TableCell} from 'material-ui/Table'
 import Component from '../../../../common/components/Component'
 import Connect from '../../redux/Connect'
 import Table from '../../../../common/components/Table'
-import {Toggle, Checkbox} from 'material-ui'
-import {Link} from 'react-router'
 import TextField from '../../../../common/components/TextField'
+import Card from '../../../../common/components/Card'
+import Tabs from '../../../../common/components/Tabs'
 
 class ProductsList extends Component {
     get componentClassName() {return 'products-list'}
     get data() {return {
-        data: this.props.currentHierarchy ? this.props.currentHierarchy.subNodes : [],
+        data: this.props.searchDataElementsResults ? this.props.searchDataElementsResults : [],
     }}
     get columns() {return this.state.columns}
     init() {
-        this.state.columns = [{
-            tooltip: '',
-            name: 'ID',
-            field: 'id',
-            width: 60,
-            optional: true
-        }, {
-            tooltip: '',
-            name: 'Name',
-            field: 'name',
-            show: true
-        }, {
-            tooltip: '',
-            name: 'Description',
-            field: 'desc',
-            show: true
-        }, {
-            tooltip: '',
-            name: 'Xpath',
-            field: 'path',
-            optional: true
-        }]
+        this.state.columns = [
+            {name: 'ID',field: 'id',width: '40px',optional: true,},
+            {name: 'Name',field: 'name',show: true,},
+            {name: 'Type',field: 'dataType',show: true,optional: true,},
+            {name: 'Description',field: 'description',show: true,optional: true,},
+            {name: 'Validation Rule',field: 'validationRule',show: false,optional: true,},
+            {name: 'Workflow',field: 'workflow',show: false,optional: true,},
+        ]
     }
     onToggle(item, e, checked) {
         item.show = checked
@@ -45,28 +34,69 @@ class ProductsList extends Component {
             label={item.name} toggled={item.show} disabled={!item.optional}
             onToggle={this.onToggle.bind(this, item)}/>)}</div>
     </div>
-    cellRenderer = (row,col) => {
-        if (col.field == 'name') return <Link to={`/dmr/product/${row.id}`}>{row[col.field]}</Link>
-        return <div>{row[col.field]}</div>
+    fieldRenderer(row,i,col,j) {
+        if (col.field == 'name') return <Link target='_blank' to={`/dmr/product/${row.id}`}>{row[col.field]}</Link>
+        if (col.field == 'dataType') return <Link>{row[col.field].dataType}</Link>
+        return <Link>{row[col.field]}</Link>
     }
-    tableToolbar = () =>
-        <TextField hintText='Enter name, description or xpath' fullWidth={true} underlineShow={true}/>
+    rowDetailRenderer(rowi,i) {return <div className='output-models'>
+        {rowi.outputModels.map((model,j) => <Card key={j} title={`Output: ${model.name}`} subtitle={model.subtitle}>
+            <Tabs>
+                <tab>
+                    <title>Attributes</title>
+                    <content>
+                        <div className='model-attributes'>
+                            {model.attributes.map((attr,k) => <div key={k} className='model-attribute'>
+                                <div className='model-attribute-info'>
+                                    <div className='model-attribute-name'>{attr.name}</div>
+                                    <div className='model-attribute-value'>{attr.value}</div>
+                                </div>
+                                <div className='model-attribute-description'>{attr.description}</div>
+                            </div>)}
+                        </div>
+                    </content>
+                </tab>
+                <tab>
+                    <title>Interfaces</title>
+                    <content>
+                        <div className='model-interfaces'>
+                            {model.interfaces.map((inte,k) => <div key={k} className='model-interface'>
+                                <div className='model-interface-source-target'>
+                                    <div className='model-interface-source'>
+                                        <div className='model-interface-derivedName'>{inte.derivedName}</div>
+                                    </div>
+                                    <div className='model-interface-logic'>
+                                        <div className='model-interface-contextName'>{inte.contextName}</div>
+                                        <i className='material-icons'>arrow_forward</i>
+                                        <div className='model-interface-derivedLogic'>{inte.derivedLogic}</div>
+                                    </div>
+                                    <div className='model-interface-target'>
+                                        <div className='model-interface-sourceSystem'>{inte.sourceSystem}</div>
+                                        <div className='model-interface-sourceName'>{inte.sourceProduct}</div>
+                                    </div>
+                                </div>
+                            </div>)}
+                        </div>
+                    </content>
+                </tab>
+            </Tabs>
+        </Card>)}
+    </div>}
     render = () => <div className={this.className}>
-        <div className='view-settings'>
-            {this.renderColumnsSelection()}
-            <Checkbox className='switch-view' title='Switch view' label='View' labelPosition='left'
-                style={{
-                    block: {maxWidth: 250, with: 'auto'},
-                }}
-                checkedIcon={<i className='material-icons'>ac_unit</i>}
-                uncheckedIcon={<i className='material-icons'>grid_on</i>}
-              />
+        <div className='view-toolbar'>
+            <div className='view-toolbar-settings'>
+                {this.renderColumnsSelection()}
+            </div>
+            <TextField className='seach-field' hintText='Enter name, description or xpath' fullWidth={true}
+                inputStyle={{paddingLeft: '24px', paddingRight: '24px'}}
+                hintStyle={{paddingLeft: '24px', paddingRight: '24px'}}
+                />
         </div>
-        <Table height='auto'
+        <Table height='420px' fixedHeader={true} fixedFooter={true}
             columns={this.columns.filter(item => item.show)}
             data={this.data.data}
-            cellRenderer={this.cellRenderer}
-            toobar={this.tableToolbar()}
+            fieldRenderer={this.fieldRenderer}
+            rowDetailRenderer={this.rowDetailRenderer}
         />
     </div>
 }

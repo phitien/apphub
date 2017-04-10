@@ -12,54 +12,65 @@ export default class Table extends Component {
     }
     get defaultProps() {
         return {
+            showHeader: true, showFooter: true,
             height: '350px', rowHeight: 32, fixedHeader: true, fixedFooter: true,
             columns: [], data: [], currentPage: 0, totalPage: 0, pageSize: 0,
             showPagination: true, showFilters: true, showRowHover: true, stripedRows: true, showCheckboxes: false, selectable: true,
-            onCellClick: () => {}, onCellHover: () => {}, onCellHoverExit: () => {},
-            onRowHover: () => {}, onRowHoverExit: () => {}, onRowSelection: () => {},
-            cellRenderer: function(row, col) {return <div>{row[col.field]}</div>}.bind(this),
+            onCellClick: (rowIndex, cellIndex) => {
+                if (rowIndex%2 == 0 && this.cmpProps.rowDetailRenderer) {
+                    this.cmpProps.data[rowIndex/2].expanded = !this.cmpProps.data[rowIndex/2].expanded
+                    this.setState(this.state)
+                }
+            }, onCellHover: () => {}, onCellHoverExit: () => {},
+            onRowHover: () => {}, onRowHoverExit: () => {},
+            onRowSelection: (rows) => {},
+            fieldRenderer: function(row,i,col,j) {return <a>{row && row[col.field] ? row[col.field].toString() : ''}</a>},
+            cellRenderer: function(row,i,col,j) {return <TableCell key={j} className={`cell${j}`} style={this.cellStyle(col)}>{this.cmpProps.fieldRenderer.call(this,row,i,col,j)}</TableCell>},
+            rowRenderer: function(row, i) {
+                const rs = [<TableRow key={this.cmpProps.renderRowDetail ? 2*i : i} className={`row${i}`} style={this.lineStyle} selected={row.selected}>
+                    {this.cmpProps.columns.map((col,j) => this.cmpProps.cellRenderer.call(this,row,i,col,j))}
+                </TableRow>]
+                if (this.cmpProps.rowDetailRenderer)
+                    rs.push(<TableRow key={2*i+1} className={`row${i}`} style={this.util.assign(this.lineStyle, {display: row.expanded ? '' : 'none'})}>
+                        <TableCell style={this.cellStyle()} colSpan={this.cmpProps.columns.length}>
+                            {this.cmpProps.rowDetailRenderer.call(this,row,i)}
+                        </TableCell>
+                    </TableRow>)
+                return rs
+            },
         }
     }
-    get lineHeightStyle() {return this.util.assign({}, {height: this.cmpProps.rowHeight})}
-    headerCellStyle(col) {return this.util.assign(this.lineHeightStyle, {width: col.width ? col.width : 'auto'})}
-    get cellStyle() {return this.util.assign(this.lineHeightStyle, {})}
-    get buttonStyle() {return this.util.assign(this.lineHeightStyle, {display: 'flex', alignItem: 'center'})}
+    get lineStyle() {return this.util.assign({}, {height: this.cmpProps.rowHeight})}
+    cellStyle(col) {return this.util.assign(this.lineStyle, {width: col && col.width ? col.width : 'auto'})}
+    get buttonStyle() {return this.util.assign(this.lineStyle, {display: 'flex', alignItem: 'center'})}
 
     header = () =>
-        <TableHeader
+        <TableHeader style={{display: !this.cmpProps.showHeader ? 'none' : ''}}
             displaySelectAll={this.cmpProps.showCheckboxes}
             adjustForCheckbox={this.cmpProps.showCheckboxes}
             enableSelectAll={this.cmpProps.enableSelectAll}>
-            <TableRow style={this.cellStyle}>
+            <TableRow style={this.lineStyle}>
                 {this.cmpProps.columns.map((col,i) => <TableHeaderColumn key={i} tooltip={col.tooltip}
-                    style={this.headerCellStyle(col)}>{col.name}</TableHeaderColumn>)}
+                    style={this.cellStyle(col)}>{col.name}</TableHeaderColumn>)}
             </TableRow>
-            {this.toobar()}
         </TableHeader>
-    toobar = () =>
-        <TableRow style={this.lineHeightStyle}>
-            <TableHeaderColumn style={this.cellStyle}  colSpan={this.cmpProps.columns.length}>
-                
-            </TableHeaderColumn>)}
-        </TableRow>
-    body = () => //!this.data || this.data.length ? null :
-        <TableBody
+    body = () =>
+        <TableBody style={{display: !this.cmpProps.data ? 'none' : ''}}
             displayRowCheckbox={this.cmpProps.showCheckboxes}
             deselectOnClickaway={this.cmpProps.deselectOnClickaway}
             showRowHover={this.cmpProps.showRowHover}
             stripedRows={this.cmpProps.stripedRows}
         >
-          {this.cmpProps.data.map((row,i) => <TableRow style={this.lineHeightStyle} key={i} selected={row.selected}>
-              {this.cmpProps.columns.map((col,j) => <TableCell style={this.cellStyle} key={j}>{this.cmpProps.cellRenderer(row,col)}</TableCell>)}
-          </TableRow>)}
+          {this.cmpProps.data.map((row,i) => this.cmpProps.rowRenderer.call(this,row,i))}
         </TableBody>
     footer = () =>
-        <TableFooter adjustForCheckbox={this.cmpProps.showCheckboxes}>
+        <TableFooter style={{display: !this.cmpProps.showFooter ? 'none' : ''}}
+            adjustForCheckbox={this.cmpProps.showCheckboxes}>
             {this.pagination()}
         </TableFooter>
     pagination = () => //!this.cmpProps.showPagination ? null :
-        <TableRow style={this.lineHeightStyle}>
-            <TableCell style={this.cellStyle} colSpan={this.cmpProps.columns.length}>
+        <TableRow style={this.lineStyle}>
+            <TableCell style={this.cellStyle()} colSpan={this.cmpProps.columns.length}>
                 <div className='pagination'>
                     <div className='pagination-navi'>
                         <IconButton style={this.buttonStyle}><i className='material-icons'>chevron_left</i></IconButton>
@@ -77,7 +88,7 @@ export default class Table extends Component {
 
     render = () =>
         <div className={this.className}>
-            <MaterialTable height={this.cmpProps.height}
+            <MaterialTable height={this.cmpProps.height} style={{display: !this.cmpProps.data ? 'none' : ''}}
                 fixedHeader={this.cmpProps.fixedHeader} fixedFooter={this.cmpProps.fixedFooter}
                 selectable={this.cmpProps.selectable} multiSelectable={this.cmpProps.multiSelectable}
                 onCellClick={this.cmpProps.onCellClick} onCellHover={this.cmpProps.onCellHover}

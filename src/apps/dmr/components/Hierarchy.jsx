@@ -15,19 +15,18 @@ class Hierarchy extends Component {
         node.expanded = !node.expanded
         this.state.selectedNode = node
         this.setState(this.state)
+        this.props.executeSetCurrentHierarchyAction({data: node})
         this.props.executeLoadSubHierarchyAction(node)
+        this.props.executeSearchDataElementsAction({context: node.id})
     }
     renderIcon = (node, lv) => {
-        return <i className='material-icons' onClick={this.expandNode.bind(this, node)}>{node.expanded ? 'remove' : 'add'}</i>
+        return <i className='material-icons'>{node.expanded ? 'remove' : 'add'}</i>
     }
     renderHierarchy = (node,lv,i) => <li key={i} className={`node node-lv-${lv}`}>
-        <div className='node-name'>
+        <div className='node-name' onClick={this.expandNode.bind(this, node)}>
             {this.renderIcon(node, lv)}
             <Link to={`/dmr/products/${node.id}`} className='name'>
                 {node.name} {node.subNodes ? `(${node.subNodes.length})` : ''}
-            </Link>
-            <Link to={`/dmr/product/${node.id}`} className='open'>
-                <i className='material-icons' title='Open'>get_app</i>
             </Link>
         </div>
         {node.expanded && node.subNodes && node.subNodes.length ? <ul>
