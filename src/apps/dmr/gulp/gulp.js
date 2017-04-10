@@ -42,6 +42,12 @@ gulp.task(NAME + ':clean', function() {
 gulp.task(NAME + ':vendor', function() {
   return vendor(PUBLIC_STATIC_APP, VENDOR_LIBS);
 });
+gulp.task(NAME + ':config', function() {
+  return gulp.src(SRC + '/core/config-default.jsx')
+    .pipe(replace('{env}', process.env.NODE_ENV))
+    .pipe(rename('config.jsx'))
+    .pipe(gulp.dest(SRC_APP, {overwrite: true}));
+});
 gulp.task(NAME + ':js', function() {
   return bundleJS(SRC_APP + '/entry.jsx', PUBLIC_STATIC_APP, VENDOR_LIBS);
 });
@@ -113,14 +119,17 @@ gulp.task(NAME + ':server', function() {
     name: 'Dev server',
     root: './public',
     port: 2000,
-    livereload: true,
+    livereload: {
+      port: 35729
+    },
     fallback: './public/dmr/index.html'
   });
 });
 gulp.task(NAME + ':build', function() {
   return runSequence(
     // NAME + ':clean',
-    // NAME + ':vendor',
+    NAME + ':vendor',
+    NAME + ':config',
     NAME + ':js',
     NAME + ':css',
     NAME + ':copy',

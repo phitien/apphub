@@ -1,4 +1,3 @@
-import config from '../config/config'
 import Action from '../../../core/redux/Action'
 
 export class SwitchSidebarLeftViewAction extends Action {}
@@ -7,7 +6,7 @@ export class ToggleSidebarRightAction extends Action {}
 export class SetCurrentHierarchyAction extends Action {}
 export class LoadRootHierarchyAction extends Action {
     beforeDispatch(id) {
-        this.util.query(config.api.urls.hierarchy, {product: ''}, {
+        this.util.query(this.util.format(configuration.api.urls.hierarchy, ''), {product: ''}, {
             success: (res) => {
                 Action.run(LoadedRootHierarchyAction, res)
                 const subNodes = this.store.getState().LoadedRootHierarchyActionReducer.hierarchy.subNodes
@@ -37,7 +36,7 @@ export class LoadSubHierarchyAction extends Action {
     }
     beforeDispatch(node, id) {
         if (!node.loaded) {
-            this.util.query(config.api.urls.hierarchy, {product: node.path}, {
+            this.util.query(this.util.format(configuration.api.urls.hierarchy, node.id), {product: node.path}, {
                 success: (res) => {
                     this.util.assign(node, res.data.body, {loaded: true})
                     this.afterLoad(node, id, res)

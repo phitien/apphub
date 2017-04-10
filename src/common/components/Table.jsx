@@ -36,10 +36,10 @@ export default class Table extends Component {
             </TableRow>
             {this.toobar()}
         </TableHeader>
-    toobar = () => 
+    toobar = () =>
         <TableRow style={this.lineHeightStyle}>
             <TableHeaderColumn style={this.cellStyle}  colSpan={this.cmpProps.columns.length}>
-                {this.cmpProps.toobar}
+                
             </TableHeaderColumn>)}
         </TableRow>
     body = () => //!this.data || this.data.length ? null :
