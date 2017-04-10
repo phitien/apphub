@@ -9,7 +9,7 @@ var rename = require('gulp-rename');
 var runSequence = require('run-sequence');
 var livereload = require('gulp-livereload');
 var clean = require('gulp-clean');
-var webserver = require('gulp-webserver');
+var connect = require('gulp-connect');
 
 var NAME = 'dmr';
 var APP = '/' + NAME;
@@ -107,26 +107,23 @@ gulp.task(NAME + ':watch', function() {
   gulp.watch(PUBLIC + APP + '/*.html').on('change', livereload.reload)
 });
 gulp.task(NAME + ':server', function() {
-  gulp.src('./public')
-      .pipe(webserver({
+  return connect.server({
+        root: './public',
         port: 2000,
-        livereload: true,
-        directoryListing: {
-          enable: false,
-          path: 'public'
-        },
-        open: 'http://localhost:2000/dmr',
-        fallback: 'index.html',
-      }));
+        fallback: './public/dmr/index.html'
+    });
 });
-gulp.task(NAME + '', function() {
+gulp.task(NAME + ':build', function() {
   return runSequence(
     // NAME + ':clean',
     // NAME + ':vendor',
     NAME + ':js',
     NAME + ':css',
     NAME + ':copy',
-    NAME + ':inject',
+    NAME + ':inject')
+});
+gulp.task(NAME + ':serve', function() {
+  return runSequence(
     NAME + ':watch',
     NAME + ':server')
 });

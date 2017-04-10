@@ -5,7 +5,7 @@
   "main": "null",
   "scripts": {
     "test": "test",
-    "start": "webpack --config src/apps/dmr/webpack.config.js;webpack-dev-server --config src/apps/dmr/webpack.config.js",
+    "start": "gulp dmr:build;gulp dmr:serve;",
     "gulp": "gulp",
     "gulp-install": "npm i -D gulp vinyl-source-stream vinyl-buffer browserify gulp-sourcemaps gulp-autoprefixer gulp-concat babelify gulp-sass run-sequence gulp-inject gulp-replace gulp-livereload gulp-rename gulp-uglify gulp-clean"
   },
@@ -44,6 +44,7 @@
     "gulp-autoprefixer": "^3.1.1",
     "gulp-clean": "^0.3.2",
     "gulp-concat": "^2.6.1",
+    "gulp-connect": "^5.0.0",
     "gulp-inject": "^4.2.0",
     "gulp-livereload": "^3.8.1",
     "gulp-rename": "^1.2.2",
