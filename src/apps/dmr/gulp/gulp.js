@@ -27,8 +27,8 @@ var PUBLIC = './public';
 // var PUBLIC = './server/src/main/resources/templates';
 var PUBLIC_STATIC = PUBLIC + STATIC;
 var PUBLIC_STATIC_APP = PUBLIC_STATIC + APP;
-// var HTML_DIR = './server/src/main/resources/templates';
 var HTML_DIR = './public' + APP;
+var HTML_DIR_JAVA = './server/src/main/resources/templates';
 
 var VENDOR_LIBS = [
   'react', 'react-dom', 'react-router', 'flux', 'events',
@@ -84,8 +84,9 @@ gulp.task(NAME + ':inject', function() {
       '<script src="'+filepath.replace(PUBLIC.substr(1),'')+'"></script>'
     }
   }))
-  // .pipe(rename(APP + '.html'))
   .pipe(gulp.dest(HTML_DIR, {overwrite: true}))
+  .pipe(rename(APP + '.html'))
+  .pipe(gulp.dest(HTML_DIR_JAVA, {overwrite: true}))
 });
 gulp.task(NAME + ':watch', function() {
   livereload.listen()
