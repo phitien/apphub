@@ -37,7 +37,6 @@ export class LoadSubHierarchyAction extends Action {
         }
     }
     beforeDispatch(node, path) {
-        console.log(node, path)
         if (node.path) {
             if (!node.loaded) {
                 const payload = {product: node.path, path: node.path}
@@ -73,6 +72,7 @@ export class LoadModelDetailAction extends Action {
 export class LoadedModelDetailAction extends Action {}
 export class SearchDataElementsAction extends Action {
     beforeDispatch(payload) {
+        this.util.assign(payload, {outputType: 'SCBML', sourceSystem: ''})
         this.util.query(configuration.api.urls.searchDataElements.format(payload), payload, {
             success: (new SearchedDataElementsAction()).getFn()
         })
