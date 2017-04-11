@@ -30,13 +30,13 @@ class ProductsList extends Component {
         return <Link>{row[col.field]}</Link>
     }
     rowDetailRenderer(rowi,i) {return <div className='output-models'>
-        {rowi.outputModels.map((model,j) => <Card key={j} title={`Output: ${model.name}`} subtitle={model.subtitle}>
+        {!rowi.outputModels ? null : rowi.outputModels.map((model,j) => <Card key={j} title={`Output: ${model.name}`} subtitle={model.subtitle}>
             <Tabs>
                 <tab>
                     <title>Attributes</title>
                     <content>
                         <div className='model-attributes'>
-                            {model.attributes.map((attr,k) => <div key={k} className='model-attribute'>
+                            {!model.interfaces ? null : model.attributes.map((attr,k) => <div key={k} className='model-attribute'>
                                 <div className='model-attribute-info'>
                                     <div className='model-attribute-name'>{attr.name}</div>
                                     <div className='model-attribute-value'>{attr.value}</div>
@@ -50,7 +50,7 @@ class ProductsList extends Component {
                     <title>Interfaces</title>
                     <content>
                         <div className='model-interfaces'>
-                            {model.interfaces.map((inte,k) => <div key={k} className='model-interface'>
+                            {!model.interfaces ? null : model.interfaces.map((inte,k) => <div key={k} className='model-interface'>
                                 <div className='model-interface-source-target'>
                                     <div className='model-interface-source'>
                                         <div className='model-interface-derivedName'>{inte.derivedName}</div>

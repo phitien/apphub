@@ -72,7 +72,7 @@ export class LoadModelDetailAction extends Action {
 export class LoadedModelDetailAction extends Action {}
 export class SearchDataElementsAction extends Action {
     beforeDispatch(payload) {
-        this.util.assign(payload, {outputType: 'SCBML', sourceSystem: ''})
+        this.util.assign(payload, {outputType: '', sourceSystem: ''})
         this.util.query(configuration.api.urls.searchDataElements.format(payload), payload, {
             success: (new SearchedDataElementsAction()).getFn()
         })
