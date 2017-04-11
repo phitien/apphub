@@ -16,9 +16,12 @@ export default class Table extends Component {
             height: '350px', rowHeight: 32, fixedHeader: true, fixedFooter: true,
             columns: [], data: [], currentPage: 0, totalPage: 0, pageSize: 0,
             showPagination: true, showFilters: true, showRowHover: true, stripedRows: true, showCheckboxes: false, selectable: true,
-            onCellClick: (rowIndex, cellIndex) => {
-                if (rowIndex%2 == 0 && this.cmpProps.rowDetailRenderer) {
-                    this.cmpProps.data[rowIndex/2].expanded = !this.cmpProps.data[rowIndex/2].expanded
+            onCellClick: (rowIndex, cellIndex, e) => {
+                if (!e.target.closest('.output-models') && this.cmpProps.rowDetailRenderer) {
+                    const row = this.cmpProps.data[rowIndex] ? this.cmpProps.data[rowIndex] : this.cmpProps.data[rowIndex - 1]
+                    const newState = !row.expanded
+                    this.cmpProps.data.map(row => row.expanded = false)
+                    row.expanded = newState
                     this.setState(this.state)
                 }
             }, onCellHover: () => {}, onCellHoverExit: () => {},
@@ -30,8 +33,8 @@ export default class Table extends Component {
                 const rs = [<TableRow key={this.cmpProps.renderRowDetail ? 2*i : i} className={`row${i}`} style={this.lineStyle} selected={row.selected}>
                     {this.cmpProps.columns.map((col,j) => this.cmpProps.cellRenderer.call(this,row,i,col,j))}
                 </TableRow>]
-                if (this.cmpProps.rowDetailRenderer)
-                    rs.push(<TableRow key={2*i+1} className={`row${i}`} style={this.util.assign(this.lineStyle, {display: row.expanded ? '' : 'none'})}>
+                if (row.expanded && this.cmpProps.rowDetailRenderer)
+                    rs.push(<TableRow key={2*i+1} className={`row-detail row-detail-${i}`} style={this.util.assign(this.lineStyle, {display: row.expanded ? '' : 'none'})}>
                         <TableCell style={this.cellStyle()} colSpan={this.cmpProps.columns.length}>
                             {this.cmpProps.rowDetailRenderer.call(this,row,i)}
                         </TableCell>
@@ -68,14 +71,14 @@ export default class Table extends Component {
             adjustForCheckbox={this.cmpProps.showCheckboxes}>
             {this.pagination()}
         </TableFooter>
-    pagination = () => //!this.cmpProps.showPagination ? null :
-        <TableRow style={this.lineStyle}>
+    pagination = () =>
+        <TableRow style={this.util.assign(this.lineStyle, {display: !this.cmpProps.showPagination ? 'none' : ''})}>
             <TableCell style={this.cellStyle()} colSpan={this.cmpProps.columns.length}>
                 <div className='pagination'>
                     <div className='pagination-navi'>
                         <IconButton style={this.buttonStyle}><i className='material-icons'>chevron_left</i></IconButton>
                         <div className='pagination-pageInfo'>
-                            <TextField type='number' min={1} style={{width: 'auto'}} defaultValue={this.cmpProps.currentPage}/>/{this.cmpProps.totalPage}
+                            <TextField type='number' min={1} style={{width: 'auto'}} defaultValue={this.cmpProps.currentPage}/>
                         </div>
                         <IconButton style={this.buttonStyle}><i className='material-icons'>chevron_right</i></IconButton>
                     </div>

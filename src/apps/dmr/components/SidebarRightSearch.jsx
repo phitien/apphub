@@ -6,17 +6,16 @@ import SelectField from '../../../common/components/SelectField'
 
 class SidebarRightSearch extends Component {
     get componentClassName() {return `sidebar-right-search`}
-    get columns() {return this.props.dataElementColumns}
-    onToggle(item, e, checked) {
-        item.show = checked
-        this.setState(this.state)
+    onToggle(col, e, checked) {
+        col.show = checked
+        this.props.executeSetDataElementColumnsAction({data: this.props.dataElementColumns})
     }
     renderColumnsSelection = () =>
         <div className='data-element-table-columns-selection'>
             <div className='choices'>
-                {this.columns.filter(item => item.optional).map((item,i) =>
+                {this.props.dataElementColumns.map((item,i) =>
                 <Toggle key={i} className='choice' labelPosition='right'
-                    label={item.name} toggled={item.show} disabled={!item.optional}
+                    label={item.name} defaultToggled={item.show} disabled={!item.optional}
                     onToggle={this.onToggle.bind(this, item)}/>)}
             </div>
         </div>

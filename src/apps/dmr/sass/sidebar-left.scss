@@ -32,21 +32,26 @@
 .page.has-sidebar-left-collapsed {
   .sidebar-left {
     width: $sidebar-left-width-collapsed;padding: 0;
-    >*{width: auto;margin: auto;}
+    >*{width: auto;margin-left: 6px;}
     .sidebar-left-search {justify-content: center;}
     .hierarchy {
+      width: auto;
       ul {
+        display: flex;flex-direction: column;justify-content: flex-start;align-items: flex-start;
+        width: auto;margin: 0;padding: 0;
         li.node-lv-1 {
+          width: auto;margin: 0;padding: 0;
           i {display: none;}
           .node-name {
             @extend .grey-box;
-            height: 28px;width: 28px;overflow: hidden;margin: 5px auto;border-radius: 50%;
+            height: 28px;width: 28px;overflow: hidden;margin: 5px 0;border-radius: 50%;
             display: flex;align-items: center;justify-content: center;
             font-size:$font-size-xxs;white-space: nowrap;
+            a.name {text-align: center;&:before {display: none;}}
             &:hover {
               @extend .default-box;
-              font-size: $font-size-s;border-radius: 0;width: 100px;overflow: visible;padding: 0 3px;
-              display: block;
+              font-size: $font-size-s;border-radius: 0;
+              width: auto;min-width: 50px;overflow: visible;padding: 0 3px;
               a:before {display: none;}
             }
           }

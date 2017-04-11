@@ -16,7 +16,7 @@ export class SetListOutputTypesActionReducer extends Reducer {
             {primaryText: 'Logical Model',value: 'Logical Model'},
         ]}
     }
-    matchedTransform(state, action) {
+    matchedTransform(state = this.defaultState, action) {
         return this.util.assign({}, state, {listOutputTypes: action.data ? action.data : this.defaultState.listOutputTypes})
     }
 }
@@ -28,8 +28,8 @@ export class SetDataElementColumnsActionReducer extends Reducer {
             {name: 'Asset Class',field: 'assetClass',show: true,optional: true,},
             {name: 'Product',field: 'product',show: true,optional: true,},
             {name: 'Description',field: 'description',show: true,optional: true,},
-            {name: 'Validation Rule',field: 'validationRule',show: false,optional: true,},
-            {name: 'Workflow',field: 'workflow',show: false,optional: true,},
+            // {name: 'Validation Rule',field: 'validationRule',show: false,optional: true,},
+            // {name: 'Workflow',field: 'workflow',show: false,optional: true,},
         ]}
     }
     matchedTransform(state, action) {

@@ -39,7 +39,7 @@ class ProductsList extends Component {
         if (col.field == 'product') return <Link>{getProduct()}</Link>
         return <Link>{row[col.field]}</Link>
     }
-    rowDetailRenderer(rowi,i) {return <div className='output-models'>
+    rowDetailRenderer(rowi,i) {return !rowi.expanded ? null : <div className='output-models'>
         {!rowi.outputModels ? null : rowi.outputModels.map((model,j) => <Card key={j} title={`${model.name}`} subtitle={model.subtitle}>
             <div className='model-attributes'>
                 {!model.interfaces ? null : model.attributes.map((attr,k) => <div key={k} className='model-attribute'>

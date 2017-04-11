@@ -26,7 +26,7 @@
       padding: 3px 5px;margin: 0;
     }
   }
-  td:hover .model-interfaces {
-    border-color: #ffffff;
+  .row-detail, .row-detail td {
+    background-color: #ffffff !important;
   }
 }
