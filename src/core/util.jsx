@@ -52,11 +52,11 @@ class Util {
     amountOf = (o) => this.numberWithCommas(o)
     dateOf = o => moment(o).format('MMMM Do YYYY')
     random = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min
-    props = (origin, excluded) => {
-        let props = {}
+    exclude = (origin, excludes) => {
+        const props = {}
         Object.keys(origin).map(k => {
-            if (origin.hasOwnProperty(k) && excluded.indexOf(k) < 0) {
-                props[k] = origin[k]
+            if (origin.hasOwnProperty(k) && excludes.indexOf(k) < 0) {
+                this.assign(props, {[k]: origin[k]})
             }
         })
         return props

@@ -4,6 +4,7 @@
   }
   .output-models {padding: 12px 0;}
   .model-attributes {
+    width: 100%;margin-bottom: $margin;
     .model-attribute {}
     .model-attribute-info {display: flex;}
     .model-attribute-name {
@@ -16,34 +17,16 @@
     }
   }
   .model-interfaces {
-    .model-interface {}
-    .model-interface-contextName {font-size: 14px;color: $blue;}
-    .model-interface-source-target {
-      display: flex;align-items: center;justify-content: space-between;padding: 3px $margin;
-      box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
-      .model-interface-sourceSystem {
-      }
-      .model-interface-sourceName {
-        color: $green;
-      }
-      .model-interface-derivedName {
-      }
-      .model-interface-derivedLogic {
-        font-style: italic;opacity: .5;
-      }
-      .model-interface-source {
-        display: flex;align-items: center;justify-content: center;
-      }
-      .model-interface-logic {
-        display: flex;flex-direction: column;align-items: center;justify-content: center;
-        i {font-size: 32px;}
-      }
-      .model-interface-target {
-        display: flex;align-items: center;justify-content: center;
-      }
-      &:hover {
-        background-color: $lightgrey;
-      }
+    border-color: $lightgrey;border-style: solid;border-width: 1px 1px 0 0;
+    width: 100%;
+    thead, tbody, tr, th, td {border-color: inherit;border-style: inherit;}
+    th {text-align: center;background-color: $grey;}
+    th,td {
+      border-width: 0 0 1px 1px;
+      padding: 3px 5px;margin: 0;
     }
+  }
+  td:hover .model-interfaces {
+    border-color: #ffffff;
   }
 }

@@ -1,5 +1,7 @@
 import Action from '../../../core/redux/Action'
 
+export class SetListOutputTypesAction extends Action {}
+export class SetCurrentOutputModelAction extends Action {}
 export class SetDataElementColumnsAction extends Action {}
 export class SwitchSidebarLeftViewAction extends Action {}
 export class ToggleSidebarLeftAction extends Action {}

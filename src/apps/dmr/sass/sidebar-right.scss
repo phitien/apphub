@@ -3,13 +3,13 @@
     position: fixed;top: $header-height;width: $sidebar-width - $margin;bottom: $footer-height;right: 0;padding: 0 $margin/2;
     z-index: 10;display: flex;flex-direction: column;justify-content: flex-start;align-items: flex-start;
     >*{width: 100%;}
-    .view-toolbar-settings {
-      display: flex;margin-bottom: $margin;display: none;
-      .columns-selection {
-        flex: 1;
+    .sidebar-right-search-section {
+      h4 {margin: $margin/2 0;}
+      .data-element-table-columns-selection {
         .choices {
           .choice {
             display: inline-block !important;width: auto !important;margin-right: $margin;
+            label {color: $blue !important;}
           }
         }
       }
