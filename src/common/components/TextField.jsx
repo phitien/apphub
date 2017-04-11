@@ -9,7 +9,7 @@ export default class TextField extends Component {
     get defaultProps() {
         return {
             id: this.util.uuid(), name: '', children: null, rows: 1, rowsMax: 1,
-            defaultValue: null, value: null, disabled: false, errorStyle: {}, errorText: null,
+            disabled: false, errorStyle: {}, errorText: null,
             floatingLabelFixed: false, floatingLabelShrinkStyle: {},
             floatingLabelStyle: {}, floatingLabelText: null,
             fullWidth: true, hintText: null, multiLine: false,
