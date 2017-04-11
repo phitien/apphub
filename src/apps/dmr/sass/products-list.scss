@@ -22,7 +22,6 @@
       display: flex;align-items: center;justify-content: space-between;padding: 3px $margin;
       box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
       .model-interface-sourceSystem {
-        &:after {content: ':: ';}
       }
       .model-interface-sourceName {
         color: $green;

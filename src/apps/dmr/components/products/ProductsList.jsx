@@ -51,20 +51,11 @@ class ProductsList extends Component {
                     <content>
                         <div className='model-interfaces'>
                             {!model.interfaces ? null : model.interfaces.map((inte,k) => <div key={k} className='model-interface'>
-                                <div className='model-interface-source-target'>
-                                    <div className='model-interface-source'>
-                                        <div className='model-interface-derivedName'>{inte.derivedName}</div>
-                                    </div>
-                                    <div className='model-interface-logic'>
-                                        <div className='model-interface-contextName'>{inte.contextName}</div>
-                                        <i className='material-icons'>arrow_forward</i>
-                                        <div className='model-interface-derivedLogic'>{inte.derivedLogic}</div>
-                                    </div>
-                                    <div className='model-interface-target'>
-                                        <div className='model-interface-sourceSystem'>{inte.sourceSystem}</div>
-                                        <div className='model-interface-sourceName'>{inte.sourceProduct}</div>
-                                    </div>
-                                </div>
+                                <div className='model-interface-contextName'>{inte.contextName}</div>
+                                <div className='model-interface-sourceSystem'>{inte.sourceSystem}</div>
+                                <div className='model-interface-sourceName'>{inte.sourceProduct}</div>
+                                <div className='model-interface-derivedName'>{inte.derivedName}</div>
+                                <div className='model-interface-derivedLogic'>{inte.derivedLogic}</div>
                             </div>)}
                         </div>
                     </content>
