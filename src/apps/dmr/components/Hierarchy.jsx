@@ -16,8 +16,8 @@ class Hierarchy extends Component {
         this.state.selectedNode = node
         this.setState(this.state)
         this.props.executeSetCurrentHierarchyAction({data: node})
-        this.props.executeLoadSubHierarchyAction(node)
-        this.props.executeSearchDataElementsAction({context: node.id})
+        this.props.executeLoadSubHierarchyAction({product: node.path, path: node.path})
+        this.props.executeSearchDataElementsAction({product: node.path, path: node.path})
     }
     renderIcon = (node, lv) => {
         return <i className='material-icons'>{node.expanded ? 'remove' : 'add'}</i>
@@ -25,7 +25,7 @@ class Hierarchy extends Component {
     renderHierarchy = (node,lv,i) => <li key={i} className={`node node-lv-${lv}`}>
         <div className='node-name' onClick={this.expandNode.bind(this, node)}>
             {this.renderIcon(node, lv)}
-            <Link to={`/dmr/products/${node.id}`} className='name'>
+            <Link to={`/dmr/products/?path=${node.path}`} className='name'>
                 {node.name} {node.subNodes ? `(${node.subNodes.length})` : ''}
             </Link>
         </div>

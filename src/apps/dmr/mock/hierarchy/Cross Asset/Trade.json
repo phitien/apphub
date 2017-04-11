@@ -3,6 +3,6 @@
     "id": 7,
     "name": "Trade",
     "template": null,
-    "subNodes": []
+    "path": "/Cross Asset/Trade"
   }
 }

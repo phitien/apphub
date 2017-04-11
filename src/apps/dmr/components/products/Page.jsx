@@ -10,13 +10,14 @@ class ProductsPage extends Page {
         return `${this.props.hideSidebarLeft ? 'has-sidebar-left-collapsed' : 'has-sidebar-left'} ${this.props.hideSidebarRight ? 'has-sidebar-right-collapsed' : 'has-sidebar-right'}`}
     componentDidMount() {
         addEventListener('url_changed', (e) => {
-            if (id = e.detail.next.params.id && this.props.routeParams.id != id) {
-                this.props.executeLoadRootHierarchyAction(id)
-                this.props.executeSearchDataElementsAction({context: id})
+            if (path = e.detail.next.params.path && this.props.routeParams.path != path) {
+                this.props.executeLoadRootHierarchyAction(path)
+                this.props.executeSearchDataElementsAction({product: path, path: path})
             }
         })
-        this.props.executeLoadRootHierarchyAction(this.props.routeParams.id)
-        this.props.executeSearchDataElementsAction({context: this.props.routeParams.id})
+        const path = this.props.routeParams.path
+        this.props.executeLoadRootHierarchyAction(path)
+        this.props.executeSearchDataElementsAction({product: path, path: path})
     }
     children = () => <div className='wrapper'>
         <SidebarLeft/>

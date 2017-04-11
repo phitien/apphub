@@ -8,7 +8,9 @@ import Content from './Content'
 class ProductPage extends Page {
     get pageClassName() {
         return `${this.props.hideSidebarLeft ? 'has-sidebar-left-collapsed' : 'has-sidebar-left'} ${this.props.hideSidebarRight ? 'has-sidebar-right-collapsed' : 'has-sidebar-right'}`}
-    componentDidMount() {this.props.executeLoadRootHierarchyAction(this.props.routeParams.id)}
+    componentDidMount() {
+        this.props.executeLoadRootHierarchyAction({product: this.props.routeParams.path})
+    }
     children = () => <div className='wrapper'>
         <SidebarLeft/>
         <Content/>

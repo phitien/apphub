@@ -7,8 +7,8 @@ import ProductPage from './components/product/Page'
 const hierarchyPaths = ['/dmr']
 const subRoutes = [
     {path: 'products', component: ProductsPage, onEnter: RouteEnterLoginRequired},
-    {path: 'products/:id', component: ProductsPage, onEnter: RouteEnterLoginRequired},
-    {path: 'product/:id', component: ProductPage, onEnter: RouteEnterLoginRequired}
+    {path: 'products?path=:path', component: ProductsPage, onEnter: RouteEnterLoginRequired},
+    {path: 'product?path=:path', component: ProductPage, onEnter: RouteEnterLoginRequired}
 ]
 const routes = []
 

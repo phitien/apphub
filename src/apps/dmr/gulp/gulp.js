@@ -127,8 +127,6 @@ gulp.task(NAME + ':server', function() {
 });
 gulp.task(NAME + ':build', function() {
   return runSequence(
-    // NAME + ':clean',
-    NAME + ':vendor',
     NAME + ':config',
     NAME + ':js',
     NAME + ':css',
@@ -139,4 +137,11 @@ gulp.task(NAME + ':serve', function() {
   return runSequence(
     NAME + ':watch',
     NAME + ':server')
+});
+gulp.task(NAME, function() {
+  return runSequence(
+    NAME + ':clean',
+    NAME + ':vendor',
+    NAME + ':build',
+    NAME + ':serve')
 });

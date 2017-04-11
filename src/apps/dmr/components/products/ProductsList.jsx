@@ -25,7 +25,7 @@ class ProductsList extends Component {
         ]})
     }
     fieldRenderer(row,i,col,j) {
-        if (col.field == 'name') return <Link target='_blank' to={`/dmr/product/${row.id}`}>{row[col.field]}</Link>
+        if (col.field == 'name') return <Link target='_blank' to={`/dmr/product?path=${row.path}`}>{row[col.field]}</Link>
         if (col.field == 'dataType') return <Link>{row[col.field].dataType}</Link>
         return <Link>{row[col.field]}</Link>
     }

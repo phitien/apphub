@@ -9,6 +9,7 @@ import REQUEST from './Request'
 import cookie from './cookie'
 import user from './user'
 
+format.extend(String.prototype)
 
 class Util {
     get user() {return user}
