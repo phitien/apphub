@@ -1,0 +1,68 @@
+{
+	"header": {
+		"user": null,
+		"serverDateTime": null,
+		"token": null
+	},
+	"body": {
+		"id": 45,
+		"name": "Order Id",
+		"description": null,
+		"groupProcessingSeq": null,
+		"groups": null,
+		"dataHierarchyPath": "/Cross Asset/Trade",
+		"validationRule": null,
+		"dataType": {
+			"dataType": "xsd:string"
+		},
+		"workFlow": null,
+		"outputModels": [{
+			"name": "SCBML",
+			"description": "Transaction processing",
+			"attributes": [{
+				"name": "Mandatory-Optional-Flag",
+				"description": null,
+				"value": "O"
+			}, {
+				"name": "Asset Class",
+				"description": null,
+				"value": "Cross Asset"
+			}, {
+				"name": "Product",
+				"description": null,
+				"value": "Trade-Header"
+			}, {
+				"name": "Xpath",
+				"description": null,
+				"value": "/scb:SCBML/scb:payload/scb:FPMLPayload/conf:trade/conf:tradeHeader/conf:originatingPackage/conf:orderIdentifier/conf:orderId\n"
+			}],
+			"interfaces": null
+		}],
+		"interfaces": [{
+			"id": 26,
+			"contextName": "One-to-One-Map",
+			"sourceSystem": "FEDS",
+			"sourceProduct": "FXSPOT",
+			"derivedName": "OrderId",
+			"derivedLogic": "orderId = xmlReader.eval(\"/FXTICKET_CDC/EXTERNALTRANSACTIONID/@AfterImage\");\nmodel.put(\"OrderId\", orderId);"
+		}, {
+			"id": 22,
+			"contextName": "One-to-One-Map",
+			"sourceSystem": "FEDS",
+			"sourceProduct": "FXFWD",
+			"derivedName": "OrderId",
+			"derivedLogic": "orderId = xmlReader.eval(\"/FXTICKET_CDC/EXTERNALTRANSACTIONID/@AfterImage\");\nmodel.put(\"OrderId\", orderId);"
+		}, {
+			"id": 30,
+			"contextName": "One-to-One-Map",
+			"sourceSystem": "FEDS",
+			"sourceProduct": "FXSWAP",
+			"derivedName": "OrderId",
+			"derivedLogic": "orderId = xmlReader.eval(\"/FXTICKET_CDC/EXTERNALTRANSACTIONID/@AfterImage\");\nmodel.put(\"OrderId\", orderId);"
+		}]
+	},
+	"status": {
+		"code": "200",
+		"message": "Success"
+	}
+}

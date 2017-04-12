@@ -12,7 +12,9 @@ class SidebarRightSearch extends Component {
     renderColumnsSelection = () =>
         <div className='data-element-table-columns-selection'>
             <div className='choices'>
-                {this.props.dataElementColumns.map((item,i) =>
+                {this.props.dataElementColumns
+                    .filter(item => item.optional)
+                    .map((item,i) =>
                 <Toggle key={i} className='choice' labelPosition='right'
                     label={item.name} defaultToggled={item.show} disabled={!item.optional}
                     onToggle={this.onToggle.bind(this, item)}/>)}

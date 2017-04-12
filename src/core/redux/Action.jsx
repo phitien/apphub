@@ -12,13 +12,17 @@ export default class Action {
     get store() {return getStoreInstance()}
     get dispatcher() {return __dispatcher}
     set dispatcher(v) {__dispatcher = !__dispatcher ? v : __dispatcher}
+    get callback() {return this.__callback}
+    set callback(v) {this.__callback = v}
     getFn(dispatch) {
         this.dispatcher = dispatch
         return (function(payload) {
+            if (typeof arguments[arguments.length - 1] == 'function') {
+                this.callback = arguments[arguments.length - 1]
+            }
             this.beforeDispatch.apply(this, arguments)
             Action.dispatch(this.getData(payload))
-            if (typeof arguments[arguments.length - 1] == 'function')
-                arguments[arguments.length - 1](payload)
+            if (this.callback) this.callback(payload)
             if (this.debug) this.debug.call(this, payload)
         }).bind(this)
     }

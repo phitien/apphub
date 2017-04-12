@@ -62,7 +62,3 @@ export class LoadedInterfaceSystemsActionReducer extends CoreReducer {
     get defaultValue() {return []}
     getData(action) {return action.data.body}
 }
-export class LoadedDataElementInfoActionReducer extends CoreReducer {
-    get fieldName() {return 'dataElement'}
-    getData(action) {return action.data.body}
-}

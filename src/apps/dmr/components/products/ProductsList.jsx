@@ -10,27 +10,6 @@ class ProductsList extends Component {
     get data() {return {data: this.props.searchDataElementsResults}}
     get columns() {return this.props.dataElementColumns}
     fieldRenderer(row,i,col,j) {
-        function getAssestClass() {
-            let v = ''
-            if (row.outputModels) {
-                row.outputModels.map(model => v = v ? v : model.attributes.reduce((v,n) => {
-                    return v = n.name == 'Asset Class' ? v = n.value : v
-                }))
-            }
-            return v
-        }
-        function getProduct() {
-            let v = ''
-            if (row.outputModels) {
-                row.outputModels.map(model => v = v ? v : model.attributes.reduce((v,n) => {
-                    return v = n.name == 'Product' ? v = n.value : v
-                }))
-            }
-            return v
-        }
-        if (col.field == 'name') return <Link>{row[col.field]}</Link>
-        if (col.field == 'assetClass') return <Link>{getAssestClass()}</Link>
-        if (col.field == 'product') return <Link>{getProduct()}</Link>
         return <Link>{row[col.field]}</Link>
     }
     rowDetailRenderer(rowi,i) {
@@ -67,9 +46,8 @@ class ProductsList extends Component {
                     const target = e.target.closest('.output-models')
                     const row = this.data.data[rowIndex] ? this.data.data[rowIndex] : this.data.data[rowIndex - 1]
                     const callback = (res) => {
-                        console.log(res)
-                        if (res && res.data && res.data.body) {
-                            this.util.assign(row, {loaded: true, info: res.data.body})
+                        if (res  && res.data && res.data.body) {
+                            this.util.assign(row, {loaded: true, expanded: false, info: res.data.body})
                         }
                         if (!target) {
                             const newState = !row.expanded

@@ -85,12 +85,11 @@ export class SearchDataElementsAction extends CoreAction {
 export class SearchedDataElementsAction extends CoreAction {}
 export class LoadDataElementInfoAction extends CoreAction {
     beforeDispatch(payload) {
-        this.util.query(configuration.api.urls.dataElement.format(payload), {elementId: payload.id}, {
-            success: (new LoadedDataElementInfoAction()).getFn()
+        this.util.query(configuration.api.urls.dataElement.format(payload), {elementId: payload.elementId}, {
+            success: this.callback
         })
     }
 }
-export class LoadedDataElementInfoAction extends CoreAction {}
 export class LoadInterfaceSystemsAction extends CoreAction {
     beforeDispatch(payload) {
         this.util.query('/static/dmr/api/interface-systems.json', {}, {
