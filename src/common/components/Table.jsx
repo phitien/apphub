@@ -14,7 +14,7 @@ export default class Table extends Component {
         return {
             showHeader: true, showFooter: true,
             height: '350px', rowHeight: 32, fixedHeader: true, fixedFooter: true,
-            columns: [], data: [], currentPage: 0, totalPage: 0, pageSize: 0,
+            columns: [], data: [], currentPage: 1, totalPage: 1, pageSize: 10,
             showPagination: true, showFilters: true, showRowHover: true, stripedRows: true, showCheckboxes: false, selectable: true,
             onCellClick: (rowIndex, cellIndex, e) => {}, onCellHover: () => {}, onCellHoverExit: () => {},
             onRowHover: () => {}, onRowHoverExit: () => {},
@@ -63,19 +63,43 @@ export default class Table extends Component {
             adjustForCheckbox={this.cmpProps.showCheckboxes}>
             {this.pagination()}
         </TableFooter>
+    openPrevPage = () => this.onPageChage(this.cmpProps.currentPage > 0 ? this.cmpProps.currentPage - 1 : 1)
+    openNextPage = () => this.onPageChage(this.cmpProps.currentPage + 1)
+    onPageFieldChange = (e) => this.onPageChage(e.target.value)
+    onPageChage = (page) => {
+        if (page != this.cmpProps.currentPage) {
+            this.cmpProps.currentPage = page
+            this.setState(this.state)
+            this.cmpProps.onPageChange(page)
+        }
+    }
+    onPageSizeFieldChange = (e) => this.onPageSizeChange(e.target.value)
+    onPageSizeChange = (size) => {
+        if (size != this.cmpProps.pageSize) {
+            this.cmpProps.pageSize = size
+            this.setState(this.state)
+            this.cmpProps.onPageSizeChange(size)
+        }
+    }
     pagination = () =>
         <TableRow style={this.util.assign(this.lineStyle, {display: !this.cmpProps.showPagination ? 'none' : ''})}>
             <TableCell style={this.cellStyle()} colSpan={this.cmpProps.columns.length}>
                 <div className='pagination'>
                     <div className='pagination-navi'>
-                        <IconButton style={this.buttonStyle}><i className='material-icons'>chevron_left</i></IconButton>
+                        <IconButton style={this.buttonStyle} onClick={this.openPrevPage}><i className='material-icons'>chevron_left</i></IconButton>
                         <div className='pagination-pageInfo'>
-                            <TextField type='number' min={1} style={{width: 'auto'}} defaultValue={this.cmpProps.currentPage}/>
+                            <TextField type='number' min={1} style={{width: 'auto'}} step={5}
+                                paddingLeftRight={{paddingRight: '5px', paddingLeft: '5px'}}
+                                value={this.cmpProps.currentPage}
+                                onChange={this.onPageFieldChange}/>
                         </div>
-                        <IconButton style={this.buttonStyle}><i className='material-icons'>chevron_right</i></IconButton>
+                        <IconButton style={this.buttonStyle} onClick={this.openNextPage}><i className='material-icons'>chevron_right</i></IconButton>
                     </div>
                     <div className='pagination-pagesize'>
-                        <TextField type='number' min={10} style={{width: 'auto'}} defaultValue={this.cmpProps.pageSize}/>/page
+                        <TextField type='number' min={10} max={100} step={5} style={{width: 'auto'}}
+                            paddingLeftRight={{paddingRight: '5px', paddingLeft: '5px'}}
+                            value={this.cmpProps.pageSize}
+                            onChange={this.onPageSizeFieldChange}/>/page
                     </div>
                 </div>
             </TableCell>

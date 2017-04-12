@@ -22,6 +22,14 @@ class ProductsList extends Component {
     onOutputSelectChange = (e, index, value) => this.props.executeSetCurrentOutputTypeAction({data: value}, () => {
         this.props.executeSearchDataElementsAction({id: this.route.params.id})
     })
+    onPageChange = (pageNo) => this.props.executeSetCurrentPageNoAction({data: pageNo}, () => {
+        this.props.executeSearchDataElementsAction({id: this.route.params.id})
+    })
+    onPageSizeChange = (pageSize) => {
+        this.props.executeSetCurrentPageSizeAction({data: pageSize}, () => {
+            this.props.executeSearchDataElementsAction({id: this.route.params.id})
+        })
+    }
     render = () =>
         <div className={this.className}>
             <div className='view-toolbar'>
@@ -40,6 +48,8 @@ class ProductsList extends Component {
             <Table height='420px' fixedHeader={true} fixedFooter={true}
                 columns={this.columns.filter(item => item.show)}
                 data={this.data.data}
+                pageSize={this.props.currentPageSize} onPageChange={this.onPageChange}
+                currentPage={this.props.currentPageNo} onPageSizeChange={this.onPageSizeChange}
                 fieldRenderer={this.fieldRenderer}
                 rowDetailRenderer={this.rowDetailRenderer}
                 onCellClick={(rowIndex, cellIndex, e) => {

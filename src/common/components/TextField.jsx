@@ -12,8 +12,8 @@ export default class TextField extends Component {
     get backgroundColor() {return configuration.ui.inputBackgroundColor}
     get color() {return configuration.ui.inputColor}
     get hintcolor() {return configuration.ui.inputHintColor}
-    get lineStyle() {return {height: this.height, lineHeight: this.height, fontSize: this.fontSize, color: this.color, backgroundColor: this.backgroundColor,}}
-    get paddingLeftRight() {return {paddingRight: this.paddingRight, paddingLeft: this.paddingLeft}}
+    get lineStyle() {return this.props.lineStyle ? this.props.lineStyle : {height: this.height, lineHeight: this.height, fontSize: this.fontSize, color: this.color, backgroundColor: this.backgroundColor,}}
+    get paddingLeftRight() {return this.props.paddingLeftRight ? this.props.paddingLeftRight : {paddingRight: this.paddingRight, paddingLeft: this.paddingLeft}}
 
     get cmpProps() {
         return this.util.assignDeep(this.defaultProps, this.props)

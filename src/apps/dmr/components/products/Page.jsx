@@ -16,6 +16,8 @@ class ProductsPage extends Page {
         this.props.executeSetCurrentOutputTypeAction()
         this.props.executeSetListSourceSystemsAction()
         this.props.executeSetCurrentSourceSystemAction()
+        this.props.executeSetCurrentPageNoAction()
+        this.props.executeSetCurrentPageSizeAction()
         this.loadData(this.route.params.id)
     }
     onRouteChanged = (prev, next) => prev.params.id != next.params.id ? this.loadData(next.params.id) : false

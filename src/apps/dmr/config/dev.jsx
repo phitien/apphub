@@ -10,7 +10,7 @@ module.exports = exports = {
         }
     },
     ui: {
-        currentPageNo: 0,
+        currentPageNo: 1,
         currentPageSize: 10,
         currentOutputType: 'SCBML',
         currentSourceSystem: 'BTS',
