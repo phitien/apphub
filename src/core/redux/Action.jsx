@@ -5,7 +5,6 @@ let __dispatcher = null
 
 export default class Action {
     beforeDispatch(payload) {}
-    afterDispatch(payload) {}
     getData(payload) {
         return this.util.assign({}, payload, {type: this.constructor.name})
     }
@@ -18,7 +17,9 @@ export default class Action {
         return (function(payload) {
             this.beforeDispatch.apply(this, arguments)
             Action.dispatch(this.getData(payload))
-            this.afterDispatch.apply(this, arguments)
+            if (typeof arguments[arguments.length - 1] == 'function')
+                arguments[arguments.length - 1](payload)
+            if (this.debug) this.debug.call(this, payload)
         }).bind(this)
     }
     static dispatch(payload) {

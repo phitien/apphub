@@ -1,7 +1,11 @@
 import Action from '../../../core/redux/Action'
 
+export class SetCurrentSearchValueAction extends Action {}
+export class SetCurrentPageNoAction extends Action {}
+export class SetCurrentPageSizeAction extends Action {}
+export class SetCurrentOutputTypeAction extends Action {}
+export class SetCurrentSourceSystemAction extends Action {}
 export class SetListOutputTypesAction extends Action {}
-export class SetCurrentOutputModelAction extends Action {}
 export class SetDataElementColumnsAction extends Action {}
 export class SwitchSidebarLeftViewAction extends Action {}
 export class ToggleSidebarLeftAction extends Action {}
@@ -57,14 +61,38 @@ export class LoadSubHierarchyAction extends Action {
 }
 export class LoadedSubHierarchyAction extends Action {}
 export class SearchDataElementsAction extends Action {
+    get searchParams() {
+        const outputType = this.store.getState().SetCurrentOutputTypeActionReducer.currentOutputType
+        const sourceSystem = this.store.getState().SetCurrentSourceSystemActionReducer.currentSourceSystem
+        const searchValue = this.store.getState().SetCurrentSearchValueActionReducer.currentSearchValue
+        const pageNo = this.store.getState().SetCurrentPageNoActionReducer.currentPageNo
+        const pageSize = this.store.getState().SetCurrentPageSizeActionReducer.currentPageSize
+        return {
+            sourceSystem,
+            outputType,
+            searchValue,
+            page: {pageNo,pageSize}
+        }
+    }
+    debug(payload) {
+        console.log(payload, this.searchParams)
+    }
     beforeDispatch(payload) {
-        this.util.assign({outputType: 'SCBML', sourceSystem: 'BTS'}, payload)
-        this.util.query(configuration.api.urls.searchDataElements.format(payload), payload, {
+        this.util.post(configuration.api.urls.searchDataElements.format(payload),
+            this.util.assign(this.searchParams, {contextPathId: payload.id ? payload.id : 0}), {
             success: (new SearchedDataElementsAction()).getFn()
         })
     }
 }
 export class SearchedDataElementsAction extends Action {}
+export class LoadDataElementInfoAction extends Action {
+    beforeDispatch(payload) {
+        this.util.query(configuration.api.urls.dataElement.format(payload), {elementId: payload.id}, {
+            success: (new LoadedDataElementInfoAction()).getFn()
+        })
+    }
+}
+export class LoadedDataElementInfoAction extends Action {}
 export class LoadInterfaceSystemsAction extends Action {
     beforeDispatch(payload) {
         this.util.query('/static/dmr/api/interface-systems.json', {}, {
@@ -73,14 +101,3 @@ export class LoadInterfaceSystemsAction extends Action {
     }
 }
 export class LoadedInterfaceSystemsAction extends Action {}
-export class LoadDataElementInfoAction extends Action {
-    beforeDispatch(payload, callback) {
-        this.util.query(configuration.api.urls.dataElement.format(payload), payload, {
-            success: [
-                (new LoadedDataElementInfoAction()).getFn(),
-                callback
-            ]
-        })
-    }
-}
-export class LoadedDataElementInfoAction extends Action {}

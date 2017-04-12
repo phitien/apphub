@@ -7,8 +7,7 @@ import * as DefaultReducers from '../../common/redux/Reducer'
 import * as DrmReducers from './redux/Reducer'
 import events from './events'
 import routes from './routes'
-import HeaderApplication from '../../common/applications/HeaderApplication'
-import FooterApplication from '../../common/applications/FooterApplication'
+import {HeaderApplication, FooterApplication} from '../../common/applications'
 import Application from './Application'
 
 const store = getStoreInstance(assign(DefaultReducers, DrmReducers))

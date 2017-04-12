@@ -1,28 +1,26 @@
-import Reducer from '../../../core/redux/Reducer'
+import Reducer, {ConfigReducer, FalseReducer, TrueReducer} from '../../../core/redux/Reducer'
 
-export class SetCurrentOutputModelActionReducer extends Reducer {
-    get defaultState() {
-        return {currentOutputType: configuration.ui.currentOutputType}
-    }
-    matchedTransform(state, action) {
-        return this.util.assign({}, state, {currentOutputType: action.data ? action.data : configuration.ui.currentOutputType})
-    }
+export class SetCurrentSearchValueActionReducer extends ConfigReducer {
+    debug(state, action) {console.log(this.constructor.name, this.value, state, action)}
+    get fieldName() {return 'currentSearchValue'}
 }
-export class SetListOutputTypesActionReducer extends Reducer {
-    get defaultState() {
-        return {listOutputTypes: configuration.ui.listOutputTypes}
-    }
-    matchedTransform(state = this.defaultState, action) {
-        return this.util.assign({}, state, {listOutputTypes: action.data ? action.data : configuration.ui.listOutputTypes})
-    }
+export class SetCurrentPageNoActionReducer extends ConfigReducer {
+    get fieldName() {return 'currentPageNo'}
 }
-export class SetDataElementColumnsActionReducer extends Reducer {
-    get defaultState() {
-        return {dataElementColumns: configuration.ui.dataElementColumns}
-    }
-    matchedTransform(state, action) {
-        return this.util.assign({}, state, {dataElementColumns: action.data ? action.data : configuration.ui.dataElementColumns})
-    }
+export class SetCurrentPageSizeActionReducer extends ConfigReducer {
+    get fieldName() {return 'currentPageSize'}
+}
+export class SetCurrentOutputTypeActionReducer extends ConfigReducer {
+    get fieldName() {return 'currentOutputType'}
+}
+export class SetCurrentSourceSystemActionReducer extends ConfigReducer {
+    get fieldName() {return 'currentSourceSystem'}
+}
+export class SetListOutputTypesActionReducer extends ConfigReducer {
+    get fieldName() {return 'listOutputTypes'}
+}
+export class SetDataElementColumnsActionReducer extends ConfigReducer {
+    get fieldName() {return 'dataElementColumns'}
 }
 export class SetCurrentHierarchyActionReducer extends Reducer {
     get defaultState() {
@@ -36,66 +34,33 @@ export class SetCurrentHierarchyActionReducer extends Reducer {
     }
 }
 export class SearchedDataElementsActionReducer extends Reducer {
-    get defaultState() {
-        return {searchDataElementsResults: null}
-    }
-    matchedTransform(state, action) {
-        return this.util.assign({}, state, {searchDataElementsResults: action.data.body})
-    }
+    get fieldName() {return 'searchDataElementsResults'}
+    getData(action) {return action.data.body}
 }
 export class SwitchSidebarLeftViewActionReducer extends Reducer {
-    get defaultState() {
-        return {sidebarLeftViewName: 'Hierarchy'}
-    }
-    matchedTransform(state, action) {
-        return this.util.assign({}, state, {sidebarLeftViewName: action.data})
-    }
+    get fieldName() {return 'sidebarLeftViewName'}
+    get defaultValue() {return 'Hierarchy'}
 }
 export class LoadedRootHierarchyActionReducer extends Reducer {
-    get defaultState() {
-        return {hierarchy: null}
-    }
-    matchedTransform(state, action) {
-        return this.util.assign({}, state, {hierarchy: action.data.body})
-    }
+    get fieldName() {return 'hierarchy'}
+    getData(action) {return action.data.body}
 }
 export class LoadedSubHierarchyActionReducer extends Reducer {
-    get defaultState() {
-        return {subHierarchy: null}
-    }
-    matchedTransform(state, action) {
-        return this.util.assign({}, state, {subHierarchy: action.data.body})
-    }
+    get fieldName() {return 'subHierarchy'}
+    getData(action) {return action.data.body}
 }
-export class ToggleSidebarLeftActionReducer extends Reducer {
-    get defaultState() {
-        return {hideSidebarLeft: false}
-    }
-    matchedTransform(state, action) {
-        return this.util.assign({}, state, {hideSidebarLeft: action.data})
-    }
+export class ToggleSidebarLeftActionReducer extends FalseReducer {
+    get fieldName() {return 'hideSidebarLeft'}
 }
-export class ToggleSidebarRightActionReducer extends Reducer {
-    get defaultState() {
-        return {hideSidebarRight: true}
-    }
-    matchedTransform(state, action) {
-        return this.util.assign({}, state, {hideSidebarRight: action.data})
-    }
+export class ToggleSidebarRightActionReducer extends TrueReducer {
+    get fieldName() {return 'hideSidebarRight'}
 }
 export class LoadedInterfaceSystemsActionReducer extends Reducer {
-    get defaultState() {
-        return {interfaceSystems: []}
-    }
-    matchedTransform(state, action) {
-        return this.util.assign({}, state, {interfaceSystems: action.data.body})
-    }
+    get fieldName() {return 'interfaceSystems'}
+    get defaultValue() {return []}
+    getData(action) {return action.data.body}
 }
 export class LoadedDataElementInfoActionReducer extends Reducer {
-    get defaultState() {
-        return {dataElement: null}
-    }
-    matchedTransform(state, action) {
-        return this.util.assign({}, state, {dataElement: action.data.body})
-    }
+    get fieldName() {return 'dataElement'}
+    getData(action) {return action.data.body}
 }

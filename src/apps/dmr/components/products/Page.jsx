@@ -15,7 +15,7 @@ class ProductsPage extends Page {
     postComponentDidMount() {
         this.props.executeSetDataElementColumnsAction()
         this.props.executeSetListOutputTypesAction()
-        this.props.executeSetCurrentOutputModelAction()
+        this.props.executeSetCurrentOutputTypeAction()
         this.loadData(this.route.params.id)
     }
     onRouteChanged = (prev, next) => prev.params.id != next.params.id ? this.loadData(next.params.id) : false

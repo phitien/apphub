@@ -3,14 +3,18 @@ module.exports = exports = {
         urls: {
             hierarchy: 'http://uklvauems02a.uk.standardchartered.com:8083/dmr-api/mapper-service/datahierarchy',
             searchDataElements: 'http://uklvauems02a.uk.standardchartered.com:8083/dmr-api/mapper-service/elements',
-            dataElement: 'http://uklvauems02a.uk.standardchartered.com:8083/dmr-api/mapper-service/elementInfo',
+            dataElement: 'http://uklvauems02a.uk.standardchartered.com:8083/dmr-api/mapper-service/elementinfo',
             pageInfo: '/static/dmr/api/page.json',
             pageInfoLogged: '/static/dmr/api/page-logged.json',
             login: '/static/dmr/api/login.json',
         }
     },
     ui: {
+        currentPageNo: 0,
+        currentPageSize: 10,
         currentOutputType: 'SCBML',
+        currentSourceSystem: '',
+        setCurrentSearchValue: '',
         listOutputTypes: [
             {primaryText: 'BCDF',value: 'BCDF'},
             {primaryText: 'SCBML',value: 'SCBML'},

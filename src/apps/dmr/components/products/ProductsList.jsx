@@ -1,12 +1,8 @@
 import React from 'react'
 import {Link} from 'react-router'
 import {TableRow, TableRowColumn as TableCell} from 'material-ui/Table'
-import Component from '../../../../common/components/Component'
 import Connect from '../../redux/Connect'
-import Table from '../../../../common/components/Table'
-import TextField from '../../../../common/components/TextField'
-import Card from '../../../../common/components/Card'
-import Tabs from '../../../../common/components/Tabs'
+import {Component, Table, TextField, SelectField, Card, Tabs} from '../../../../common/components'
 
 class ProductsList extends Component {
     get componentClassName() {return 'products-list'}
@@ -33,7 +29,6 @@ class ProductsList extends Component {
             }
             return v
         }
-        // if (col.field == 'name') return <Link target='_blank' to={`/dmr/product?path=${this.util.queries.path}&id=${row.id}`}>{row[col.field]}</Link>
         if (col.field == 'name') return <Link>{row[col.field]}</Link>
         if (col.field == 'assetClass') return <Link>{getAssestClass()}</Link>
         if (col.field == 'product') return <Link>{getProduct()}</Link>
@@ -44,7 +39,7 @@ class ProductsList extends Component {
         <Card className='data-element'>
             <div className='output-models'>
                 {!rowi.info.outputModels ? null : rowi.info.outputModels.map((model,j) =>
-                <div className='output-model'>
+                <div key={j} className='output-model'>
                     <div className='model-attributes'>
                         <div className='heading'>{model.name}</div>
                         <div className='description'>{model.description}</div>
@@ -87,13 +82,24 @@ class ProductsList extends Component {
             </table>
         </Card>
     }
+    onSearchFieldChange = (e) => {
+        console.log(e.target)
+        this.props.executeSetCurrentSearchValueAction({data: e.target.value}, () => {
+            this.props.executeSearchDataElementsAction({id: this.route.params.id})
+        })
+    }
     render = () =>
         <div className={this.className}>
             <div className='view-toolbar'>
-                <TextField className='seach-field' hintText='Enter name, description or xpath' fullWidth={true}
+                <TextField className='seach-field' hintText='Enter name, description or xpath'
                     inputStyle={{paddingLeft: '24px', paddingRight: '24px'}}
                     hintStyle={{paddingLeft: '24px', paddingRight: '24px'}}
+                    onChange={this.onSearchFieldChange}
                     />
+                <SelectField source={this.props.listOutputTypes}
+                    onChange={this.onSearchFieldChange}
+                    value={this.props.currentOutputType}
+                    labelStyle={{fontSize: '13px', color: '#ffffff'}}/>
             </div>
             <Table height='420px' fixedHeader={true} fixedFooter={true}
                 columns={this.columns.filter(item => item.show)}

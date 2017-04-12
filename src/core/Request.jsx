@@ -10,7 +10,7 @@ export default class REQUEST {
     }
 
     constructor(url, method) {
-        method = method ? method.toLowerCase() : 'get'
+        method = configuration.env != 'mock' && method ? method.toLowerCase() : 'get'
         this.__options = {url, method}
     }
     execute = () => this.exe = when(axios(this.__options))
