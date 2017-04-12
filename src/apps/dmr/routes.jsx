@@ -1,9 +1,5 @@
-import onRouteEntered from '../../common/routes/onRouteEntered'
-import onRouteChanged from '../../common/routes/onRouteChanged'
-import Viewport from './components/Viewport'
-import LandingPage from './components/landing/Page'
-import ProductsPage from './components/products/Page'
-import ProductPage from './components/product/Page'
+import {onRouteEntered, onRouteChanged} from '../../common/routes'
+import {Viewport, LandingPage, ProductsPage} from './components'
 
 const hierarchyPaths = ['/dmr']
 const subRoutes = [

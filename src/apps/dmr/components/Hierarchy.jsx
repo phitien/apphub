@@ -1,7 +1,7 @@
 import React from 'react'
-import Component from '../../../common/components/Component'
-import Connect from '../redux/Connect'
 import {Link} from 'react-router'
+import {Component} from '../../../common/components'
+import {Connect} from '../redux'
 
 class Hierarchy extends Component {
     get componentClassName() {return 'hierarchy'}

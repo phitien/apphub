@@ -1,9 +1,8 @@
 import React from 'react'
-import Component from './Component'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import getMuiTheme from 'material-ui/styles/getMuiTheme'
+import {MuiThemeProvider, getMuiTheme} from 'material-ui/styles'
 import {cyan500} from 'material-ui'
 import injectTapEventPlugin from 'react-tap-event-plugin'
+import Component from './Component'
 
 injectTapEventPlugin()
 

@@ -1,13 +1,11 @@
 import React from 'react'
-import Page from '../../../../common/components/Page'
-import Connect from '../../redux/Connect'
+import {Connect} from '../../redux'
 import SidebarLeft from '../SidebarLeft'
 import SidebarRight from '../SidebarRight'
+import Page from '../Page'
 import Content from './Content'
 
 class ProductsPage extends Page {
-    get pageClassName() {
-        return `${this.props.hideSidebarLeft ? 'has-sidebar-left-collapsed' : 'has-sidebar-left'} ${this.props.hideSidebarRight ? 'has-sidebar-right-collapsed' : 'has-sidebar-right'}`}
     loadData(id) {
         this.props.executeLoadRootHierarchyAction(id)
         this.props.executeSearchDataElementsAction({id})
@@ -16,6 +14,8 @@ class ProductsPage extends Page {
         this.props.executeSetDataElementColumnsAction()
         this.props.executeSetListOutputTypesAction()
         this.props.executeSetCurrentOutputTypeAction()
+        this.props.executeSetListSourceSystemsAction()
+        this.props.executeSetCurrentSourceSystemAction()
         this.loadData(this.route.params.id)
     }
     onRouteChanged = (prev, next) => prev.params.id != next.params.id ? this.loadData(next.params.id) : false

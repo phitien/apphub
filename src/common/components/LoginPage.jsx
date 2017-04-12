@@ -1,7 +1,7 @@
 import React from 'react'
-import Page from './Page'
 import {TextField, RaisedButton} from 'material-ui'
-import Connect from '../redux/Connect'
+import {Connect} from '../redux'
+import Page from './Page'
 
 class LoginPage extends Page {
     get pageClassName() {return `login-page`}

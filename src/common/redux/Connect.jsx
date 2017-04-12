@@ -1,4 +1,4 @@
-import {default as DefaultConnect} from '../../core/redux/Connect'
+import {Connect as DefaultConnect} from '../../core/redux'
 import * as actions from './Action'
 
 export default class Connect extends DefaultConnect {

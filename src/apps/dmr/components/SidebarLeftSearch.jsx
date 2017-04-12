@@ -1,8 +1,7 @@
 import React from 'react'
-import Component from '../../../common/components/Component'
-import Connect from '../redux/Connect'
-import {TextField, RaisedButton} from 'material-ui'
-import {IconMenu, MenuItem, IconButton} from 'material-ui'
+import {TextField, RaisedButton, IconMenu, MenuItem, IconButton} from 'material-ui'
+import {Component} from '../../../common/components'
+import {Connect} from '../redux'
 import SidebarLeftCollapseButton from './SidebarLeftCollapseButton'
 
 class SidebarLeftSearch extends Component {

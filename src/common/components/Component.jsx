@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import util from '../../core/util'
+import {util} from '../../core'
 
 export default class Component extends React.Component {
     constructor(props) {

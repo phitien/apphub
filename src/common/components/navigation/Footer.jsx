@@ -1,6 +1,6 @@
 import React from 'react'
+import {Connect} from '../../redux'
 import Component from '../Component'
-import Connect from '../../redux/Connect'
 import Version from './Version'
 
 class Footer extends Component {

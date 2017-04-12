@@ -1,4 +1,4 @@
-import cookie from '../../core/cookie'
+import {cookie} from '../../core'
 
 export default function(prev, next) {
     cookie.value('route_changed', {prev, next})

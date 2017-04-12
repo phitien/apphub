@@ -1,6 +1,6 @@
 import React from 'react'
+import {Connect} from '../../redux'
 import Component from '../Component'
-import Connect from '../../redux/Connect'
 
 class Help extends Component {
     get componentClassName() {return 'help'}

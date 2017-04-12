@@ -1,5 +1,7 @@
 .page .content .products-list {
   .view-toolbar {
+    display: flex;align-items: flex-start;justify-content: space-between;
+    background-color: #ffffff;border-bottom: 1px solid $lightgrey;
     .seach-field {}
   }
   .heading {color: $blue;font-size: 120%;margin-bottom: $margin/2;}

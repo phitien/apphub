@@ -1,6 +1,6 @@
 import React from 'react'
-import Component from '../../../common/components/Component'
-import Connect from '../redux/Connect'
+import {Component} from '../../../common/components'
+import {Connect} from '../redux'
 
 class SidebarLeftCollapseButton extends Component {
     get componentClassName() {return `sidebar-left-collapse-button material-icons`}

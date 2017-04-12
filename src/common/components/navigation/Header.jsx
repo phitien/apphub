@@ -1,6 +1,6 @@
 import React from 'react'
+import {Connect} from '../../redux'
 import Component from '../Component'
-import Connect from '../../redux/Connect'
 import LinksHub from './LinksHub'
 import LogoBox from './LogoBox'
 import SearchBox from './SearchBox'

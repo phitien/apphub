@@ -1,7 +1,6 @@
-import Reducer, {ConfigReducer, FalseReducer, TrueReducer} from '../../../core/redux/Reducer'
+import {default as CoreReducer, ConfigReducer, FalseReducer, TrueReducer} from '../../../core/redux/Reducer'
 
 export class SetCurrentSearchValueActionReducer extends ConfigReducer {
-    debug(state, action) {console.log(this.constructor.name, this.value, state, action)}
     get fieldName() {return 'currentSearchValue'}
 }
 export class SetCurrentPageNoActionReducer extends ConfigReducer {
@@ -19,10 +18,13 @@ export class SetCurrentSourceSystemActionReducer extends ConfigReducer {
 export class SetListOutputTypesActionReducer extends ConfigReducer {
     get fieldName() {return 'listOutputTypes'}
 }
+export class SetListSourceSystemsActionReducer extends ConfigReducer {
+    get fieldName() {return 'listSourceSystems'}
+}
 export class SetDataElementColumnsActionReducer extends ConfigReducer {
     get fieldName() {return 'dataElementColumns'}
 }
-export class SetCurrentHierarchyActionReducer extends Reducer {
+export class SetCurrentHierarchyActionReducer extends CoreReducer {
     get defaultState() {
         return {currentHierarchy: null, componentTitle: null}
     }
@@ -33,19 +35,19 @@ export class SetCurrentHierarchyActionReducer extends Reducer {
         })
     }
 }
-export class SearchedDataElementsActionReducer extends Reducer {
+export class SearchedDataElementsActionReducer extends CoreReducer {
     get fieldName() {return 'searchDataElementsResults'}
     getData(action) {return action.data.body}
 }
-export class SwitchSidebarLeftViewActionReducer extends Reducer {
+export class SwitchSidebarLeftViewActionReducer extends CoreReducer {
     get fieldName() {return 'sidebarLeftViewName'}
     get defaultValue() {return 'Hierarchy'}
 }
-export class LoadedRootHierarchyActionReducer extends Reducer {
+export class LoadedRootHierarchyActionReducer extends CoreReducer {
     get fieldName() {return 'hierarchy'}
     getData(action) {return action.data.body}
 }
-export class LoadedSubHierarchyActionReducer extends Reducer {
+export class LoadedSubHierarchyActionReducer extends CoreReducer {
     get fieldName() {return 'subHierarchy'}
     getData(action) {return action.data.body}
 }
@@ -55,12 +57,12 @@ export class ToggleSidebarLeftActionReducer extends FalseReducer {
 export class ToggleSidebarRightActionReducer extends TrueReducer {
     get fieldName() {return 'hideSidebarRight'}
 }
-export class LoadedInterfaceSystemsActionReducer extends Reducer {
+export class LoadedInterfaceSystemsActionReducer extends CoreReducer {
     get fieldName() {return 'interfaceSystems'}
     get defaultValue() {return []}
     getData(action) {return action.data.body}
 }
-export class LoadedDataElementInfoActionReducer extends Reducer {
+export class LoadedDataElementInfoActionReducer extends CoreReducer {
     get fieldName() {return 'dataElement'}
     getData(action) {return action.data.body}
 }

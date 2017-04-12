@@ -1,14 +1,13 @@
 import React from 'react'
 import {Link} from 'react-router'
 import {TableRow, TableRowColumn as TableCell} from 'material-ui/Table'
-import Connect from '../../redux/Connect'
-import {Component, Table, TextField, SelectField, Card, Tabs} from '../../../../common/components'
+import {Component, Table, TextField, SelectField} from '../../../../common/components'
+import {Connect} from '../../redux'
+import Detail from './Detail'
 
 class ProductsList extends Component {
     get componentClassName() {return 'products-list'}
-    get data() {return {
-        data: this.props.searchDataElementsResults ? this.props.searchDataElementsResults : [],
-    }}
+    get data() {return {data: this.props.searchDataElementsResults}}
     get columns() {return this.props.dataElementColumns}
     fieldRenderer(row,i,col,j) {
         function getAssestClass() {
@@ -36,70 +35,28 @@ class ProductsList extends Component {
     }
     rowDetailRenderer(rowi,i) {
         return !rowi.loaded || !rowi.info || !rowi.expanded ? null :
-        <Card className='data-element'>
-            <div className='output-models'>
-                {!rowi.info.outputModels ? null : rowi.info.outputModels.map((model,j) =>
-                <div key={j} className='output-model'>
-                    <div className='model-attributes'>
-                        <div className='heading'>{model.name}</div>
-                        <div className='description'>{model.description}</div>
-                        {!model.attributes ? null : model.attributes.map((attr,k) =>
-                        <div key={k} className='model-attribute'>
-                            <div className='info'>
-                                <div className='name'>{attr.name}</div>
-                                <div className='value'>{attr.value}</div>
-                            </div>
-                            <div className='description'>{attr.description}</div>
-                        </div>)}
-                    </div>
-                </div>)}
-            </div>
-            <table className='model-interfaces'>
-                <thead>
-                    <tr className='model-interface model-interface-header'>
-                        <th className='model-interface-source' colSpan={2}>Source</th>
-                        <th className='model-interface-contextName'></th>
-                        <th className='model-interface-derived' colSpan={2}>Derived</th>
-                    </tr>
-                    <tr className='model-interface model-interface-header'>
-                        <th className='model-interface-sourceSystem'>System</th>
-                        <th className='model-interface-sourceProduct'>Product</th>
-                        <th className='model-interface-contextName'>Context</th>
-                        <th className='model-interface-derivedName'>Name</th>
-                        <th className='model-interface-derivedLogic'>Logic</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {!rowi.info.interfaces ? null : rowi.info.interfaces.map((inte,k) =>
-                    <tr key={k} className='model-interface'>
-                        <td className='model-interface-sourceSystem'>{inte.sourceSystem}</td>
-                        <td className='model-interface-sourceProduct'>{inte.sourceProduct}</td>
-                        <td className='model-interface-contextName'>{inte.contextName}</td>
-                        <td className='model-interface-derivedName'>{inte.derivedName}</td>
-                        <td className='model-interface-derivedLogic'>{inte.derivedLogic}</td>
-                    </tr>)}
-                </tbody>
-            </table>
-        </Card>
+        <Detail info={rowi.info}/>
     }
-    onSearchFieldChange = (e) => {
-        console.log(e.target)
-        this.props.executeSetCurrentSearchValueAction({data: e.target.value}, () => {
-            this.props.executeSearchDataElementsAction({id: this.route.params.id})
-        })
-    }
+    onSearchFieldChange = (e) => this.props.executeSetCurrentSearchValueAction({data: e.target.value}, () => {
+        this.props.executeSearchDataElementsAction({id: this.route.params.id})
+    })
+    onOutputSelectChange = (e, index, value) => this.props.executeSetCurrentOutputTypeAction({data: value}, () => {
+        this.props.executeSearchDataElementsAction({id: this.route.params.id})
+    })
     render = () =>
         <div className={this.className}>
             <div className='view-toolbar'>
-                <TextField className='seach-field' hintText='Enter name, description or xpath'
-                    inputStyle={{paddingLeft: '24px', paddingRight: '24px'}}
-                    hintStyle={{paddingLeft: '24px', paddingRight: '24px'}}
-                    onChange={this.onSearchFieldChange}
-                    />
+                <TextField className='seach-field'
+                    floatingLabelText='Name, description, xpath'
+                    onChange={this.onSearchFieldChange}/>
                 <SelectField source={this.props.listOutputTypes}
-                    onChange={this.onSearchFieldChange}
-                    value={this.props.currentOutputType}
-                    labelStyle={{fontSize: '13px', color: '#ffffff'}}/>
+                    floatingLabelText='Output type'
+                    onChange={this.onOutputSelectChange}
+                    value={this.props.currentOutputType}/>
+                <SelectField source={this.props.listSourceSystems}
+                    floatingLabelText='Source system'
+                    onChange={this.onSourceSystemChange}
+                    value={this.props.currentSourceSystem}/>
             </div>
             <Table height='420px' fixedHeader={true} fixedFooter={true}
                 columns={this.columns.filter(item => item.show)}
@@ -110,6 +67,7 @@ class ProductsList extends Component {
                     const target = e.target.closest('.output-models')
                     const row = this.data.data[rowIndex] ? this.data.data[rowIndex] : this.data.data[rowIndex - 1]
                     const callback = (res) => {
+                        console.log(res)
                         if (res && res.data && res.data.body) {
                             this.util.assign(row, {loaded: true, info: res.data.body})
                         }

@@ -1,22 +1,13 @@
-import Reducer from '../../core/redux/Reducer'
+import {default as CoreReducer, ConfigReducer, FalseReducer, TrueReducer} from '../../core/redux/Reducer'
 
-export class UserLogoutActionReducer extends Reducer {
-    get defaultState() {
-        return {user: null}
-    }
-    matchedTransform(state, action) {
-        return this.util.assign({}, state, {user: null})
-    }
+export class UserLogoutActionReducer extends CoreReducer {
+    get fieldName() {return 'user'}
+    getData(action) {return null}
 }
-export class UserLoginActionReducer extends Reducer {
-    get defaultState() {
-        return {user: null}
-    }
-    matchedTransform(state, action) {
-        return this.util.assign({}, state, {user: action.data})
-    }
+export class UserLoginActionReducer extends CoreReducer {
+    get fieldName() {return 'user'}
 }
-export class LoadedPageInfoActionReducer extends Reducer {
+export class LoadedPageInfoActionReducer extends CoreReducer {
     get defaultState() {
         return {pageInfo: [], pageTitle: 'Apps Hub', appName: 'Apps Hub'}
     }
@@ -44,19 +35,10 @@ export class LoadedPageInfoActionReducer extends Reducer {
         }, value)
     }
 }
-export class AddModalToViewActionReducer extends Reducer {
-    get defaultState() {
-        return {modal: null}
-    }
-    matchedTransform(state, action) {
-        return this.util.assign({}, state, {modal: action.data})
-    }
+export class AddModalToViewActionReducer extends CoreReducer {
+    get fieldName() {return 'modal'}
 }
-export class RemoveModalFromViewActionReducer extends Reducer {
-    get defaultState() {
-        return {modal: null}
-    }
-    matchedTransform(state, action) {
-        return this.util.assign({}, state, {modal: null})
-    }
+export class RemoveModalFromViewActionReducer extends CoreReducer {
+    get fieldName() {return 'modal'}
+    getData(action) {return null}
 }

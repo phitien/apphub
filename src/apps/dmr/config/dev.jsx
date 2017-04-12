@@ -13,12 +13,15 @@ module.exports = exports = {
         currentPageNo: 0,
         currentPageSize: 10,
         currentOutputType: 'SCBML',
-        currentSourceSystem: '',
+        currentSourceSystem: 'BTS',
         setCurrentSearchValue: '',
         listOutputTypes: [
             {primaryText: 'BCDF',value: 'BCDF'},
             {primaryText: 'SCBML',value: 'SCBML'},
             {primaryText: 'Logical Model',value: 'Logical Model'},
+        ],
+        listSourceSystems: [
+            {primaryText: 'BTS',value: 'BTS'},
         ],
         dataElementColumns: [
             {name: 'ID',field: 'id',width: '40px',optional: true,},
@@ -29,5 +32,14 @@ module.exports = exports = {
             // {name: 'Validation Rule',field: 'validationRule',show: false,optional: true,},
             // {name: 'Workflow',field: 'workflow',show: false,optional: true,},
         ],
+        inputHeight: '32px',
+        inputPaddingTop: '3px',
+        inputPaddingBottom: '3px',
+        inputPaddingLeft: '24px',
+        inputPaddingRight: '24px',
+        inputFontSize: '13px',
+        inputBackgroundColor: 'rgba(255, 255, 255, 1)',
+        inputColor: 'rgba(0, 0, 0, 1)',
+        inputHintColor: 'rgba(0, 0, 0, .5)',
     }
 }

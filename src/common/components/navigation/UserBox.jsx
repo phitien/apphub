@@ -1,6 +1,6 @@
 import React from 'react'
+import {Connect} from '../../redux'
 import Component from '../Component'
-import Connect from '../../redux/Connect'
 import Menu from '../Menu'
 
 class UserBox extends Component {

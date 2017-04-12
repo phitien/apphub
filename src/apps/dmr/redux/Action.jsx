@@ -1,44 +1,45 @@
-import Action from '../../../core/redux/Action'
+import {Action as CoreAction} from '../../../core/redux'
 
-export class SetCurrentSearchValueAction extends Action {}
-export class SetCurrentPageNoAction extends Action {}
-export class SetCurrentPageSizeAction extends Action {}
-export class SetCurrentOutputTypeAction extends Action {}
-export class SetCurrentSourceSystemAction extends Action {}
-export class SetListOutputTypesAction extends Action {}
-export class SetDataElementColumnsAction extends Action {}
-export class SwitchSidebarLeftViewAction extends Action {}
-export class ToggleSidebarLeftAction extends Action {}
-export class ToggleSidebarRightAction extends Action {}
-export class SetCurrentHierarchyAction extends Action {}
-export class LoadRootHierarchyAction extends Action {
+export class SetCurrentSearchValueAction extends CoreAction {}
+export class SetCurrentPageNoAction extends CoreAction {}
+export class SetCurrentPageSizeAction extends CoreAction {}
+export class SetCurrentOutputTypeAction extends CoreAction {}
+export class SetCurrentSourceSystemAction extends CoreAction {}
+export class SetListOutputTypesAction extends CoreAction {}
+export class SetListSourceSystemsAction extends CoreAction {}
+export class SetDataElementColumnsAction extends CoreAction {}
+export class SwitchSidebarLeftViewAction extends CoreAction {}
+export class ToggleSidebarLeftAction extends CoreAction {}
+export class ToggleSidebarRightAction extends CoreAction {}
+export class SetCurrentHierarchyAction extends CoreAction {}
+export class LoadRootHierarchyAction extends CoreAction {
     beforeDispatch(id) {
         const payload = {product: ''}
         this.util.query(configuration.api.urls.hierarchy.format(payload), payload, {
             success: (res) => {
-                Action.run(LoadedRootHierarchyAction, res)
+                CoreAction.run(LoadedRootHierarchyAction, res)
                 const subNodes = this.store.getState().LoadedRootHierarchyActionReducer.hierarchy.subNodes
                 if (subNodes && subNodes.length) {
                     subNodes.map(subnode => {
-                        Action.run(LoadSubHierarchyAction, subnode, id)
+                        CoreAction.run(LoadSubHierarchyAction, subnode, id)
                         if (subnode.id == id)
-                            Action.run(SetCurrentHierarchyAction, subnode)
+                            CoreAction.run(SetCurrentHierarchyAction, subnode)
                     })
                 }
             },
         })
     }
 }
-export class LoadedRootHierarchyAction extends Action {}
-export class LoadSubHierarchyAction extends Action {
+export class LoadedRootHierarchyAction extends CoreAction {}
+export class LoadSubHierarchyAction extends CoreAction {
     afterLoad(node, id, res) {
-        Action.run(LoadedSubHierarchyAction, res)
+        CoreAction.run(LoadedSubHierarchyAction, res)
         if (node.id == id)
-            Action.run(SetCurrentHierarchyAction, {data: node})
+            CoreAction.run(SetCurrentHierarchyAction, {data: node})
         const subNodes = node.subNodes
         if (subNodes && subNodes.length) {
             subNodes.map(subnode => {
-                Action.run(LoadSubHierarchyAction, subnode, id)
+                CoreAction.run(LoadSubHierarchyAction, subnode, id)
             })
         }
     }
@@ -59,8 +60,8 @@ export class LoadSubHierarchyAction extends Action {
         }
     }
 }
-export class LoadedSubHierarchyAction extends Action {}
-export class SearchDataElementsAction extends Action {
+export class LoadedSubHierarchyAction extends CoreAction {}
+export class SearchDataElementsAction extends CoreAction {
     get searchParams() {
         const outputType = this.store.getState().SetCurrentOutputTypeActionReducer.currentOutputType
         const sourceSystem = this.store.getState().SetCurrentSourceSystemActionReducer.currentSourceSystem
@@ -74,9 +75,6 @@ export class SearchDataElementsAction extends Action {
             page: {pageNo,pageSize}
         }
     }
-    debug(payload) {
-        console.log(payload, this.searchParams)
-    }
     beforeDispatch(payload) {
         this.util.post(configuration.api.urls.searchDataElements.format(payload),
             this.util.assign(this.searchParams, {contextPathId: payload.id ? payload.id : 0}), {
@@ -84,20 +82,20 @@ export class SearchDataElementsAction extends Action {
         })
     }
 }
-export class SearchedDataElementsAction extends Action {}
-export class LoadDataElementInfoAction extends Action {
+export class SearchedDataElementsAction extends CoreAction {}
+export class LoadDataElementInfoAction extends CoreAction {
     beforeDispatch(payload) {
         this.util.query(configuration.api.urls.dataElement.format(payload), {elementId: payload.id}, {
             success: (new LoadedDataElementInfoAction()).getFn()
         })
     }
 }
-export class LoadedDataElementInfoAction extends Action {}
-export class LoadInterfaceSystemsAction extends Action {
+export class LoadedDataElementInfoAction extends CoreAction {}
+export class LoadInterfaceSystemsAction extends CoreAction {
     beforeDispatch(payload) {
         this.util.query('/static/dmr/api/interface-systems.json', {}, {
             success: (new LoadedInterfaceSystemsAction()).getFn()
         })
     }
 }
-export class LoadedInterfaceSystemsAction extends Action {}
+export class LoadedInterfaceSystemsAction extends CoreAction {}

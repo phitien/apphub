@@ -2,7 +2,7 @@
 require('./config')
 
 import assign from 'object-assign'
-import {getStoreInstance} from '../../core/redux/Store'
+import {getStoreInstance} from '../../core/redux'
 import * as DefaultReducers from '../../common/redux/Reducer'
 import * as DrmReducers from './redux/Reducer'
 import events from './events'
@@ -10,8 +10,9 @@ import routes from './routes'
 import {HeaderApplication, FooterApplication} from '../../common/applications'
 import Application from './Application'
 
-const store = getStoreInstance(assign(DefaultReducers, DrmReducers))
 HeaderApplication.addEvents(events)
+
+const store = getStoreInstance(assign(DefaultReducers, DrmReducers))
 
 const headerApplication = new HeaderApplication()
 // headerApplication.routes = routes

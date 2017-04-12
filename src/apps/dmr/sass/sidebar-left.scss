@@ -22,9 +22,10 @@
         li.node {cursor: pointer;display: block;margin: 0;padding: 0;}
         li.node-lv-0 > .node-name:first-child {display: none;}
         li.node-lv-1 > .node-name a.name:before {content: ''}
-        li.node-lv-2 > .node-name a.name:before {content: ': .  '}
-        li.node-lv-3 > .node-name a.name:before {content: ': . .  '}
-        li.node-lv-4 > .node-name a.name:before {content: ': . . .  '}
+        li.node-lv-2 > .node-name a.name:before {content: '. :  '}
+        li.node-lv-3 > .node-name a.name:before {content: '. . :  '}
+        li.node-lv-4 > .node-name a.name:before {content: '. . . :  '}
+        li.node-lv-5 > .node-name a.name:before {content: '. . . . :  '}
       }
     }
   }

@@ -1,7 +1,7 @@
 import React from 'react'
 import {Toggle} from 'material-ui'
-import Component from '../../../common/components/Component'
-import Connect from '../redux/Connect'
+import {Component} from '../../../common/components'
+import {Connect} from '../redux'
 
 class SidebarRightSearch extends Component {
     get componentClassName() {return `sidebar-right-search`}
