@@ -27,8 +27,8 @@ class Tabs extends Component {
     getContent = (el, i) => el.props.children.reduce((v, child) => {
         return child.type == 'content' ? v = child.props.children : v
     }, i)
-    render() {
-        return <div className={this.className} style={{display: !this.childCount ? 'none' : ''}}>
+    render = () =>
+        <div className={this.className} style={{display: !this.childCount ? 'none' : ''}}>
             <div className='tabs-header'>
                 {this.props.children.map((tab,i) =>
                 <RaisedButton key={i} onClick={() => this.setState({activeIndex: i})} label={this.getTitle(tab,i)}
@@ -41,7 +41,6 @@ class Tabs extends Component {
                 {this.getContent(this.props.children[this.activeIndex], this.activeIndex)}
             </div>
         </div>
-    }
 
 }
 

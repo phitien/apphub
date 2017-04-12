@@ -6,16 +6,28 @@ export default class Component extends React.Component {
     constructor(props) {
         super(props)
         this.state = {validationErrors: {}, refresh: false}
-        this.refresh = this.refresh.bind(this)
         this.init()
     }
     init() {}
     componentDidMount() {
         this.__mounted = true
-        addEventListener('cookie_deleted', this.refresh)
-        addEventListener('cookie_updated', this.refresh)
+        addEventListener('global_cookie_deleted', this.refresh.bind(this))
+        addEventListener('global_cookie_updated', this.refresh.bind(this))
+        addEventListener('global_route_entered', (e) => {
+            const {route, replace} = e.detail
+            this.setState({pageRoute: route})
+            this.onRouteEntered(route, replace)
+        })
+        addEventListener('global_route_changed', (e) => {
+            const {prev, next} = e.detail
+            this.onRouteChanged(prev, next)
+        })
+        this.postComponentDidMount()
     }
+    postComponentDidMount() {}
     componentWillUnmount() {this.__mounted = false}
+    onRouteEntered = (route, replace) => {}
+    onRouteChanged = (prev, next) => {}
     refresh() {
         if (this.__mounted) {
             this.setState(this.state)
@@ -35,4 +47,5 @@ export default class Component extends React.Component {
     get util() {return util}
     get componentClassName() {return ''}
     get className() {return `${this.componentClassName} ${this.props.className ? this.props.className : ''}`}
+    get route() {return this.util.cookie.read('route_entered').route}
 }

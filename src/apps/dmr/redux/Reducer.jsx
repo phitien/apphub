@@ -2,38 +2,26 @@ import Reducer from '../../../core/redux/Reducer'
 
 export class SetCurrentOutputModelActionReducer extends Reducer {
     get defaultState() {
-        return {currentOutputType: 'SCBML'}
+        return {currentOutputType: configuration.ui.currentOutputType}
     }
     matchedTransform(state, action) {
-        return this.util.assign({}, state, {currentOutputType: action.data ? action.data : this.defaultState.currentOutputType})
+        return this.util.assign({}, state, {currentOutputType: action.data ? action.data : configuration.ui.currentOutputType})
     }
 }
 export class SetListOutputTypesActionReducer extends Reducer {
     get defaultState() {
-        return {listOutputTypes: [
-            {primaryText: 'BCDF',value: 'BCDF'},
-            {primaryText: 'SCBML',value: 'SCBML'},
-            {primaryText: 'Logical Model',value: 'Logical Model'},
-        ]}
+        return {listOutputTypes: configuration.ui.listOutputTypes}
     }
     matchedTransform(state = this.defaultState, action) {
-        return this.util.assign({}, state, {listOutputTypes: action.data ? action.data : this.defaultState.listOutputTypes})
+        return this.util.assign({}, state, {listOutputTypes: action.data ? action.data : configuration.ui.listOutputTypes})
     }
 }
 export class SetDataElementColumnsActionReducer extends Reducer {
     get defaultState() {
-        return {dataElementColumns: [
-            {name: 'ID',field: 'id',width: '40px',optional: true,},
-            {name: 'Name',field: 'name',show: true,},
-            {name: 'Asset Class',field: 'assetClass',show: true,optional: true,},
-            {name: 'Product',field: 'product',show: true,optional: true,},
-            {name: 'Description',field: 'description',show: true,optional: true,},
-            // {name: 'Validation Rule',field: 'validationRule',show: false,optional: true,},
-            // {name: 'Workflow',field: 'workflow',show: false,optional: true,},
-        ]}
+        return {dataElementColumns: configuration.ui.dataElementColumns}
     }
     matchedTransform(state, action) {
-        return this.util.assign({}, state, {dataElementColumns: action.data ? action.data : this.defaultState.dataElementColumns})
+        return this.util.assign({}, state, {dataElementColumns: action.data ? action.data : configuration.ui.dataElementColumns})
     }
 }
 export class SetCurrentHierarchyActionReducer extends Reducer {

@@ -10,14 +10,15 @@ import UserBox from './UserBox'
 
 class Header extends Component {
     get componentClassName() {return 'dark-box header'}
-    componentDidMount() {this.props.executeLoadPageInfoAction()}
-    render = () => <div className={this.className}>
-        <LinksHub/>
-        <LogoBox/>
-        <SearchBox/>
-        <Notification/>
-        <UserBox/>
-        <Help/>
-    </div>
+    onRouteEntered = (route, replace) => this.props.executeLoadPageInfoAction()
+    render = () =>
+        <div className={this.className}>
+            <LinksHub/>
+            <LogoBox/>
+            <SearchBox/>
+            <Notification/>
+            <UserBox/>
+            <Help/>
+        </div>
 }
 export default (new Connect(Header)).klass

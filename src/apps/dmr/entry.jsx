@@ -1,20 +1,27 @@
 // import './sass/styles.scss'
 require('./config')
+
 import assign from 'object-assign'
 import {getStoreInstance} from '../../core/redux/Store'
 import * as DefaultReducers from '../../common/redux/Reducer'
 import * as DrmReducers from './redux/Reducer'
+import events from './events'
+import routes from './routes'
+import HeaderApplication from '../../common/applications/HeaderApplication'
+import FooterApplication from '../../common/applications/FooterApplication'
+import Application from './Application'
 
 const store = getStoreInstance(assign(DefaultReducers, DrmReducers))
+HeaderApplication.addEvents(events)
 
-import HeaderApplication from '../../common/applications/HeaderApplication'
 const headerApplication = new HeaderApplication()
+// headerApplication.routes = routes
 headerApplication.render(store)
 
-import Application from './Application'
-const application = new Application()
-application.render(store)
-
-import FooterApplication from '../../common/applications/FooterApplication'
 const footerApplication = new FooterApplication()
+// footerApplication.routes = routes
 footerApplication.render(store)
+
+const application = new Application()
+application.routes = routes
+application.render(store)

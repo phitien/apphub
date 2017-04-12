@@ -8,27 +8,29 @@ import Card from '../../../../common/components/Card'
 class Detail extends Component {
     get componentClassName() {return 'product'}
     get columns() {return []}
-    componentDidMount() {this.props.executeLoadModelDetailAction()}
-    render = () => <div className={this.className}>
-        <Tabs linear={false}>
-            <tab>
-                <title>Logical</title>
-                <content>
-                    <Card title='Logical Model' subtitle='Logical model fields'>
-                        TODO Show Logical fields
-                    </Card>
-                </content>
-            </tab>
-            <tab>
-                <title>Physical</title>
-                <content>
-                    <Card title='Physical Model'>
-                        TODO Show Physical fields
-                    </Card>
-                </content>
-            </tab>
-        </Tabs>
-    </div>
+    onRouteEntered = (route, replace) =>
+        this.props.executeLoadModelDetailAction()
+    render = () =>
+        <div className={this.className}>
+            <Tabs linear={false}>
+                <tab>
+                    <title>Logical</title>
+                    <content>
+                        <Card title='Logical Model' subtitle='Logical model fields'>
+                            TODO Show Logical fields
+                        </Card>
+                    </content>
+                </tab>
+                <tab>
+                    <title>Physical</title>
+                    <content>
+                        <Card title='Physical Model'>
+                            TODO Show Physical fields
+                        </Card>
+                    </content>
+                </tab>
+            </Tabs>
+        </div>
 }
 
 export default (new Connect(Detail)).klass

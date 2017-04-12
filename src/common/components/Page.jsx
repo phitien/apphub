@@ -20,8 +20,9 @@ export default class Page extends Component {
     get pageClassName() {return ''}
     children = () => this.props.children
     modal = () => this.props.modal
-    render = () => <MuiThemeProvider muiTheme={getMuiTheme(customTheme)}><div className={this.className}>
-        {this.children()}
-        {this.modal()}
-    </div></MuiThemeProvider>
+    render = () =>
+        <MuiThemeProvider muiTheme={getMuiTheme(customTheme)}><div className={this.className}>
+            {this.children()}
+            {this.modal()}
+        </div></MuiThemeProvider>
 }

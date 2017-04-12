@@ -8,11 +8,11 @@ class Cookie {
         }
         else if (value === null) {
             cookie.remove(name, assign({ path: '/' }, opts))
-            dispatchEvent(new CustomEvent('cookie_deleted', {name}))
+            dispatchEvent(new CustomEvent('cookie_deleted', {detail: {name}}))
         }
         else {
             cookie.save(name, value, assign({ path: '/' }, opts))
-            dispatchEvent(new CustomEvent('cookie_updated', {name, value}))
+            dispatchEvent(new CustomEvent('cookie_updated', {detail: {name, value}}))
          }
     }
     remove = (name, opts) => this.value(name, null, opts)

@@ -8,28 +8,23 @@ import Content from './Content'
 class ProductsPage extends Page {
     get pageClassName() {
         return `${this.props.hideSidebarLeft ? 'has-sidebar-left-collapsed' : 'has-sidebar-left'} ${this.props.hideSidebarRight ? 'has-sidebar-right-collapsed' : 'has-sidebar-right'}`}
-    loadData(path) {
-        this.props.executeLoadRootHierarchyAction(path)
-        this.props.executeSearchDataElementsAction({product: path, path: path})
+    loadData(id) {
+        this.props.executeLoadRootHierarchyAction(id)
+        this.props.executeSearchDataElementsAction({id})
     }
-    componentDidMount() {
+    postComponentDidMount() {
         this.props.executeSetDataElementColumnsAction()
         this.props.executeSetListOutputTypesAction()
         this.props.executeSetCurrentOutputModelAction()
-        this.loadData(this.util.queries.path)
-        addEventListener('url_changed', (e) => {
-            let oldPath = this.util.extractPairs(e.detail.prev.location.search).path
-            let newPath = this.util.extractPairs(e.detail.next.location.search).path
-            if (newPath != oldPath) {
-                this.loadData(newPath)
-            }
-        })
+        this.loadData(this.route.params.id)
     }
-    children = () => <div className='wrapper'>
-        <SidebarLeft/>
-        <Content/>
-        <SidebarRight/>
-    </div>
+    onRouteChanged = (prev, next) => prev.params.id != next.params.id ? this.loadData(next.params.id) : false
+    children = () =>
+        <div className='wrapper'>
+            <SidebarLeft/>
+            <Content/>
+            <SidebarRight/>
+        </div>
 }
 
 export default (new Connect(ProductsPage)).klass

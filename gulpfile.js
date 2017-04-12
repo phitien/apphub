@@ -4,7 +4,7 @@ for(var i in argv) {
   if (
     argv.hasOwnProperty(i)
     && (matches = argv[i].match(/NODE_ENV=(.*)/))
-    && (['mock', 'dev', 'test', 'stage', 'production'].indexOf(matches[1]) >= 0)
+    && (['mock', 'test', 'stage', 'production'].indexOf(matches[1]) >= 0)
   ) {
     NODE_ENV = matches[1]
     break;
