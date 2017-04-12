@@ -91,11 +91,11 @@ export class LoadedInterfaceSystemsActionReducer extends Reducer {
         return this.util.assign({}, state, {interfaceSystems: action.data.body})
     }
 }
-export class LoadedModelDetailActionReducer extends Reducer {
+export class LoadedDataElementInfoActionReducer extends Reducer {
     get defaultState() {
-        return {product: null}
+        return {dataElement: null}
     }
     matchedTransform(state, action) {
-        return this.util.assign({}, state, {product: action.data.body})
+        return this.util.assign({}, state, {dataElement: action.data.body})
     }
 }

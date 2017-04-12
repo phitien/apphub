@@ -9,7 +9,7 @@ class Detail extends Component {
     get componentClassName() {return 'product'}
     get columns() {return []}
     onRouteEntered = (route, replace) =>
-        this.props.executeLoadModelDetailAction()
+        this.props.executeLoadedDataElementInfoAction()
     render = () =>
         <div className={this.className}>
             <Tabs linear={false}>

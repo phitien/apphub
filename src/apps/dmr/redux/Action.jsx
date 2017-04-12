@@ -73,11 +73,14 @@ export class LoadInterfaceSystemsAction extends Action {
     }
 }
 export class LoadedInterfaceSystemsAction extends Action {}
-export class LoadModelDetailAction extends Action {
-    beforeDispatch(payload, lv) {
+export class LoadDataElementInfoAction extends Action {
+    beforeDispatch(payload, callback) {
         this.util.query(configuration.api.urls.dataElement.format(payload), payload, {
-            success: (new LoadedModelDetailAction()).getFn()
+            success: [
+                (new LoadedDataElementInfoAction()).getFn(),
+                callback
+            ]
         })
     }
 }
-export class LoadedModelDetailAction extends Action {}
+export class LoadedDataElementInfoAction extends Action {}

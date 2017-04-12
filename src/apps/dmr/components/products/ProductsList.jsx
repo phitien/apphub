@@ -39,15 +39,24 @@ class ProductsList extends Component {
         if (col.field == 'product') return <Link>{getProduct()}</Link>
         return <Link>{row[col.field]}</Link>
     }
-    rowDetailRenderer(rowi,i) {return !rowi.expanded ? null : <div className='output-models'>
-        {!rowi.outputModels ? null : rowi.outputModels.map((model,j) => <Card key={j} title={`${model.name}`} subtitle={model.subtitle}>
-            <div className='model-attributes'>
-                {!model.interfaces ? null : model.attributes.map((attr,k) => <div key={k} className='model-attribute'>
-                    <div className='model-attribute-info'>
-                        <div className='model-attribute-name'>{attr.name}</div>
-                        <div className='model-attribute-value'>{attr.value}</div>
+    rowDetailRenderer(rowi,i) {
+        return !rowi.loaded || !rowi.info || !rowi.expanded ? null :
+        <Card className='data-element'>
+            <div className='output-models'>
+                {!rowi.info.outputModels ? null : rowi.info.outputModels.map((model,j) =>
+                <div className='output-model'>
+                    <div className='model-attributes'>
+                        <div className='heading'>{model.name}</div>
+                        <div className='description'>{model.description}</div>
+                        {!model.attributes ? null : model.attributes.map((attr,k) =>
+                        <div key={k} className='model-attribute'>
+                            <div className='info'>
+                                <div className='name'>{attr.name}</div>
+                                <div className='value'>{attr.value}</div>
+                            </div>
+                            <div className='description'>{attr.description}</div>
+                        </div>)}
                     </div>
-                    <div className='model-attribute-description'>{attr.description}</div>
                 </div>)}
             </div>
             <table className='model-interfaces'>
@@ -66,7 +75,7 @@ class ProductsList extends Component {
                     </tr>
                 </thead>
                 <tbody>
-                    {!model.interfaces ? null : model.interfaces.map((inte,k) =>
+                    {!rowi.info.interfaces ? null : rowi.info.interfaces.map((inte,k) =>
                     <tr key={k} className='model-interface'>
                         <td className='model-interface-sourceSystem'>{inte.sourceSystem}</td>
                         <td className='model-interface-sourceProduct'>{inte.sourceProduct}</td>
@@ -76,22 +85,44 @@ class ProductsList extends Component {
                     </tr>)}
                 </tbody>
             </table>
-        </Card>)}
-    </div>}
-    render = () => <div className={this.className}>
-        <div className='view-toolbar'>
-            <TextField className='seach-field' hintText='Enter name, description or xpath' fullWidth={true}
-                inputStyle={{paddingLeft: '24px', paddingRight: '24px'}}
-                hintStyle={{paddingLeft: '24px', paddingRight: '24px'}}
-                />
+        </Card>
+    }
+    render = () =>
+        <div className={this.className}>
+            <div className='view-toolbar'>
+                <TextField className='seach-field' hintText='Enter name, description or xpath' fullWidth={true}
+                    inputStyle={{paddingLeft: '24px', paddingRight: '24px'}}
+                    hintStyle={{paddingLeft: '24px', paddingRight: '24px'}}
+                    />
+            </div>
+            <Table height='420px' fixedHeader={true} fixedFooter={true}
+                columns={this.columns.filter(item => item.show)}
+                data={this.data.data}
+                fieldRenderer={this.fieldRenderer}
+                rowDetailRenderer={this.rowDetailRenderer}
+                onCellClick={(rowIndex, cellIndex, e) => {
+                    const target = e.target.closest('.output-models')
+                    const row = this.data.data[rowIndex] ? this.data.data[rowIndex] : this.data.data[rowIndex - 1]
+                    const callback = (res) => {
+                        if (res && res.data && res.data.body) {
+                            this.util.assign(row, {loaded: true, info: res.data.body})
+                        }
+                        if (!target) {
+                            const newState = !row.expanded
+                            this.data.data.map(row => row.expanded = false)
+                            row.expanded = newState
+                            this.setState(this.state)
+                        }
+                    }
+                    if (!row.loaded) {
+                        this.props.executeLoadDataElementInfoAction(row, callback)
+                    }
+                    else {
+                        callback()
+                    }
+                }}
+            />
         </div>
-        <Table height='420px' fixedHeader={true} fixedFooter={true}
-            columns={this.columns.filter(item => item.show)}
-            data={this.data.data}
-            fieldRenderer={this.fieldRenderer}
-            rowDetailRenderer={this.rowDetailRenderer}
-        />
-    </div>
 }
 
 export default (new Connect(ProductsList)).klass

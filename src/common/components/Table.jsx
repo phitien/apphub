@@ -16,15 +16,7 @@ export default class Table extends Component {
             height: '350px', rowHeight: 32, fixedHeader: true, fixedFooter: true,
             columns: [], data: [], currentPage: 0, totalPage: 0, pageSize: 0,
             showPagination: true, showFilters: true, showRowHover: true, stripedRows: true, showCheckboxes: false, selectable: true,
-            onCellClick: (rowIndex, cellIndex, e) => {
-                if (!e.target.closest('.output-models') && this.cmpProps.rowDetailRenderer) {
-                    const row = this.cmpProps.data[rowIndex] ? this.cmpProps.data[rowIndex] : this.cmpProps.data[rowIndex - 1]
-                    const newState = !row.expanded
-                    this.cmpProps.data.map(row => row.expanded = false)
-                    row.expanded = newState
-                    this.setState(this.state)
-                }
-            }, onCellHover: () => {}, onCellHoverExit: () => {},
+            onCellClick: (rowIndex, cellIndex, e) => {}, onCellHover: () => {}, onCellHoverExit: () => {},
             onRowHover: () => {}, onRowHoverExit: () => {},
             onRowSelection: (rows) => {},
             fieldRenderer: function(row,i,col,j) {return <a>{row && row[col.field] ? row[col.field].toString() : ''}</a>},
