@@ -1,12 +1,12 @@
 import React from 'react'
-import {Component} from '../../../common/components'
+import {Style} from '../../../common/components'
 import {Connect} from '../redux'
 import Hierarchy from './Hierarchy'
 import Product from './Product'
 import SidebarLeftSearch from './SidebarLeftSearch'
 import SidebarLeftExpandButton from './SidebarLeftExpandButton'
 
-class SidebarLeft extends Component {
+class SidebarLeft extends Style {
     get componentClassName() {return `lightdark-box sidebar-left`}
     render = () => <div className={this.className}>
         {this.props.hideSidebarLeft ? <SidebarLeftExpandButton/> : null}

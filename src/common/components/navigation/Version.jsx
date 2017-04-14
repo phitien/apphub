@@ -1,8 +1,8 @@
 import React from 'react'
 import {Connect} from '../../redux'
-import Component from '../Component'
+import Style from '../Style'
 
-class Version extends Component {
+class Version extends Style {
     get componentClassName() {return 'version'}
     render = () => <div className={this.className}>
         Version 0.0.1

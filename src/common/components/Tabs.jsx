@@ -1,19 +1,9 @@
 import React from 'react'
 import {RaisedButton} from 'material-ui'
-import Component from './Component'
+import Style from './Style'
 
-class Tabs extends Component {
+class Tabs extends Style {
     get componentClassName() {return `tabs ${this.cmpProps.vertical ? 'tabs-vertical': 'tabs-horizontal'}`}
-    get cmpProps() {
-        return this.util.assignDeep(this.defaultProps, this.props)
-    }
-    get defaultProps() {
-        return {
-            vertical: false,
-            tabStyle: {border: '0'},
-            tabLabelStyle: {fontSize: '12px', paddingLeft: '3px', paddingRight: '3px'},
-        }
-    }
     state = {
         activeIndex: this.cmpProps.activeIndex ? this.cmpProps.activeIndex : 0,
     }
@@ -33,15 +23,14 @@ class Tabs extends Component {
                 {this.props.children.map((tab,i) =>
                 <RaisedButton key={i} onClick={() => this.setState({activeIndex: i})} label={this.getTitle(tab,i)}
                     className={`tab ${i==this.activeIndex?'active':''}`} primary={i==this.activeIndex}
-                    buttonStyle={this.cmpProps.tabStyle}
-                    labelStyle={this.cmpProps.tabLabelStyle}
+                    buttonStyle={this.theme.buttonStyle}
+                    labelStyle={this.theme.labelStyle}
                     />)}
             </div>
             <div className='tab-content'>
                 {this.getContent(this.props.children[this.activeIndex], this.activeIndex)}
             </div>
         </div>
-
 }
 
 export default Tabs

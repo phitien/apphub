@@ -1,5 +1,6 @@
 exports.Card = require('./Card').default
 exports.Component = require('./Component').default
+exports.Style = require('./Style').default
 exports.Menu = require('./Menu').default
 exports.Page = require('./Page').default
 exports.SelectField = require('./SelectField').default

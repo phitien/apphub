@@ -1,9 +1,9 @@
 import React from 'react'
 import {Connect} from '../../redux'
-import Component from '../Component'
+import Style from '../Style'
 import Menu from '../Menu'
 
-class LinksHub extends Component {
+class LinksHub extends Style {
     get componentClassName() {return 'links-hub'}
     children = () => <div className='wrapper'>
         <div className='icon'>

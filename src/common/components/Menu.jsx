@@ -1,7 +1,7 @@
 import React from 'react'
-import Component from './Component'
+import Style from './Style'
 
-export default class Menu extends Component {
+export default class Menu extends Style {
     get componentClassName() {return ''}
     renderMenu = (menus, className, subMenuClassName) => !menus || !menus.length ? null : <ul className={className}>{menus.map((item, i) => {
         let props = item.onClick ?

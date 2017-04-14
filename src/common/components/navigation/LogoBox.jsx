@@ -1,8 +1,8 @@
 import React from 'react'
 import {Connect} from '../../redux'
-import Component from '../Component'
+import Style from '../Style'
 
-class LogoBox extends Component {
+class LogoBox extends Style {
     get componentClassName() {return 'logo-box'}
     render() {
         return <div className={this.className}>

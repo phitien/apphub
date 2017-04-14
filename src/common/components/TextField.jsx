@@ -1,45 +1,33 @@
 import React from 'react'
 import {TextField as MaterialTextField} from 'material-ui'
-import Component from './Component'
+import Style from './Style'
 
-export default class TextField extends Component {
-    get height() {return configuration.ui.inputHeight}
-    get paddingTop() {return configuration.ui.inputPaddingTop}
-    get paddingBottom() {return configuration.ui.inputPaddingBottom}
-    get paddingRight() {return configuration.ui.inputPaddingRight}
-    get paddingLeft() {return configuration.ui.inputPaddingLeft}
-    get fontSize() {return configuration.ui.inputFontSize}
-    get backgroundColor() {return configuration.ui.inputBackgroundColor}
-    get color() {return configuration.ui.inputColor}
-    get hintcolor() {return configuration.ui.inputHintColor}
-    get lineStyle() {return this.props.lineStyle ? this.props.lineStyle : {height: this.height, lineHeight: this.height, fontSize: this.fontSize, color: this.color, backgroundColor: this.backgroundColor,}}
-    get paddingLeftRight() {return this.props.paddingLeftRight ? this.props.paddingLeftRight : {paddingRight: this.paddingRight, paddingLeft: this.paddingLeft}}
-
-    get cmpProps() {
-        return this.util.assignDeep(this.defaultProps, this.props)
-    }
+export default class TextField extends Style {
+    get componentClassName() {return 'text-field'}
+    get themeProps() {return [
+        'children', 'defaultValue', 'disabled', 'errorStyle',
+        'errorText', 'floatingLabelFixed', 'floatingLabelFocusStyle', 'floatingLabelShrinkStyle',
+        'floatingLabelStyle', 'floatingLabelText',
+        'fullWidth', 'hintStyle', 'hintText', 'inputStyle',
+        'multiLine', 'onChange', 'rows', 'rowsMax',
+        'textareaStyle', 'type', 'underlineDisabledStyle', 'underlineFocusStyle',
+        'underlineShow', 'underlineStyle', 'value',
+    ]}
     get defaultProps() {
+        const theme = this.theme
         return {
-            id: this.util.uuid(), name: '', children: null, rows: 1, rowsMax: 1,
-            disabled: false, errorStyle: {}, errorText: null,
-            floatingLabelFixed: false, floatingLabelShrinkStyle: {},
-            floatingLabelText: null,
-            fullWidth: true, hintText: null, multiLine: false, underlineShow: true, type: 'text',
-            underlineDisabledStyle: {}, underlineFocusStyle: {},
             floatingLabelFocusStyle: {top: '5px'},
             floatingLabelStyle: this.util.assign({
-                backgroundColor: this.backgroundColor, opacity: '.8', top: '10px', left: '0px'
-            }, this.paddingLeftRight),
+                top: '10px', left: '0px'
+            }, theme.floatingLabelStyle, theme.paddingLeftRightSmall),
             style: this.util.assign({
-                paddingTop: this.paddingTop, paddingBottom: this.paddingBottom,
                 display: 'inline-flex', flexDirection: 'column',
-            }, this.lineStyle),
-            inputStyle: this.util.assign({}, this.paddingLeftRight, {flex: 1, width: 'auto', margin: '0'}),
-            textareaStyle: this.util.assign({}, this.paddingLeftRight, {flex: 1, width: 'auto', margin: '0'}),
-            hintStyle: this.util.assign({}, this.lineStyle, this.paddingLeftRight, {bottom: '2px', color: this.hintcolor}),
-            underlineStyle: {bottom: '0'},
-            onChange: () => {},
+            }, theme.lineStyle, theme.paddingTopBottomSmall),
+            inputStyle: this.util.assign({}, theme.inputStyle, theme.paddingLeftRightSmall),
+            textareaStyle: this.util.assign({}, theme.textareaStyle, theme.paddingLeftRightSmall),
+            hintStyle: this.util.assign({bottom: '2px'}, theme.hintStyle, theme.lineStyle, theme.paddingLeftRightSmall),
+            underlineStyle: this.util.assign({}, theme.underlineStyle),
         }
     }
-    render = () => <MaterialTextField {...this.cmpProps}/>
+    render = () => <MaterialTextField {...this.cmpStyleProps} className={this.className}/>
 }

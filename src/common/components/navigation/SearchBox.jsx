@@ -1,8 +1,8 @@
 import React from 'react'
 import {Connect} from '../../redux'
-import Component from '../Component'
+import Style from '../Style'
 
-class SearchBox extends Component {
+class SearchBox extends Style {
     get componentClassName() {return 'search-box'}
     children = () => <div className='wrapper'>
         <input type='text' ref={e => this.searchInput = e}

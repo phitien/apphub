@@ -1,4 +1,5 @@
 import {connect} from 'react-redux'
+import thunk from 'redux-thunk'
 import util from '../util'
 
 export default class Connect {

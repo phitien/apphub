@@ -1,0 +1,8 @@
+{
+  "body": [{
+    "title": "{APPNAME}",
+    "app": "{APPNAME}",
+    "description": "{APPDESCRIPTION}",
+    "url": "/{appname}",
+  }]
+}

@@ -1,8 +1,8 @@
 import React from 'react'
 import {Connect} from '../../redux'
-import Component from '../Component'
+import Style from '../Style'
 
-class Notification extends Component {
+class Notification extends Style {
     get componentClassName() {return 'notification'}
     children = () => <div className='wrapper'>
         <div className='icon'>

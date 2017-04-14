@@ -61,6 +61,15 @@ class Util {
         })
         return props
     }
+    include = (origin, includes) => {
+        const props = {}
+        Object.keys(origin).map(k => {
+            if (origin.hasOwnProperty(k) && includes.indexOf(k) >= 0) {
+                this.assign(props, {[k]: origin[k]})
+            }
+        })
+        return props
+    }
 
     request = (url, method, data, opts) => {
         if (url) {

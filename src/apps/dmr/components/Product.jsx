@@ -1,8 +1,8 @@
 import React from 'react'
-import {Component} from '../../../common/components'
+import {Style} from '../../../common/components'
 import {Connect} from '../redux'
 
-class Product extends Component {
+class Product extends Style {
     get componentClassName() {return `product`}
     render = () =>
         <div className={this.className}>

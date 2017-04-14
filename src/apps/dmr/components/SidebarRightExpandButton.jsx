@@ -1,8 +1,8 @@
 import React from 'react'
-import {Component} from '../../../common/components'
+import {Style} from '../../../common/components'
 import {Connect} from '../redux'
 
-class SidebarRightExpandButton extends Component {
+class SidebarRightExpandButton extends Style {
     get componentClassName() {return `sidebar-right-expand-button material-icons`}
     expandSidebarRight = () => this.props.executeToggleSidebarRightAction({data: false})
     render = () => <i className={this.className}

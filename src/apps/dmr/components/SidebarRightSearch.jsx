@@ -1,9 +1,9 @@
 import React from 'react'
 import {Toggle} from 'material-ui'
-import {Component} from '../../../common/components'
+import {Style} from '../../../common/components'
 import {Connect} from '../redux'
 
-class SidebarRightSearch extends Component {
+class SidebarRightSearch extends Style {
     get componentClassName() {return `sidebar-right-search`}
     onToggle(col, e, checked) {
         col.show = checked

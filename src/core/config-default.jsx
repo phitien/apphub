@@ -1,5 +1,4 @@
 import Config from '../../core/Config'
-new Config({env: '{env}'})
-new Config(require('./config/mock'))
-new Config(require('./config/dev'))
+new Config({env: '{env}', appname: '{APPNAME}', apppath: '/{appname}'})
+new Config(require('./config/base'))
 new Config(require('./config/{env}'))

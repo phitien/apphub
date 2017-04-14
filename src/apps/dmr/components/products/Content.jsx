@@ -1,10 +1,10 @@
 import React from 'react'
-import {Component} from '../../../../common/components'
+import {Style} from '../../../../common/components'
 import {Connect} from '../../redux'
 import BreadCrumbs from '../BreadCrumbs'
 import ProductsList from './ProductsList'
 
-class Content extends Component {
+class Content extends Style {
     get componentClassName() {return `content`}
     render = () => <div className={this.className}>
         <BreadCrumbs/>

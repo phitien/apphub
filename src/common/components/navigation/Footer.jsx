@@ -1,9 +1,9 @@
 import React from 'react'
 import {Connect} from '../../redux'
-import Component from '../Component'
+import Style from '../Style'
 import Version from './Version'
 
-class Footer extends Component {
+class Footer extends Style {
     get componentClassName() {return 'lightdark-box footer'}
     render = () => <div className={this.className}>
         <Version/>

@@ -1,11 +1,11 @@
 import React from 'react'
 import {Link} from 'react-router'
 import {TableRow, TableRowColumn as TableCell} from 'material-ui/Table'
-import {Component, Table, TextField, SelectField} from '../../../../common/components'
+import {Style, Table, TextField, SelectField} from '../../../../common/components'
 import {Connect} from '../../redux'
 import Detail from './Detail'
 
-class ProductsList extends Component {
+class ProductsList extends Style {
     get componentClassName() {return 'products-list'}
     get data() {return {data: this.props.searchDataElementsResults}}
     get columns() {return this.props.dataElementColumns}

@@ -9,6 +9,12 @@ export class SetCurrentPageNoActionReducer extends ConfigReducer {
 export class SetCurrentPageSizeActionReducer extends ConfigReducer {
     get fieldName() {return 'currentPageSize'}
 }
+export class ToggleSidebarLeftActionReducer extends FalseReducer {
+    get fieldName() {return 'hideSidebarLeft'}
+}
+export class ToggleSidebarRightActionReducer extends TrueReducer {
+    get fieldName() {return 'hideSidebarRight'}
+}
 export class SetCurrentOutputTypeActionReducer extends ConfigReducer {
     get fieldName() {return 'currentOutputType'}
 }
@@ -50,12 +56,6 @@ export class LoadedRootHierarchyActionReducer extends CoreReducer {
 export class LoadedSubHierarchyActionReducer extends CoreReducer {
     get fieldName() {return 'subHierarchy'}
     getData(action) {return action.data.body}
-}
-export class ToggleSidebarLeftActionReducer extends FalseReducer {
-    get fieldName() {return 'hideSidebarLeft'}
-}
-export class ToggleSidebarRightActionReducer extends TrueReducer {
-    get fieldName() {return 'hideSidebarRight'}
 }
 export class LoadedInterfaceSystemsActionReducer extends CoreReducer {
     get fieldName() {return 'interfaceSystems'}

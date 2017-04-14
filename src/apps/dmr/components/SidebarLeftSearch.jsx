@@ -1,10 +1,10 @@
 import React from 'react'
 import {TextField, RaisedButton, IconMenu, MenuItem, IconButton} from 'material-ui'
-import {Component} from '../../../common/components'
+import {Style} from '../../../common/components'
 import {Connect} from '../redux'
 import SidebarLeftCollapseButton from './SidebarLeftCollapseButton'
 
-class SidebarLeftSearch extends Component {
+class SidebarLeftSearch extends Style {
     get componentClassName() {return 'sidebar-left-search'}
     get views() {return ['Hierarchy', 'Product']}
     switchSidebarLeftView(view) {

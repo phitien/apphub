@@ -17,14 +17,16 @@ export class LoadRootHierarchyAction extends CoreAction {
         const payload = {product: ''}
         this.util.query(configuration.api.urls.hierarchy.format(payload), payload, {
             success: (res) => {
-                CoreAction.run(LoadedRootHierarchyAction, res)
-                const subNodes = this.store.getState().LoadedRootHierarchyActionReducer.hierarchy.subNodes
-                if (subNodes && subNodes.length) {
-                    subNodes.map(subnode => {
-                        CoreAction.run(LoadSubHierarchyAction, subnode, id)
-                        if (subnode.id == id)
-                            CoreAction.run(SetCurrentHierarchyAction, subnode)
-                    })
+                if (res && res.data && res.data.body) {
+                    const subNodes = res.data.body.subNodes
+                    if (subNodes && subNodes.length) {
+                        subNodes.map(subnode => {
+                            CoreAction.run(LoadSubHierarchyAction, subnode, id)
+                            if (subnode.id == id)
+                                CoreAction.run(SetCurrentHierarchyAction, subnode)
+                        })
+                    }
+                    CoreAction.run(LoadedRootHierarchyAction, res)
                 }
             },
         })

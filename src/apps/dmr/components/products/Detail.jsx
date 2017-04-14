@@ -1,8 +1,8 @@
 import React from 'react'
-import {Component, Card} from '../../../../common/components'
+import {Style, Card} from '../../../../common/components'
 import {Connect} from '../../redux'
 
-class Detail extends Component {
+class Detail extends Style {
     get componentClassName() {return 'product'}
     get info() {
         console.log(this.props.info)

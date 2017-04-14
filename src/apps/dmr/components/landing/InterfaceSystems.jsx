@@ -1,9 +1,9 @@
 import React from 'react'
-import {Component} from '../../../../common/components'
+import {Style} from '../../../../common/components'
 import {Connect} from '../../redux'
 import InterfaceSystem from './InterfaceSystem'
 
-class InterfaceSystems extends Component {
+class InterfaceSystems extends Style {
     get componentClassName() {return 'interface-systems'}
     get interfaceSystems() {return !this.util.isEmpty(this.props.interfaceSystems) ? this.props.interfaceSystems : []}
     onRouteEntered = (route, replace) =>

@@ -1,0 +1,16 @@
+.page {
+  .content {
+    padding-top: $margin;padding-bottom: $margin;
+    padding-left: $sidebar-width + $margin;
+    padding-right: 2*$margin;
+  }
+}
+.page.has-sidebar-left-collapsed {
+  .content {
+    padding-left: $sidebar-left-width-collapsed + $margin;
+  }
+}
+.page.has-sidebar-right-collapsed {
+  .content {
+  }
+}

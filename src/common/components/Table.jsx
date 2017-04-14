@@ -2,49 +2,51 @@ import React from 'react'
 import {Table as MaterialTable, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn as TableCell}
   from 'material-ui/Table'
 import {IconButton} from 'material-ui'
-import Component from './Component'
+import Style from './Style'
 import TextField from './TextField'
 
-export default class Table extends Component {
+export default class Table extends Style {
     get componentClassName() {return 'table'}
-    get cmpProps() {
-        return this.util.assignDeep(this.defaultProps, this.props)
-    }
+    get themeProps() {return [
+        'allRowsSelected', 'bodyStyle', 'children', 'className',
+        'fixedFooter', 'fixedHeader', 'footerStyle', 'headerStyle',
+        'height', 'multiSelectable', 'onCellClick', 'onCellHover',
+        'onCellHoverExit', 'onRowHover', 'onRowHoverExit', 'onRowSelection',
+        'selectable', 'wrapperStyle',
+    ]}
     get defaultProps() {
         return {
             showHeader: true, showFooter: true,
-            height: '350px', rowHeight: 32, fixedHeader: true, fixedFooter: true,
             columns: [], data: [], currentPage: 1, totalPage: 1, pageSize: 10,
-            showPagination: true, showFilters: true, showRowHover: true, stripedRows: true, showCheckboxes: false, selectable: true,
-            onCellClick: (rowIndex, cellIndex, e) => {}, onCellHover: () => {}, onCellHoverExit: () => {},
-            onRowHover: () => {}, onRowHoverExit: () => {},
-            onRowSelection: (rows) => {},
-            fieldRenderer: function(row,i,col,j) {return <a>{row && row[col.field] ? row[col.field].toString() : ''}</a>},
-            cellRenderer: function(row,i,col,j) {return <TableCell key={j} className={`cell${j}`} style={this.cellStyle(col)}>{this.cmpProps.fieldRenderer.call(this,row,i,col,j)}</TableCell>},
-            rowRenderer: function(row, i) {
-                const rs = [<TableRow key={this.cmpProps.renderRowDetail ? 2*i : i} className={`row${i}`} style={this.lineStyle} selected={row.selected}>
-                    {this.cmpProps.columns.map((col,j) => this.cmpProps.cellRenderer.call(this,row,i,col,j))}
-                </TableRow>]
-                if (row.expanded && this.cmpProps.rowDetailRenderer)
-                    rs.push(<TableRow key={2*i+1} className={`row-detail row-detail-${i}`} style={this.util.assign(this.lineStyle, {display: row.expanded ? '' : 'none'})}>
-                        <TableCell style={this.cellStyle()} colSpan={this.cmpProps.columns.length}>
-                            {this.cmpProps.rowDetailRenderer.call(this,row,i)}
-                        </TableCell>
-                    </TableRow>)
-                return rs
-            },
+            showPagination: true, showFilters: true,
+            height: '350px',
         }
     }
-    get lineStyle() {return this.util.assign({}, {height: this.cmpProps.rowHeight})}
-    cellStyle(col) {return this.util.assign(this.lineStyle, {width: col && col.width ? col.width : 'auto'})}
-    get buttonStyle() {return this.util.assign(this.lineStyle, {display: 'flex', alignItem: 'center'})}
+    cellStyle(col) {return this.util.assign({width: col && col.width ? col.width : 'auto'}, this.theme.cellStyle)}
+    get prevNextStyle() {return this.util.assign({display: 'flex', alignItem: 'center'}, this.theme.rowStyle)}
+
+    fieldRenderer(row,i,col,j) {return this.props.fieldRenderer ? this.props.fieldRenderer(row,i,col,j) : <a>{row && row[col.field] ? row[col.field].toString() : ''}</a>}
+    cellRenderer(row,i,col,j) {return this.props.cellRenderer ? this.props.cellRenderer(row,i,col,j) : <TableCell key={j} className={`cell${j}`} style={this.cellStyle(col)}>{this.fieldRenderer.call(this,row,i,col,j)}</TableCell>}
+    rowRenderer(row, i) {
+        if (this.props.rowRenderer) return this.props.rowRenderer(row,i)
+        const rs = [<TableRow key={i} className={`row${i}`} style={this.theme.rowStyle} selected={row.selected}>
+            {this.cmpProps.columns.map((col,j) => this.cmpProps.cellRenderer.call(this,row,i,col,j))}
+        </TableRow>]
+        if (row.expanded && this.props.rowDetailRenderer)
+            rs.push(<TableRow key={i + 0.5} className={`row-detail row-detail-${i}`} style={row.expanded ? this.theme.rowStyle : {display: 'none'}}>
+                <TableCell style={this.cellStyle()} colSpan={this.cmpProps.columns.length}>
+                    {this.cmpProps.rowDetailRenderer.call(this,row,i)}
+                </TableCell>
+            </TableRow>)
+        return rs
+    }
 
     header = () =>
         <TableHeader style={{display: !this.cmpProps.showHeader ? 'none' : ''}}
             displaySelectAll={this.cmpProps.showCheckboxes}
             adjustForCheckbox={this.cmpProps.showCheckboxes}
             enableSelectAll={this.cmpProps.enableSelectAll}>
-            <TableRow style={this.lineStyle}>
+            <TableRow style={this.theme.rowStyle}>
                 {this.cmpProps.columns.map((col,i) => <TableHeaderColumn key={i} tooltip={col.tooltip}
                     style={this.cellStyle(col)}>{col.name}</TableHeaderColumn>)}
             </TableRow>
@@ -82,41 +84,33 @@ export default class Table extends Component {
         }
     }
     pagination = () =>
-        <TableRow style={this.util.assign(this.lineStyle, {display: !this.cmpProps.showPagination ? 'none' : ''})}>
+        <TableRow style={this.util.assign({display: !this.cmpProps.showPagination ? 'none' : ''}, this.theme.rowStyle)}>
             <TableCell style={this.cellStyle()} colSpan={this.cmpProps.columns.length}>
                 <div className='pagination'>
                     <div className='pagination-navi'>
-                        <IconButton style={this.buttonStyle} onClick={this.openPrevPage}><i className='material-icons'>chevron_left</i></IconButton>
+                        <IconButton style={this.prevNextStyle} onClick={this.openPrevPage}><i className='material-icons'>chevron_left</i></IconButton>
                         <div className='pagination-pageInfo'>
                             <TextField type='number' min={1} style={{width: 'auto'}} step={5}
-                                paddingLeftRight={{paddingRight: '5px', paddingLeft: '5px'}}
+                                floatingLabelText='Page'
                                 value={this.cmpProps.currentPage}
                                 onChange={this.onPageFieldChange}/>
                         </div>
-                        <IconButton style={this.buttonStyle} onClick={this.openNextPage}><i className='material-icons'>chevron_right</i></IconButton>
+                        <IconButton style={this.prevNextStyle} onClick={this.openNextPage}><i className='material-icons'>chevron_right</i></IconButton>
                     </div>
                     <div className='pagination-pagesize'>
                         <TextField type='number' min={10} max={100} step={5} style={{width: 'auto'}}
-                            paddingLeftRight={{paddingRight: '5px', paddingLeft: '5px'}}
+                            floatingLabelText='Size'
                             value={this.cmpProps.pageSize}
-                            onChange={this.onPageSizeFieldChange}/>/page
+                            onChange={this.onPageSizeFieldChange}/>
                     </div>
                 </div>
             </TableCell>
         </TableRow>
 
     render = () =>
-        <div className={this.className}>
-            <MaterialTable height={this.cmpProps.height} style={{display: !this.cmpProps.data ? 'none' : ''}}
-                fixedHeader={this.cmpProps.fixedHeader} fixedFooter={this.cmpProps.fixedFooter}
-                selectable={this.cmpProps.selectable} multiSelectable={this.cmpProps.multiSelectable}
-                onCellClick={this.cmpProps.onCellClick} onCellHover={this.cmpProps.onCellHover}
-                onCellHoverExit={this.cmpProps.onCellHoverExit} onRowHover={this.cmpProps.onRowHover}
-                onRowHoverExit={this.cmpProps.onRowHoverExit} onRowSelection={this.cmpProps.onRowSelection}
-                >
-                {this.header()}
-                {this.body()}
-                {this.footer()}
-            </MaterialTable>
-        </div>
+        <MaterialTable {...this.cmpStyleProps} className={this.className}>
+            {this.header()}
+            {this.body()}
+            {this.footer()}
+        </MaterialTable>
 }

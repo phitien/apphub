@@ -1,9 +1,9 @@
 import React from 'react'
 import {Connect} from '../../redux'
-import Component from '../Component'
+import Style from '../Style'
 import Menu from '../Menu'
 
-class UserBox extends Component {
+class UserBox extends Style {
     get componentClassName() {return 'user-box'}
     get menus() {return [{
         html: <div className='lightdark-box user-info'>

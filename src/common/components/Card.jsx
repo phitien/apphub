@@ -1,7 +1,7 @@
 import React from 'react'
-import Component from './Component'
+import Style from './Style'
 
-export default class Card extends Component {
+export default class Card extends Style {
     get componentClassName() {return 'card'}
     header = () =>
         <div className='card-header' style={{display: !this.props.title ? 'none' : ''}}>
