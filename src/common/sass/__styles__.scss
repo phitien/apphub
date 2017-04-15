@@ -52,6 +52,7 @@ h3,h4,h5 {font-weight: normal;color: $blue;}
 input[type=text],input[type=password],input[type=email],input[type=url] {
   height: $line-height;border: none;outline: none;border-radius: 3px;padding: 0 3px;
 }
+@import "./breadcrumbs.scss";
 @import "./select-field.scss";
 @import "./tabs.scss";
 @import "./card.scss";

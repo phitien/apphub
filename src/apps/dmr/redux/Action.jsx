@@ -13,15 +13,15 @@ export class ToggleSidebarLeftAction extends CoreAction {}
 export class ToggleSidebarRightAction extends CoreAction {}
 export class SetCurrentHierarchyAction extends CoreAction {
     beforeDispatch(node) {
-        const breadcrums = []
+        const breadcrumbs = []
         function* loop(n) {
-            if(!n || !n.parent) yield breadcrums
+            if(!n || !n.parent) yield breadcrumbs
             else {
-                breadcrums.push({title: n.name, url: `/dmr/products/${n.id}`})
+                breadcrumbs.push({title: n.name, url: `/dmr/products/${n.id}`})
                 yield* loop(n.parent)
             }
         }
-        CoreAction.execute('SetBreadcrumAction', loop(node).next().value.reverse())
+        CoreAction.execute('SetBreadcrumbsAction', loop(node).next().value.reverse())
     }
 }
 export class LoadHierarchyAction extends CoreAction {

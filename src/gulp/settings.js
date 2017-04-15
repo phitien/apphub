@@ -91,12 +91,13 @@ module.exports = exports = function(config) {
       env: env,
       port: port,
       livereloadport: livereloadport,
-      dest: function(bundles, destinations) {
+      dest: function(bundles, destinations, subdir) {
+        subdir = subdir ? '/' + subdir : ''
         var gulp = require('gulp');
         var rs = null;
         bundles.forEach(function(bundle) {
           destinations.forEach(function(destination) {
-            rs = bundle.pipe(gulp.dest(destination))
+            rs = bundle.pipe(gulp.dest(destination + subdir))
           })
         })
         return rs;

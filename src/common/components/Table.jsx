@@ -19,7 +19,7 @@ export default class Table extends Style {
             showHeader: true, showFooter: true, showCheckboxes: false,
             columns: [], data: [], currentPage: 1, totalPage: 1, pageSize: 10,
             showPagination: true, showFilters: true,
-            height: '362px',
+            height: '362px', stripedRows: true, showRowHover: true, selectable: false,
         }
     }
     cellStyle(col) {return this.util.assign({width: col && col.width ? col.width : 'auto'}, this.theme.rowStyle, this.theme.cellStyle)}
@@ -30,7 +30,7 @@ export default class Table extends Style {
     rowRenderer(row, i) {
         if (this.props.rowRenderer) return this.props.rowRenderer.call(this,row,i)
         const rs = [<TableRow key={i} className={`row${i}`} style={this.theme.rowStyle}
-            hoverable={true} 
+            hoverable={true}
             selected={row.selected}>
             {this.cmpProps.columns.map((col,j) => this.cellRenderer(row,i,col,j))}
         </TableRow>]

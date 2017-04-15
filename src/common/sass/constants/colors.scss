@@ -9,6 +9,8 @@ $dark: #212121;
 $lightdark: #444444;
 
 $primary: $blue;
+$color-disabled: rgba(0, 0, 0, .5);
+$border-color: rgba(0, 0, 0, .1);
 
 $bg-color: #ffffff;
 $bg-grey-color: $grey;
@@ -24,3 +26,6 @@ $text-lightdark-color: #f3f3f3;
 $node-level-1-color: $green;
 $node-level-2-color: $red;
 $node-level-3-color: $dark;
+
+$breadcrumb-color: $blue;
+$toolbar-bg-color: $lightgrey;

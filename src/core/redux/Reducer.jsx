@@ -17,12 +17,11 @@ export default class Reducer {
             : this.notMatchedTransform(state, action)
     }
     normalize(action) {return action.data}
-    debugFn(state, action) {console.log(this.constructor.name, state, action, this.value)}
+    debugFn(state, action) {console.log(this.constructor.name, ...arguments)}
     matchedTransform(state, action) {
-        if (!action.data) action.data = action
-        this.value = this.normalize(action)
-        if (this.debug) this.debugFn(state, action)
-        return this.util.assign({}, this.defaultState, state, {[this.fieldName]: this.value})
+        this.value = {[this.fieldName]: this.normalize(action)}
+        if (this.debug) this.debugFn(state, action, this.value)
+        return this.util.assign({}, this.defaultState, state, this.value)
     }
     notMatchedTransform(state, action) {
         return state

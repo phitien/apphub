@@ -14,18 +14,13 @@ class LinksHub extends Style {
             return node.subNodes && node.subNodes.length ? this.getAppName(node.subNodes, value) : value
         }, value)
     }
-    getAppName(nodes, value) {
-        return nodes.reduce((value, node) => {
-            if (location.pathname.indexOf(node.url) >= 0)
-                return value = node.app
-            return node.subNodes && node.subNodes.length ? this.getAppName(node.subNodes, value) : value
-        }, value)
-    }
     children = () => <div className='wrapper'>
         <div className='icon'>
             <img className='svg-image' alt='Standard Chartered' src='/static/images/bc-scb.png'/>
             <i className='material-icons'>apps</i>
-            <h3>{this.props.pageInfo.appname ? this.props.pageInfo.appname : configuration.appname}</h3>
+            <h3>
+                {configuration.appname}
+            </h3>
         </div>
         <Menu menus={this.props.pageInfo.menus} className='lightgrey-box menus' subMenuClassName='lightgrey-box'/>
     </div>

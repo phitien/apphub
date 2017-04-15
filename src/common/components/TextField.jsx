@@ -24,7 +24,6 @@ export default class TextField extends Style {
             inputStyle: this.util.assign({}, theme.inputStyle, theme.paddingLeftRightSmall),
             textareaStyle: this.util.assign({}, theme.textareaStyle, theme.paddingLeftRightSmall),
             hintStyle: this.util.assign({width: '100%', whiteSpace: 'nowrap', margin: '0', padding: '0', top: '0'}, theme.hintStyle, theme.lineStyle, theme.paddingLeftRightSmall),
-            underlineStyle: this.util.assign({}, theme.underlineStyle),
         }
     }
     render = () => <MaterialTextField {...this.cmpStyleProps} className={this.className}/>

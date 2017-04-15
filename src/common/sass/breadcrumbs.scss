@@ -1,0 +1,17 @@
+.breadcrumbs {
+  height: 32px; line-height: 32px;margin-bottom: $margin;
+  display: flex;align-items: center;justify-content: space-between;
+  .links {
+    flex: 1;
+    .breadcrumb {
+      font-size: $breadcrumb-font-size;color: $breadcrumb-color;
+      margin-right: $margin;
+      &:last-child {
+        margin-right: 0;
+        color: $color-disabled;
+        font-style: italic;
+        cursor: text;
+      }
+    }
+  }
+}

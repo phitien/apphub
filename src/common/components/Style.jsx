@@ -56,7 +56,7 @@ export default class Style extends Component {
             },
             hintStyle: {
                 color: theme.hintColor,
-                fontSize: theme.fontSizeSmall,
+                fontSize: theme.fontSizeSmall, fontStyle: 'italic',
                 display: 'flex', alignItems: 'center', justifyContent: 'flex-start',
             },
             floatingLabelStyle: {
@@ -68,9 +68,9 @@ export default class Style extends Component {
                 color: theme.floatingLabelFocusColor,
                 fontSize: theme.floatingLabelFontSize,
                 display: 'flex', alignItems: 'center', justifyContent: 'flex-start',
-                // transform: `scale(1) translate(0px, -${theme.lineHeight})`,
             },
             underlineStyle: {bottom: '0', left: '0'},
+            underlineFocusStyle: {borderBottomWidth: '1px'},
             tableStyle: {},
             rowStyle: {
                 height: 'auto',

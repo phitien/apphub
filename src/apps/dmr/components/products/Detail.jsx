@@ -1,12 +1,11 @@
 import React from 'react'
+import HighLight from 'react-highlight'
 import {Style, Card} from '../../../../common/components'
 import {Connect} from '../../redux'
 
 class Detail extends Style {
     get componentClassName() {return 'product'}
-    get info() {
-        console.log(this.props.info)
-        return this.props.info}
+    get info() {return this.props.info}
     render = () =>
         <Card className='data-element'>
             <div className='output-models'>
@@ -17,10 +16,7 @@ class Detail extends Style {
                         <div className='description'>{model.description}</div>
                         {!model.attributes ? null : model.attributes.map((attr,k) =>
                         <div key={k} className='model-attribute'>
-                            <div className='info'>
-                                <div className='name'>{attr.name}</div>
-                                <div className='value'>{attr.value}</div>
-                            </div>
+                            <div className='name' title={`${attr.name}: ${attr.value}`}>{attr.name} <span className='value'>{attr.value}</span></div>
                             <div className='description'>{attr.description}</div>
                         </div>)}
                     </div>
@@ -29,16 +25,11 @@ class Detail extends Style {
             <table className='model-interfaces'>
                 <thead>
                     <tr className='model-interface model-interface-header'>
-                        <th className='model-interface-source' colSpan={2}>Source</th>
-                        <th className='model-interface-contextName'></th>
-                        <th className='model-interface-derived' colSpan={2}>Derived</th>
-                    </tr>
-                    <tr className='model-interface model-interface-header'>
-                        <th className='model-interface-sourceSystem'>System</th>
-                        <th className='model-interface-sourceProduct'>Product</th>
+                        <th className='model-interface-sourceSystem'>Source System</th>
+                        <th className='model-interface-sourceProduct'>Source Product</th>
                         <th className='model-interface-contextName'>Context</th>
-                        <th className='model-interface-derivedName'>Name</th>
-                        <th className='model-interface-derivedLogic'>Logic</th>
+                        <th className='model-interface-derivedName'>Derived Name</th>
+                        <th className='model-interface-derivedLogic'>Derived Logic</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -48,7 +39,13 @@ class Detail extends Style {
                         <td className='model-interface-sourceProduct'>{inte.sourceProduct}</td>
                         <td className='model-interface-contextName'>{inte.contextName}</td>
                         <td className='model-interface-derivedName'>{inte.derivedName}</td>
-                        <td className='model-interface-derivedLogic'>{inte.derivedLogic}</td>
+                        <td className='model-interface-derivedLogic'>
+                            <div className='wrapper'>
+                                <HighLight className='javascript hljs'>
+                                    {inte.derivedLogic}
+                                </HighLight>
+                            </div>
+                        </td>
                     </tr>)}
                 </tbody>
             </table>

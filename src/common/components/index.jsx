@@ -9,3 +9,4 @@ exports.Table = require('./Table').default
 exports.Tabs = require('./Tabs').default
 exports.TextField = require('./TextField').default
 exports.Viewport = require('./Viewport').default
+exports.HighLight = require('./HighLight').default

@@ -1,8 +1,8 @@
 import {default as CoreReducer, ConfigReducer, FalseReducer, TrueReducer} from '../../core/redux/Reducer'
 
-export class SetBreadcrumActionReducer extends CoreReducer {
-    get debug(){return true}
-    get fieldName() {return 'breadcrum'}
+export class SetBreadcrumbsActionReducer extends CoreReducer {
+    get defaultValue() {return []}
+    get fieldName() {return 'breadcrumbs'}
 }
 export class UserLogoutActionReducer extends CoreReducer {
     get fieldName() {return 'user'}

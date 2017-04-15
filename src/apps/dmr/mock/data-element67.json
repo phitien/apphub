@@ -37,6 +37,48 @@
 				"value": "/scb:SCBML/scb:payload/scb:FPMLPayload/conf:trade/conf:tradeHeader/conf:originatingPackage/conf:orderIdentifier/conf:orderId\n"
 			}],
 			"interfaces": null
+		}, {
+			"name": "SCBML",
+			"description": "Transaction processing",
+			"attributes": [{
+				"name": "Mandatory-Optional-Flag",
+				"description": null,
+				"value": "O"
+			}, {
+				"name": "Asset Class",
+				"description": null,
+				"value": "Cross Asset"
+			}, {
+				"name": "Product",
+				"description": null,
+				"value": "Trade-Header"
+			}, {
+				"name": "Xpath",
+				"description": null,
+				"value": "/scb:SCBML/scb:payload/scb:FPMLPayload/conf:trade/conf:tradeHeader/conf:originatingPackage/conf:orderIdentifier/conf:orderId\n"
+			}],
+			"interfaces": null
+		},{
+			"name": "SCBML",
+			"description": "Transaction processing",
+			"attributes": [{
+				"name": "Mandatory-Optional-Flag",
+				"description": null,
+				"value": "O"
+			}, {
+				"name": "Asset Class",
+				"description": null,
+				"value": "Cross Asset"
+			}, {
+				"name": "Product",
+				"description": null,
+				"value": "Trade-Header"
+			}, {
+				"name": "Xpath",
+				"description": null,
+				"value": "/scb:SCBML/scb:payload/scb:FPMLPayload/conf:trade/conf:tradeHeader/conf:originatingPackage/conf:orderIdentifier/conf:orderId\n"
+			}],
+			"interfaces": null
 		}],
 		"interfaces": [{
 			"id": 26,

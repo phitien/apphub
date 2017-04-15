@@ -1,6 +1,12 @@
 import {Action as CoreAction} from '../../core/redux'
 
-export class SetBreadcrumAction extends CoreAction {}
+export class ShowStageAction extends CoreAction {
+    dispatchable = false
+    beforeDispatch(payload) {
+        console.log('Stage', this.store.getState())
+    }
+}
+export class SetBreadcrumbsAction extends CoreAction {}
 export class AddModalToViewAction extends CoreAction {}
 export class RemoveModalFromViewAction extends CoreAction {}
 export class LoadedPageInfoAction extends CoreAction {}

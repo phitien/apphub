@@ -21,16 +21,3 @@
   background-color: $bg-lightdark-color;
   color: $text-lightdark-color;
 }
-.table {
-  font-size: 11px;
-  .pagination{display: flex;align-items: center;justify-content: flex-end;}
-  .pagination-navi, .pagination-pagesize {
-    >div {
-      display: flex;align-items: center;justify-content: center;
-      input {width: 36px !important;text-align: center;font-size: 15px !important;}
-      button {height: 32px !important;display: flex !important;align-items: center !important;border: 0 !important;padding: 0 5px !important;width: auto !important;}
-    }
-    >.title {}
-  }
-  .pagination-pagesize{margin-left: $margin;}
-}

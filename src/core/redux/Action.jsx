@@ -5,11 +5,11 @@ let __dispatcher = null
 const __actions = {}
 
 export default class Action {
-    get debug() {return this.__debug}
-    set debug(v) {this.__debug = v}
+    dispatchable = true
+    debug = false
     beforeDispatch(payload) {}
     normalize(payload) {
-        if (!payload || !payload.data) payload = {data: payload}
+        if (!payload || !payload.data) payload = this.util.assign({}, {data: payload})
         return this.util.assign({}, payload, {type: this.constructor.name})
     }
     get util() {return util}
@@ -20,6 +20,7 @@ export default class Action {
     get fn() {return this.__fn}
     debugFn(payload) {
         console.log(this.constructor.name, 'payload', this.normalize(...arguments))
+        console.log(this.constructor.name, 'stage', this.store.getState()[`${this.constructor.name}Reducer`])
         console.log(this.constructor.name, 'callback', this.callback)
     }
     getFn(dispatch) {
@@ -28,10 +29,13 @@ export default class Action {
             if (typeof arguments[arguments.length - 1] == 'function') {
                 this.callback = arguments[arguments.length - 1]
             }
+            try {
+                this.beforeDispatch(...arguments)
+                if (this.dispatchable) Action.dispatch(this.normalize(...arguments))
+                if (this.callback) this.callback(...arguments)
+            }
+            catch(e) {}
             if (this.debug) this.debugFn(...arguments)
-            this.beforeDispatch(...arguments)
-            Action.dispatch(this.normalize(...arguments))
-            if (this.callback) this.callback(...arguments)
         }).bind(this)
         return this.__fn
     }
