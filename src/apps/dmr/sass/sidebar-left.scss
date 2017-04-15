@@ -26,6 +26,8 @@
         li.node-lv-3 > .node-name a.name:before {content: '. . :  '}
         li.node-lv-4 > .node-name a.name:before {content: '. . . :  '}
         li.node-lv-5 > .node-name a.name:before {content: '. . . . :  '}
+        li.node.marked > .node-name > a.name {color: $green;}
+        li.unmarked {}
       }
     }
   }

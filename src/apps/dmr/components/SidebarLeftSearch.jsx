@@ -17,6 +17,7 @@ class SidebarLeftSearch extends Style {
     render = () => <div className={this.className}>
         <SidebarLeftCollapseButton/>
         <input type='text' ref={e => this.searchInput = e}
+            onChange={(e) => this.props.executeSearchHierarchyAction(e.target.value)}
             placeholder='Search'/>
         {this.renderSwitchViewMenu()}
     </div>

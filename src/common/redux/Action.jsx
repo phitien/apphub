@@ -1,9 +1,9 @@
 import {Action as CoreAction} from '../../core/redux'
 
-export class ShowStageAction extends CoreAction {
+export class ShowStateAction extends CoreAction {
     dispatchable = false
     beforeDispatch(payload) {
-        console.log('Stage', this.store.getState())
+        console.log('State', this.store.getState())
     }
 }
 export class SetBreadcrumbsAction extends CoreAction {}

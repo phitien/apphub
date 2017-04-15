@@ -12,15 +12,20 @@ export default class Action {
         if (!payload || !payload.data) payload = this.util.assign({}, {data: payload})
         return this.util.assign({}, payload, {type: this.constructor.name})
     }
+    normalizeSearch(results) {
+        return {search: results, type: this.constructor.name}
+    }
     get util() {return util}
     get store() {return getStoreInstance()}
+    getState(name) {return this.store.getState()[`${name}Reducer`]}
+    get state() {return this.getState(this.constructor.name)}
     get dispatcher() {return __dispatcher}
     get callback() {return this.__callback}
     set callback(v) {this.__callback = v}
     get fn() {return this.__fn}
     debugFn(payload) {
         console.log(this.constructor.name, 'payload', this.normalize(...arguments))
-        console.log(this.constructor.name, 'stage', this.store.getState()[`${this.constructor.name}Reducer`])
+        console.log(this.constructor.name, 'state', this.state)
         console.log(this.constructor.name, 'callback', this.callback)
     }
     getFn(dispatch) {
@@ -34,12 +39,16 @@ export default class Action {
                 if (this.dispatchable) Action.dispatch(this.normalize(...arguments))
                 if (this.callback) this.callback(...arguments)
             }
-            catch(e) {}
+            catch(e) {console.error(e)}
             if (this.debug) this.debugFn(...arguments)
         }).bind(this)
         return this.__fn
     }
-    static actions() {return __actions}
+    static actions() {
+        const rs = {}
+        Object.keys(__actions).map(k => rs[k] = __actions[k].fn)
+        return rs
+    }
     static dispatch(payload) {
         __dispatcher(payload)
     }
@@ -52,21 +61,43 @@ export default class Action {
         }
         else throw `Action ${$name} is not registerd`
     }
-    static fn(klass) {
+    static action(klass) {
         const name = Action.getName(klass)
         if (Object.keys(__actions).indexOf(`execute${name}`) >= 0) {
             return __actions[`execute${name}`]
         }
         return null
     }
+    static fn(klass) {
+        const action = Action.action(klass)
+        if (action) return action.fn
+    }
+    static instance(klass) {
+        const action = Action.action(klass)
+        if (action) return action.instance
+    }
     static put(klass, dispatch, ownProps) {
         if (!__dispatcher) __dispatcher = dispatch
         const name = Action.getName(klass)
         if (name) {
-            let action = Action.fn(name)
+            let action = Action.action(name)
             if (!action) {
-                __actions[`execute${name}`] = (new klass()).getFn(__dispatcher)
+                const instance = new klass()
+                __actions[`execute${name}`] = {
+                    instance: instance,
+                    fn: instance.getFn(__dispatcher),
+                }
             }
         }
+    }
+}
+export class LocalSearchAction extends Action {
+    dispatchable = false
+    searchClass = null
+    search = (state) => null
+    beforeDispatch(q) {
+        if (!this.searchClass) return
+        const action = Action.instance(this.searchClass)
+        Action.dispatch(action.normalizeSearch(!q ? {} : this.search(this.util.assign({}, action.state), q)))
     }
 }

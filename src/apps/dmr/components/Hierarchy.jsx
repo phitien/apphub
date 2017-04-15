@@ -5,10 +5,11 @@ import {Connect} from '../redux'
 
 class Hierarchy extends Style {
     get componentClassName() {return 'hierarchy'}
+    get isSearching() {return !this.util.isEmpty(this.props.SearchhierarchyResults)}
     get hierarchy() {
         return this.state.hierarchy = this.util.assign(
             {id: null, name: null, template: null, subNodes: [], expanded: true},
-            this.props.hierarchy)
+            this.isSearching ? this.props.SearchhierarchyResults : this.props.hierarchy)
     }
     toggleSidebarLeft = () => this.props.executeToggleSidebarLeftAction(!this.props.hideSidebarLeft)
     expandNode(node) {
@@ -20,7 +21,7 @@ class Hierarchy extends Style {
     }
     renderIcon = (node, lv) => <i className='material-icons'>{node.expanded ? 'remove' : 'add'}</i>
     renderHierarchy = (node,lv,i) =>
-        <li key={i} className={`node node-lv-${lv}`}>
+        <li key={i} className={`node node-lv-${lv} ${this.isSearching ? `${node.marked ? 'marked' : 'unmarked'}` : ''}`}>
             <div className='node-name' onClick={this.expandNode.bind(this, node)}>
                 {this.renderIcon(node, lv)}
                 <Link to={`/dmr/products/${node.id}`} className='name'>

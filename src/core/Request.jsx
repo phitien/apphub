@@ -59,14 +59,14 @@ export default class REQUEST {
         return this.__run(undefined, ...this.__before)
         .execute()
         .then(res => {
-            try {this.__run(res, ...this.__success)} catch(e) {console.log('request:success', e)}
+            try {this.__run(res, ...this.__success)} catch(e) {console.error('request:success', e)}
             return res
         })
         .catch(res => {
-            try {this.__run(res, ...this.__failure)} catch(e) {console.log('request:failure', e)}
+            try {this.__run(res, ...this.__failure)} catch(e) {console.error('request:failure', e)}
             return res
         }).then(res => {
-            try {this.__run(undefined, ...this.__after)} catch(e) {console.log('request:after', e)}
+            try {this.__run(undefined, ...this.__after)} catch(e) {console.error('request:after', e)}
             return res
         })
     }

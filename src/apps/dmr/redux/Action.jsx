@@ -1,16 +1,31 @@
-import {Action as CoreAction} from '../../../core/redux'
+import {Action as CoreAction, LocalSearchAction} from '../../../core/redux'
 
-export class SetCurrentSearchValueAction extends CoreAction {}
-export class SetCurrentPageNoAction extends CoreAction {}
-export class SetCurrentPageSizeAction extends CoreAction {}
+export class SearchHierarchyAction extends LocalSearchAction {
+    searchClass = LoadedHierarchyAction
+    search = (state, q) => {
+        if (!q) return null
+        function traverseup(n, marked) {
+            if (n) {
+                traverseup(n.parent, marked)
+            }
+        }
+        function traversedown(n) {
+            n.marked = n.name && n.name.toLowerCase().indexOf(q.toLowerCase()) >= 0
+            if (n.marked) traverseup(n.parent, n.marked)
+            if (n.subNodes && n.subNodes.length) {
+                n.subNodes.map(sn => traversedown(sn))
+            }
+            return n
+        }
+        return traversedown(this.util.assign({}, state.hierarchy))
+    }
+}
 export class SetCurrentOutputTypeAction extends CoreAction {}
 export class SetCurrentSourceSystemAction extends CoreAction {}
 export class SetListOutputTypesAction extends CoreAction {}
 export class SetListSourceSystemsAction extends CoreAction {}
 export class SetDataElementColumnsAction extends CoreAction {}
 export class SwitchSidebarLeftViewAction extends CoreAction {}
-export class ToggleSidebarLeftAction extends CoreAction {}
-export class ToggleSidebarRightAction extends CoreAction {}
 export class SetCurrentHierarchyAction extends CoreAction {
     beforeDispatch(node) {
         const breadcrumbs = []
@@ -102,3 +117,8 @@ export class LoadInterfaceSystemsAction extends CoreAction {
     }
 }
 export class LoadedInterfaceSystemsAction extends CoreAction {}
+export class SetCurrentSearchValueAction extends CoreAction {}
+export class SetCurrentPageNoAction extends CoreAction {}
+export class SetCurrentPageSizeAction extends CoreAction {}
+export class ToggleSidebarLeftAction extends CoreAction {}
+export class ToggleSidebarRightAction extends CoreAction {}
