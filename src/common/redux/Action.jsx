@@ -37,3 +37,10 @@ export class UserLoginAction extends CoreAction {
         ).run()
     }
 }
+export class SetCurrentSearchValueAction extends CoreAction {}
+export class SetCurrentPageNoAction extends CoreAction {}
+export class SetCurrentPageSizeAction extends CoreAction {}
+export class ToggleSidebarLeftAction extends CoreAction {
+    debug = true
+}
+export class ToggleSidebarRightAction extends CoreAction {}

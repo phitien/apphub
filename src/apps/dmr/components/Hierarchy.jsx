@@ -34,16 +34,16 @@ class Hierarchy extends Style {
     renderIcon = (node, lv) => <i className='material-icons'>{this.shouldExpanNode(node) ? 'remove' : 'add'}</i>
     renderHierarchy = (node,lv,i) =>
     !this.shouldShowNode(node) ? null :
-        <li key={i} className={`node node-lv-${lv} ${this.isSearching ? `${node.marked ? 'marked' : 'unmarked'}` : ''}`}>
+        <li key={i} className={`node node-lv-${lv} ${node.expanded ? 'expanded' : 'collapsed'} ${this.isSearching ? `${node.marked ? 'marked' : 'unmarked'}` : ''}`}>
             <div className='node-name' onClick={this.expandNode.bind(this, node)}>
                 {this.renderIcon(node, lv)}
                 <Link to={`/dmr/products/${node.id}`} className='name'>
                     {node.name} {node.subNodes ? `(${node.subNodes.length})` : ''}
                 </Link>
             </div>
-            {this.canExpanNode(node) && this.shouldExpanNode(node) ? <ul>
-                {node.subNodes.map((item,i) => this.renderHierarchy(item,lv+1,i))}
-            </ul> : null}
+            <ul>
+                {!node.subNodes ? null : node.subNodes.map((item,i) => this.renderHierarchy(item,lv+1,i))}
+            </ul>
         </li>
     render = () =>
         <div className={this.className}>

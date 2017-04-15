@@ -9,7 +9,8 @@ export default class Action {
     debug = false
     beforeDispatch(payload) {}
     normalize(payload) {
-        if (!payload || !payload.data) payload = this.util.assign({}, {data: payload})
+        if (!payload || !payload.hasOwnProperty('data'))
+            payload = this.util.assign({}, {data: payload})
         return this.util.assign({}, payload, {type: this.constructor.name})
     }
     normalizeSearch(results) {

@@ -122,8 +122,3 @@ export class LoadInterfaceSystemsAction extends CoreAction {
     }
 }
 export class LoadedInterfaceSystemsAction extends CoreAction {}
-export class SetCurrentSearchValueAction extends CoreAction {}
-export class SetCurrentPageNoAction extends CoreAction {}
-export class SetCurrentPageSizeAction extends CoreAction {}
-export class ToggleSidebarLeftAction extends CoreAction {}
-export class ToggleSidebarRightAction extends CoreAction {}

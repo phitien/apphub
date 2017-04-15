@@ -25,8 +25,8 @@ export default class Reducer {
     normalizeSearch(action) {return action.search}
     debugFn(state, action) {console.log(this.constructor.name, ...arguments)}
     matchedTransform(state, action) {
-        if (action.data) this.value = {[this.fieldName]: this.normalize(action)}
-        else if (action.search) this.value = {[`Search${this.fieldName}Results`]: this.normalizeSearch(action)}
+        if (action.hasOwnProperty('data')) this.value = {[this.fieldName]: this.normalize(action)}
+        else if (action.hasOwnProperty('search')) this.value = {[`Search${this.fieldName}Results`]: this.normalizeSearch(action)}
         if (this.debug) this.debugFn(state, action, this.value)
         return this.util.assign({}, this.defaultState, state, this.value)
     }

@@ -1,5 +1,28 @@
+@include keyframes(sidebar-expanding) {
+  0% {width: $sidebar-left-width-collapsed;}
+  100% {width: $sidebar-width - $margin;}
+}
+@include keyframes(sidebar-collapsing) {
+  0% {width: $sidebar-width - $margin;}
+  100% {width: $sidebar-left-width-collapsed;}
+}
+@include keyframes(node-expanding) {
+  0% {height: 0px;display: none;}
+  25% {height: 25px;}
+  50% {height: 50px;}
+  75% {height: 75px;}
+  100% {display: none;}
+}
+@include keyframes(node-collapsing) {
+  0% {display: block;}
+  25% {height: 75px;}
+  50% {height: 50px;}
+  75% {height: 25px;}
+  100% {height: 0px;}
+}
 .page {
   .sidebar-left {
+    @include animation('sidebar-expanding .5s 1');
     position: fixed;top: $header-height;width: $sidebar-width - $margin;bottom: $footer-height;left: 0;padding: 0 $margin/2;
     display: flex;flex-direction: column;justify-content: flex-start;align-items: flex-start;
     >*{width: 100%;}
@@ -19,7 +42,7 @@
       }
       ul {
         width: 100%;display: block;margin: 0;padding: 0;
-        li.node {cursor: pointer;display: block;margin: 0;padding: 0;}
+        li.node {cursor: pointer;display: block;margin: 0;padding: 0;height: auto;}
         li.node-lv-0 > .node-name:first-child {display: none;}
         li.node-lv-1 > .node-name a.name:before {content: ''}
         li.node-lv-2 > .node-name a.name:before {content: '. :  '}
@@ -28,13 +51,23 @@
         li.node-lv-5 > .node-name a.name:before {content: '. . . . :  '}
         li.node.marked > .node-name > a.name {color: $green;}
         li.unmarked {}
+        li ul {
+          @include animation('node-collapsing .5s 1');
+          display: none;
+        }
+        li.expanded > ul {
+          @include animation('node-expanding .5s 1');
+          display: block;
+        }
       }
     }
   }
 }
 .page.has-sidebar-left-collapsed {
   .sidebar-left {
-    width: $sidebar-left-width-collapsed;padding: 0;
+    @include animation('sidebar-collapsing .3s 1');
+    width: $sidebar-left-width-collapsed;
+    padding: 0;
     >*{width: auto;margin-left: 6px;}
     .sidebar-left-search {justify-content: center;}
     .hierarchy {

@@ -1,0 +1,16 @@
+@mixin animation($anims...) {
+    $max: length($anims);
+    $animations: '';
+    @for $i from 1 through $max {
+        $animations: #{$animations + nth($anims, $i)};
+        @if $i < $max {
+            $animations: #{$animations + ", "};
+        }
+    }
+    animation: $animations;
+}
+@mixin keyframes($animationName) {
+    @keyframes #{$animationName} {
+        @content;
+    }
+}
