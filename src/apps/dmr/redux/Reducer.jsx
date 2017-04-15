@@ -45,6 +45,9 @@ export class LoadedHierarchyActionReducer extends CoreReducer {
     get fieldName() {return 'hierarchy'}
     normalize(action) {return action.data.body}
 }
+export class LoadedDataElementInfoActionReducer extends CoreReducer {
+    get fieldName() {return 'dataElement'}
+}
 export class LoadedInterfaceSystemsActionReducer extends CoreReducer {
     get fieldName() {return 'interfaceSystems'}
     get defaultValue() {return []}

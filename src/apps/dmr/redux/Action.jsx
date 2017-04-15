@@ -62,18 +62,22 @@ export class SearchDataElementsAction extends CoreAction {
         const pageNo = this.store.getState().SetCurrentPageNoActionReducer.currentPageNo
         const pageSize = this.store.getState().SetCurrentPageSizeActionReducer.currentPageSize
         return {
-            sourceSystem,
-            outputType,
-            searchValue,
-            page: {pageNo,pageSize}
+            header: null, serverDateTime: null, token: null,
+            body: {
+                sourceSystem,
+                outputType,
+                searchValue,
+                page: {pageNo,pageSize}
+            }
         }
     }
     beforeDispatch(payload) {
-        this.util.post(configuration.api.urls.searchDataElements.format(payload),
-            this.util.assign(this.searchParams, {contextPathId: payload.id ? payload.id : 0}))
-            .success(
-                CoreAction.fn('SearchedDataElementsAction')
-            ).run()
+        const searchParams = this.searchParams
+        searchParams.body.contextPathId = parseInt(payload.id) ? parseInt(payload.id) : 0
+        this.util.post(configuration.api.urls.searchDataElements.format(payload), searchParams)
+        .success(
+            CoreAction.fn('SearchedDataElementsAction')
+        ).run()
     }
 }
 export class SearchedDataElementsAction extends CoreAction {}
@@ -81,10 +85,14 @@ export class LoadDataElementInfoAction extends CoreAction {
     beforeDispatch(payload) {
         this.util.query(configuration.api.urls.dataElement.format(payload), {elementId: payload.elementId})
         .success(
-            this.callback
+            (res) => {
+                this.util.assign(payload, {loaded: true, expanded: true, info: res.data.body})
+                CoreAction.execute('LoadedDataElementInfoAction', payload)
+            }
         ).run()
     }
 }
+export class LoadedDataElementInfoAction extends CoreAction {}
 export class LoadInterfaceSystemsAction extends CoreAction {
     beforeDispatch(payload) {
         this.util.query('/static/dmr/api/interface-systems.json')

@@ -4,10 +4,10 @@ import {Style, Card} from '../../../../common/components'
 import {Connect} from '../../redux'
 
 class Detail extends Style {
-    get componentClassName() {return 'product'}
+    get componentClassName() {return 'data-element'}
     get info() {return this.props.info}
     render = () =>
-        <Card className='data-element'>
+        <Card className={this.className}>
             <div className='output-models'>
                 {!this.info.outputModels ? null : this.info.outputModels.map((model,j) =>
                 <div key={j} className='output-model'>

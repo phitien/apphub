@@ -14,7 +14,7 @@ class ProductsList extends Style {
     }
     rowDetailRenderer(rowi,i) {
         return !rowi.loaded || !rowi.info || !rowi.expanded ? null :
-        <Detail info={rowi.info}/>
+        <Detail info={rowi.info} className='data-element'/>
     }
     onSearchFieldChange = (e) => this.props.executeSetCurrentSearchValueAction(e.target.value, () => {
         this.props.executeSearchDataElementsAction({id: this.route.params.id})
@@ -54,24 +54,17 @@ class ProductsList extends Style {
                 fieldRenderer={this.fieldRenderer}
                 rowDetailRenderer={this.rowDetailRenderer}
                 onCellClick={(rowIndex, cellIndex, e) => {
-                    const target = e.target.closest('.output-models')
-                    const row = this.data.data[rowIndex] ? this.data.data[rowIndex] : this.data.data[rowIndex - 1]
-                    const callback = (res) => {
-                        if (res  && res.data && res.data.body) {
-                            this.util.assign(row, {loaded: true, expanded: false, info: res.data.body})
+                    const row = e.target.closest('.row')
+                    const index = row.getAttribute('data-index')
+                    if (parseInt(index) == index) {
+                        const row = this.data.data[index]
+                        if (!row.loaded) {
+                            this.props.executeLoadDataElementInfoAction(row)
                         }
-                        if (!target) {
-                            const newState = !row.expanded
-                            this.data.data.map(row => row.expanded = false)
-                            row.expanded = newState
+                        else {
+                            row.expanded = !row.expanded
                             this.setState(this.state)
                         }
-                    }
-                    if (!row.loaded) {
-                        this.props.executeLoadDataElementInfoAction(row, callback)
-                    }
-                    else {
-                        callback()
                     }
                 }}
             />

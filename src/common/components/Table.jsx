@@ -29,13 +29,13 @@ export default class Table extends Style {
     cellRenderer(row,i,col,j) {return this.props.cellRenderer ? this.props.cellRenderer.call(this,row,i,col,j) : <TableCell key={j} className={`cell${j}`} style={this.cellStyle(col)}>{this.fieldRenderer(row,i,col,j)}</TableCell>}
     rowRenderer(row, i) {
         if (this.props.rowRenderer) return this.props.rowRenderer.call(this,row,i)
-        const rs = [<TableRow key={i} className={`row${i}`} style={this.theme.rowStyle}
+        const rs = [<TableRow key={i} data-index={i} className={`row`} style={this.theme.rowStyle}
             hoverable={true}
             selected={row.selected}>
             {this.cmpProps.columns.map((col,j) => this.cellRenderer(row,i,col,j))}
         </TableRow>]
         if (row.expanded && this.props.rowDetailRenderer)
-            rs.push(<TableRow key={i + 0.5} className={`row-detail row-detail-${i}`} style={row.expanded ? this.theme.rowStyle : {display: 'none'}}>
+            rs.push(<TableRow key={i + 0.5} data-index={i + 0.5} className={`row row-detail`} style={row.expanded ? this.theme.rowStyle : {display: 'none'}}>
                 <TableCell style={this.cellStyle()} colSpan={this.cmpProps.columns.length}>
                     {this.cmpProps.rowDetailRenderer.call(this,row,i)}
                 </TableCell>
