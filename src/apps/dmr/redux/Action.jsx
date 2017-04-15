@@ -3,21 +3,26 @@ import {Action as CoreAction, LocalSearchAction} from '../../../core/redux'
 export class SearchHierarchyAction extends LocalSearchAction {
     searchClass = LoadedHierarchyAction
     search = (state, q) => {
-        if (!q) return null
+        if (!q) return []
+        const rs = []
         function traverseup(n, marked) {
             if (n) {
+                if (rs.indexOf(n) < 0) rs.push(n)
                 traverseup(n.parent, marked)
             }
         }
         function traversedown(n) {
             n.marked = n.name && n.name.toLowerCase().indexOf(q.toLowerCase()) >= 0
-            if (n.marked) traverseup(n.parent, n.marked)
+            if (n.marked) {
+                if (rs.indexOf(n) < 0) rs.push(n)
+                traverseup(n.parent, n.marked)
+            }
             if (n.subNodes && n.subNodes.length) {
                 n.subNodes.map(sn => traversedown(sn))
             }
-            return n
         }
-        return traversedown(this.util.assign({}, state.hierarchy))
+        traversedown(this.util.assign({}, state.hierarchy))
+        return rs
     }
 }
 export class SetCurrentOutputTypeAction extends CoreAction {}

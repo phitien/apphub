@@ -98,6 +98,6 @@ export class LocalSearchAction extends Action {
     beforeDispatch(q) {
         if (!this.searchClass) return
         const action = Action.instance(this.searchClass)
-        Action.dispatch(action.normalizeSearch(!q ? {} : this.search(this.util.assign({}, action.state), q)))
+        Action.dispatch(action.normalizeSearch(!q ? {} : this.search(action.state, q)))
     }
 }
