@@ -1,27 +1,27 @@
 {
-  "body": [{
-    "title": "DMR",
-    "app": "DMR",
-    "description": "Data Models Repositories",
-    "url": "/dmr",
-    "subNodes": [{
-      "title": "Dashboard",
-      "app": "DMR",
-      "description": "Data Models Statistic",
+  "body": {
+    "appname": "DMR",
+    "version": "0.0.2",
+    "menus": [{
+      "title": "DMR",
+      "description": "Data Models Repositories",
       "url": "/dmr",
-      "subNodes": []
+      "subNodes": [{
+        "title": "Dashboard",
+        "description": "Data Models Statistic",
+        "url": "/dmr",
+        "subNodes": []
+      },{
+        "title": "Products",
+        "description": "Products List",
+        "url": "/dmr/products",
+        "subNodes": []
+      }]
     },{
-      "title": "Products",
-      "app": "DMR",
-      "description": "Products List",
-      "url": "/dmr/products",
+      "title": "Exception Management",
+      "description": "Exception Management",
+      "url": "/em",
       "subNodes": []
     }]
-  },{
-    "title": "Exception Management",
-    "app": "EM",
-    "description": "Exception Management",
-    "url": "/em",
-    "subNodes": []
-  }]
+  }
 }

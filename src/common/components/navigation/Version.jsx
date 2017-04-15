@@ -5,7 +5,7 @@ import Style from '../Style'
 class Version extends Style {
     get componentClassName() {return 'version'}
     render = () => <div className={this.className}>
-        Version 0.0.1
+        Version {this.props.pageInfo.version ? this.props.pageInfo.version : configuration.version}
     </div>
 }
 export default (new Connect(Version)).klass

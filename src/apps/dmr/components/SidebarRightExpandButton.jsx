@@ -4,7 +4,7 @@ import {Connect} from '../redux'
 
 class SidebarRightExpandButton extends Style {
     get componentClassName() {return `sidebar-right-expand-button material-icons`}
-    expandSidebarRight = () => this.props.executeToggleSidebarRightAction({data: false})
+    expandSidebarRight = () => this.props.executeToggleSidebarRightAction(false)
     render = () => <i className={this.className}
         onClick={this.expandSidebarRight}>chevron_left</i>
 }

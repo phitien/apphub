@@ -1,13 +1,13 @@
 import React from 'react'
 import {Style} from '../../../../common/components'
 import {Connect} from '../../redux'
-import BreadCrumbs from '../BreadCrumbs'
+import Breadcrumbs from '../Breadcrumbs'
 import ProductsList from './ProductsList'
 
 class Content extends Style {
     get componentClassName() {return `content`}
     render = () => <div className={this.className}>
-        <BreadCrumbs/>
+        <Breadcrumbs/>
         <ProductsList/>
     </div>
 }

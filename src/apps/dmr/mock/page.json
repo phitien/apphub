@@ -1,15 +1,17 @@
 {
-  "body": [{
-    "title": "Data Models Repositories",
-    "app": "DMR",
-    "description": "Data Models Repositories",
-    "url": "/dmr/products",
-    "subNodes": []
-  },{
-    "title": "Exception Management",
-    "app": "EM",
-    "description": "Exception Management",
-    "url": "/em",
-    "subNodes": []
-  }]
+  "body": {
+    "appname": "DMR",
+    "version": "0.0.2",
+    "menus": [{
+      "title": "DMR",
+      "description": "Data Models Repositories",
+      "url": "/dmr",
+      "subNodes": []
+    },{
+      "title": "EM",
+      "description": "Exception Management",
+      "url": "/em",
+      "subNodes": []
+    }]
+  }
 }

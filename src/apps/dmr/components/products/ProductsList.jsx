@@ -16,17 +16,17 @@ class ProductsList extends Style {
         return !rowi.loaded || !rowi.info || !rowi.expanded ? null :
         <Detail info={rowi.info}/>
     }
-    onSearchFieldChange = (e) => this.props.executeSetCurrentSearchValueAction({data: e.target.value}, () => {
+    onSearchFieldChange = (e) => this.props.executeSetCurrentSearchValueAction(e.target.value, () => {
         this.props.executeSearchDataElementsAction({id: this.route.params.id})
     })
-    onOutputSelectChange = (e, index, value) => this.props.executeSetCurrentOutputTypeAction({data: value}, () => {
+    onOutputSelectChange = (e, index, value) => this.props.executeSetCurrentOutputTypeAction(value, () => {
         this.props.executeSearchDataElementsAction({id: this.route.params.id})
     })
-    onPageChange = (pageNo) => this.props.executeSetCurrentPageNoAction({data: pageNo}, () => {
+    onPageChange = (pageNo) => this.props.executeSetCurrentPageNoAction(pageNo, () => {
         this.props.executeSearchDataElementsAction({id: this.route.params.id})
     })
     onPageSizeChange = (pageSize) => {
-        this.props.executeSetCurrentPageSizeAction({data: pageSize}, () => {
+        this.props.executeSetCurrentPageSizeAction(pageSize, () => {
             this.props.executeSearchDataElementsAction({id: this.route.params.id})
         })
     }
@@ -35,6 +35,7 @@ class ProductsList extends Style {
             <div className='view-toolbar'>
                 <TextField className='seach-field'
                     floatingLabelText='Name, description, xpath'
+                    hintText='Search for name, description, xpath'
                     onChange={this.onSearchFieldChange}/>
                 <SelectField source={this.props.listOutputTypes}
                     floatingLabelText='Output type'
@@ -45,7 +46,7 @@ class ProductsList extends Style {
                     onChange={this.onSourceSystemChange}
                     value={this.props.currentSourceSystem}/>
             </div>
-            <Table height='420px' fixedHeader={true} fixedFooter={true}
+            <Table fixedHeader={true} fixedFooter={true}
                 columns={this.columns.filter(item => item.show)}
                 data={this.data.data}
                 pageSize={this.props.currentPageSize} onPageChange={this.onPageChange}

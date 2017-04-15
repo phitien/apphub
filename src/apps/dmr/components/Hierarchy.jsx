@@ -10,13 +10,12 @@ class Hierarchy extends Style {
             {id: null, name: null, template: null, subNodes: [], expanded: true},
             this.props.hierarchy)
     }
-    toggleSidebarLeft = () => this.props.executeToggleSidebarLeftAction({data: !this.props.hideSidebarLeft})
+    toggleSidebarLeft = () => this.props.executeToggleSidebarLeftAction(!this.props.hideSidebarLeft)
     expandNode(node) {
         node.expanded = !node.expanded
         this.state.selectedNode = node
         this.setState(this.state)
-        this.props.executeSetCurrentHierarchyAction({data: node})
-        this.props.executeLoadSubHierarchyAction({id: node.id})
+        this.props.executeSetCurrentHierarchyAction(node)
         this.props.executeSearchDataElementsAction({id: node.id})
     }
     renderIcon = (node, lv) => <i className='material-icons'>{node.expanded ? 'remove' : 'add'}</i>

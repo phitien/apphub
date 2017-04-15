@@ -71,38 +71,14 @@ class Util {
         return props
     }
 
-    request = (url, method, data, opts) => {
-        if (url) {
-            function run(o, payload) {
-                if (typeof o == 'function') o(payload)
-                else if (Array.isArray(o)) o.map(f => run(f, payload))
-            }
-            opts = this.assign({}, {
-                beforeExecute: () => {},
-                afterExecute: () => {},
-                success: (res) => {},
-                failure: (res) => {}
-            }, opts)
-            run(opts.beforeExecute)
-            return new REQUEST(url, method).data(data).execute()
-            .then(res => {
-                try {run(opts.afterExecute)} catch(e) {console.log('request:afterExecute', e)}
-                try {run(opts.success, res)} catch(e) {console.log('request:success', e)}
-                return res
-            })
-            .catch(res => {
-                try {run(opts.afterExecute)} catch(e) {console.log('request:afterExecute', e)}
-                try {run(opts.failure, res)} catch(e) {console.log('request:failure', e)}
-                return res
-            })
-        }
-        throw 'url is missing'
+    request = (url, method, data) => {
+        return new REQUEST(url, method).data(data)
     }
-    query = (url, data, opts) => this.request(url, 'GET', data, opts)
-    post = (url, data, opts) => this.request(url, 'POST', data, opts)
-    update = (url, data, opts) => this.request(url, 'PUT', data, opts)
-    remove = (url, data, opts) => this.request(url, 'DELETE', data, opts)
-    options = (url, data, opts) => this.request(url, 'OPTIONS', data, opts)
+    query = (url, data) => this.request(url, 'GET', data)
+    post = (url, data) => this.request(url, 'POST', data)
+    update = (url, data) => this.request(url, 'PUT', data)
+    remove = (url, data) => this.request(url, 'DELETE', data)
+    options = (url, data) => this.request(url, 'OPTIONS', data)
 
     newTab = link => window.open(link, '_blank')
     redirect = link => window.open(link)

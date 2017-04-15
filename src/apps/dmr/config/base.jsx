@@ -33,12 +33,14 @@ module.exports = exports = {
         ],
         theme: {
             lineHeight: '32px',
+            padding: '24px',
+            paddingSmall: '5px',
             paddingTop: '24px',
             paddingRight: '24px',
             paddingBottom: '24px',
             paddingLeft: '24px',
-            paddingTopSmall: '3px',
-            paddingRightSmall: '3px',
+            paddingTopSmall: '5px',
+            paddingBottomSmall: '5px',
             paddingRightSmall: '5px',
             paddingLeftSmall: '5px',
             buttonFontSize: '13px',
@@ -48,15 +50,16 @@ module.exports = exports = {
             fontSize: '14px',
             fontSizeSmall: '12px',
             backgroundColor: 'rgba(255, 255, 255, 1)',
-            color: 'rgba(0, 0, 0, 1)',
+            color: 'rgba(0, 0, 0, .8)',
             hintColor: 'rgba(0, 0, 0, .6)',
-            labelColor: 'rgb(50, 200, 254, 1)',
-            floatingLabelColor: 'rgb(50, 200, 254, 1)',
+            labelColor: 'rgba(0, 0, 0, .8)',
+            floatingLabelColor: 'rgba(50, 200, 254, 1)',
+            floatingLabelFocusColor: 'rgba(50, 200, 254, 1)',
             materialTheme: {
                 palette: {
-                    primary1Color: 'rgb(50, 200, 254, 1)',
-                    accent1Color: 'rgba(0, 0, 0, 1)',
-                    borderColor: 'rgba(0, 0, 0, .8)'
+                    primary1Color: 'rgba(50, 200, 254, 1)',
+                    accent1Color: 'rgba(50, 200, 254, 1)',
+                    borderColor: 'rgba(0, 0, 0, .5)'
                 }
             }
         }

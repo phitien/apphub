@@ -1,6 +1,7 @@
 import {connect} from 'react-redux'
 import thunk from 'redux-thunk'
 import util from '../util'
+import Action from './Action'
 
 export default class Connect {
     constructor(klass) {
@@ -10,16 +11,11 @@ export default class Connect {
     }
     getDefaultProps() {return {}}
     getActions(dispatch, ownProps) {return {}}
-    extractActions(o, dispatch, ownProps) {
-        const actions = {}
-        Object.keys(o).map(name => {
-            const klass = o[name]
-            if (klass && typeof klass == 'function') {
-                const action = new klass()
-                actions[`execute${name}`] = action.getFn(dispatch)
-            }
+    registerActions(dispatch, ownProps) {
+        const actions = this.getActions(dispatch, ownProps)
+        Object.values(actions).map(klass => {
+            Action.put(klass, dispatch, ownProps)
         })
-        return actions
     }
     get util() {return util}
     get mapStateToProps() {return (state, ownProps) => {
@@ -28,9 +24,12 @@ export default class Connect {
         return newProps
     }}
     get mapDispatchToProps() {return (dispatch, ownProps) => {
-        return this.getActions(dispatch, ownProps)
+        this.registerActions(dispatch, ownProps)
+        return Action.actions()
     }}
-    get klass() {return connect(this.mapStateToProps, this.mapDispatchToProps)(this.__klass)}
+    get klass() {
+        return connect(this.mapStateToProps, this.mapDispatchToProps)(this.__klass)
+    }
 
     static createStore(reducer) {
         return createStore(

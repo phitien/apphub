@@ -7,7 +7,7 @@ class SidebarRightSearch extends Style {
     get componentClassName() {return `sidebar-right-search`}
     onToggle(col, e, checked) {
         col.show = checked
-        this.props.executeSetDataElementColumnsAction({data: this.props.dataElementColumns})
+        this.props.executeSetDataElementColumnsAction(this.props.dataElementColumns)
     }
     renderColumnsSelection = () =>
         <div className='data-element-table-columns-selection'>

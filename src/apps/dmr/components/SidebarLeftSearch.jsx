@@ -8,7 +8,7 @@ class SidebarLeftSearch extends Style {
     get componentClassName() {return 'sidebar-left-search'}
     get views() {return ['Hierarchy', 'Product']}
     switchSidebarLeftView(view) {
-        this.props.executeSwitchSidebarLeftViewAction({data: view})
+        this.props.executeSwitchSidebarLeftViewAction(view)
     }
     renderSwitchViewMenu = () => <IconMenu
         iconButtonElement={<IconButton style={{padding: '0', color: '#ffffff', width: 24}}><i className='material-icons'>more_vert</i></IconButton>}>

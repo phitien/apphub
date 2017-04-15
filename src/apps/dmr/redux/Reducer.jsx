@@ -31,34 +31,22 @@ export class SetDataElementColumnsActionReducer extends ConfigReducer {
     get fieldName() {return 'dataElementColumns'}
 }
 export class SetCurrentHierarchyActionReducer extends CoreReducer {
-    get defaultState() {
-        return {currentHierarchy: null, componentTitle: null}
-    }
-    matchedTransform(state, action) {
-        return this.util.assign({}, state, {
-            currentHierarchy: action.data,
-            componentTitle: action.data ? action.data.name : null
-        })
-    }
+    get fieldName() {return 'currentHierarchy'}
 }
 export class SearchedDataElementsActionReducer extends CoreReducer {
     get fieldName() {return 'searchDataElementsResults'}
-    getData(action) {return action.data.body}
+    normalize(action) {return action.data.body}
 }
 export class SwitchSidebarLeftViewActionReducer extends CoreReducer {
     get fieldName() {return 'sidebarLeftViewName'}
     get defaultValue() {return 'Hierarchy'}
 }
-export class LoadedRootHierarchyActionReducer extends CoreReducer {
+export class LoadedHierarchyActionReducer extends CoreReducer {
     get fieldName() {return 'hierarchy'}
-    getData(action) {return action.data.body}
-}
-export class LoadedSubHierarchyActionReducer extends CoreReducer {
-    get fieldName() {return 'subHierarchy'}
-    getData(action) {return action.data.body}
+    normalize(action) {return action.data.body}
 }
 export class LoadedInterfaceSystemsActionReducer extends CoreReducer {
     get fieldName() {return 'interfaceSystems'}
     get defaultValue() {return []}
-    getData(action) {return action.data.body}
+    normalize(action) {return action.data.body}
 }

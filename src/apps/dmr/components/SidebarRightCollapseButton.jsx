@@ -4,7 +4,7 @@ import {Connect} from '../redux'
 
 class SidebarRightCollapseButton extends Style {
     get componentClassName() {return `sidebar-right-collapse-button material-icons`}
-    collapseSidebarRight = () => this.props.executeToggleSidebarRightAction({data: true})
+    collapseSidebarRight = () => this.props.executeToggleSidebarRightAction(true)
     render = () => <i className={this.className}
         onClick={this.collapseSidebarRight}>chevron_right</i>
 }

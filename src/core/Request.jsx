@@ -30,4 +30,44 @@ export default class REQUEST {
     }
     buildUrl = (url, query) => url.indexOf('?') >= 0 ? `${url}&${query}` : `${url}?${query}`
     buildQuery = (json) => json ? Object.keys(json).map(k => `${encodeURIComponent(k)}=${encodeURIComponent(json[k] ? json[k] : '')}`).join('&') : ''
+
+    __before = []
+    __after = []
+    __success = []
+    __failure = []
+    __run = (payload, ...args) => {
+        args.map(fn => fn(payload))
+        return this
+    }
+    before = (...args) => {
+        this.__before = args
+        return this
+    }
+    after = (...args) => {
+        this.__after = args
+        return this
+    }
+    success = (...args) => {
+        this.__success = args
+        return this
+    }
+    failure = (...args) => {
+        this.__failure = args
+        return this
+    }
+    run = () => {
+        return this.__run(undefined, ...this.__before)
+        .execute()
+        .then(res => {
+            try {this.__run(res, ...this.__success)} catch(e) {console.log('request:success', e)}
+            return res
+        })
+        .catch(res => {
+            try {this.__run(res, ...this.__failure)} catch(e) {console.log('request:failure', e)}
+            return res
+        }).then(res => {
+            try {this.__run(undefined, ...this.__after)} catch(e) {console.log('request:after', e)}
+            return res
+        })
+    }
 }

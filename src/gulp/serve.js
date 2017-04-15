@@ -5,7 +5,6 @@ module.exports = exports = function(config) {
   var settings = require('./settings')(config);
   gulp.task(settings.NAME + ':watch', function() {
     if (settings.env == 'production' || settings.env == 'stage' || settings.env == 'test') return;
-    console.log(settings.getAllFiles(settings.SRC_CORE, '*.jsx', 7))
     gulp.watch(settings.getAllFiles(settings.SRC_CORE, '*.jsx', 7), function() {
       runSequence(settings.NAME + ':js', settings.NAME + ':reload')
     });

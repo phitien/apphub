@@ -12,25 +12,27 @@ export default class Table extends Style {
         'fixedFooter', 'fixedHeader', 'footerStyle', 'headerStyle',
         'height', 'multiSelectable', 'onCellClick', 'onCellHover',
         'onCellHoverExit', 'onRowHover', 'onRowHoverExit', 'onRowSelection',
-        'selectable', 'wrapperStyle',
+        'selectable', 'wrapperStyle', 'height',
     ]}
     get defaultProps() {
         return {
-            showHeader: true, showFooter: true,
+            showHeader: true, showFooter: true, showCheckboxes: false,
             columns: [], data: [], currentPage: 1, totalPage: 1, pageSize: 10,
             showPagination: true, showFilters: true,
-            height: '350px',
+            height: '362px',
         }
     }
-    cellStyle(col) {return this.util.assign({width: col && col.width ? col.width : 'auto'}, this.theme.cellStyle)}
+    cellStyle(col) {return this.util.assign({width: col && col.width ? col.width : 'auto'}, this.theme.rowStyle, this.theme.cellStyle)}
     get prevNextStyle() {return this.util.assign({display: 'flex', alignItem: 'center'}, this.theme.rowStyle)}
 
-    fieldRenderer(row,i,col,j) {return this.props.fieldRenderer ? this.props.fieldRenderer(row,i,col,j) : <a>{row && row[col.field] ? row[col.field].toString() : ''}</a>}
-    cellRenderer(row,i,col,j) {return this.props.cellRenderer ? this.props.cellRenderer(row,i,col,j) : <TableCell key={j} className={`cell${j}`} style={this.cellStyle(col)}>{this.fieldRenderer.call(this,row,i,col,j)}</TableCell>}
+    fieldRenderer(row,i,col,j) {return this.props.fieldRenderer ? this.props.fieldRenderer.call(this,row,i,col,j) : <a>{row && row[col.field] ? row[col.field].toString() : ''}</a>}
+    cellRenderer(row,i,col,j) {return this.props.cellRenderer ? this.props.cellRenderer.call(this,row,i,col,j) : <TableCell key={j} className={`cell${j}`} style={this.cellStyle(col)}>{this.fieldRenderer(row,i,col,j)}</TableCell>}
     rowRenderer(row, i) {
-        if (this.props.rowRenderer) return this.props.rowRenderer(row,i)
-        const rs = [<TableRow key={i} className={`row${i}`} style={this.theme.rowStyle} selected={row.selected}>
-            {this.cmpProps.columns.map((col,j) => this.cmpProps.cellRenderer.call(this,row,i,col,j))}
+        if (this.props.rowRenderer) return this.props.rowRenderer.call(this,row,i)
+        const rs = [<TableRow key={i} className={`row${i}`} style={this.theme.rowStyle}
+            hoverable={true} 
+            selected={row.selected}>
+            {this.cmpProps.columns.map((col,j) => this.cellRenderer(row,i,col,j))}
         </TableRow>]
         if (row.expanded && this.props.rowDetailRenderer)
             rs.push(<TableRow key={i + 0.5} className={`row-detail row-detail-${i}`} style={row.expanded ? this.theme.rowStyle : {display: 'none'}}>
@@ -58,7 +60,7 @@ export default class Table extends Style {
             showRowHover={this.cmpProps.showRowHover}
             stripedRows={this.cmpProps.stripedRows}
         >
-          {this.cmpProps.data.map((row,i) => this.cmpProps.rowRenderer.call(this,row,i))}
+          {this.cmpProps.data.map((row,i) => this.rowRenderer(row,i))}
         </TableBody>
     footer = () =>
         <TableFooter style={{display: !this.cmpProps.showFooter ? 'none' : ''}}
@@ -84,22 +86,26 @@ export default class Table extends Style {
         }
     }
     pagination = () =>
-        <TableRow style={this.util.assign({display: !this.cmpProps.showPagination ? 'none' : ''}, this.theme.rowStyle)}>
+        <TableRow style={this.util.assign({
+                padding: '0',
+                display: !this.cmpProps.showPagination ? 'none' : ''}, this.theme.rowStyle)}>
             <TableCell style={this.cellStyle()} colSpan={this.cmpProps.columns.length}>
                 <div className='pagination'>
                     <div className='pagination-navi'>
-                        <IconButton style={this.prevNextStyle} onClick={this.openPrevPage}><i className='material-icons'>chevron_left</i></IconButton>
-                        <div className='pagination-pageInfo'>
-                            <TextField type='number' min={1} style={{width: 'auto'}} step={5}
-                                floatingLabelText='Page'
-                                value={this.cmpProps.currentPage}
-                                onChange={this.onPageFieldChange}/>
+                        <div className='title'>Page</div>
+                        <div>
+                            <IconButton iconStyle={this.prevNextStyle} onClick={this.openPrevPage}><i className='material-icons'>chevron_left</i></IconButton>
+                            <div className='pagination-pageInfo'>
+                                <TextField type='number' min={1} step={5}
+                                    value={this.cmpProps.currentPage}
+                                    onChange={this.onPageFieldChange}/>
+                            </div>
+                            <IconButton iconStyle={this.prevNextStyle} onClick={this.openNextPage}><i className='material-icons'>chevron_right</i></IconButton>
                         </div>
-                        <IconButton style={this.prevNextStyle} onClick={this.openNextPage}><i className='material-icons'>chevron_right</i></IconButton>
                     </div>
                     <div className='pagination-pagesize'>
-                        <TextField type='number' min={10} max={100} step={5} style={{width: 'auto'}}
-                            floatingLabelText='Size'
+                        <div className='title'>Size</div>
+                        <TextField type='number' min={10} max={100} step={5}
                             value={this.cmpProps.pageSize}
                             onChange={this.onPageSizeFieldChange}/>
                     </div>

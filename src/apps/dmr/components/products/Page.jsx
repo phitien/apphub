@@ -7,7 +7,7 @@ import Content from './Content'
 
 class ProductsPage extends Page {
     loadData(id) {
-        this.props.executeLoadRootHierarchyAction(id)
+        this.props.executeLoadHierarchyAction(id)
         this.props.executeSearchDataElementsAction({id})
     }
     postComponentDidMount() {
