@@ -1,8 +1,11 @@
 module.exports = exports = function(name, df) {
-  const argv = process.argv
+  const argv = process.argv;
+  const reg = new RegExp(name + '=(.*)');
   for(var i in argv) {
-    const matches = argv[i].match(new RegExp(name + '=(.*)'))
-    if (argv.hasOwnProperty(i) && matches) return matches[1]
+    if (argv.hasOwnProperty(i)) {
+      var matches = argv[i].match(reg);
+      if (matches) return matches[1];
+    }
   }
-  return df
+  return df;
 }
