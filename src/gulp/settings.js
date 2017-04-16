@@ -31,9 +31,10 @@ module.exports = exports = function(config) {
 
   var VENDOR_LIBS = [
     'react', 'react-dom', 'react-router', 'flux', 'events',
-    'redux', 'react-redux', 'redux-thunk',
+    'redux', 'react-redux', 'redux-thunk', 'redux-saga', 'normalizr', 'redux-devtools', 'redux-devtools-dock-monitor', 'redux-devtools-log-monitor', 'redux-logger',
     'material-ui', 'react-tap-event-plugin',
-    'lodash', 'object-assign', 'moment', 'when', 'axios'
+    'react-highlight', 'uuid', 'string-format', 'object-assign-deep',
+    'lodash', 'object-assign', 'moment', 'when', 'axios', 'humps',
   ];
 
   var GULP_NEW_APP_TEXT = '/**NEW_APP**/';

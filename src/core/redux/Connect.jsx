@@ -13,9 +13,7 @@ export default class Connect {
     getActions(dispatch, ownProps) {return {}}
     registerActions(dispatch, ownProps) {
         const actions = this.getActions(dispatch, ownProps)
-        Object.values(actions).map(klass => {
-            Action.put(klass, dispatch, ownProps)
-        })
+        Object.keys(actions).map(k => Action.put(actions[k], dispatch, ownProps))
     }
     get util() {return util}
     get mapStateToProps() {return (state, ownProps) => {
