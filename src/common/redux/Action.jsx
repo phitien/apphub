@@ -1,3 +1,4 @@
+import {configuration} from '../../core'
 import {Action as CoreAction} from '../../core/redux'
 
 export class ShowStateAction extends CoreAction {

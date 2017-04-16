@@ -1,6 +1,7 @@
 import React from 'react'
 import {Router} from 'react-router'
 import Application from './Application'
+import {configuration, DevTools} from '../../core'
 
 export default class RoutesApplication extends Application {
     get routes() {
@@ -9,5 +10,9 @@ export default class RoutesApplication extends Application {
     }
     set routes(v) {this.__routes = v}
     get history() {return this.util.history}
-    children = () => <Router routes={this.routes} history={this.history}/>
+
+    children = () => <div className='application'>
+        <Router routes={this.routes} history={this.history}/>
+        {configuration.showDevTool ? <DevTools/> : null}
+    </div>
 }

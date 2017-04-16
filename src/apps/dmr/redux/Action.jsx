@@ -1,4 +1,5 @@
 import {Action as CoreAction, LocalSearchAction} from '../../../core/redux'
+import configuration from '../config'
 
 export class SearchHierarchyAction extends LocalSearchAction {
     searchClass = LoadedHierarchyAction

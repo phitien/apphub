@@ -1,4 +1,5 @@
 import React from 'react'
+import {configuration} from '../../../core'
 import {Connect} from '../../redux'
 import Style from '../Style'
 import Menu from '../Menu'

@@ -1,4 +1,4 @@
-import util from '../util'
+import {util, configuration} from '..'
 import {getStoreInstance} from './Store'
 
 export default class Reducer {

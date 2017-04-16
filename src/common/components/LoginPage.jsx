@@ -1,5 +1,6 @@
 import React from 'react'
 import {TextField, RaisedButton} from 'material-ui'
+import {configuration} from '../../core'
 import {Connect} from '../redux'
 import Page from './Page'
 

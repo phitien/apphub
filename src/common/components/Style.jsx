@@ -1,4 +1,5 @@
 import React from 'react'
+import {configuration} from '../../core'
 import Component from './Component'
 
 export default class Style extends Component {

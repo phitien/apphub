@@ -1,10 +1,13 @@
-import {createStore, combineReducers, applyMiddleware} from 'redux'
+import {createStore, combineReducers, applyMiddleware, compose} from 'redux'
 import thunk from 'redux-thunk'
-import util from '../util'
+import {createLogger} from 'redux-logger'
+import createSagaMiddleware, { END } from 'redux-saga'
+import {util, configuration, DevTools} from '..'
 
 let store = null
-export const getStoreInstance = (reducers) => {
+export const getStoreInstance = (reducers, initialState) => {
     if (util.isEmpty(store) && reducers) {
+        const sagaMiddleware = createSagaMiddleware()
         const transformers = {}
         if (typeof reducers == 'function') {
             const reducer = new reducers()
@@ -18,10 +21,25 @@ export const getStoreInstance = (reducers) => {
                 }
             }
         }
+        const middleware = configuration.isDebug ? compose(
+            applyMiddleware(
+                sagaMiddleware,
+                thunk,
+                createLogger()
+            ),
+            DevTools.instrument()
+        ) : applyMiddleware(
+            sagaMiddleware,
+            thunk
+        )
+
         store = createStore(
             combineReducers(transformers),
-            applyMiddleware(thunk)
+            initialState,
+            middleware
         )
+        store.runSaga = sagaMiddleware.run
+        store.close = () => store.dispatch(END)
     }
     return store
 }

@@ -1,6 +1,7 @@
 import axios from 'axios'
 import when from 'when'
 import assign from 'object-assign'
+import {configuration} from './Config'
 
 export default class REQUEST {
     get defaultHeaders() {

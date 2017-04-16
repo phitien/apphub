@@ -1,4 +1,6 @@
-import Config from '../../core/Config'
-new Config({env: '{env}', appname: '{APPNAME}', apppath: '/{appname}', version: '0.0.1'})
-new Config(require('./config/base'))
-new Config(require('./config/{env}'))
+import {Config} from '../../core/Config'
+export default new Config(
+    {env: '{env}', appname: '{APPNAME}', apppath: '/{appname}', version: '0.0.1'},
+    require('./config/base'),
+    require('./config/{env}')
+).all()
