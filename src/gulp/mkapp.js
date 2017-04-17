@@ -18,7 +18,7 @@ gulp.task('mkapp', function() {
   var settings = require('./settings')({appname: appname, port: port, livereloadport: livereloadport});
   var fs = require('fs');
   var replace = require('gulp-replace');
-  fs.stat(settings.SRC_APP + '/index.jsx', function(err, stat) {
+  fs.stat(settings.SRC_APP + '/index.js', function(err, stat) {
       if(err == null) {
         console.error('App ' + appname + ' already exists');
       } else {

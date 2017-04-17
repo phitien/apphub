@@ -1,7 +1,0 @@
-spring:
-  jpa:
-    hibernare:
-      ddl-auto: update
-
-server:
-  port: 2000

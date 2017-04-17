@@ -2,6 +2,7 @@ var instance = null;
 module.exports = exports = function(config) {
   var NAME = config.appname;
   var APP = '/' + NAME;
+  var APPNAME = config.APPNAME ? config.APPNAME : NAME.toUpperCase();
 
   var SRC = './src';
   var SRC_CORE = SRC + '/core';
@@ -12,6 +13,7 @@ module.exports = exports = function(config) {
   var SRC_APP = SRC_APPS + APP;
   var SRC_TEMPLATE = SRC_APP + '/template';
   var SRC_MOCK = SRC_APP + '/mock';
+  var SRC_APP_CONFIG = SRC_APP + '/config';
   var SRC_STATIC_APP = SRC_APP + '/static';
 
   var STATIC = '/static';
@@ -23,7 +25,7 @@ module.exports = exports = function(config) {
   var PUBLIC_APP = PUBLIC + APP;
 
   var JAVA_RESOURCE = './server/src/main/resources';
-  var JAVA_PUBLIC = JAVA_RESOURCE + '/public';
+  var JAVA_PUBLIC = JAVA_RESOURCE + '';
   var JAVA_PUBLIC_STATIC = JAVA_PUBLIC + STATIC;
   var JAVA_PUBLIC_STATIC_APP = JAVA_PUBLIC_STATIC + APP;
   var JAVA_PUBLIC_STATIC_APP_API = JAVA_PUBLIC_STATIC_APP + '/api';
@@ -43,7 +45,7 @@ module.exports = exports = function(config) {
 
   var argv = require('./argv');
   var NODE_ENV = argv('NODE_ENV')
-  var env = process.env.NODE_ENV = (['mock', 'test', 'stage', 'production'].indexOf(NODE_ENV) >= 0) ? NODE_ENV : 'mock'
+  var env = process.env.NODE_ENV = (['mock', 'dev', 'test', 'stage', 'production'].indexOf(NODE_ENV) >= 0) ? NODE_ENV : 'mock'
 
   var port = argv('PORT', config.port ? config.port : 2000)
   var livereloadport = argv('LIVE_RELOAD_PORT', config.livereloadport ? config.livereloadport : 35729)
@@ -60,6 +62,7 @@ module.exports = exports = function(config) {
     config.settings = {
       NAME: NAME,
       APP: APP,
+      APPNAME: APPNAME,
       SRC: SRC,
       SRC_CORE: SRC_CORE,
       SRC_COMMON: SRC_COMMON,
@@ -67,6 +70,7 @@ module.exports = exports = function(config) {
       SRC_APPS: SRC_APPS,
       SRC_SAMPLE: SRC_SAMPLE,
       SRC_APP: SRC_APP,
+      SRC_APP_CONFIG: SRC_APP_CONFIG,
       SRC_TEMPLATE: SRC_TEMPLATE,
       SRC_MOCK: SRC_MOCK,
       SRC_STATIC_APP: SRC_STATIC_APP,

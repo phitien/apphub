@@ -27,19 +27,12 @@ public class Application extends WebMvcConfigurerAdapter {
         if (!registry.hasMappingForPattern("/**")) {
             registry.addResourceHandler("/**").addResourceLocations(CLASSPATH_RESOURCE_LOCATIONS);
         }
-        registry.addResourceHandler("/static/**")
-                .addResourceLocations("file:////Users/phitien/apphub/public/static/")
-                .setCachePeriod(0);
     }
 
     private static final String[]CLASSPATH_RESOURCE_LOCATIONS = {
-            "classpath:/META-INF/resources/","classpath:/resources/",
-            "classpath:/static/","classpath:/static/app/","classpath:/public/"
+            "classpath:/META-INF/resources/",
+            "classpath:/resources/",
+            "classpath:/static/"
     };
-
-//    @Override
-//    public void addViewControllers(ViewControllerRegistry registry) {
-//        registry.addViewController("/dmr/**").setViewName("dmr");
-//    }
 
 }

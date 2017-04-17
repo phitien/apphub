@@ -13,7 +13,7 @@ module.exports = {
   context: rootPath + '/src',
   module: {
     loaders: [{
-      test: /\.jsx?$/,
+      test: /\.js?$/,
       exclude: /node_modules/,
       loaders: ['babel-loader']
     },{
@@ -32,7 +32,7 @@ module.exports = {
     historyApiFallback: true
   },
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: ['.js']
   },
   output: {
     path: rootPath + '/public',
@@ -45,7 +45,7 @@ module.exports = {
   entry: [
     'webpack-dev-server/client?http://localhost:9000',
     'webpack/hot/only-dev-server',
-    './apps/dmr/entry.jsx',
+    './apps/dmr/index.js',
   ],
   plugins: [
     new webpack.ProvidePlugin({$: 'jquery', jQuery: 'jquery', 'window.jQuery': 'jquery'}),

@@ -1,0 +1,38 @@
+{
+	"header": {
+		"user": null,
+		"serverDateTime": null,
+		"token": null
+	},
+	"status": {
+		"code": "200",
+		"message": "success"
+	},
+	"body": {
+		"id": 1,
+		"name": "Cross Asset",
+		"template": null,
+		"subNodes": [{
+			"id": 7,
+			"name": "Trade",
+			"desc": "Trade",
+			"parentId": 1,
+			"template": null,
+			"path": "/Cross Asset/Trade"
+		}, {
+			"id": 8,
+			"name": "Header",
+			"desc": "Header",
+			"parentId": 1,
+			"template": null,
+			"path": "/Cross Asset/Header"
+		}, {
+			"id": 12,
+			"name": "Payload",
+			"desc": "Payload",
+			"parentId": 1,
+			"template": null,
+			"path": "/Cross Asset/Payload"
+		}]
+	}
+}

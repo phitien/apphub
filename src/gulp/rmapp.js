@@ -13,7 +13,7 @@ gulp.task('rmapp', function() {
   }
   var settings = require('./settings')({appname: appname});
   var fs = require('fs');
-  fs.stat(settings.SRC_APP + '/index.jsx', function(err, stat) {
+  fs.stat(settings.SRC_APP + '/index.js', function(err, stat) {
       if(err == null) {
         var clean = require('gulp-clean');
         gulp.src([settings.SRC_APPS + '/' + appname], {read: false}).pipe(clean())

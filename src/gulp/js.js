@@ -10,8 +10,8 @@ module.exports = exports = function(config) {
     // var gutil = require('gulp-util');
     // var sourcemaps = require('gulp-sourcemaps');
     var bundleConfig = {
-        entries: [settings.SRC_APP + '/index.jsx'],
-        extensions: ['.jsx'],
+        entries: [settings.SRC_APP + '/index.js'],
+        extensions: ['.js'],
         debug: true,
         fullPaths: true,
         noBundleExternal: true,

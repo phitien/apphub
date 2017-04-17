@@ -4,14 +4,14 @@ module.exports = exports = function(config) {
   var connect = require('gulp-connect');
   var settings = require('./settings')(config);
   gulp.task(settings.NAME + ':watch', function() {
-    if (settings.env == 'production' || settings.env == 'stage' || settings.env == 'test') return;
-    gulp.watch(settings.getAllFiles(settings.SRC_CORE, '*.jsx', 7), function() {
+    // if (settings.env == 'production' || settings.env == 'stage' || settings.env == 'test') return;
+    gulp.watch(settings.getAllFiles(settings.SRC_CORE, '*.js', 7), function() {
       runSequence(settings.NAME + ':js', settings.NAME + ':reload')
     });
-    gulp.watch(settings.getAllFiles(settings.SRC_COMMON, '*.jsx', 7), function() {
+    gulp.watch(settings.getAllFiles(settings.SRC_COMMON, '*.js', 7), function() {
       runSequence(settings.NAME + ':js', settings.NAME + ':reload')
     });
-    gulp.watch(settings.getAllFiles(settings.SRC_APP, '*.jsx', 7), function() {
+    gulp.watch(settings.getAllFiles(settings.SRC_APP, '*.js', 7), function() {
       runSequence(settings.NAME + ':js', settings.NAME + ':reload')
     });
     gulp.watch(settings.getAllFiles(settings.SRC_COMMON, '*.scss', 7), function() {
@@ -36,14 +36,7 @@ module.exports = exports = function(config) {
     ]).pipe(connect.reload());
   });
   gulp.task(settings.NAME + ':server', function() {
-    if (settings.env == 'production' || settings.env == 'stage' || settings.env == 'test') {
-      return connect.server({
-        name: 'Live server',
-        root: settings.PUBLIC,
-        port: settings.port,
-        fallback: settings.PUBLIC_APP + '/' + settings.NAME + '.html'
-      });
-    }
+    // if (settings.env == 'production' || settings.env == 'stage' || settings.env == 'test') return;
     return connect.server({
       name: 'Dev server',
       root: settings.PUBLIC,
