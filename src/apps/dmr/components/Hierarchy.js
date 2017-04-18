@@ -5,24 +5,14 @@ import {Connect} from '../redux'
 
 class Hierarchy extends Style {
     get componentClassName() {return 'hierarchy'}
-    get isSearching() {return !this.util.isEmpty(this.props.SearchhierarchyResults)}
-    get search() {return this.isSearching ? this.props.SearchhierarchyResults.map(n => n.id) : []}
     get hierarchy() {
         return this.util.assign(
             {id: null, name: null, template: null, subNodes: [], expanded: true},
             this.props.hierarchy
         )
     }
-    shouldShowNode = (node) => {
-        if (!node.id) return true
-        if (this.isSearching) {
-            const search = this.search
-            if (this.util.isEmpty(search)) return true
-            if (search.indexOf(node.id) < 0) return false
-        }
-        return true
-    }
-    shouldExpanNode = (node) => node.expanded || this.isSearching
+    shouldShowNode = (node) => !node || node.hide ? false : true
+    shouldExpanNode = (node) => node.expanded || this.hierarchy.searching
     canExpanNode = (node) => node.subNodes && node.subNodes.length
     expandNode(node) {
         node.expanded = !node.expanded
@@ -32,9 +22,13 @@ class Hierarchy extends Style {
         this.props.executeSearchDataElementsAction({id: node.id})
     }
     renderIcon = (node, lv) => <i className='material-icons'>{this.shouldExpanNode(node) ? 'remove' : 'add'}</i>
+
+    nodeClassName = (node, lv) =>
+        `node node-lv-${lv} ${this.shouldExpanNode(node) ? 'expanded' : 'collapsed'}`
+
     renderHierarchy = (node,lv,i) =>
     !this.shouldShowNode(node) ? null :
-        <li key={i} className={`node node-lv-${lv} ${node.expanded ? 'expanded' : 'collapsed'} ${this.isSearching ? `${node.marked ? 'marked' : 'unmarked'}` : ''}`}>
+        <li key={i} className={this.nodeClassName(node, lv)}>
             <div className='node-name' onClick={this.expandNode.bind(this, node)}>
                 {this.renderIcon(node, lv)}
                 <Link to={`/dmr/products/${node.id}`} className='name'>

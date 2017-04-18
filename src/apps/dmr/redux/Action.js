@@ -2,27 +2,40 @@ import {Action, ApiAction, ProxyAction, SearchAction} from '../../../core/redux'
 
 export class SearchHierarchyAction extends SearchAction {
     proxyClasses = 'ApiSuccessLoadHierarchyAction'
-    search(state, q) {
-        if (!q) return []
-        const rs = []
-        function traverseup(n, marked) {
-            if (n) {
-                if (rs.indexOf(n) < 0) rs.push(n)
-                traverseup(n.parent, marked)
-            }
-        }
-        function traversedown(n) {
-            n.marked = n.name && n.name.toLowerCase().indexOf(q.toLowerCase()) >= 0
-            if (n.marked) {
-                if (rs.indexOf(n) < 0) rs.push(n)
-                traverseup(n.parent, n.marked)
-            }
+    searchFn(state, q) {
+        let hierarchy = this.util.assign({}, state.hierarchy)
+        hierarchy.searching = false
+        function showhide(n, hide, arr) {
+            if (!n.id) n.hide = false
+            else if (arr) n.hide = !arr.includes(n)
+            else n.hide = hide
             if (n.subNodes && n.subNodes.length) {
-                n.subNodes.map(sn => traversedown(sn))
+                n.subNodes.map(sn => showhide(sn, hide, arr))
             }
         }
-        traversedown(this.util.assign({}, state.hierarchy))
-        return rs
+        showhide(hierarchy, false)
+        if (q) {
+            hierarchy.searching = true
+            let rs = []
+            function traverseup(n) {
+                if (n) {
+                    if (!rs.includes(n)) rs.push(n)
+                    traverseup(n.parent)
+                }
+            }
+            function traversedown(n) {
+                if (n.name && n.name.toLowerCase().indexOf(q.toLowerCase()) >= 0) {
+                    if (!rs.includes(n)) rs.push(n)
+                    traverseup(n.parent)
+                }
+                if (n.subNodes && n.subNodes.length) {
+                    n.subNodes.map(sn => traversedown(sn))
+                }
+            }
+            traversedown(hierarchy)
+            showhide(hierarchy, true, rs)
+        }
+        return {data: {body: hierarchy}}
     }
 }
 export class SetCurrentOutputTypeAction extends Action {}

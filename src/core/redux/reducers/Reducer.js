@@ -25,9 +25,10 @@ export default class Reducer {
     normalize(action) {return action.data}
     normalizeSearch(action) {return action.search}
     debugFn(state, action, ...args) {
-        console.log(this.constructor.name, 'value', this.value)
-        console.log(this.constructor.name, 'state', state, action, ...args)
-        console.log(this.constructor.name, 'action', action)
+        console.log(this.constructor.name)
+        console.log('value', this.value)
+        console.log('state', state, action, ...args)
+        console.log('action', action)
     }
     matchedTransform(state, action, ...args) {
         this.action = action
