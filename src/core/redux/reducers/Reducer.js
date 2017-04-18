@@ -15,23 +15,28 @@ export default class Reducer {
     get store() {return getStore()}
     get value() {return this.__value}
     set value(v) {this.__value = v}
-    transform(state = this.defaultState, action) {
+    transform(state = this.defaultState, action, ...args) {
         return `${action.type}` == this.constructor.name
         || `${action.type}Reducer` == this.constructor.name
         || `Search${action.type}Reducer` == `Search${this.constructor.name}`
-            ? this.matchedTransform(state, action)
-            : this.notMatchedTransform(state, action)
+            ? this.matchedTransform(state, action, ...args)
+            : this.notMatchedTransform(state, action, ...args)
     }
     normalize(action) {return action.data}
     normalizeSearch(action) {return action.search}
-    debugFn(state, action) {console.log(this.constructor.name, ...arguments)}
-    matchedTransform(state, action) {
+    debugFn(state, action, ...args) {
+        console.log(this.constructor.name, 'value', this.value)
+        console.log(this.constructor.name, 'state', state, action, ...args)
+        console.log(this.constructor.name, 'action', action)
+    }
+    matchedTransform(state, action, ...args) {
+        this.action = action
         if (action.hasOwnProperty('data')) this.value = {[this.fieldName]: this.normalize(action)}
         else if (action.hasOwnProperty('search')) this.value = {[`Search${this.fieldName}Results`]: this.normalizeSearch(action)}
-        if (this.debug) this.debugFn(state, action, this.value)
+        if (this.debug) this.debugFn(state, action, ...args)
         return this.util.assign({}, this.defaultState, state, this.value)
     }
-    notMatchedTransform(state, action) {
+    notMatchedTransform(state, action, ...args) {
         return state
     }
 }

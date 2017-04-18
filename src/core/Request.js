@@ -9,6 +9,7 @@ export default class REQUEST {
             'Content-Type': 'application/json'
         }
     }
+    get payload() {return this.__options.data}
 
     constructor(url, method) {
         method = configuration.isMock() && method ? method.toLowerCase() : 'get'
@@ -23,11 +24,12 @@ export default class REQUEST {
     headers = (headers) => this.option('headers', assign(this.defaultHeaders, headers))
     url = (url) => this.option('url', url)
     data = (data) => {
+        this.option('data', data)
         if (this.__options.method == 'get') {
             const url = this.__options.url
             return this.option('url', this.buildUrl(url, this.buildQuery(data)))
         }
-        return this.option('data', data)
+        return this
     }
     buildUrl = (url, query) => url.indexOf('?') >= 0 ? `${url}&${query}` : `${url}?${query}`
     buildQuery = (json) => json ? Object.keys(json).map(k => `${encodeURIComponent(k)}=${encodeURIComponent(json[k] ? json[k] : '')}`).join('&') : ''

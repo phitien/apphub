@@ -7,19 +7,19 @@ const __actions = {}
 function normalize(name, payload, ...args) {
     if (!payload || !payload.hasOwnProperty('data'))
         payload = util.assign({}, {data: payload})
-    return util.assign({}, payload, {type: name})
+    return util.assign({extra: args}, payload, {type: name})
 }
 function normalizeSearch(name, results, ...args) {return {search: results, type: name}}
 
 export default class Action {
     dispatchable = true
     debug = false
-    preProcess(payload) {}
-    beforeDispatch(payload) {}
-    normalize(payload) {
+    preProcess(payload, ...args) {}
+    beforeDispatch(payload, ...args) {}
+    normalize(payload, ...args) {
         if (!payload || !payload.hasOwnProperty('data'))
             payload = this.util.assign({}, {data: payload})
-        return normalize(this.name, ...arguments)
+        return normalize(this.name, payload, ...args)
     }
     normalizeSearch(results) {return normalizeSearch(this.name, ...arguments)}
     getState(name) {return this.store.getState()[`${name}Reducer`]}
@@ -29,8 +29,8 @@ export default class Action {
       Object.keys(states).map(k => this.util.assign(newStates, states[k]))
       return newStates
     }
-    debugFn(payload) {}
-    dispatch(payload) {this.dispatcher(payload)}
+    debugFn(payload, ...args) {}
+    dispatch(payload, ...args) {this.dispatcher(payload, ...args)}
     get name() {return this.constructor.name}
     get configuration() {return configuration}
     get util() {return util}
@@ -38,15 +38,15 @@ export default class Action {
     get state() {return this.getState(this.name)}
     get dispatcher() {return __dispatcher}
     get fn() {return this.__fn}
-    getFn(dispatch) {
+    getFn(dispatch, ownProps, ...args) {
+        const me = this
         if (!__dispatcher) __dispatcher = dispatch
-        if (!this.__fn) this.__fn = (function(payload) {
-            const me = this
-            me.preProcess(...arguments)
-            if (me.beforeDispatch(...arguments) !== false) {
-                if (me.dispatchable) me.dispatch(me.normalize(...arguments))
+        if (!this.__fn) this.__fn = (function(payload, ...argus) {
+            me.preProcess(payload, ...argus)
+            if (me.beforeDispatch(payload, ...argus) !== false) {
+                if (me.dispatchable) me.dispatch(me.normalize(payload, ...argus))
             }
-            if (me.debug) me.debugFn(...arguments)
+            if (me.debug) me.debugFn(payload, ...argus)
         }).bind(this)
         return this.__fn
     }
@@ -79,7 +79,7 @@ export default class Action {
         const action = Action.action(klass)
         if (action) return action.instance
     }
-    static put(klass, dispatch, ownProps) {
+    static put(klass, dispatch, ownProps, ...args) {
         if (!__dispatcher) __dispatcher = dispatch
         const name = Action.getName(klass)
         if (name) {
@@ -89,7 +89,7 @@ export default class Action {
                 if (instance.isApiAction) instance.runSaga()
                 __actions[`execute${name}`] = {
                     instance: instance,
-                    fn: instance.getFn(__dispatcher),
+                    fn: instance.getFn(__dispatcher, ownProps, ...args),
                 }
             }
         }

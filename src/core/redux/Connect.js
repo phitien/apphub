@@ -10,10 +10,10 @@ export default class Connect {
         this.getActions = this.getActions.bind(this)
     }
     getDefaultProps() {return {}}
-    getActions(dispatch, ownProps) {return {}}
-    registerActions(dispatch, ownProps) {
-        const actions = this.getActions(dispatch, ownProps)
-        Object.keys(actions).map(k => Action.put(actions[k], dispatch, ownProps))
+    getActions(dispatch, ownProps, ...args) {return {}}
+    registerActions(dispatch, ownProps, ...args) {
+        const actions = this.getActions(dispatch, ownProps, ...args)
+        Object.keys(actions).map(k => Action.put(actions[k], dispatch, ownProps, ...args))
     }
     get util() {return util}
     get mapStateToProps() {return (state, ownProps) => {
@@ -21,8 +21,8 @@ export default class Connect {
         if (state) Object.keys(state).map(k => this.util.assign(newProps, state[k]))
         return newProps
     }}
-    get mapDispatchToProps() {return (dispatch, ownProps) => {
-        this.registerActions(dispatch, ownProps)
+    get mapDispatchToProps() {return (dispatch, ownProps, ...args) => {
+        this.registerActions(dispatch, ownProps, ...args)
         return Action.actions()
     }}
     get klass() {
