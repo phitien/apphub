@@ -43,13 +43,9 @@ export default class Action {
         if (!this.__fn) this.__fn = (function(payload) {
             const me = this
             me.preProcess(...arguments)
-            function* run() {
-                yield me.beforeDispatch(...arguments)
-                yield me.dispatchable ? me.dispatch(me.normalize(...arguments)) : false
+            if (me.beforeDispatch(...arguments) !== false) {
+                if (me.dispatchable) me.dispatch(me.normalize(...arguments))
             }
-            const _run = run()
-            if (_run.next().value !== false)
-                _run.next()
             if (me.debug) me.debugFn(...arguments)
         }).bind(this)
         return this.__fn
@@ -59,7 +55,7 @@ export default class Action {
         Object.keys(__actions).map(k => rs[k] = __actions[k].fn)
         return rs
     }
-    static getName(klass) {return typeof klass == 'string' ? klass : klass.name}
+    static getName(klass) {if (klass) return typeof klass == 'string' ? klass : klass.name}
     static execute(klass, payload, ...args) {
         const name = Action.getName(klass)
         const action = Action.fn(name)

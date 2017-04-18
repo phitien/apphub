@@ -1,4 +1,4 @@
-import {Reducer, ConfigReducer, FalseReducer, TrueReducer} from '../../../core/redux'
+import {Reducer, ConfigReducer, CookieReducer, FalseReducer, TrueReducer, NullReducer} from '../../../core/redux'
 
 export class SetCurrentSearchValueActionReducer extends ConfigReducer {
     get fieldName() {return 'currentSearchValue'}

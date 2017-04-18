@@ -9,7 +9,7 @@ class Help extends Style {
             <i className='material-icons'>help</i>
         </div>
     </div>
-    render = () => !this.util.user.isLogged ? null :
+    render = () =>
         <div className={this.className}>
             {this.children()}
         </div>

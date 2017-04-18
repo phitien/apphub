@@ -26,7 +26,7 @@ export class Config {
         this.configuration = WINDOW.configuration
     }
     all() {
-        if (this.configuration.isDebug()) console.log(this.configuration)
+        // if (this.configuration.isDebug()) console.log(this.configuration)
         return this.configuration
     }
 }

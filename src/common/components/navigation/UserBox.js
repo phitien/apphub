@@ -5,7 +5,8 @@ import Menu from '../Menu'
 
 class UserBox extends Style {
     get componentClassName() {return 'user-box'}
-    get menus() {return [{
+    get menus() {
+        return [{
         html: <div className='lightdark-box user-info'>
             <div className='display-name'>{this.util.user.displayName}</div>
             <div className='email'>({this.util.user.email})</div>

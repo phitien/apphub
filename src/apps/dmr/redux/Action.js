@@ -45,18 +45,30 @@ export class SetCurrentHierarchyAction extends ProxyAction {
         return loop(node).next().value.reverse()
     }
 }
-export class LoadHierarchyAction extends ApiAction {
-    getRequest(id, root, node) {
+export class LoadHierarchyAction extends Action {
+    beforeDispatch(id, root, node) {
         if (!root) {
             root = {loaded: false, path: '', id: ''}
-            node = root
         }
-        if (node.id == id)
-            Action.execute(SetCurrentHierarchyAction, node)
-        if (!node.loaded) {
-            const payload = {product: node.path, id: node.id}
-            return this.util.query(this.configuration.api.urls.hierarchy.format(payload), payload)
+        const me = this
+        async function load(node) {
+            if (!node.loaded) {
+                let payload = {product: node.path, id: node.id}
+                let res = await me.util.query(me.configuration.api.urls.hierarchy.format(payload), payload).run(true)
+                if(res.data.body) {
+                    me.util.assign(node, res.data.body, {loaded: true})
+                    if (!me.util.isEmpty(node.subNodes)) {
+                        node.subNodes.map(subnode => {
+                            me.util.assign(subnode, {parent: node})
+                            load(subnode)
+                        })
+                    }
+                }
+            }
+            if (node.id == id) Action.execute(SetCurrentHierarchyAction, node)
         }
+        load(root)
+        Action.execute('ApiSuccessLoadHierarchyAction', {data: {body: root}})
     }
 }
 export class SearchDataElementsAction extends ApiAction {

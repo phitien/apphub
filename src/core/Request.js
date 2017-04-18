@@ -15,7 +15,7 @@ export default class REQUEST {
         this.__options = {url, method}
         this.headers({})
     }
-    execute = () => this.exe = when(axios(this.__options))
+    execute = (isAsync) => this.exe = isAsync ? axios(this.__options) : when(axios(this.__options))
     option = (n, v) => {
         this.__options[n] = v
         return this
@@ -56,9 +56,10 @@ export default class REQUEST {
         this.__failure = args
         return this
     }
-    run = () => {
-        return this.__run(undefined, ...this.__before)
-        .execute()
+    run = (isAsync) => {
+        return isAsync ? this.__run(undefined, ...this.__before).execute(isAsync) :
+        this.__run(undefined, ...this.__before)
+        .execute(isAsync)
         .then(res => {
             try {this.__run(res, ...this.__success)} catch(e) {console.error('request:success', e)}
             return res

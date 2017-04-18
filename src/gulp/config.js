@@ -7,6 +7,7 @@ module.exports = exports = function(config) {
     return gulp.src(settings.SRC + '/core/config-default.js')
       .pipe(replace('{env}', process.env.NODE_ENV))
       .pipe(replace('{appname}', settings.NAME))
+      .pipe(replace('{NAME}', settings.NAME.toUpperCase()))
       .pipe(replace('{APPNAME}', settings.APPNAME))
       .pipe(rename('index.js'))
       .pipe(gulp.dest(settings.SRC_APP_CONFIG, {overwrite: true}));

@@ -11,8 +11,11 @@ export default class UserProfile {
         cookie.value('user', this.data)
     }
     load = (data) => {
-        if (data) this.data = data
-        this.saveToCookie()
+        if (!data) this.unload()
+        else {
+          this.data = data
+          this.saveToCookie()          
+        }
     }
     unload = () => {
         cookie.remove('user')
@@ -22,7 +25,6 @@ export default class UserProfile {
         this.data[field] = value
         this.saveToCookie()
     }
-    get util() {return util}
     get isLogged() {return this.data ? true : false}
     get email() {return this.data.email}
     set email(v) {this.update('email', v)}

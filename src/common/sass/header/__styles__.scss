@@ -29,13 +29,18 @@
         }
       }
     }
-    &:hover {
-      color: $primary;
-      ul.menus {display: block;}
+    .wrapper {
+      height: 100%;display: flex;align-items: center;justify-content: center;
+      &:hover {
+        color: $primary;
+        ul.menus {display: block;}
+      }
     }
   }
-  .links-hub .icon {
-    i {margin-right: 5px;}
+  .links-hub {
+    .icon {
+      i {margin-right: $margin;}
+    }
     img {height: 32px;margin-right: 5px;}
     h3 {color: #ffffff;font-size: 14px;text-transform: uppercase;
       &:hover {color: $primary;}

@@ -16,17 +16,17 @@ class LinksHub extends Style {
     }
     children = () => <div className='wrapper'>
         <div className='icon'>
-            <img className='svg-image' alt='Standard Chartered' src='/static/images/bc-scb.png'/>
             <i className='material-icons'>apps</i>
-            <h3>
-                {this.configuration.appname}
-            </h3>
         </div>
         <Menu menus={this.props.pageInfo.menus} className='lightgrey-box menus' subMenuClassName='lightgrey-box'/>
     </div>
     render = () => {
         return <div className={this.className}>
             {this.children()}
+            <img className='svg-image' alt='Standard Chartered' src='/static/images/bc-scb.png'/>
+            <h3>
+                {this.configuration.appname}
+            </h3>
         </div>
     }
 }

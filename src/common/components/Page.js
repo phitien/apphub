@@ -3,6 +3,7 @@ import {MuiThemeProvider, getMuiTheme} from 'material-ui/styles'
 import {cyan500} from 'material-ui'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 import Style from './Style'
+import Login from './Login'
 
 injectTapEventPlugin()
 
@@ -13,7 +14,7 @@ export default class Page extends Style {
     modal = () => this.props.modal
     render = () =>
         <MuiThemeProvider muiTheme={getMuiTheme(this.theme.materialTheme)}><div className={this.className}>
-            {this.children()}
+            {this.util.user.isLogged ? this.children() : <Login/>}
             {this.modal()}
         </div></MuiThemeProvider>
 }

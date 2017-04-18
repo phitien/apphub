@@ -1,15 +1,17 @@
-import {Reducer, ConfigReducer, FalseReducer, TrueReducer} from '../../core/redux'
+import {Reducer, ConfigReducer, CookieReducer, FalseReducer, TrueReducer, NullReducer} from '../../core/redux'
 
 export class SetBreadcrumbsActionReducer extends Reducer {
     get defaultValue() {return []}
     get fieldName() {return 'breadcrumbs'}
 }
-export class UserLogoutActionReducer extends Reducer {
+export class UserLogoutActionReducer extends CookieReducer {
+    get defaultValue() {return null}
     get fieldName() {return 'user'}
-    normalize(action) {return null}
+    setCookie() {this.util.user.unload()}
 }
-export class UserLoginActionReducer extends Reducer {
+export class ApiSuccessUserLoginActionReducer extends CookieReducer {
     get fieldName() {return 'user'}
+    setCookie() {this.util.user.load(this.__value[this.fieldName])}
 }
 export class AddModalToViewActionReducer extends Reducer {
     get fieldName() {return 'modal'}
