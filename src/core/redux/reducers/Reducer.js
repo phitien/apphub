@@ -2,33 +2,34 @@ import {util, configuration} from '../..'
 import {getStore} from '../Store'
 
 export default class Reducer {
+    debug = false
+    get name() {return this.constructor.name}
     get configuration() {return configuration}
-    get debug() {return this.__debug}
-    set debug(v) {this.__debug = v}
     get util() {return util}
-    get fieldName() {throw `${this.constructor.name}: No fieldName`}
+    get store() {return getStore()}
+    get state() {return this.store.getState()[this.name]}
+
+    get fieldName() {throw `${this.name}: No fieldName`}
     get defaultState() {return {
         [this.fieldName]: this.defaultValue,
         [`Search${this.fieldName}Results`]: null
     }}
     get defaultValue() {return null}
-    get store() {return getStore()}
-    get value() {return this.__value}
-    set value(v) {this.__value = v}
     transform(state = this.defaultState, action, ...args) {
-        return `${action.type}` == this.constructor.name
-        || `${action.type}Reducer` == this.constructor.name
-        || `Search${action.type}Reducer` == `Search${this.constructor.name}`
+        return `${action.type}` == this.name
+        || `${action.type}Reducer` == this.name
+        || `Search${action.type}Reducer` == `Search${this.name}`
             ? this.matchedTransform(state, action, ...args)
             : this.notMatchedTransform(state, action, ...args)
     }
     normalize(action) {return action.data}
     normalizeSearch(action) {return action.search}
     debugFn(state, action, ...args) {
-        console.log(this.constructor.name)
-        console.log('value', this.value)
-        console.log('state', state, action, ...args)
+        console.log(this.name)
+        console.log('prev-state', state)
+        console.log('next-state', this.value)
         console.log('action', action)
+        console.log('extra', ...args)
     }
     matchedTransform(state, action, ...args) {
         this.action = action

@@ -14,6 +14,14 @@ function normalizeSearch(name, results, ...args) {return {search: results, type:
 export default class Action {
     dispatchable = true
     debug = false
+    get name() {return this.constructor.name}
+    get configuration() {return configuration}
+    get util() {return util}
+    get store() {return getStore()}
+    get state() {return this.getState(this.name)}
+    get dispatcher() {return __dispatcher}
+    get fn() {return this.__fn}
+    
     preProcess(payload, ...args) {}
     beforeDispatch(payload, ...args) {}
     normalize(payload, ...args) {
@@ -31,13 +39,6 @@ export default class Action {
     }
     debugFn(payload, ...args) {}
     dispatch(payload, ...args) {this.dispatcher(payload, ...args)}
-    get name() {return this.constructor.name}
-    get configuration() {return configuration}
-    get util() {return util}
-    get store() {return getStore()}
-    get state() {return this.getState(this.name)}
-    get dispatcher() {return __dispatcher}
-    get fn() {return this.__fn}
     getFn(dispatch, ownProps, ...args) {
         const me = this
         if (!__dispatcher) __dispatcher = dispatch

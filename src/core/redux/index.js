@@ -11,4 +11,5 @@ exports.CookieReducer = reducers.CookieReducer
 exports.FalseReducer = reducers.FalseReducer
 exports.TrueReducer = reducers.TrueReducer
 exports.NullReducer = reducers.NullReducer
+exports.ListReducer = reducers.ListReducer
 exports.getStore = require('./Store').getStore

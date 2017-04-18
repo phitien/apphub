@@ -5,7 +5,9 @@ import {Connect} from '../../redux'
 
 class Detail extends Style {
     get componentClassName() {return 'data-element'}
-    get info() {return this.props.info}
+    get info() {
+        return this.props.info
+    }
     render = () =>
         <Card className={this.className}>
             <div className='output-models'>

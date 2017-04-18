@@ -1,102 +1,29 @@
 {
-  "body": [
-    {
-      "dataHierarchyPath": null,
-      "dataType": {
-        "dataType": "xsd:normalizedString"
-      },
-      "description": null,
-      "groupProcessingSeg": null,
-      "groups": null,
-      "id": 137,
-      "name": "Possible Duplicate",
-      "outputModels": [{
-        "attributes": [{
-          "description": null,
-          "name": "xpath",
-          "value": "/scb:SCBML/scb:header/scb:originationDetails/scb:possibleDuplicate"
-        },{
-          "description": null,
-          "name": "Asset Class",
-          "value": "Cross Asset"
-        },{
-          "description": null,
-          "name": "Product",
-          "value": "SCB-header"
-        },{
-          "description": null,
-          "name": "Mandatory-Optional-Flag",
-          "value": "M"
-        }],
-        "description": null,
-        "name": "SCBML"
-      }],
-      "interfaces": [{
-        "contextName": "Hardcode",
-        "derivedLogic": "model.put('PossibleDuplicate', 'flase')",
-        "derivedName": "PossibleDuplicate",
-        "id": 109,
-        "sourceProduct": "BOND",
-        "sourceSystem": "BTS"
-      },{
-        "contextName": "Hardcode",
-        "derivedLogic": "model.put('PossibleDuplicate', 'flase')",
-        "derivedName": "PossibleDuplicate",
-        "id": 115,
-        "sourceProduct": "REPO",
-        "sourceSystem": "BTS"
-      }],
-      "validationRule": null,
-      "workflow": null
-    },
-    {
-      "dataHierarchyPath": null,
-      "dataType": {
-        "dataType": "xsd:normalizedString"
-      },
-      "description": null,
-      "groupProcessingSeg": null,
-      "groups": null,
-      "id": 125,
-      "name": "Country Code",
-      "outputModels": [{
-        "attributes": [{
-          "description": null,
-          "name": "xpath",
-          "value": "/scb:SCBML/scb:header/scb:originationDetails/scb:possibleDuplicate"
-        },{
-          "description": null,
-          "name": "Asset Class",
-          "value": "Cross Asset"
-        },{
-          "description": null,
-          "name": "Product",
-          "value": "SCB-header"
-        },{
-          "description": null,
-          "name": "Mandatory-Optional-Flag",
-          "value": "M"
-        }],
-        "description": null,
-        "name": "SCBML"
-      }],
-      "interfaces": [{
-        "contextName": "Hardcode",
-        "derivedLogic": "model.put('CountryCode', 'ALL')",
-        "derivedName": "PossibleDuplicate",
-        "id": 83,
-        "sourceProduct": "REPO",
-        "sourceSystem": "BTS"
-      },{
-        "contextName": "Hardcode",
-        "derivedLogic": "model.put('CountryCode', 'ALL')",
-        "derivedName": "CountryCode",
-        "id": 124,
-        "sourceProduct": "BOND",
-        "sourceSystem": "BTS"
-      }],
-      "validationRule": null,
-      "workflow": null
-    }
-  ]
+	"header": {
+		"user": null,
+		"serverDateTime": null,
+		"token": null
+	},
+	"body": {
+		"elements": [{
+			"elementId": 45,
+			"context": "/Cross Asset/Trade",
+			"elementName": "Order Id",
+			"lifeCycle": "Production",
+			"elementDesc": null,
+			"elementType": "xsd:string",
+			"assetClass": "Cross Asset",
+			"elementCategory": "Trade-Header",
+			"xpath": "/scb:SCBML/scb:payload/scb:FPMLPayload/conf:trade/conf:tradeHeader/conf:originatingPackage/conf:orderIdentifier/conf:orderId\n"
+		}],
+		"pageInfo": {
+			"pageNo": 0,
+			"pageSize": 1,
+			"totalPage": 1
+		}
+	},
+	"status": {
+		"code": "200",
+		"message": "Success"
+	}
 }

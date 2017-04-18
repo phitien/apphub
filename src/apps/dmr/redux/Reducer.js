@@ -1,4 +1,4 @@
-import {Reducer, ConfigReducer, CookieReducer, FalseReducer, TrueReducer, NullReducer} from '../../../core/redux'
+import {Reducer, ConfigReducer, CookieReducer, FalseReducer, TrueReducer, NullReducer, ListReducer} from '../../../core/redux'
 
 export class SetCurrentOutputTypeActionReducer extends ConfigReducer {
     get fieldName() {return 'currentOutputType'}
@@ -23,6 +23,7 @@ export class SwitchSidebarLeftViewActionReducer extends Reducer {
     get defaultValue() {return 'Hierarchy'}
 }
 export class ApiSuccessSearchDataElementsActionReducer extends Reducer {
+    get defaultValue() {return {elements: [], pageInfo: {pageNo: 1, pageSize: 10, totalPage: 2}}}
     get fieldName() {return 'searchDataElementsResults'}
     normalize(action) {return action.data.body}
 }
@@ -30,6 +31,7 @@ export class ApiSuccessLoadHierarchyActionReducer extends Reducer {
     get fieldName() {return 'hierarchy'}
     normalize(action) {return action.data.body}
 }
-export class ApiSuccessLoadDataElementInfoActionReducer extends Reducer {
-    get fieldName() {return 'dataElement'}
+export class ApiSuccessLoadDataElementInfoActionReducer extends ListReducer {
+    get fieldName() {return 'dataElements'}
+    normalize(action) {return action.data.body}
 }

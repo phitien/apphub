@@ -5,6 +5,7 @@ module.exports = exports = {
             hierarchy: 'http://uklvauems02a.uk.standardchartered.com:8083/dmr-api/mapper-service/datahierarchy',
             searchDataElements: 'http://uklvauems02a.uk.standardchartered.com:8083/dmr-api/mapper-service/elements',
             dataElement: 'http://uklvauems02a.uk.standardchartered.com:8083/dmr-api/mapper-service/elementInfo',
+            productList: 'http://uklvauems02a.uk.standardchartered.com:8083/dmr-api/mapper-service/productList',
             pageInfo: '/static/dmr/api/page.json',
             pageInfoLogged: '/static/dmr/api/page-logged.json',
             login: '/static/dmr/api/login.json',
@@ -19,7 +20,6 @@ module.exports = exports = {
         listOutputTypes: [
             {primaryText: 'BCDF',value: 'BCDF'},
             {primaryText: 'SCBML',value: 'SCBML'},
-            {primaryText: 'Logical Model',value: 'Logical Model'},
         ],
         listSourceSystems: [
             {primaryText: 'FEDS',value: 'FEDS'},
@@ -27,11 +27,12 @@ module.exports = exports = {
         ],
         dataElementColumns: [
             {name: 'ID',field: 'elementId',width: '40px',optional: true,},
-            {name: 'Name',field: 'elementName',show: true,},
+            {name: 'Element Name',field: 'elementName',show: true,},
             {name: 'Asset Class',field: 'assetClass',show: true,},
-            {name: 'Product',field: 'product',show: true,},
+            {name: 'Element Category',field: 'elementCategory',show: true,},
             {name: 'Description',field: 'elementDesc',show: true,optional: true,},
-            {name: 'Xpath',field: 'xpath',optional: true,},
+            {name: 'Xpath',field: 'context',optional: true,},
+            {name: 'LifeCycle',field: 'lifeCycle',optional: true,},
         ],
         theme: {
             lineHeight: '32px',

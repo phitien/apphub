@@ -7,14 +7,20 @@ import Detail from './Detail'
 
 class ProductsList extends Style {
     get componentClassName() {return 'products-list'}
-    get data() {return {data: this.props.searchDataElementsResults}}
+    get data() {
+        return {data: this.props.searchDataElementsResults.elements}
+    }
     get columns() {return this.props.dataElementColumns}
+    getInfo(row) {
+        return this.props.dataElements ? this.props.dataElements[row.elementId] : null
+    }
     fieldRenderer(row,i,col,j) {
         return <Link>{row[col.field]}</Link>
     }
     rowDetailRenderer(rowi,i) {
-        return !rowi.loaded || !rowi.info || !rowi.expanded ? null :
-        <Detail info={rowi.info} className='data-element'/>
+        let info = this.getInfo(rowi)
+        return !info ? null :
+        <Detail info={info} className='data-element'/>
     }
     onSearchFieldChange = (e) => this.props.executeSetCurrentSearchValueAction(e.target.value, () => {
         this.props.executeSearchDataElementsAction({id: this.route.params.id})
@@ -52,19 +58,15 @@ class ProductsList extends Style {
                 pageSize={this.props.currentPageSize} onPageChange={this.onPageChange}
                 currentPage={this.props.currentPageNo} onPageSizeChange={this.onPageSizeChange}
                 fieldRenderer={this.fieldRenderer}
-                rowDetailRenderer={this.rowDetailRenderer}
+                rowDetailRenderer={this.rowDetailRenderer.bind(this)}
                 onCellClick={(rowIndex, cellIndex, e) => {
                     const row = e.target.closest('.row')
                     const index = row.getAttribute('data-index')
                     if (parseInt(index) == index) {
                         const row = this.data.data[index]
-                        if (!row.loaded) {
-                            this.props.executeLoadDataElementInfoAction(row)
-                        }
-                        else {
-                            row.expanded = !row.expanded
-                            this.setState(this.state)
-                        }
+                        this.props.executeLoadDataElementInfoAction(row)
+                        row.expanded = !row.expanded
+                        this.refresh()
                     }
                 }}
             />

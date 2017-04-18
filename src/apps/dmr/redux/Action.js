@@ -102,14 +102,18 @@ export class SearchDataElementsAction extends ApiAction {
             }
         }
     }
-    getRequest(payload) {
+    loadRequest(payload) {
         const searchParams = this.searchParams
         searchParams.body.contextPathId = parseInt(payload.id) ? parseInt(payload.id) : 0
         return this.util.post(this.configuration.api.urls.searchDataElements.format(payload), searchParams)
     }
 }
 export class LoadDataElementInfoAction extends ApiAction {
-    getRequest(payload) {
+    loadCache(payload) {
+        const state = this.apiSuccessState
+        return state && state.dataElements ? state.dataElements[payload.elementId] : null
+    }
+    loadRequest(payload) {
         return this.util.query(this.configuration.api.urls.dataElement.format(payload), {elemId: payload.elementId})
     }
 }
