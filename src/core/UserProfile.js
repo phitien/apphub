@@ -14,7 +14,7 @@ export default class UserProfile {
         if (!data) this.unload()
         else {
           this.data = data
-          this.saveToCookie()          
+          this.saveToCookie()
         }
     }
     unload = () => {
@@ -34,4 +34,10 @@ export default class UserProfile {
     set lastName(v) {this.update('lastName', v)}
     get displayName() {return this.data.displayName}
     set displayName(v) {this.save('displayName', v)}
+    get occupation() {return this.data.occupation}
+    set occupation(v) {this.save('occupation', v)}
+    get department() {return this.data.department}
+    set department(v) {this.save('department', v)}
+    get lastLogin() {return this.data.lastLogin}
+    set lastLogin(v) {this.save('lastLogin', v)}
 }

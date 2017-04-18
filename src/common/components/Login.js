@@ -30,16 +30,16 @@ class Login extends Style {
     }
     render = () =>
       <div className={this.className}>
-        <form className='login-form'>
-            <h1>Sign in to {this.configuration.app}</h1>
-            <TextField type='text' ref={e => this.accountInput = e}
-                errorText={this.state.validationErrors.account}
-                hintText='Account' fullWidth={true} />
-            <TextField type='password' ref={e => this.passwordInput = e}  style={{marginTop: 12, marginBottom: 12}}
-                errorText={this.state.validationErrors.password}
-                hintText='Password' fullWidth={true} />
-            <RaisedButton label='Login' primary={true} fullWidth={true} onClick={this.onLogin}/>
-        </form>
+          <h1>Sign in to <span className='app'>{this.configuration.app}</span></h1>
+          <form className='login-form'>
+              <TextField type='text' ref={e => this.accountInput = e}
+                  errorText={this.state.validationErrors.account}
+                  hintText='Account' fullWidth={true} />
+              <TextField type='password' ref={e => this.passwordInput = e}  style={{marginTop: 12, marginBottom: 12}}
+                  errorText={this.state.validationErrors.password}
+                  hintText='Password' fullWidth={true} />
+              <RaisedButton label='Login' primary={true} fullWidth={true} onClick={this.onLogin}/>
+          </form>
       </div>
 }
 export default (new Connect(Login)).klass

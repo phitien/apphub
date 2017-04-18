@@ -9,6 +9,7 @@ import SidebarLeftExpandButton from './SidebarLeftExpandButton'
 class SidebarLeft extends Style {
     get componentClassName() {return `lightdark-box sidebar-left`}
     render = () => <div className={this.className}>
+        <div className='view-type'>{this.props.sidebarLeftViewName == 'Hierarchy' ? 'Logical Data Hierarchy' : 'Business Product'}</div>
         {this.props.hideSidebarLeft ? <SidebarLeftExpandButton/> : null}
         {this.props.hideSidebarLeft ? null : <SidebarLeftSearch/>}
         {this.props.sidebarLeftViewName == 'Hierarchy' ? <Hierarchy/> : <Product/>}

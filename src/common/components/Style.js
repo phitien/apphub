@@ -6,14 +6,6 @@ export default class Style extends Component {
     get defaultTheme() {
         const theme = this.configuration.ui.theme
         return this.util.assign({id: this.uuid, name: this.uuid}, theme, {
-            colorStyle: {
-                color: theme.color,
-                backgroundColor: theme.backgroundColor
-            },
-            reverseColorStyle: {
-                color: theme.backgroundColor,
-                backgroundColor: theme.color
-            },
             paddingLeftRight: {
                 paddingLeft: theme.paddingLeft,
                 paddingRight: theme.paddingRight
@@ -30,44 +22,15 @@ export default class Style extends Component {
                 paddingTop: theme.paddingTopSmall,
                 paddingBottom: theme.paddingBottomSmall
             },
-            inputStyle: {
-                flex: 1, width: '100%', margin: '0'
-            },
-            textareaStyle: {
-                flex: 1, width: 'auto', margin: '0'
-            },
             lineStyle: {
                 height: theme.lineHeight,
                 lineHeight: theme.lineHeight,
             },
             buttonStyle: {
                 fontSize: theme.buttonFontSize,
+                backgroundColor: theme.buttonBackgroundColor,
                 paddingLeft: theme.paddingLeftSmall,
                 paddingRight: theme.paddingRightSmall,
-            },
-            textStyle: {
-                color: theme.color,
-                fontSize: theme.fontSize,
-            },
-            labelStyle: {
-                color: theme.labelColor,
-                fontSize: theme.labelFontSize,
-                display: 'flex', alignItems: 'center', justifyContent: 'flex-start',
-            },
-            hintStyle: {
-                color: theme.hintColor,
-                fontSize: theme.fontSizeSmall, fontStyle: 'italic',
-                display: 'flex', alignItems: 'center', justifyContent: 'flex-start',
-            },
-            floatingLabelStyle: {
-                color: theme.floatingLabelColor,
-                fontSize: theme.floatingLabelFontSize,
-                display: 'flex', alignItems: 'center', justifyContent: 'flex-start',
-            },
-            floatingLabelFocusStyle: {
-                color: theme.floatingLabelFocusColor,
-                fontSize: theme.floatingLabelFontSize,
-                display: 'flex', alignItems: 'center', justifyContent: 'flex-start',
             },
             underlineStyle: {bottom: '0', left: '0'},
             underlineFocusStyle: {borderBottomWidth: '1px'},

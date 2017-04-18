@@ -1,3 +1,4 @@
+const primaryColor = 'rgba(52, 142, 40, 1)'
 module.exports = exports = {
     api: {
         urls: {
@@ -44,21 +45,28 @@ module.exports = exports = {
             paddingBottomSmall: '5px',
             paddingRightSmall: '5px',
             paddingLeftSmall: '5px',
-            buttonFontSize: '13px',
-            labelFontSize: '14px',
-            floatingLabelFontSize: '13px',
+            buttonFontSize: '14px',
+            buttonBackgroundColor: primaryColor,
             fontSizeBig: '16px',
             fontSize: '14px',
-            fontSizeSmall: '12px',
+            fontSizeSmall: '13px',
             backgroundColor: 'rgba(255, 255, 255, 1)',
             color: 'rgba(0, 0, 0, .7)',
+            inputFontSize: '13px',
+            inputColor: 'rgba(0, 0, 0, .8)',
+            inputBackgroundColor: 'transparent',
+            hintFontSize: '13px',
             hintColor: 'rgba(0, 0, 0, .6)',
-            labelColor: 'rgba(0, 0, 0, .9)',
-            floatingLabelColor: 'rgba(50, 200, 254, 1)',
-            floatingLabelFocusColor: 'rgba(50, 200, 254, 1)',
+            labelFontSize: '14px',
+            labelColor: primaryColor,
+            floatingLabelFontSize: '14px',
+            floatingLabelFontSize: '13px',
+            floatingLabelColor: primaryColor,
+            floatingLabelFocusFontSize: '13px',
+            floatingLabelFocusColor: primaryColor,
             materialTheme: {
                 palette: {
-                    primary1Color: 'rgba(50, 200, 254, 1)',
+                    primary1Color: primaryColor,
                     accent1Color: 'rgba(50, 200, 254, 1)',
                     borderColor: 'rgba(0, 0, 0, .1)'
                 }

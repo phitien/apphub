@@ -4,13 +4,16 @@
   .links {
     flex: 1;
     .breadcrumb {
-      font-size: $breadcrumb-font-size;color: $breadcrumb-color;
+      font-size: $breadcrumb-font-size;color: $primary;
       margin-right: $margin;
+      &:after {
+          content: '/';margin-left: $margin;
+      }
       &:last-child {
         margin-right: 0;
         color: $color-disabled;
-        font-style: italic;
         cursor: text;
+        &:after {display: none;}
       }
     }
   }

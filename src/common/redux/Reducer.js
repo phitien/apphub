@@ -12,7 +12,7 @@ export class UserLogoutActionReducer extends CookieReducer {
 export class ApiSuccessUserLoginActionReducer extends CookieReducer {
     get fieldName() {return 'user'}
     setCookie() {
-        this.util.assign(this.__value[this.fieldName], {displayName: this.action.extra[0].account})//TODO remove 
+        this.util.assign(this.__value[this.fieldName], {displayName: this.action.extra[0].account})//TODO remove
         this.util.user.load(this.__value[this.fieldName])
     }
 }
@@ -33,7 +33,6 @@ export class SetCurrentPageSizeActionReducer extends ConfigReducer {
     get fieldName() {return 'currentPageSize'}
 }
 export class ToggleSidebarLeftActionReducer extends FalseReducer {
-    debug = true
     get fieldName() {return 'hideSidebarLeft'}
 }
 export class ToggleSidebarRightActionReducer extends TrueReducer {

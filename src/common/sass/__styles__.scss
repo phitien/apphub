@@ -7,8 +7,8 @@ html {
 }
 body {
   @extend .default-box;
-  font-family: 'Roboto', sans-serif;-webkit-font-smoothing: antialiased;
-  font-size: $font-size;line-height: $line-height;
+  font-family: 'Roboto', sans-serif;font-size: $font-size;font-weight: 400;
+  line-height: $line-height;
   margin: 0;padding: 0;min-height: 100%;
   #header,#container,#footer {width: 100%;}
   #header {
@@ -28,29 +28,30 @@ body {
       }
       .login-page {
         align-items: center;justify-content: center;
+        h1 {color: $primary;}
         .login-form {
           width: 30%;
           padding: 24px;
           border-radius: 3px;
           background-color: rgba(255, 255, 255, .9);
-          h1 {
-            color: $primary;
-          }
         }
       }
     }
   }
 }
-a {cursor: pointer;text-decoration: none;color: inherit;
+a {
+    cursor: pointer;text-decoration: none;color: inherit;
+    font-weight: 200;
   &:hover {color: $primary;}
 }
 i {cursor: pointer;
   &:hover {color: $primary;}
 }
-h1,h2 {font-weight: normal;color: $blue;}
-h3,h4,h5 {font-weight: normal;color: $blue;}
+h1,h2 {color: $primary;font-weight: 100;}
+h3,h4,h5 {color: $primary;font-weight: 100;}
 input[type=text],input[type=password],input[type=email],input[type=url] {
   height: $line-height;border: none;outline: none;border-radius: 3px;padding: 0 3px;
+  font-weight: 100;
 }
 @import "./breadcrumbs.scss";
 @import "./select-field.scss";
