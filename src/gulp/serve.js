@@ -29,7 +29,7 @@ module.exports = exports = function(config) {
   });
   gulp.task(settings.NAME + ':reload', function() {
     if (settings.env == 'production' || settings.env == 'stage' || settings.env == 'test') return;
-    gulp.src([
+    return gulp.src([
       settings.PUBLIC_STATIC_APP + '/*.css',
       settings.PUBLIC_STATIC_APP + '/*.js',
       settings.PUBLIC_APP + '/*.html'
@@ -37,15 +37,18 @@ module.exports = exports = function(config) {
   });
   gulp.task(settings.NAME + ':server', function() {
     // if (settings.env == 'production' || settings.env == 'stage' || settings.env == 'test') return;
-    return connect.server({
-      name: 'Dev server',
-      root: settings.PUBLIC,
-      port: settings.port,
-      livereload: {
-        port: settings.livereloadport,
-      },
-      fallback: settings.PUBLIC_APP + '/' + settings.NAME + '.html'
-    });
+    try {
+        return connect.server({
+          name: 'Dev server',
+          root: settings.PUBLIC,
+          port: settings.port,
+          livereload: {
+            port: settings.livereloadport,
+          },
+          fallback: settings.PUBLIC_APP + '/' + settings.NAME + '.html'
+        });
+    }
+    catch(e) {console.error(e)}
   });
   gulp.task(settings.NAME + ':serve', function() {
     return runSequence(

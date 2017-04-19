@@ -2,18 +2,18 @@
   "_args": [
     [
       {
-        "raw": "highlight.js@^9.6.0",
+        "raw": "highlight.js",
         "scope": null,
         "escapedName": "highlight.js",
         "name": "highlight.js",
-        "rawSpec": "^9.6.0",
-        "spec": ">=9.6.0 <10.0.0",
-        "type": "range"
+        "rawSpec": "",
+        "spec": "latest",
+        "type": "tag"
       },
-      "/Users/phitien/apphub/node_modules/react-highlight"
+      "/Users/phitien/apphub"
     ]
   ],
-  "_from": "highlight.js@>=9.6.0 <10.0.0",
+  "_from": "highlight.js@latest",
   "_id": "highlight.js@9.10.0",
   "_inCache": true,
   "_location": "/highlight.js",
@@ -29,22 +29,24 @@
   "_npmVersion": "2.15.9",
   "_phantomChildren": {},
   "_requested": {
-    "raw": "highlight.js@^9.6.0",
+    "raw": "highlight.js",
     "scope": null,
     "escapedName": "highlight.js",
     "name": "highlight.js",
-    "rawSpec": "^9.6.0",
-    "spec": ">=9.6.0 <10.0.0",
-    "type": "range"
+    "rawSpec": "",
+    "spec": "latest",
+    "type": "tag"
   },
   "_requiredBy": [
+    "#USER",
+    "/",
     "/react-highlight"
   ],
   "_resolved": "https://registry.npmjs.org/highlight.js/-/highlight.js-9.10.0.tgz",
   "_shasum": "f9f0b14c0be00f0e4fb1e577b749fed9e6f52f55",
   "_shrinkwrap": null,
-  "_spec": "highlight.js@^9.6.0",
-  "_where": "/Users/phitien/apphub/node_modules/react-highlight",
+  "_spec": "highlight.js",
+  "_where": "/Users/phitien/apphub",
   "author": {
     "name": "Ivan Sagalaev",
     "email": "maniac@softwaremaniacs.org"

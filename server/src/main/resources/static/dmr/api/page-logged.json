@@ -12,9 +12,14 @@
         "url": "/dmr",
         "subNodes": []
       },{
-        "title": "Products",
-        "description": "Products List",
+        "title": "Data elements",
+        "description": "Data elements",
         "url": "/dmr/products",
+        "subNodes": []
+      },{
+        "title": "Workflow",
+        "description": "Workflow",
+        "url": "/dmr/workflow",
         "subNodes": []
       }]
     },{
