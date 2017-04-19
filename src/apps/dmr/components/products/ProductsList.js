@@ -64,9 +64,10 @@ class ProductsList extends Style {
                     const index = row.getAttribute('data-index')
                     if (parseInt(index) == index) {
                         const row = this.data.data[index]
-                        this.props.executeLoadDataElementInfoAction(row)
-                        row.expanded = !row.expanded
-                        this.refresh()
+                        this.props.executeLoadDataElementInfoAction(row, () => {
+                            row.expanded = !row.expanded
+                            this.refresh()
+                        })
                     }
                 }}
             />

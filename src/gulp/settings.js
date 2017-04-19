@@ -9,7 +9,7 @@ module.exports = exports = function(config) {
   var SRC_COMMON = SRC + '/common';
   var SRC_STATIC = SRC + '/static';
   var SRC_APPS = SRC + '/apps';
-  var SRC_SAMPLE = SRC_APPS + '/sample';
+  var SRC_SAMPLE = SRC + '/sample';
   var SRC_APP = SRC_APPS + APP;
   var SRC_TEMPLATE = SRC_APP + '/template';
   var SRC_MOCK = SRC_APP + '/mock';

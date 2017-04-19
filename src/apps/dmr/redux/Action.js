@@ -46,7 +46,7 @@ export class SetDataElementColumnsAction extends Action {}
 export class SwitchSidebarLeftViewAction extends Action {}
 export class SetCurrentHierarchyAction extends ProxyAction {
     proxyClasses = 'SetBreadcrumbsAction'
-    proxyNormalize(node) {
+    proxyNormalize(state, node) {
         const breadcrumbs = []
         function* loop(n) {
             if(!n || !n.parent) yield breadcrumbs
@@ -65,6 +65,7 @@ export class LoadHierarchyAction extends Action {
         }
         const me = this
         async function load(node) {
+            if (node.id == id) Action.execute(SetCurrentHierarchyAction, node)
             if (!node.loaded) {
                 let payload = {product: node.path, id: node.id}
                 let res = await me.util.query(me.configuration.api.urls.hierarchy.format(payload), payload).run(true)
@@ -78,7 +79,6 @@ export class LoadHierarchyAction extends Action {
                     }
                 }
             }
-            if (node.id == id) Action.execute(SetCurrentHierarchyAction, node)
         }
         load(root)
         Action.execute('ApiSuccessLoadHierarchyAction', {data: {body: root}})

@@ -16,6 +16,7 @@ export class SetDataElementColumnsActionReducer extends ConfigReducer {
     get fieldName() {return 'dataElementColumns'}
 }
 export class SetCurrentHierarchyActionReducer extends Reducer {
+    debug = true
     get fieldName() {return 'currentHierarchy'}
 }
 export class SwitchSidebarLeftViewActionReducer extends Reducer {

@@ -21,7 +21,7 @@ export default class Action {
     get state() {return this.getState(this.name)}
     get dispatcher() {return __dispatcher}
     get fn() {return this.__fn}
-    
+
     preProcess(payload, ...args) {}
     beforeDispatch(payload, ...args) {}
     normalize(payload, ...args) {
