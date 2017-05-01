@@ -4,10 +4,14 @@ import Style from '../Style'
 
 class LogoBox extends Style {
     componentClassName = 'logo-box'
-    render() {
+
+    children = () => <div className='wrapper'>
+        <img src={this.configuration.applogo}/>
+        <h3>{this.configuration.appname}</h3>
+    </div>
+    render = () => {
         return <div className={this.className}>
-            <img alt={this.pageInfo.pagename} src={applogo}/>
-            <h3>{appname}</h3>
+            {this.children()}
         </div>
     }
 }

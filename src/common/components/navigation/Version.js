@@ -4,8 +4,14 @@ import Style from '../Style'
 
 class Version extends Style {
     componentClassName = 'version'
-    render = () => <div className={this.className}>
-        Version {this.pageInfo.version ? this.pageInfo.version : this.configuration.version}
+
+    children = () => <div className='wrapper'>
+        {this.configuration.appversion}
     </div>
+    render = () => {
+        return <div className={this.className}>
+            {this.children()}
+        </div>
+    }
 }
 export default (new Connect(Version)).klass

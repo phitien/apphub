@@ -15,10 +15,11 @@ class Header extends Style {
         <div className={this.className}>
             <LinksHub/>
             <LogoBox/>
+            <div className='space'/>
             <SearchBox/>
             <Notification/>
-            <UserBox/>
             <Help/>
+            <UserBox/>
         </div>
 }
 export default (new Connect(Header)).klass

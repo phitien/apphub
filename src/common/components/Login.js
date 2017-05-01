@@ -5,7 +5,7 @@ import TextField from './TextField'
 import Button from './Button'
 
 class Login extends Style {
-    componentClassName = 'container-fluid page login-page'
+    componentClassName = 'login'
     validate = () => {
         if (!this.accountInput.value) {
             return this.setError('account', 'This field is required')

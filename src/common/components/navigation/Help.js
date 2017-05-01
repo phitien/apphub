@@ -5,9 +5,7 @@ import Style from '../Style'
 class Help extends Style {
     componentClassName = 'help'
     children = () => <div className='wrapper'>
-        <div className='icon'>
-            <i className='material-icons'>help</i>
-        </div>
+        <i className='material-icons'>help</i>
     </div>
     render = () =>
         <div className={this.className}>

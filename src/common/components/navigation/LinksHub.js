@@ -15,9 +15,7 @@ class LinksHub extends Style {
         }, value)
     }
     children = () => <div className='wrapper'>
-        <div className='icon'>
-            <i className='material-icons'>apps</i>
-        </div>
+        <i className='material-icons'>apps</i>
         <Menu menus={this.pageInfo.menus} className='menus' subMenuClassName='sub-menus'/>
     </div>
     render = () => {

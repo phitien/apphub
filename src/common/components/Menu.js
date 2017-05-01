@@ -18,7 +18,6 @@ export default class Menu extends Style {
             <li key={i} className={this.getNodeClassName(item)}>
                 <Link {...props}>
                     {item.title}
-                    {item.subNodes && item.subNodes.length > 0 ? <i className='material-icons'>chevron_right</i> : null}
                 </Link>
                 {!item.description ? null :
                 <div className='description'>{item.description}</div>}

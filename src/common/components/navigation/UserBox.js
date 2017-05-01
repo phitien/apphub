@@ -7,24 +7,17 @@ class UserBox extends Style {
     componentClassName = 'user-box'
     get menus() {
         return [{
-            title: 'Manage',
-            subNodes: [{
-                title: 'View profile',
-            },{
-                title: 'Preferences',
-            },{
-                title: 'Logout',
-                onClick: () => this.props.executeUserLogoutAction()
-            }]
-        }
-    ]}
+            title: 'Profile',
+        },{
+            title: 'Preferences',
+        },{
+            title: 'Logout',
+            onClick: () => this.props.executeUserLogoutAction()
+        }]
+    }
     children = () => <div className='wrapper'>
-        <div className='icon'>
-            <div className='user-info'>
-                <div className='display-name'>{this.util.user.displayName}</div>
-            </div>
-            <i className='material-icons'>person</i>
-        </div>
+        <div className='display-name'>{this.util.user.displayName}</div>
+        <i className='material-icons'>person</i>
         <div className='menus'>
             <div className='info'>
                 <div className='avatar'></div>

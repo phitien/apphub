@@ -1,8 +1,8 @@
-.default-box, body {
+.default-box, body, .header .user-box .wrapper .menus {
   background-color: rgba(87, 195, 201, 0.1) !important;
   color: #000000 !important; }
 
-.primary-box, .stepper .step-header.active .step-index a {
+.primary-box, .button, .stepper .step-header.active .step-index a {
   background-color: #69BE28 !important;
   color: #000000 !important; }
 
@@ -106,12 +106,18 @@ i {
 h1, h2 {
   color: #0075B0;
   margin: 0;
-  padding: 0; }
+  padding: 0;
+  line-height: 31.5px;
+  font-size: 21px;
+  font-weight: 100; }
 
 h3, h4, h5 {
   color: #0075B0;
   margin: 0;
-  padding: 0; }
+  padding: 0;
+  line-height: 27px;
+  font-size: 18px;
+  font-weight: 100; }
 
 input[type=text], input[type=password], input[type=email], input[type=url] {
   height: 24px;
@@ -125,6 +131,46 @@ iframe {
   border: none;
   width: 100%;
   height: 100%; }
+
+.space {
+  flex: 1; }
+
+.button {
+  border: none;
+  height: 32px;
+  outline: none;
+  padding-left: 16px;
+  padding-right: 16px;
+  border-radius: 2px;
+  box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px; }
+  .button.fit {
+    width: 100%; }
+  .button:hover {
+    box-shadow: rgba(0, 0, 0, 0.156863) 0px 3px 10px, rgba(0, 0, 0, 0.227451) 0px 3px 10px; }
+
+.text-field {
+  position: relative; }
+  .text-field input {
+    width: 100%;
+    height: 24px;
+    font-size: 13px;
+    background-color: transparent;
+    margin: 0;
+    padding: 0;
+    border-bottom: 1px solid #999999;
+    outline: none; }
+    .text-field input:hover {
+      border-bottom-color: #69BE28; }
+  .text-field .message {
+    position: absolute;
+    left: 0;
+    top: 100%;
+    line-height: 16px;
+    margin-top: 3px;
+    font-size: 10px;
+    font-style: italic; }
+  .text-field.error .message {
+    color: red; }
 
 .select-field {
   display: inline-block;
@@ -320,6 +366,21 @@ iframe {
         .breadcrumbs .links .breadcrumb:last-child:after {
           display: none; }
 
+.login {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; }
+
+.login-form {
+  width: 300px;
+  margin: 0 auto; }
+  .login-form .text-field {
+    margin: 24px 0; }
+  .login-form .button {
+    width: 100%; }
+
 #application {
   position: fixed;
   top: 0;
@@ -332,7 +393,8 @@ iframe {
 
 #header {
   position: fixed;
-  height: 40px; }
+  height: 40px;
+  z-index: 1; }
 
 #footer {
   position: fixed;
@@ -346,48 +408,53 @@ iframe {
   overflow: hidden;
   display: flex;
   flex-direction: column; }
-  #container .viewport {
-    flex: 1;
-    display: flex;
-    flex-direction: column; }
 
 .header {
   display: flex;
   align-items: center;
-  justify-content: space-between; }
-  .header .user-box .menus {
-    display: none; }
-
-#application {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0; }
-
-#header, #container, #footer {
+  height: 100%;
   width: 100%; }
+  .header > * {
+    height: 100%;
+    padding: 0 8px; }
+    .header > * .wrapper {
+      display: flex;
+      align-items: center;
+      height: 100%; }
+      .header > * .wrapper .menus {
+        display: none;
+        position: absolute;
+        top: 100%; }
+      .header > * .wrapper:hover .menus {
+        display: block; }
+  .header .logo-box img {
+    height: 24px; }
+  .header .user-box .wrapper .menus {
+    right: 0;
+    padding: 8px;
+    box-shadow: 1px 3px 8px rgba(0, 0, 0, 0.3); }
 
-#header {
-  position: fixed;
-  height: 40px; }
-
-#footer {
-  position: fixed;
-  bottom: 0;
-  height: 32px; }
-
-#container {
-  position: fixed;
-  top: 40px;
-  bottom: 32px;
-  overflow: hidden;
+.footer {
   display: flex;
-  flex-direction: column; }
-  #container .viewport {
-    flex: 1;
-    display: flex;
-    flex-direction: column; }
+  align-items: center;
+  height: 100%;
+  width: 100%; }
+  .footer > * {
+    height: 100%;
+    padding: 0 8px; }
+    .footer > * .wrapper {
+      display: flex;
+      align-items: center;
+      height: 100%; }
+      .footer > * .wrapper .menus {
+        display: none;
+        position: absolute;
+        top: 100%; }
+      .footer > * .wrapper:hover .menus {
+        display: block; }
+  .footer .version {
+    font-size: 10px;
+    font-style: italic; }
 
 @keyframes sidebar-left-expanding {
   0% {
@@ -453,16 +520,15 @@ iframe {
   width: 16px;
   padding: 0; }
 
-.application {
+.viewport {
   flex: 1;
   display: flex;
   flex-direction: column; }
-  .application .page .wrapper {
-    flex: 1;
-    display: flex; }
-    .application .page .wrapper .content {
-      flex: 1;
-      overflow: auto; }
+
+.page {
+  flex: 1;
+  display: flex;
+  flex-direction: column; }
 
 .page .content {
   padding: 0; }

@@ -1,6 +1,7 @@
 $font-family: Helvetica, Arial, sans-serif;
 $font-weight: 500;
-$font-size-xl: 20px;
+$font-size-xxl: 21px;
+$font-size-xl: 18px;
 $font-size-l: 16px;
 $font-size: 13px;
 $font-size-s: 12px;
@@ -9,7 +10,7 @@ $font-size-xs: 10px;
 $margin: 16px;
 $header-height: 40px;
 $header-padding-top: $margin;
-$logo-height: 40px;
+$logo-height: 24px;
 
 $footer-height: 32px;
 $footer-padding-top: $margin;
@@ -33,3 +34,8 @@ $select-field-height: 24px;
 $select-field-dropdown-bg: #ffffff;
 $select-field-margin: $margin;
 $select-field-border-color: $border-color;
+
+$login-form-width: 300px;
+$button-height: 32px;
+$text-field-height: 24px;
+$text-field-font-size: 13px;

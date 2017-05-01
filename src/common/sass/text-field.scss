@@ -1,0 +1,24 @@
+.text-field {
+    position: relative;
+    input {
+        width: 100%;
+        height: $text-field-height;
+        font-size: $text-field-font-size;
+        background-color: transparent;
+        margin: 0;
+        padding: 0;
+        border-bottom: 1px solid $border-color;
+        outline: none;
+        &:hover {
+            border-bottom-color: $primary;
+        }
+    }
+    .message {
+        position: absolute;left: 0;top: 100%;
+        line-height: $margin;margin-top: 3px;
+        font-size: $font-size-xs;font-style: italic;
+    }
+    &.error .message {
+        color: red;
+    }
+}

@@ -9,11 +9,11 @@ export default class TextField extends Style {
     set value(v) {this.input.value = v}
     get placeholder() {return this.props.placeholder ? this.props.placeholder : ''}
 
-    error = () => !this.props.errorText ? null :
-        <div className='error'>{this.props.errorText}</div>
+    renderMessage = () => !this.props.errorText ? null :
+        <div className='message'>{this.props.errorText}</div>
     render = () =>
         <div className={this.className}>
             <input ref={e => this.input = e} type={this.type} value={this.defaultValue} placeholder={this.placeholder}/>
-            {this.error()}
+            {this.renderMessage()}
         </div>
 }

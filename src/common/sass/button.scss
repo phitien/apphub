@@ -1,0 +1,14 @@
+.button {
+    @extend .primary-box;
+    border: none;
+    height: $button-height;
+    outline: none;
+    padding-left: $margin;
+    padding-right: $margin;
+    border-radius: 2px;
+    box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
+    &.fit {width: 100%;}
+    &:hover {
+        box-shadow: rgba(0, 0, 0, 0.156863) 0px 3px 10px, rgba(0, 0, 0, 0.227451) 0px 3px 10px;
+    }
+}
