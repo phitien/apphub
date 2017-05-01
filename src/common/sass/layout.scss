@@ -1,15 +1,25 @@
 #application {
-    position: fixed;top: 0;right: 0;bottom: 0;left: 0;
-}
-#header,#container,#footer {width: 100%;}
-#header {
-    position: fixed;height: $header-height;
-    z-index: 1;
-}
-#footer {
-    position: fixed;bottom: 0;height: $footer-height;
-}
-#container {
-    position: fixed;top: $header-height;bottom: $footer-height;overflow: hidden;
-    display: flex;flex-direction: column;
+    width: $application-width;margin: 0 auto;
+    #header {
+        height: $header-height;z-index: 1;
+    }
+    #footer {
+        height: $footer-height;
+    }
+    #container {
+        min-height: 500px;display: flex;flex-direction: column;
+    }
+    &.fixed {
+        width: auto;position: fixed;top: 0;right: 0;bottom: 0;left: 0;
+        #header,#container,#footer {width: 100%;}
+        #header {
+            position: fixed;
+        }
+        #footer {
+            position: fixed;bottom: 0;
+        }
+        #container {
+            position: fixed;top: $header-height;bottom: $footer-height;overflow: hidden;
+        }
+    }
 }

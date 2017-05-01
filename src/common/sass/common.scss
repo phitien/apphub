@@ -1,4 +1,7 @@
-.default-box {@include box($bg-color, $text-color, true);}
+.default-box {
+    @include box($bg-color, $text-color, true);
+    background: linear-gradient(to right bottom, $bg-color, $bg-color2);
+}
 .primary-box {@include box($primary, $text-color, true);}
 .primary1-box {@include box($primary1, $text-color, true);}
 .primary2-box {@include box($primary2, $text-color-inverse, true);}
@@ -30,11 +33,11 @@ body {
 a {cursor: pointer;text-decoration: none;color: inherit;}
 i {cursor: pointer;&:hover {color: $primary;}}
 h1,h2 {
-    color: $hilight-color;margin: 0;padding: 0;line-height: 1.5*$font-size-xxl;
+    margin: 0;padding: 0;line-height: 1.5*$font-size-xxl;
     font-size: $font-size-xxl;font-weight: 100;
 }
 h3,h4,h5 {
-    color: $hilight-color;margin: 0;padding: 0;line-height: 1.5*$font-size-xl;
+    margin: 0;padding: 0;line-height: 1.5*$font-size-xl;
     font-size: $font-size-xl;font-weight: 100;
 }
 input[type=text],input[type=password],input[type=email],input[type=url] {

@@ -4,20 +4,7 @@
   "description": "App Hub application",
   "main": "null",
   "scripts": {
-    "test": "test",
-    "start": "npm run start-mock",
-    "serve": "npm run serve-mock",
-    "start-mock": "gulp dmr --NODE_ENV=mock",
-    "serve-mock": "gulp dmr:serve --NODE_ENV=mock",
-    "start-dev": "gulp dmr --NODE_ENV=dev",
-    "serve-dev": "gulp dmr:serve --NODE_ENV=dev",
-    "start-test": "gulp dmr --NODE_ENV=test",
-    "serve-test": "gulp dmr:serve --NODE_ENV=test",
-    "start-stage": "gulp dmr --NODE_ENV=stage",
-    "serve-stage": "gulp dmr:serve --NODE_ENV=stage",
-    "start-production": "gulp dmr --NODE_ENV=production",
-    "serve-production": "gulp dmr:serve --NODE_ENV=production",
-    "gulp-install": "npm i -D gulp vinyl-source-stream vinyl-buffer browserify gulp-sourcemaps gulp-autoprefixer gulp-concat babelify gulp-sass run-sequence gulp-inject gulp-replace gulp-livereload gulp-rename gulp-uglify gulp-clean"
+    "test": "test"
   },
   "repository": {
     "type": "git",

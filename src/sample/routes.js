@@ -3,7 +3,7 @@ import * as pages from './pages'
 import Viewport from './Viewport'
 
 const subRoutes = [
-{path: '{apppath}/sub', component: pages.SubPage, onChange: onRouteChanged}
+{path: '{apppath}/sub', component: pages.SubPage, onChange: onRouteChanged},
 /**NEWPAGE**/
 ]
 const routes = [{
