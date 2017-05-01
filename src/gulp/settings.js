@@ -36,7 +36,7 @@ module.exports = exports = function(config) {
     ];
 
     var GULP_NEW_APP_TEXT = '/**NEW_APP**/';
-    var GULP_NEW_APP = "gulp(require('"+SRC_APP+"/gulp/gulp'));";
+    var GULP_NEW_APP = "addGulpTasks(require('"+SRC_APP+"/gulp/gulp'));";
     var GULP_NEW_APP_REPLACEMENT = GULP_NEW_APP + "\n" + GULP_NEW_APP_TEXT;
 
     var argv = require('./argv');

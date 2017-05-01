@@ -1,6 +1,4 @@
-module.exports = exports = function(config) {
-    var gulp = require('gulp');
-    var settings = require('./settings')(config);
+module.exports = exports = function(settings) {
     gulp.task(settings.config.app + ':config', function() {
         var replace = require('gulp-replace');
         var rename = require('gulp-rename');

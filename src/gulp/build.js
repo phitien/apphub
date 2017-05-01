@@ -1,13 +1,4 @@
-module.exports = exports = function(config) {
-    require('./config')(config);
-    require('./js')(config);
-    require('./css')(config);
-    require('./copy')(config);
-    require('./inject')(config);
-    var gulp = require('gulp');
-    var runSequence = require('run-sequence');
-    var settings = require('./settings')(config);
-
+module.exports = exports = function(settings) {
     gulp.task(settings.config.app + ':build', function() {
         var rs = runSequence(
             settings.config.app + ':config',

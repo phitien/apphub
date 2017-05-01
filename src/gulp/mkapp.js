@@ -22,7 +22,8 @@ gulp.task('mkapp', function() {
             var batchReplace = require('gulp-batch-replace');
             var replaceConfig = []
             Object.keys(settings.config).forEach(function(k) {
-                replaceConfig.push(['{'+k+'}', settings.config[k]])
+                if (k != 'cache')
+                    replaceConfig.push(['{'+k+'}', settings.config[k]])
             })
             gulp.src(settings.getAllFiles(settings.SRC_SAMPLE, '*', 10))
                 .pipe(batchReplace(replaceConfig))
