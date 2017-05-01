@@ -1,10 +1,11 @@
 .select-field {
+    z-index: 10;
     .padding-left {padding-left: $select-field-margin/4;}
     .padding-right {padding-right: $select-field-margin/4;}
     display: inline-block;cursor: pointer;position: relative;
     .select-title {}
     .select-dropdown {
-        z-index: 10;position: absolute;top: 100%;left: 0;background-color: $select-field-dropdown-bg;
+        z-index: 10;position: absolute;top: 100%;left: 0;
         min-width: 100%;border-left: 1px solid $select-field-border-color;border-right: 1px solid $select-field-border-color;border-bottom: 1px solid $select-field-border-color;
     }
     .select-value {
@@ -15,7 +16,9 @@
         @extend .padding-left, .padding-right;
         flex: 1;
     }
-    .search-field {}
+    .search-field {
+        border-top: 1px solid $select-field-border-color;
+    }
     .select-options {max-height: 169px;overflow-y: auto;}
     .select-option {
         @extend .padding-left, .padding-right;
@@ -23,5 +26,20 @@
         &.selected {background-color: rgba(0,0,0,.3);}
         &.none-option {font-style: italic;opacity: .5;}
         &:first-child {border-top: 1px solid $select-field-border-color;}
+    }
+    ul {display: block;margin: 0;padding: 0;background-color: $select-field-dropdown-bg;}
+    li {display: block;margin: 0;padding: 0;position: relative;min-width: 200px;
+        ul {
+            display: none;
+            position: absolute;left: 100%;top: 0;
+            border-left: 1px solid $select-field-border-color;
+            border-right: 1px solid $select-field-border-color;
+            border-bottom: 1px solid $select-field-border-color;
+        }
+        &:hover {
+            ul {
+                display: block;
+            }
+        }
     }
 }

@@ -2,9 +2,9 @@ import React from 'react'
 import {Connect} from '../../redux'
 import Style from '../Style'
 import LinksHub from './LinksHub'
+import Categories from './Categories'
 import LogoBox from './LogoBox'
 import SearchBox from './SearchBox'
-import Help  from './Help'
 import Notification  from './Notification'
 import UserBox from './UserBox'
 
@@ -15,10 +15,10 @@ class Header extends Style {
         <div className={this.className}>
             <LinksHub/>
             <LogoBox/>
+            <Categories/>
             <div className='space'/>
             <SearchBox/>
             <Notification/>
-            <Help/>
             <UserBox/>
         </div>
 }

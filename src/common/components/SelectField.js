@@ -7,10 +7,7 @@ export default class SelectField extends Style {
     placeholder = this.props.placeholder ? this.props.placeholder : ''
     noneOption = {text: this.placeholder, value: null, className: 'none-option'}
     shouldShowNoneOption = this.props.hasOwnProperty('placeholder')
-    style = this.util.assign({}, this.props.style)
     title = this.props.title
-    optionText = this.props.optionText ? this.props.optionText : (o) => o.text
-    optionValue = this.props.optionValue ? this.props.optionValue : (o) => o.value
     option = (i)=> this.options[i] ? this.options[i] : this.noneOption
     open = (open) => this.refresh({open})
     onChange = (o, f) => {
@@ -19,16 +16,19 @@ export default class SelectField extends Style {
             if (this.props.onChanged) this.props.onChanged(o, this)
         }
     }
-    state = {
-        options: this.normalizeOptions(this.props.options),
-        open: Boolean(this.props.open),
-        searchable: Boolean(this.props.searchable),
 
-
-    }
     init(props) {
+        this.normalizeOptions = (options) => Array.isArray(options) ? options.map(o => {return typeof o == 'string' ? {value: o, text:o} : o}) :
+                typeof options == 'object' ? Object.keys(options).map(k => {return {value: options[k], text: k}}) :
+                []
+        this.optionText = props.optionText ? props.optionText : (o) => o ? o.text : ''
+        this.optionValue = props.optionValue ? props.optionValue : (o) => o ? o.value : null
+        this.state.options = this.normalizeOptions(props.options)
+        this.state.open = Boolean(props.open)
+        this.state.searchable = Boolean(props.searchable),
         this.state.selected = this.options.find(o => this.optionValue(o) == props.value)
         this.state.selected = this.state.selected ? this.state.selected : this.noneOption
+        this.style = this.util.assign({}, this.props.style)
         this.util.assign(this.style, {
             width: parseInt(props.width) ? `${parseInt(props.width)}px` : 'initial',
             minWidth: parseInt(props.minWidth) ? `${parseInt(props.minWidth)}px` : 'initial',
@@ -45,21 +45,22 @@ export default class SelectField extends Style {
         })
         if (this.selected != this.noneOption) this.onChange(this.selected, true)
     }
-    normalizeOptions = (options) =>
-        Array.isArray(options) ? options.map(o => {return typeof o == 'string' ? {value: o, text:o} : k}) :
-        typeof options == 'object' ? Object.keys(options).map(k => {return {value: options[k], text: k}}) :
-        []
 
     get options() {return this.shouldShowNoneOption ? [this.noneOption].concat(this.state.options) : this.state.options}
     get filteredOptions() {
         return this.searchField && this.searchField.value ?
             this.options.filter(o => this.optionText(o).toLowerCase().includes(this.searchField.value.toLowerCase())) : this.options
     }
+    renderOptions = (options, className) => !options ? null :
+        <ul className={className}>
+            {options.map((o,i) => this.renderOption(o,i))}
+        </ul>
     renderOption = (o,i) =>
-        <div key={i} className={`select-option ${o.className} ${this.selected == o ? 'selected' : ''}`}
+        <li key={i} className={`select-option ${o.className} ${this.selected == o ? 'selected' : ''}`}
             onClick={this.onChange.bind(this, o)}>
             {this.optionText(o)}
-        </div>
+            {this.renderOptions(o.options, '')}
+        </li>
     render = () =>
         <div className={this.className}>
             {!this.title ? null : <div className='select-title'>{this.title}</div>}
@@ -68,10 +69,8 @@ export default class SelectField extends Style {
                 <i className='material-icons'>arrow_drop_down</i>
             </div>
             <div className='select-dropdown' style={this.util.assign(this.style, {display: this.state.open ? '' : 'none'})}>
-                {!this.searchable ? null : <SearchField ref={e => this.searchField = e} onChange={this.refresh}/>}
-                <div className='select-dropdown'>
-                    {this.filteredOptions.map((o,i) => this.renderOption(o,i))}
-                </div>
+                {!this.state.searchable ? null : <SearchField ref={e => this.searchField = e} onChange={this.refresh}/>}
+                {this.renderOptions(this.filteredOptions, '')}
             </div>
         </div>
 }
