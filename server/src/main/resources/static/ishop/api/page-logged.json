@@ -1,0 +1,29 @@
+{
+    "body": {
+        "app": "ishop",
+        "pagename": "iShop",
+        "title": "iShop",
+        "description": "iShop - shop on go",
+        "applogo": "/static/ishop/images/logo.jpg",
+        "version": "0.0.1",
+        "menus": [
+            {"title": "Landing", "url": "/"},
+            {"title": "Sub", "url": "//sub",
+                "children": [
+                    {"title": "Landing", "url": "/"},
+                    {"title": "Sub", "url": "//sub",
+                        "children": [
+                            {"title": "Landing", "url": "/"},
+                            {"title": "Sub", "url": "//sub",
+                                "children": [
+                                    {"title": "Landing", "url": "/"},
+                                    {"title": "Sub", "url": "//sub"}
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}

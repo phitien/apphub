@@ -1,11 +1,29 @@
 {
-  "body": [{
-    "app": "{app}",
-    "pagename": "{appname}",
-    "title": "{apptitle}",
-    "description": "{appdescription}",
-    "applogo": "{applogo}",
-    "version": "{appversion}",
-    "menus": []
-  }]
+    "body": {
+        "app": "{app}",
+        "pagename": "{appname}",
+        "title": "{apptitle}",
+        "description": "{appdescription}",
+        "applogo": "{applogo}",
+        "version": "{appversion}",
+        "menus": [
+            {"title": "Landing", "url": "{apppath}"},
+            {"title": "Sub", "url": "{apppath}/sub",
+                "children": [
+                    {"title": "Landing", "url": "{apppath}"},
+                    {"title": "Sub", "url": "{apppath}/sub",
+                        "children": [
+                            {"title": "Landing", "url": "{apppath}"},
+                            {"title": "Sub", "url": "{apppath}/sub",
+                                "children": [
+                                    {"title": "Landing", "url": "{apppath}"},
+                                    {"title": "Sub", "url": "{apppath}/sub"}
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
 }

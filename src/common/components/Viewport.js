@@ -2,7 +2,7 @@ import React from 'react'
 import Style from './Style'
 
 export default class Viewport extends Style {
-    componentClassName = 'viewport container-fluid'
+    componentClassName = 'container viewport'
     children = () => this.props.children
     render = () => <div className={this.className}>
         {this.children()}

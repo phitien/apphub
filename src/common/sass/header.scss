@@ -1,34 +1,89 @@
 .header {
-    @extend .default-box;
-    display: flex;align-items: center;height: 100%;width: 100%;
+    display: flex;align-items: center;height: 100%;
+    position: relative;
     > * {
         height: 100%;padding: 0 $margin/2;
         .wrapper {
             display: flex;align-items: center;height: 100%;
             .menus {
+                @extend .box7;
                 display: none;
+                z-index: 10;
                 position: absolute;
                 top: 100%;
+                box-shadow: 1px 3px 8px rgba(0,0,0,.3);
             }
-            &:hover {
-                .menus {display: block;}
+            &:hover .menus {
+                display: block;
             }
         }
     }
     .links-hub .wrapper {
+        .menus {
+            margin: 0;padding: 0;left: 0;
+            ul {
+                @extend .box7;margin: 0;padding: 0;display: none;position: absolute;top: 0;left: 100%;
+                box-shadow: 1px 3px 8px rgba(0,0,0,.3);
+            }
+            li {
+                margin: 0;padding: 0;display: block;position: relative;min-width: 180px;
+                border-bottom: 1px solid $border-color;
+                a {
+                    display: flex;align-items: center;padding: $margin/2;
+                    &:hover {
+                        @extend .box5;
+                    }
+                }
+                &:hover > ul {display: block;}
+            }
+            li.level0 {
+                a {justify-content: center;}
+            }
+        }
     }
     .logo-box {
-        img {height: $logo-height;}
+        img {height: $logo-height;margin-right: $margin/2;border-radius: 50%;}
     }
     .search-box {
     }
     .notification {
     }
     .user-box .wrapper .menus {
-        @extend .default-box;
-        right: 0;padding: $margin/2;
-        box-shadow: 1px 3px 8px rgba(0,0,0,.3);
+        align-items: flex-start;justify-content: flex-end;
+        margin: 0;padding: 0;right: 0;
+        .info {
+            @extend .box1;
+            padding: $margin $margin/2;overflow: hidden;
+            .avatar {
+                height: 70px;width: 70px;margin: 0 auto;
+                border-radius: 4px;
+                box-shadow: 0px 3px 10px rgba(0,0,0,.5);
+            }
+            .name {
+                margin-top: $margin;font-weight: 600;
+            }
+            .email {
+                font-size: $font-size-xs;line-height: 1.5*$font-size-xs;
+                font-style: italic;opacity: .5;
+            }
+        }
+        .links {
+            padding: $margin $margin/2;
+            height: 100%;
+        }
+        ul {margin: 0;padding: 0;}
+        li {
+            margin: 0;padding: 0;display: block;position: relative;
+            a {
+                display: flex;align-items: center;padding: 2px $margin;
+                &:hover {
+                    @extend .box5;
+                }
+            }
+            &:hover > ul {display: block;}
+        }
     }
+    .user-box .wrapper:hover .menus {display: flex;}
     .help {
     }
 }

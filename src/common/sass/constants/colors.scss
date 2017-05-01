@@ -14,17 +14,18 @@ $disabled: $grey2;
 
 $border-color: $grey2;
 
-$bg-color: rgba(87,195,201,.1);
-$bg-color1: rgba(87,195,201,.1);
-$bg-color2: rgba(87,195,201,.15);
-$bg-color3: rgba(87,195,201,.2);
-$bg-color4: rgba(87,195,201,.25);
-$bg-color5: rgba(87,195,201,.3);
-$bg-color6: rgba(87,195,201,.35);
-$bg-color7: rgba(87,195,201,.4);
-$bg-color8: rgba(87,195,201,.45);
-$bg-color9: rgba(87,195,201,.5);
-$bg-color10: rgba(87,195,201,.55);
+$bg-color1: rgba(224,244,245,1);
+$bg-color2: rgba(208,238,239,1);
+$bg-color3: rgba(194,233,235,1);
+$bg-color4: rgba(181,229,231,1);
+$bg-color5: rgba(169,224,227,1);
+$bg-color6: rgba(158,220,224,1);
+$bg-color7: rgba(147,217,220,1);
+$bg-color8: rgba(127,213,217,1);
+$bg-color9: rgba(129,210,214,1);
+$bg-color10: rgba(121,207,211,1);
+
+$bg-color: $bg-color1;
 
 $text-color: #000000;
 $text-color-inverse: #ffffff;

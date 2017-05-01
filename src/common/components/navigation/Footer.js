@@ -4,7 +4,7 @@ import Style from '../Style'
 import Version from './Version'
 
 class Footer extends Style {
-    componentClassName = 'footer'
+    componentClassName = 'container footer'
     render = () => <div className={this.className}>
         <Version/>
     </div>

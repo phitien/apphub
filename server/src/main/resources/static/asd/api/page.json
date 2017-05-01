@@ -1,5 +1,5 @@
 {
-  "body": [{
+  "body": {
     "app": "asd",
     "pagename": "Asd",
     "title": "Asd",
@@ -7,5 +7,5 @@
     "applogo": "/static/asd/images/logo.jpg",
     "version": "0.0.1",
     "menus": []
-  }]
+  }
 }

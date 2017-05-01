@@ -3,7 +3,7 @@ var replace = require('gulp-replace');
 var rename = require('gulp-rename');
 gulp.task('mkapp', function() {
     var argv = require('./argv');
-    var app = argv('name');
+    var app = argv('app');
 
     var fs = require('fs');
     try {

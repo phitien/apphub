@@ -1,10 +1,10 @@
 var gulp = require('gulp');
 gulp.task('rmapp', function() {
     var argv = require('./argv');
-    var app = argv('name');
+    var app = argv('app');
 
     if (!app) {
-        console.error('Name is missing:--name=')
+        console.error('Name is missing:gulp rmapp --app=')
         return;
     }
     if (app == 'sample') {

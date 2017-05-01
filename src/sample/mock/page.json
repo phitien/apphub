@@ -1,5 +1,5 @@
 {
-  "body": [{
+  "body": {
     "app": "{app}",
     "pagename": "{appname}",
     "title": "{apptitle}",
@@ -7,5 +7,5 @@
     "applogo": "{applogo}",
     "version": "{appversion}",
     "menus": []
-  }]
+  }
 }

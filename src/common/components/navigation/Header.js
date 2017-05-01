@@ -9,7 +9,7 @@ import Notification  from './Notification'
 import UserBox from './UserBox'
 
 class Header extends Style {
-    componentClassName = 'header'
+    componentClassName = 'container header'
     onRouteEntered = (route, replace) => this.props.executeLoadPageInfoAction()
     render = () =>
         <div className={this.className}>

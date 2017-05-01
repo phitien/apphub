@@ -8,8 +8,7 @@ $font-size-s: 12px;
 $font-size-xs: 10px;
 
 $margin: 16px;
-$header-height: 40px;
-$header-padding-top: $margin;
+$header-height: 44px;
 $logo-height: 24px;
 
 $footer-height: 32px;
@@ -28,8 +27,6 @@ $menu-min-width: 200px;
 
 $breadcrumb-font-size: 14px;
 
-$application-width: 1200px;
-
 $select-field-height: 24px;
 $select-field-dropdown-bg: #ffffff;
 $select-field-margin: $margin;
@@ -39,3 +36,9 @@ $login-form-width: 300px;
 $button-height: 32px;
 $text-field-height: 24px;
 $text-field-font-size: 13px;
+
+$application-width: 1200px;
+$application-width-s2: 1024px;
+$application-width-s3: 960px;
+$application-width-s4: 768px;
+$application-width-s5: 500px;

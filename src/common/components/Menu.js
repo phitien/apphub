@@ -4,7 +4,7 @@ import Style from './Style'
 
 export default class Menu extends Style {
     level = this.props.level ? this.props.level : 0
-    getNodeClassName = (node) => `${location.pathname == node.url ? 'active' : ''} level${this.level} ${node.subNodes && node.subNodes.length > 0 ? 'has-children' : ''}`
+    getNodeClassName = (node) => `${location.pathname == node.url ? 'active' : ''} level${this.level} ${node.children && node.children.length > 0 ? 'has-children' : ''}`
     renderMenu = (menus, className, subMenuClassName) => !menus || !menus.length ? null :
         <ul className={className}>{menus.map((item, i) => {
             let props = item.onClick ?
@@ -21,7 +21,7 @@ export default class Menu extends Style {
                 </Link>
                 {!item.description ? null :
                 <div className='description'>{item.description}</div>}
-                <Menu menus={item.subNodes}
+                <Menu menus={item.children}
                     level={this.level + 1}
                     className={subMenuClassName}
                     subMenuClassName={subMenuClassName}/>

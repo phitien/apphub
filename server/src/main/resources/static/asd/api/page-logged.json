@@ -1,11 +1,29 @@
 {
-  "body": [{
-    "app": "asd",
-    "pagename": "Asd",
-    "title": "Asd",
-    "description": "ASD application",
-    "applogo": "/static/asd/images/logo.jpg",
-    "version": "0.0.1",
-    "menus": []
-  }]
+    "body": {
+        "app": "asd",
+        "pagename": "Asd",
+        "title": "Asd",
+        "description": "ASD application",
+        "applogo": "/static/asd/images/logo.jpg",
+        "version": "0.0.1",
+        "menus": [
+            {"title": "Landing", "url": "/asd"},
+            {"title": "Sub", "url": "/asd/sub",
+                "children": [
+                    {"title": "Landing", "url": "/asd"},
+                    {"title": "Sub", "url": "/asd/sub",
+                        "children": [
+                            {"title": "Landing", "url": "/asd"},
+                            {"title": "Sub", "url": "/asd/sub",
+                                "children": [
+                                    {"title": "Landing", "url": "/asd"},
+                                    {"title": "Sub", "url": "/asd/sub"}
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
 }
