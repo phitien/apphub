@@ -1,8 +1,11 @@
 {
   "body": [{
-    "title": "ASD",
-    "app": "ASD",
-    "description": "{APPDESCRIPTION}",
-    "url": "/asd",
+    "app": "asd",
+    "pagename": "Asd",
+    "title": "Asd",
+    "description": "ASD application",
+    "applogo": "/static/asd/images/logo.jpg",
+    "version": "0.0.1",
+    "menus": []
   }]
 }

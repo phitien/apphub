@@ -6,8 +6,8 @@ class LogoBox extends Style {
     componentClassName = 'logo-box'
     render() {
         return <div className={this.className}>
-            <img alt={this.pageInfo.appname} src={this.pageInfo.applogo}/>
-            <h3>{this.configuration.appname}</h3>
+            <img alt={this.pageInfo.pagename} src={applogo}/>
+            <h3>{appname}</h3>
         </div>
     }
 }

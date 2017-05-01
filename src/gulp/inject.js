@@ -1,7 +1,7 @@
 module.exports = exports = function(config) {
   var gulp = require('gulp');
   var settings = require('./settings')(config);
-  gulp.task(settings.NAME + ':inject', function() {
+  gulp.task(settings.config.app + ':inject', function() {
     var inject = require('gulp-inject');
     var rename = require('gulp-rename');
     var bundle = gulp.src(settings.SRC_TEMPLATE + '/index.html')
@@ -14,7 +14,7 @@ module.exports = exports = function(config) {
         '<script src="'+filepath.replace(settings.PUBLIC.substr(1),'')+'"></script>'
       }
     }))
-    .pipe(rename(settings.NAME + '.html'))
+    .pipe(rename(settings.config.app + '.html'))
     return settings.dest([
       bundle
     ], settings.public_app_dirs)

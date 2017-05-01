@@ -1,7 +1,7 @@
 module.exports = exports = function(config) {
   var gulp = require('gulp');
   var settings = require('./settings')(config);
-  gulp.task(settings.NAME + ':css', function() {
+  gulp.task(settings.config.app + ':css', function() {
     var sass = require('gulp-sass');
     // var sourcemaps = require('gulp-sourcemaps');
     var autoprefixer = require('gulp-autoprefixer');

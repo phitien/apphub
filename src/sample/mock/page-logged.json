@@ -1,8 +1,11 @@
 {
   "body": [{
-    "title": "{APPNAME}",
-    "app": "{APPNAME}",
-    "description": "{APPDESCRIPTION}",
-    "url": "/{appname}",
+    "app": "{app}",
+    "pagename": "{appname}",
+    "title": "{apptitle}",
+    "description": "{appdescription}",
+    "applogo": "{applogo}",
+    "version": "{appversion}",
+    "menus": []
   }]
 }

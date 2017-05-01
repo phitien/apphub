@@ -2,7 +2,7 @@ var webpack = require('webpack');
 var path = require('path');
 
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var extractTextPlugin = new ExtractTextPlugin('static/dmr/app.css');
+var extractTextPlugin = new ExtractTextPlugin('static/{app}/zzz.css');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -22,8 +22,8 @@ module.exports = {
     }],
   },
   devServer: {
-    port: 9000,
-    contentBase: 'public/dmr',
+    port: {port},
+    contentBase: 'public/{app}',
     headers: {
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
@@ -37,28 +37,25 @@ module.exports = {
   output: {
     path: rootPath + '/public',
     publicPath: '/',
-    filename: 'static/dmr/app.js'
-  },
-  externals: {
-    'jquery': 'jQuery',
+    filename: 'static/{app}/zzz.js'
   },
   entry: [
-    'webpack-dev-server/client?http://localhost:9000',
+    'webpack-dev-server/client?http://localhost:{port}',
     'webpack/hot/only-dev-server',
-    './apps/dmr/index.js',
+    './apps/{app}/index.js',
   ],
   plugins: [
-    new webpack.ProvidePlugin({$: 'jquery', jQuery: 'jquery', 'window.jQuery': 'jquery'}),
     new webpack.HotModuleReplacementPlugin(),
     extractTextPlugin,
     new HtmlWebpackPlugin({
-      filename: 'dmr/index.html',
+      filename: '{app}/{app}.html',
       template: 'template/index.html'
     }),
     new CopyWebpackPlugin([
       { from: rootPath + '/src/static', to: rootPath + '/public/static' },
-      { from: rootPath + '/src/json', to: rootPath + '/public/static/api' },
-      { from: rootPath + '/node_modules/patternfly/dist', to: rootPath + '/public/static/patternfly' }
+      { from: rootPath + '/src/apps/{app}/mock', to: rootPath + '/public/static/{app}/api' },
+      { from: rootPath + '/src/apps/{app}/static', to: rootPath + '/public/static/{app}' },
+      { from: rootPath + '/node_modules/material-design-icons/iconfont', to: rootPath + '/public/static/material' }
     ])
   ]
 }

@@ -4,5 +4,5 @@
   "firstName": "Tien",
   "lastName": "Phi",
   "displayName": "Phi Tien",
-  "rights": ["request", "review", "approve"]
+  "rights": ["view", "edit", "remove", "add"]
 }

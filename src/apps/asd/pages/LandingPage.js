@@ -6,7 +6,7 @@ class LandingPage extends Page {
     pageClassName = 'asd-landing-page'
     children = () =>
         <div className='content'>
-            <div>Landing page for ASD</div>
+            <div>Landing page of Asd</div>
         </div>
 }
 

@@ -3,10 +3,10 @@ import {Connect} from '../redux'
 import Page from './Page'
 
 class LandingPage extends Page {
-    pageClassName = '{appname}-landing-page'
+    pageClassName = '{app}-landing-page'
     children = () =>
         <div className='content'>
-            <div>Landing page for {APPNAME}</div>
+            <div>Landing page of {appname}</div>
         </div>
 }
 

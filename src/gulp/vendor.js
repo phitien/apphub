@@ -1,7 +1,7 @@
 module.exports = exports = function(config) {
   var gulp = require('gulp');
   var settings = require('./settings')(config);
-  gulp.task(settings.NAME + ':vendor', function() {
+  gulp.task(settings.config.app + ':vendor', function() {
     var source = require('vinyl-source-stream');
     var buffer = require('vinyl-buffer');
     var browserify = require('browserify');

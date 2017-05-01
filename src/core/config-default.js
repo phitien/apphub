@@ -1,6 +1,8 @@
 import {Config} from '../../../core/Config'
 export default new Config(
-    {env: '{env}', appname: '{APPNAME}', app: '{NAME}', apppath: '/{appname}', version: '0.0.1'},
+    {env: '{env}'},
+    {config},
+    require('./ui'),
     require('./base'),
     require('./{env}')
 ).all()

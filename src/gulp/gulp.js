@@ -3,20 +3,15 @@ module.exports = exports = function(config) {
   var runSequence = require('run-sequence');
   var settings = require('./settings')(config);
   require('./clean')(config);
-  require('./vendor')(config);
-  require('./config')(config);
-  require('./js')(config);
-  require('./css')(config);
-  require('./copy')(config);
-  require('./inject')(config);
   require('./serve')(config);
+  require('./vendor')(config);
   require('./build')(config);
-  gulp.task(settings.NAME, function() {
+  gulp.task(settings.config.app, function() {
     return runSequence(
-        settings.NAME + ':clean',
-        settings.NAME + ':serve',
-        settings.NAME + ':vendor',
-        settings.NAME + ':build'
+        settings.config.app + ':clean',
+        settings.config.app + ':vendor',
+        settings.config.app + ':build',
+        settings.config.app + ':serve'
     )
   });
 }

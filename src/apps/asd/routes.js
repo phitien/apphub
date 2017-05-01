@@ -1,22 +1,19 @@
 import {onRouteEntered, onRouteChanged} from '../../common/routes'
-import {LandingPage} from './pages'
+import * as pages from './pages'
 import Viewport from './Viewport'
 
-const hierarchyPaths = ['/asd']
 const subRoutes = [
+{path: '/asd/sub', component: pages.SubPage, onChange: onRouteChanged}
+/**NEWPAGE**/
 ]
-const routes = []
-
-hierarchyPaths.map(hierarchy => {
-    routes.push({
-        path: hierarchy,
-        component: Viewport,
-        indexRoute: {
-            component: LandingPage
-        },
-        childRoutes: subRoutes,
-        onChange: onRouteChanged,
-    })
-})
+const routes = [{
+    path: '/asd',
+    component: Viewport,
+    indexRoute: {
+        component: pages.LandingPage
+    },
+    childRoutes: subRoutes,
+    onChange: onRouteChanged,
+}]
 
 export default routes

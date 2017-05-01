@@ -2,7 +2,7 @@ var webpack = require('webpack');
 var path = require('path');
 
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var extractTextPlugin = new ExtractTextPlugin('static/dmr/app.css');
+var extractTextPlugin = new ExtractTextPlugin('static/asd/zzz.css');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -22,8 +22,8 @@ module.exports = {
     }],
   },
   devServer: {
-    port: 9000,
-    contentBase: 'public/dmr',
+    port: 2000,
+    contentBase: 'public/asd',
     headers: {
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
@@ -37,28 +37,25 @@ module.exports = {
   output: {
     path: rootPath + '/public',
     publicPath: '/',
-    filename: 'static/dmr/app.js'
-  },
-  externals: {
-    'jquery': 'jQuery',
+    filename: 'static/asd/zzz.js'
   },
   entry: [
-    'webpack-dev-server/client?http://localhost:9000',
+    'webpack-dev-server/client?http://localhost:2000',
     'webpack/hot/only-dev-server',
-    './apps/dmr/index.js',
+    './apps/asd/index.js',
   ],
   plugins: [
-    new webpack.ProvidePlugin({$: 'jquery', jQuery: 'jquery', 'window.jQuery': 'jquery'}),
     new webpack.HotModuleReplacementPlugin(),
     extractTextPlugin,
     new HtmlWebpackPlugin({
-      filename: 'dmr/index.html',
+      filename: 'asd/asd.html',
       template: 'template/index.html'
     }),
     new CopyWebpackPlugin([
       { from: rootPath + '/src/static', to: rootPath + '/public/static' },
-      { from: rootPath + '/src/json', to: rootPath + '/public/static/api' },
-      { from: rootPath + '/node_modules/patternfly/dist', to: rootPath + '/public/static/patternfly' }
+      { from: rootPath + '/src/apps/asd/mock', to: rootPath + '/public/static/asd/api' },
+      { from: rootPath + '/src/apps/asd/static', to: rootPath + '/public/static/asd' },
+      { from: rootPath + '/node_modules/material-design-icons/iconfont', to: rootPath + '/public/static/material' }
     ])
   ]
 }

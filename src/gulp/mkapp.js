@@ -2,34 +2,38 @@ var gulp = require('gulp');
 var replace = require('gulp-replace');
 var rename = require('gulp-rename');
 gulp.task('mkapp', function() {
-  var argv = require('./argv');
-  var appname = argv('name');
-  var port = argv('port', 2000);
-  var livereloadport = argv('livereloadport', 35729);
+    var argv = require('./argv');
+    var app = argv('name');
 
-  if (!appname) {
-    console.error('Name is missing:--name=')
-    return;
-  }
-  if (appname == 'sample') {
-    console.error('Name must not be sample')
-    return;
-  }
-  var settings = require('./settings')({appname: appname, port: port, livereloadport: livereloadport});
-  var fs = require('fs');
-  var replace = require('gulp-replace');
-  fs.stat(settings.SRC_APP + '/index.js', function(err, stat) {
-      if(err == null) {
-        console.error('App ' + appname + ' already exists');
-      } else {
-        gulp.src(settings.getAllFiles(settings.SRC_SAMPLE, '*', 10))
-        .pipe(replace('{appname}', appname))
-        .pipe(replace('{APPNAME}', appname.toUpperCase()))
-        .pipe(replace('{port}', port))
-        .pipe(replace('{livereloadport}', livereloadport))
-        .pipe(gulp.dest(settings.SRC_APPS + '/' + appname))
-      }
-      return gulp.src(['./gulpfile.js']).pipe(replace(settings.GULP_NEW_APP_TEXT, settings.GULP_NEW_APP_REPLACEMENT))
-      .pipe(gulp.dest('.'));
-  });
+    var fs = require('fs');
+    try {
+        var config = require(app);
+    }
+    catch(e) {
+        return console.error('Could not file settings file: ' + app + '.json')
+    }
+    var settings = require('./settings')(config);
+
+    fs.stat(settings.SRC_APP + '/index.js', function(err, stat) {
+        if(err == null) {
+            console.error('App ' + settings.config.app + ' already exists');
+        } else {
+            var replace = require('gulp-replace');
+            var batchReplace = require('gulp-batch-replace');
+            var replaceConfig = []
+            Object.keys(settings.config).forEach(function(k) {
+                replaceConfig.push(['{'+k+'}', settings.config[k]])
+            })
+            gulp.src(settings.getAllFiles(settings.SRC_SAMPLE, '*', 10))
+                .pipe(batchReplace(replaceConfig))
+                .pipe(gulp.dest(settings.SRC_APP));
+            var rename = require('gulp-rename');
+            gulp.src(app + '.js')
+                .pipe(rename('gulp.js'))
+                .pipe(gulp.dest(settings.SRC_APP_GULP));
+        }
+        gulp.src(['./gulpfile.js'])
+            .pipe(replace(settings.GULP_NEW_APP_TEXT, settings.GULP_NEW_APP_REPLACEMENT))
+            .pipe(gulp.dest('.'));
+    });
 });
