@@ -3,12 +3,12 @@ import ReactDOM from 'react-dom'
 import {util, configuration} from '../../core'
 
 export default class Component extends React.Component {
-    constructor(props) {
-        super(props)
+    constructor(...args) {
+        super(...args)
         this.state = {validationErrors: {}, refresh: false}
-        this.init()
+        this.init(...args)
     }
-    init() {}
+    init(...args) {}
     componentDidMount() {
         this.__mounted = true
         addEventListener('global_cookie_deleted', this.refresh.bind(this))
@@ -28,9 +28,9 @@ export default class Component extends React.Component {
     componentWillUnmount() {this.__mounted = false}
     onRouteEntered = (route, replace) => {}
     onRouteChanged = (prev, next) => {}
-    refresh() {
+    refresh(state) {
         if (this.__mounted) {
-            this.setState(this.state)
+            this.setState(state ? state : this.state)
         }
     }
     setError(field, msg) {
@@ -46,7 +46,10 @@ export default class Component extends React.Component {
     get dom() {return ReactDOM.findDOMNode(this)}
     get configuration() {return configuration}
     get util() {return util}
-    get componentClassName() {return ''}
     get className() {return `${this.componentClassName} ${this.props.className ? this.props.className : ''}`}
     get route() {return this.util.cookie.read('route_entered').route}
+    get pageInfo() {return this.props.pageInfo}
+    breadcrumbs = this.props.breadcrumbs
+    breadcrumbsActions = this.props.breadcrumbsActions
+
 }

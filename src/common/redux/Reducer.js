@@ -4,6 +4,10 @@ export class SetBreadcrumbsActionReducer extends Reducer {
     get defaultValue() {return []}
     get fieldName() {return 'breadcrumbs'}
 }
+export class SetBreadcrumbsActionActionsReducer extends Reducer {
+    get defaultValue() {return []}
+    get fieldName() {return 'breadcrumbsActions'}
+}
 export class UserLogoutActionReducer extends CookieReducer {
     get defaultValue() {return null}
     get fieldName() {return 'user'}
@@ -12,16 +16,11 @@ export class UserLogoutActionReducer extends CookieReducer {
 export class ApiSuccessUserLoginActionReducer extends CookieReducer {
     get fieldName() {return 'user'}
     setCookie() {
-        this.util.assign(this.__value[this.fieldName], {displayName: this.action.extra[0].account})//TODO remove
         this.util.user.load(this.__value[this.fieldName])
     }
 }
 export class AddModalToViewActionReducer extends Reducer {
     get fieldName() {return 'modal'}
-}
-export class RemoveModalFromViewActionReducer extends Reducer {
-    get fieldName() {return 'modal'}
-    normalize(action) {return null}
 }
 export class SetCurrentSearchValueActionReducer extends ConfigReducer {
     get fieldName() {return 'currentSearchValue'}

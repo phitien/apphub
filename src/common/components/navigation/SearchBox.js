@@ -3,10 +3,9 @@ import {Connect} from '../../redux'
 import Style from '../Style'
 
 class SearchBox extends Style {
-    get componentClassName() {return 'search-box'}
+    componentClassName = 'search-box'
     children = () => <div className='wrapper'>
-        <input type='text' ref={e => this.searchInput = e}
-            placeholder='Search'/>
+        <input type='text' ref={e => this.searchInput = e} placeholder='Search'/>
     </div>
     render = () => <div className={this.className}>
             {!this.util.user.isLogged ? null :this.children()}

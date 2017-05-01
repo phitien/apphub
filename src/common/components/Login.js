@@ -1,18 +1,19 @@
 import React from 'react'
-import {TextField, RaisedButton} from 'material-ui'
 import {Connect} from '../redux'
 import Style from './Style'
+import TextField from './TextField'
+import Button from './Button'
 
 class Login extends Style {
-    get componentClassName() {return `container-fluid grey-box page login-page`}
+    componentClassName = 'container-fluid page login-page'
     validate = () => {
-        if (!this.accountInput.getValue()) {
+        if (!this.accountInput.value) {
             return this.setError('account', 'This field is required')
         }
         else {
             this.removeError('account')
         }
-        if (!this.passwordInput.getValue()) {
+        if (!this.passwordInput.value) {
             return this.setError('password', 'This field is required')
         }
         else {
@@ -23,8 +24,8 @@ class Login extends Style {
     onLogin = (e) => {
         if (this.validate()) {
             this.props.executeUserLoginAction({
-                account: this.accountInput.getValue(),
-                password: this.passwordInput.getValue()
+                account: this.accountInput.value,
+                password: this.passwordInput.value
             })
         }
     }
@@ -34,11 +35,11 @@ class Login extends Style {
           <form className='login-form'>
               <TextField type='text' ref={e => this.accountInput = e}
                   errorText={this.state.validationErrors.account}
-                  hintText='Account' fullWidth={true} />
-              <TextField type='password' ref={e => this.passwordInput = e}  style={{marginTop: 12, marginBottom: 12}}
+                  placeholder='Account'/>
+              <TextField type='password' ref={e => this.passwordInput = e}
                   errorText={this.state.validationErrors.password}
-                  hintText='Password' fullWidth={true} />
-              <RaisedButton label='Login' primary={true} fullWidth={true} onClick={this.onLogin}/>
+                  placeholder='Password'/>
+              <Button label='Login' onClick={this.onLogin}/>
           </form>
       </div>
 }

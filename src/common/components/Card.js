@@ -2,7 +2,7 @@ import React from 'react'
 import Style from './Style'
 
 export default class Card extends Style {
-    get componentClassName() {return 'card'}
+    componentClassName = 'card'
     header = () =>
         <div className='card-header' style={{display: !this.props.title ? 'none' : ''}}>
             <h3>{this.props.title}</h3>

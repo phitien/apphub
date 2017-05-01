@@ -4,7 +4,6 @@ import moment from 'moment'
 import assign from 'object-assign'
 import format from 'string-format'
 import uuid from 'uuid/v1'
-import assignDeep from 'object-assign-deep'
 import REQUEST from './Request'
 import cookie from './cookie'
 import user from './user'
@@ -16,7 +15,6 @@ class Util {
     get assign() {return assign}
     get format() {return format}
     get uuid() {return uuid}
-    get assignDeep() {return assignDeep}
     get lodash() {return lodash}
     get history() {return browserHistory}
     get cookie() {return cookie}

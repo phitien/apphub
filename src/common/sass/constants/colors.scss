@@ -1,31 +1,32 @@
-$red: #F44336;
-$green: rgba(52, 142, 40, 1);
-$greena: rgba(52, 142, 40, .5);
-$blue:  rgba(50, 200, 254, 1);
-$bluea:  rgba(50, 200, 254, .5);
-$grey: rgba(244, 244, 244, .5);
-$lightgrey: rgba(244, 244, 244, 1);
-$dark: rgba(0, 0, 0, 1);
-$lightdark: rgba(0, 0, 0, .8);
+$primary: #69BE28;
+$primary1: #005C84;
+$primary2: #FFFFFF;
 
-$primary: $green;
-$color-disabled: rgba(0, 0, 0, .5);
-$border-color: rgba(0, 0, 0, .1);
+$secondary: #0075B0;
+$secondary1: #3F9c35;
+$secondary2: #009FDA;
 
-$bg-color: #ffffff;
-$bg-grey-color: $grey;
-$bg-lightgrey-color: $lightgrey;
-$bg-dark-color: $dark;
-$bg-lightdark-color: $lightdark;
-$text-color: #333333;
-$text-grey-color: #333333;
-$text-lightgrey-color: #333333;
-$text-dark-color: #f3f3f3;
-$text-lightdark-color: #f3f3f3;
+$grey: #5D5D5D;
+$grey1: #777777;
+$grey2: #999999;
 
-$node-level-1-color: $green;
-$node-level-2-color: $red;
-$node-level-3-color: $dark;
+$disabled: $grey2;
 
-$breadcrumb-color: $blue;
-$toolbar-bg-color: $lightgrey;
+$border-color: $grey2;
+
+$bg-color: rgba(87,195,201,.1);
+$bg-color1: rgba(87,195,201,.1);
+$bg-color2: rgba(87,195,201,.15);
+$bg-color3: rgba(87,195,201,.2);
+$bg-color4: rgba(87,195,201,.25);
+$bg-color5: rgba(87,195,201,.3);
+$bg-color6: rgba(87,195,201,.35);
+$bg-color7: rgba(87,195,201,.4);
+$bg-color8: rgba(87,195,201,.45);
+$bg-color9: rgba(87,195,201,.5);
+$bg-color10: rgba(87,195,201,.55);
+
+$text-color: #000000;
+$text-color-inverse: #ffffff;
+
+$hilight-color: #0075B0;

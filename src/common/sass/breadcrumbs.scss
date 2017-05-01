@@ -1,20 +1,18 @@
 .breadcrumbs {
-  height: 32px; line-height: 32px;margin-bottom: $margin;
-  display: flex;align-items: center;justify-content: space-between;
-  .links {
-    flex: 1;
-    .breadcrumb {
-      font-size: $breadcrumb-font-size;color: $primary;
-      margin-right: $margin;
-      &:after {
-          content: '/';margin-left: $margin;
-      }
-      &:last-child {
-        margin-right: 0;
-        color: $color-disabled;
-        cursor: text;
-        &:after {display: none;}
-      }
+    @extend .secondary-box;
+    padding: $margin/2 $margin;
+    display: flex;align-items: center;justify-content: space-between;
+    .links {
+        flex: 1;
+        .breadcrumb {
+            font-weight: 600;margin-right: $margin;
+            &:after {
+                content: '/';margin-left: $margin;
+            }
+            &:last-child {
+                font-weight: 400;margin-right: 0;color: $primary2;cursor: text;
+                &:after {display: none;}
+            }
+        }
     }
-  }
 }

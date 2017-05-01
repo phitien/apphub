@@ -1,20 +1,27 @@
 import React from 'react'
-import {MuiThemeProvider, getMuiTheme} from 'material-ui/styles'
-import {cyan500} from 'material-ui'
-import injectTapEventPlugin from 'react-tap-event-plugin'
 import Style from './Style'
 import Login from './Login'
-
-injectTapEventPlugin()
+import Breadcrumbs from './Breadcrumbs'
+import ModalDefault from './ModalDefault'
 
 export default class Page extends Style {
-    get componentClassName() {return `container-fluid grey-box page ${this.pageClassName}`}
-    get pageClassName() {return ''}
-    children = () => this.props.children
-    modal = () => this.props.modal
+    componentClassName = `container-fluid page ${this.props.hideSidebarLeft ? 'has-sidebar-left-collapsed' : 'has-sidebar-left'} ${this.props.hideSidebarRight ? 'has-sidebar-right-collapsed' : 'has-sidebar-right'} ${this.pageClassName}`
+    pageClassName = ''
+
+    renderBreadcrumbs = () => <Breadcrumbs breadcrumbs={this.breadcrumbs} actions={this.breadcrumbsActions}/>
+    content = () => this.props.children
+    children = () =>
+        <div className='wrapper'>
+            {this.renderBreadcrumbs()}
+            {this.content()}
+        </div>
+    renderModal = () => !this.props.modal ? null : this.props.modal instanceof Modal ? this.props.modal :
+        <ModalDefault isOpen={true} contentLabel='ModalDefault'>
+            {this.props.modal}
+        </ModalDefault>
     render = () =>
-        <MuiThemeProvider muiTheme={getMuiTheme(this.theme.materialTheme)}><div className={this.className}>
+        <div className={this.className}>
             {this.util.user.isLogged ? this.children() : <Login/>}
-            {this.modal()}
-        </div></MuiThemeProvider>
+            {this.renderModal()}
+        </div>
 }

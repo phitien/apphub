@@ -3,11 +3,9 @@ import {Connect} from '../../redux'
 import Style from '../Style'
 
 class Notification extends Style {
-    get componentClassName() {return 'notification'}
+    componentClassName = 'notification'
     children = () => <div className='wrapper'>
-        <div className='icon'>
-            <i className='material-icons'>notifications</i>
-        </div>
+        <i className='material-icons'>notifications</i>
     </div>
     render = () => !this.util.user.isLogged ? null :
         <div className={this.className}>

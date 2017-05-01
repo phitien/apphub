@@ -51,6 +51,6 @@ export default class Style extends Component {
     getThemeProps() {return ['id', 'name', 'style'].concat(this.themeProps)}
     get theme() {return this.util.assign({}, this.defaultTheme, this.props)}
     get cmpStyleProps() {return this.util.include(this.util.assign({}, this.theme, this.cmpProps), this.getThemeProps())}
-    get cmpProps() {return this.util.assignDeep({}, this.defaultProps, this.props)}
+    get cmpProps() {return this.util.assign({}, this.defaultProps, this.props)}
     get defaultProps() {return {}}
 }

@@ -3,7 +3,7 @@ import {Connect} from '../../redux'
 import Style from '../Style'
 
 class Help extends Style {
-    get componentClassName() {return 'help'}
+    componentClassName = 'help'
     children = () => <div className='wrapper'>
         <div className='icon'>
             <i className='material-icons'>help</i>

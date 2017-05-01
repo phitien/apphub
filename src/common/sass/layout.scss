@@ -1,0 +1,15 @@
+#application {}
+#header,#container,#footer {width: 100%;}
+#header {
+    position: fixed;height: $header-height;
+}
+#footer {
+    position: fixed;bottom: 0;height: $footer-height;
+}
+#container {
+    position: fixed;top: $header-height;bottom: $footer-height;overflow: hidden;
+    display: flex;flex-direction: column;
+    .viewport {
+        flex: 1;display: flex;flex-direction: column;
+    }
+}

@@ -9,7 +9,7 @@ import Notification  from './Notification'
 import UserBox from './UserBox'
 
 class Header extends Style {
-    get componentClassName() {return 'dark-box header'}
+    componentClassName = 'header'
     onRouteEntered = (route, replace) => this.props.executeLoadPageInfoAction()
     render = () =>
         <div className={this.className}>

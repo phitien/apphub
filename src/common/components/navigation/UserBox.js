@@ -4,7 +4,7 @@ import Style from '../Style'
 import Menu from '../Menu'
 
 class UserBox extends Style {
-    get componentClassName() {return 'user-box'}
+    componentClassName = 'user-box'
     get menus() {
         return [{
             title: 'Manage',

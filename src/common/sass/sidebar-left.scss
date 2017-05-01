@@ -1,0 +1,18 @@
+@include keyframes(sidebar-left-expanding) {
+    0% {width: $sidebar-left-width-collapsed;}
+    100% {width: $sidebar-width -$margin;}
+}
+@include keyframes(sidebar-left-collapsing) {
+    0% {width: $sidebar-width -$margin;}
+    100% {width: $sidebar-left-width-collapsed;}
+}
+.sidebar-left {
+    @include animation('sidebar-left-expanding .5s 1');
+    position: fixed;left: 0;top: $header-height;width: $sidebar-width - $margin;bottom: $footer-height;padding: 0 $margin/2;
+    display: flex;flex-direction: column;justify-content: flex-start;align-items: flex-start;
+    > * {width: 100%;}
+}
+.page.has-sidebar-left-collapsed .sidebar-left {
+    @include animation('sidebar-left-collapsing .5s 1');
+    width: $sidebar-left-width-collapsed;padding: 0;
+}

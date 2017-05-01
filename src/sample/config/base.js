@@ -1,6 +1,9 @@
 module.exports = exports = {
     api: {
         urls: {
+            pageInfo: '/static/{appname}/api/page.json',
+            pageInfoLogged: '/static/{appname}/api/page-logged.json',
+            login: '/static/{appname}/api/login.json',
         }
     },
     ui: {

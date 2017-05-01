@@ -1,22 +1,22 @@
 import axios from 'axios'
 import when from 'when'
 import assign from 'object-assign'
+import request from 'sync-request'
 import {configuration} from './Config'
 
 export default class REQUEST {
     get defaultHeaders() {
-        return {
-            'Content-Type': 'application/json'
-        }
+        return {}
     }
     get payload() {return this.__options.data}
+    getOptions() {return this.__options}
 
     constructor(url, method) {
-        method = configuration.isMock() && method ? method.toLowerCase() : 'get'
+        method = method ? method.toLowerCase() : 'get'
         this.__options = {url, method}
         this.headers({})
     }
-    execute = (isAsync) => this.exe = isAsync ? axios(this.__options) : when(axios(this.__options))
+    execute = () => this.exe = when(axios(this.__options))
     option = (n, v) => {
         this.__options[n] = v
         return this
@@ -27,7 +27,7 @@ export default class REQUEST {
         this.option('data', data)
         if (this.__options.method == 'get') {
             const url = this.__options.url
-            return this.option('url', this.buildUrl(url, this.buildQuery(data)))
+            this.option('url', this.buildUrl(url, this.buildQuery(data)))
         }
         return this
     }
@@ -58,10 +58,10 @@ export default class REQUEST {
         this.__failure = args
         return this
     }
-    run = (isAsync) => {
-        return isAsync ? this.__run(undefined, ...this.__before).execute(isAsync) :
-        this.__run(undefined, ...this.__before)
-        .execute(isAsync)
+    run = (sync) => sync ? this.sync() : this.async()
+    async = () => {
+        return this.__run(undefined, ...this.__before)
+        .execute()
         .then(res => {
             try {this.__run(res, ...this.__success)} catch(e) {console.error('request:success', e)}
             return res
@@ -73,5 +73,20 @@ export default class REQUEST {
             try {this.__run(undefined, ...this.__after)} catch(e) {console.error('request:after', e)}
             return res
         })
+    }
+    sync = () => {
+        const res = request(this.__options.method, this.__options.url, assign({}, this.__options, {
+            json: this.__options.data
+        }))
+        try {res.data = JSON.parse(res.getBody('utf8'))}
+        catch(e) {res.data = null}
+        if (res.statusCode < 300) {
+            try {this.__run(res, ...this.__success)} catch(e) {console.log('request:success', e)}
+        }
+        else {
+            try {this.__run(res, ...this.__failure)} catch(e) {console.log('request:failure', e)}
+        }
+        try {this.__run(undefined, ...this.__after)} catch(e) {console.log('request:after', e)}
+        return res
     }
 }

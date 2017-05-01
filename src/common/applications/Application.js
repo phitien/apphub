@@ -2,22 +2,28 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import {Provider} from 'react-redux'
 import {util, configuration} from '../../core'
+import {Action} from '../../core/redux'
 
 export default class Application {
-    get configuration() {return configuration}
-    get util() {return util}
-    get container() {throw 'No container id provided'}
+    configuration = configuration
+    util = util
     children = () => {throw 'No children'}
-    afterRender = () => {}
+    afterRender = () => {
+        Action.execute('LoadPageInfoAction')
+    }
     render = (store) => {
         this.store = store
-        ReactDOM.render(
-            <Provider store={this.store}>
-                {this.children()}
-            </Provider>,
-            document.getElementById(this.container),
-            this.afterRender
-        )
+        const _render = () => {
+            ReactDOM.render(
+                <Provider store={this.store}>
+                    {this.children()}
+                </Provider>,
+                document.getElementById(this.container),
+                this.afterRender
+            )
+        }
+        addEventListener('resize', _render)
+        _render()
     }
     static addEvents(events) {
         events.map(event => addEventListener(event, (e) => {

@@ -31,12 +31,10 @@ module.exports = exports = function(config) {
   var JAVA_PUBLIC_STATIC_APP_API = JAVA_PUBLIC_STATIC_APP + '/api';
   var JAVA_PUBLIC_APP = JAVA_RESOURCE + '/templates';
 
-  var VENDOR_LIBS = [
-    'react', 'react-dom', 'react-router', 'flux', 'events',
-    'redux', 'react-redux', 'redux-thunk', 'redux-saga', 'normalizr', 'redux-devtools', 'redux-devtools-dock-monitor', 'redux-devtools-log-monitor', 'redux-logger',
-    'material-ui', 'react-tap-event-plugin',
-    'react-highlight', 'uuid', 'string-format', 'object-assign-deep',
-    'lodash', 'object-assign', 'moment', 'when', 'axios', 'humps',
+  var LIBS = [
+    ['react', 'react-dom', 'react-router', 'flux', 'events'],
+    ['redux', 'react-redux', 'redux-thunk', 'redux-saga', 'normalizr', 'redux-devtools', 'redux-devtools-dock-monitor', 'redux-devtools-log-monitor', 'redux-logger'],
+    ['uuid', 'string-format', 'lodash', 'object-assign', 'moment', 'when', 'axios'], 
   ];
 
   var GULP_NEW_APP_TEXT = '/**NEW_APP**/';
@@ -76,7 +74,7 @@ module.exports = exports = function(config) {
       SRC_STATIC_APP: SRC_STATIC_APP,
       STATIC: STATIC,
       JAVA_RESOURCE: JAVA_RESOURCE,
-      VENDOR_LIBS: VENDOR_LIBS,
+      LIBS: LIBS,
       PUBLIC: PUBLIC,
       PUBLIC_STATIC: PUBLIC_STATIC,
       PUBLIC_STATIC_APP: PUBLIC_STATIC_APP,
@@ -96,6 +94,9 @@ module.exports = exports = function(config) {
       env: env,
       port: port,
       livereloadport: livereloadport,
+      isDebug: function () {
+          return this.env == 'dev' || this.env == 'mock'
+      },
       dest: function(bundles, destinations, subdir) {
         subdir = subdir ? '/' + subdir : ''
         var gulp = require('gulp');

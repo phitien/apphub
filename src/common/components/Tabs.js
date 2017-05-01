@@ -1,9 +1,9 @@
 import React from 'react'
-import {RaisedButton} from 'material-ui'
+import Button from './Button'
 import Style from './Style'
 
 class Tabs extends Style {
-    get componentClassName() {return `tabs ${this.cmpProps.vertical ? 'tabs-vertical': 'tabs-horizontal'}`}
+    componentClassName = `tabs ${this.cmpProps.vertical ? 'tabs-vertical': 'tabs-horizontal'}`
     state = {
         activeIndex: this.cmpProps.activeIndex ? this.cmpProps.activeIndex : 0,
     }
@@ -21,11 +21,8 @@ class Tabs extends Style {
         <div className={this.className} style={{display: !this.childCount ? 'none' : ''}}>
             <div className='tabs-header'>
                 {this.props.children.map((tab,i) =>
-                <RaisedButton key={i} onClick={() => this.setState({activeIndex: i})} label={this.getTitle(tab,i)}
-                    className={`tab ${i==this.activeIndex?'active':''}`} primary={i==this.activeIndex}
-                    buttonStyle={this.theme.buttonStyle}
-                    labelStyle={this.theme.labelStyle}
-                    />)}
+                <Button key={i} onClick={() => this.setState({activeIndex: i})} label={this.getTitle(tab,i)}
+                    className={`tab ${i==this.activeIndex?'active':''}`}/>)}
             </div>
             <div className='tab-content'>
                 {this.getContent(this.props.children[this.activeIndex], this.activeIndex)}

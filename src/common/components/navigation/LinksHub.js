@@ -4,7 +4,7 @@ import Style from '../Style'
 import Menu from '../Menu'
 
 class LinksHub extends Style {
-    get componentClassName() {return 'links-hub'}
+    componentClassName = 'links-hub'
     getTitle(nodes, value) {
         return nodes.reduce((value, node) => {
             if (location.pathname == node.url)
@@ -18,15 +18,11 @@ class LinksHub extends Style {
         <div className='icon'>
             <i className='material-icons'>apps</i>
         </div>
-        <Menu menus={this.props.pageInfo.menus} className='lightgrey-box menus' subMenuClassName='lightgrey-box'/>
+        <Menu menus={this.pageInfo.menus} className='menus' subMenuClassName='sub-menus'/>
     </div>
     render = () => {
         return <div className={this.className}>
             {this.children()}
-            <img className='svg-image' alt='Standard Chartered' src='/static/images/bc-scb.png'/>
-            <h3>
-                {this.configuration.appname}
-            </h3>
         </div>
     }
 }

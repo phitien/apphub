@@ -1,0 +1,7 @@
+.page {
+    .content {padding: 0;}
+    &.has-sidebar-left .content {padding-left: $sidebar-width + $margin;}
+    &.has-sidebar-left-collapsed .content {padding-left: $sidebar-left-width-collapsed + $margin;}
+    &.has-sidebar-right .content {padding-right: $sidebar-width + $margin;}
+    &.has-sidebar-right-collapsed .content {padding-right: $sidebar-right-width-collapsed + $margin;}
+}

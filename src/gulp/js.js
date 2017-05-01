@@ -5,31 +5,27 @@ module.exports = exports = function(config) {
     var source = require('vinyl-source-stream');
     var buffer = require('vinyl-buffer');
     var browserify = require('browserify');
-    var babelify = require('babelify');
-    var assign = require('object-assign');
-    // var gutil = require('gulp-util');
-    // var sourcemaps = require('gulp-sourcemaps');
+    var uglify = require('gulp-uglify');
+    var gutil = require('gulp-util');
+    var sourcemaps = require('gulp-sourcemaps');
     var bundleConfig = {
         entries: [settings.SRC_APP + '/index.js'],
-        extensions: ['.js'],
-        debug: true,
-        fullPaths: true,
-        noBundleExternal: true,
-        transform: [babelify],
+        debug: settings.isDebug(),
+        transform: ['babelify'],
     };
     var bundler = browserify(bundleConfig);
     bundler.on('update', doBundle);
-    settings.VENDOR_LIBS.forEach(function (lib) {
-        bundler.external(lib);
+    settings.LIBS.forEach(function (libs) {
+        libs.forEach(function(lib) {
+            bundler.external(lib);
+        })
     });
     function doBundle() {
         var bundle = bundler
-            // .on('error', gutil.log.bind(gutil, 'Browserify Error'))
+            .on('error', gutil.log.bind(gutil, 'Browserify Error'))
             .bundle()
             .pipe(source('zzz.js'))
             .pipe(buffer())
-            // .pipe(sourcemaps.init())
-            // .pipe(sourcemaps.write('./'))
         return settings.dest([
           bundle
         ], settings.public_static_app_dirs)

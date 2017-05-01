@@ -3,13 +3,11 @@ import {Connect} from '../../redux'
 import Style from '../Style'
 
 class LogoBox extends Style {
-    get componentClassName() {return 'logo-box'}
+    componentClassName = 'logo-box'
     render() {
         return <div className={this.className}>
-            <a>
-                <img className='svg-image' alt='Standard Chartered' src='/static/images/standard_chartered_logo_svg.svg'/>
-            </a>
-            <h3>{this.props.pageTitle}</h3>
+            <img alt={this.pageInfo.appname} src={this.pageInfo.applogo}/>
+            <h3>{this.configuration.appname}</h3>
         </div>
     }
 }

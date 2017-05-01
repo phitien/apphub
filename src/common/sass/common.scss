@@ -1,0 +1,37 @@
+.default-box {@include box($bg-color, $text-color, true);}
+.primary-box {@include box($primary, $text-color, true);}
+.primary1-box {@include box($primary1, $text-color, true);}
+.primary2-box {@include box($primary2, $text-color-inverse, true);}
+.secondary-box {@include box($secondary, $text-color, true);}
+.secondary1-box {@include box($secondary1, $text-color, true);}
+.secondary2-box {@include box($secondary2, $text-color, true);}
+.grey-box {@include box($grey, $text-color, true);}
+.grey1-box {@include box($grey1, $text-color, true);}
+.grey2-box {@include box($grey2, $text-color, true);}
+.disabled-box {@include box($disabled, $text-color, true);}
+.box1 {@include box($bg-color1, $text-color, true);}
+.box2 {@include box($bg-color2, $text-color, true);}
+.box3 {@include box($bg-color3, $text-color, true);}
+.box4 {@include box($bg-color4, $text-color, true);}
+.box5 {@include box($bg-color5, $text-color, true);}
+.box6 {@include box($bg-color6, $text-color, true);}
+.box7 {@include box($bg-color7, $text-color, true);}
+.box8 {@include box($bg-color8, $text-color, true);}
+.box9 {@include box($bg-color9, $text-color, true);}
+.box10 {@include box($bg-color10, $text-color, true);}
+
+html {height: 100%;}
+body {
+    @extend .default-box;
+    font-family: $font-family;font-size: $font-size;font-weight: $font-weight;
+    line-height: $line-height;
+    margin: 0;padding: 0;min-height: 100%;
+}
+a {cursor: pointer;text-decoration: none;color: inherit;}
+i {cursor: pointer;&:hover {color: $primary;}}
+h1,h2 {color: $hilight-color;margin: 0;padding: 0;}
+h3,h4,h5 {color: $hilight-color;margin: 0;padding: 0;}
+input[type=text],input[type=password],input[type=email],input[type=url] {
+    height: $line-height;border: none;outline: none;border-radius: 0px;padding: 0 3px;font-weight: 100;
+}
+iframe {border: none;width: 100%;height: 100%;}

@@ -1,15 +1,19 @@
+$font-family: Helvetica, Arial, sans-serif;
+$font-weight: 500;
+$font-size-xl: 20px;
+$font-size-l: 16px;
+$font-size: 13px;
+$font-size-s: 12px;
+$font-size-xs: 10px;
+
 $margin: 16px;
-$header-height: 56px;
+$header-height: 40px;
 $header-padding-top: $margin;
 $logo-height: 40px;
 
 $footer-height: 16px;
 $footer-padding-top: $margin;
 
-$font-size: 14px;
-$font-size-s: 12px;
-$font-size-xs: 10px;
-$font-size-xxs: 6px;
 $line-height: 24px;
 
 $bar-height: 40px;
@@ -19,4 +23,13 @@ $sidebar-width: 260px;
 $sidebar-left-width-collapsed: 40px;
 $sidebar-right-width-collapsed: $margin;
 
-$breadcrumb-font-size: 16px;
+$menu-min-width: 200px;
+
+$breadcrumb-font-size: 14px;
+
+$app-width: 1200px;
+
+$select-field-height: 24px;
+$select-field-dropdown-bg: #ffffff;
+$select-field-margin: $margin;
+$select-field-border-color: $border-color;

@@ -13,9 +13,10 @@ module.exports = exports = function(config) {
   require('./build')(config);
   gulp.task(settings.NAME, function() {
     return runSequence(
-      // settings.NAME + ':clean',
-      settings.NAME + ':vendor',
-      settings.NAME + ':build',
-      settings.NAME + ':serve')
+        settings.NAME + ':clean',
+        settings.NAME + ':serve',
+        settings.NAME + ':vendor',
+        settings.NAME + ':build'
+    )
   });
 }

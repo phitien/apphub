@@ -1,0 +1,10 @@
+@mixin box($bg, $color, $important: false) {
+    @if $important {
+        background-color: $bg !important;
+        color: $color !important;
+    }
+    @else {
+        background-color: $bg;
+        color: $color;
+    }
+}

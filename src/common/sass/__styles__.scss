@@ -1,60 +1,18 @@
 @import "./constants/__styles__.scss";
+@import "./common.scss";
+@import "./select-field.scss";
+@import "./search-field.scss";
+@import "./table.scss";
+@import "./tabs.scss";
+@import "./stepper.scss";
+@import "./card.scss";
+@import "./modal.scss";
+@import "./breadcrumbs.scss";
+
+@import "./layout.scss";
 @import "./header/__styles__.scss";
 @import "./footer/__styles__.scss";
-
-html {
-  height: 100%;
-}
-body {
-  @extend .default-box;
-  font-family: 'Roboto', sans-serif;font-size: $font-size;font-weight: 400;
-  line-height: $line-height;
-  margin: 0;padding: 0;min-height: 100%;
-  #header,#container,#footer {width: 100%;}
-  #header {
-    position: fixed;height: $header-height;z-index: 10;
-  }
-  #footer {
-    position: fixed;bottom: 0;height: $footer-height;
-    &:after {content: '';display: block;height: 1px;width: 100%;background-color: $dark;position: absolute;top: 0;left: 0;}
-  }
-  #container {
-    position: fixed;top: $header-height;bottom: $footer-height;overflow: hidden;
-    display: flex;flex-direction: column;
-    .viewport {
-      flex: 1;display: flex;flex-direction: column;
-      .page {
-        flex: 1;display: flex;flex-direction: column;
-      }
-      .login-page {
-        align-items: center;justify-content: center;
-        h1 {color: $primary;}
-        .login-form {
-          width: 30%;
-          padding: 24px;
-          border-radius: 3px;
-          background-color: rgba(255, 255, 255, .9);
-        }
-      }
-    }
-  }
-}
-a {
-    cursor: pointer;text-decoration: none;color: inherit;
-    font-weight: 200;
-  &:hover {color: $primary;}
-}
-i {cursor: pointer;
-  &:hover {color: $primary;}
-}
-h1,h2 {color: $primary;font-weight: 100;}
-h3,h4,h5 {color: $primary;font-weight: 100;}
-input[type=text],input[type=password],input[type=email],input[type=url] {
-  height: $line-height;border: none;outline: none;border-radius: 3px;padding: 0 3px;
-  font-weight: 100;
-}
-@import "./breadcrumbs.scss";
-@import "./select-field.scss";
-@import "./tabs.scss";
-@import "./card.scss";
+@import "./sidebar-left.scss";
+@import "./sidebar-right.scss";
 @import "./page.scss";
+@import "./content.scss";

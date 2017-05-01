@@ -1,5 +1,6 @@
 import {onRouteEntered, onRouteChanged} from '../../common/routes'
-import {Viewport, LandingPage} from './components'
+import {LandingPage} from './pages'
+import Viewport from './Viewport'
 
 const hierarchyPaths = ['/{appname}']
 const subRoutes = [

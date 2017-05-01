@@ -1,33 +1,18 @@
-.tabs {
-  background-color: #fff;
-  display: flex;
-  .tabs-header {
-    display: flex;overflow: hidden;
-    >*{flex: 1;}
-  }
-  .tab-content {
-    flex: 1;
-    padding: $margin;
-    color: rgba(0, 0, 0, 0.870588);
-    background-color: rgb(255, 255, 255);
-    transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
-    box-sizing: border-box; font-family: Roboto, sans-serif;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
-    border-radius: 2px;
-    overflow-wrap: break-word;
-    overflow: hidden;
-  }
-}
-.tabs-horizontal {
-  flex-direction: column;
-  .tabs-header {
-    padding-bottom: 1px;flex-direction: row;
-  }
-}
-.tabs-vertical {
-  display: flex;flex-direction: row;
-  .tabs-header {
-    display: flex;flex-direction: column;
-  }
+.table-view {
+    @extend .box1;
+    font-size: 11px;width: 100%;margin: 0;padding: 0;
+    .pagination {display: flex;align-items: center;justify-content: space-between;}
+    .pagination-navi,.pagination-totalpage,.pagination-pagesize {
+        display: flex;align-items: center;justify-content: center;
+        input {width: 36px;text-align: center;font-size: 14px;}
+    }
+    table {width: 100%;border-top: 1px solid $border-color;border-left: 1px solid $border-color;}
+    thead {@extend .secondary-box;}
+    th,td {margin: 0;padding: 3px;border-right: 1px solid $border-color;border-bottom: 1px solid $border-color;}
+    tbody tr {
+        &:nth-child(2n + 1) {@extend .box3;}
+        &:nth-child(2n) {@extend .box1;}
+        &:hover {@extend .box4;}
+        &.no-row-found {@extend .box1;}
+    }
 }
