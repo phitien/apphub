@@ -4,6 +4,7 @@ import Viewport from './Viewport'
 
 const subRoutes = [
 {path: '/asd/sub', component: pages.SubPage, onChange: onRouteChanged},
+{path: '/asd/ok', component: pages.OkPage, onChange: onRouteChanged},
 /**NEWPAGE**/
 ]
 const routes = [{

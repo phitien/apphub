@@ -4,6 +4,9 @@ import {default as BasePage} from './Page'
 
 class Page extends BasePage {
     pageClassName = '{app}-sub-page'
+
+    pageLoadedApi = null
+    
     children = () =>
         <div className='content'>
             <div>Sub page of {appname}</div>

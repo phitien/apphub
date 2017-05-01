@@ -4,6 +4,7 @@ import {default as BasePage} from './Page'
 
 class Page extends BasePage {
     pageClassName = 'asd-landing-page'
+
     children = () =>
         <div className='content'>
             <div>Landing page of Asd</div>

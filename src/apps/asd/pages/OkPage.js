@@ -3,13 +3,13 @@ import {Connect} from '../redux'
 import {default as BasePage} from './Page'
 
 class Page extends BasePage {
-    pageClassName = '{app}-landing-page'
+    pageClassName = 'asd-sub-page'
 
-    pageLoadedApi = null
+    pageLoadedApi = '132adas.asd/asdasd'
     
     children = () =>
         <div className='content'>
-            <div>Landing page of {appname}</div>
+            <div>Ok page of asd</div>
         </div>
 }
 

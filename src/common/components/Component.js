@@ -23,7 +23,15 @@ export default class Component extends React.Component {
             this.onRouteChanged(prev, next)
         })
         this.postComponentDidMount()
+        if (this.pageLoadedApi) {
+            this.util.query(this.pageLoadedApi)
+                .success(this.pageLoadedApiSuccess)
+                .failure(this.pageLoadedApiFailure)
+                .run()
+        }
     }
+    pageLoadedApiSuccess = (res) => {}
+    pageLoadedApiFailure = (res) => {}
     postComponentDidMount() {}
     componentWillUnmount() {this.__mounted = false}
     onRouteEntered = (route, replace) => {}

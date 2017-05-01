@@ -3,13 +3,14 @@ gulp.task('mkpage', function() {
     var argv = require('./argv');
     var app = argv('app');
     var name = argv('name');
+    var api = argv('api');
 
     if (!app) {
-        console.error('No App provided: gulp mkpage --app=app --name=name');
+        console.error('No App provided: gulp mkpage --app=app --name=name --api=?');
         return;
     }
     if (!name) {
-        console.error('No page name provided: gulp mkpage --app=app --name=name');
+        console.error('No page name provided: gulp mkpage --app=app --name=name --api=?');
         return;
     }
 
@@ -27,7 +28,12 @@ gulp.task('mkpage', function() {
                     var replace = require('gulp-replace');
                     var batchReplace = require('gulp-batch-replace');
                     gulp.src(settings.SRC_SAMPLE + '/pages/SubPage.js')
-                        .pipe(batchReplace([['Sub', Name], ['{app}', app], ['{appname}', app]]))
+                        .pipe(batchReplace([
+                            ['Sub', Name],
+                            ['{app}', app],
+                            ['{appname}', app],
+                            ['pageLoadedApi = null', 'pageLoadedApi = ' + (api ? '\'' + api + '\'' : 'null')]
+                        ]))
                         .pipe(rename(Name + 'Page.js'))
                         .pipe(gulp.dest(settings.SRC_APP + '/pages'));
                     gulp.src(settings.SRC_APP + '/pages/index.js')

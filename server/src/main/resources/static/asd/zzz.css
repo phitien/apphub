@@ -381,7 +381,7 @@ iframe {
     width: 100%; }
 
 #application {
-  width: 1000px;
+  width: auto;
   margin: 0 auto; }
   #application #header {
     height: 40px;
