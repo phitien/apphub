@@ -1,7 +1,7 @@
 import {Config} from '../../../core/Config'
 export default new Config(
     {env: '{env}'},
-    {config},
+    require('../conf'),
     require('./ui'),
     require('./base'),
     require('./{env}')

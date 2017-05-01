@@ -24,7 +24,7 @@ gulp.task('rmpage', function() {
                     var replace = require('gulp-replace');
                     var clean = require('gulp-clean');
                     gulp.src(settings.SRC_APP + '/routes.js')
-                        .pipe(replace("{path: '/"+app+"/"+name+"', component: pages."+Name+"Page, onChange: onRouteChanged},\n", ""))
+                        .pipe(replace("{path: conf.apppath + '/"+name+"', component: pages."+Name+"Page, onChange: onRouteChanged},\n", ""))
                         .pipe(gulp.dest(settings.SRC_APP, {overwrite: true}));
 
                     gulp.src(settings.SRC_APP + '/pages/index.js')

@@ -1,13 +1,14 @@
 import {onRouteEntered, onRouteChanged} from '../../common/routes'
 import * as pages from './pages'
 import Viewport from './Viewport'
+import conf from './conf'
 
 const subRoutes = [
-{path: '{apppath}/sub', component: pages.SubPage, onChange: onRouteChanged},
+{path: conf.apppath + '/sub', component: pages.SubPage, onChange: onRouteChanged},
 /**NEWPAGE**/
 ]
 const routes = [{
-    path: '{apppath}',
+    path: conf.apppath,
     component: Viewport,
     indexRoute: {
         component: pages.LandingPage

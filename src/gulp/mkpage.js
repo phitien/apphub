@@ -40,7 +40,7 @@ gulp.task('mkpage', function() {
                         .pipe(replace('/**NEWPAGE**/', "exports."+Name+"Page = require('./"+Name+"Page').default\n/**NEWPAGE**/"))
                         .pipe(gulp.dest(settings.SRC_APP + '/pages', {overwrite: true}));
                     gulp.src(settings.SRC_APP + '/routes.js')
-                        .pipe(replace('/**NEWPAGE**/', "{path: '/"+app+"/"+name+"', component: pages."+Name+"Page, onChange: onRouteChanged},\n/**NEWPAGE**/"))
+                        .pipe(replace('/**NEWPAGE**/', "{path: conf.apppath + '/"+name+"', component: pages."+Name+"Page, onChange: onRouteChanged},\n/**NEWPAGE**/"))
                         .pipe(gulp.dest(settings.SRC_APP, {overwrite: true}));
                     gulp.src(settings.SRC_SAMPLE + '/sass/sub-page.scss')
                         .pipe(batchReplace([['sub', name], ['{app}', app]]))

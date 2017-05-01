@@ -5,5 +5,4 @@ require('./src/gulp/rmpage');
 
 var addGulpTasks = require('./src/gulp/gulp');
 
-addGulpTasks(require('./src/apps/asd/gulp/gulp'));
 /**NEW_APP**/

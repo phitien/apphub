@@ -30,7 +30,7 @@ gulp.task('mkapp', function() {
                 .pipe(gulp.dest(settings.SRC_APP));
             var rename = require('gulp-rename');
             gulp.src(app + '.js')
-                .pipe(rename('gulp.js'))
+                .pipe(rename('index.js'))
                 .pipe(gulp.dest(settings.SRC_APP_GULP));
         }
         gulp.src(['./gulpfile.js'])

@@ -8,7 +8,7 @@ module.exports = exports = function(config) {
     var SRC_APPS = SRC + '/apps';
     var SRC_SAMPLE = SRC + '/sample';
     var SRC_APP = SRC_APPS + APP;
-    var SRC_APP_GULP = SRC_APP + '/gulp';
+    var SRC_APP_GULP = SRC_APP + '/conf';
     var SRC_TEMPLATE = SRC_APP + '/template';
     var SRC_MOCK = SRC_APP + '/mock';
     var SRC_APP_CONFIG = SRC_APP + '/config';
@@ -36,7 +36,7 @@ module.exports = exports = function(config) {
     ];
 
     var GULP_NEW_APP_TEXT = '/**NEW_APP**/';
-    var GULP_NEW_APP = "addGulpTasks(require('"+SRC_APP+"/gulp/gulp'));";
+    var GULP_NEW_APP = "addGulpTasks(require('"+SRC_APP+"/conf'));";
     var GULP_NEW_APP_REPLACEMENT = GULP_NEW_APP + "\n" + GULP_NEW_APP_TEXT;
 
     var argv = require('./argv');
