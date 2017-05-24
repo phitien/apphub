@@ -199,6 +199,7 @@ iframe {
 
 .select-field {
   z-index: 10;
+  box-sizing: border-box;
   display: inline-block;
   cursor: pointer;
   position: relative; }
@@ -207,6 +208,7 @@ iframe {
   .select-field .padding-right, .select-field .select-text, .select-field .select-option {
     padding-right: 4px; }
   .select-field .select-dropdown {
+    box-sizing: border-box;
     z-index: 10;
     position: absolute;
     top: 100%;
@@ -216,6 +218,7 @@ iframe {
     border-right: 1px solid #999999;
     border-bottom: 1px solid #999999; }
   .select-field .select-value {
+    box-sizing: border-box;
     display: flex;
     align-items: center;
     border: 1px solid #999999; }
@@ -566,6 +569,10 @@ body {
         display: block; }
   .header .user-box .wrapper:hover .menus {
     display: flex; }
+  .header .categories .wrapper .select-field {
+    width: 250px; }
+    .header .categories .wrapper .select-field .select-dropdown {
+      width: 250px; }
 
 .footer {
   display: flex;

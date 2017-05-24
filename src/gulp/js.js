@@ -12,7 +12,6 @@ module.exports = exports = function(settings) {
             transform: ['babelify'],
         };
         var bundler = browserify(bundleConfig);
-        bundler.on('update', doBundle);
         settings.LIBS.forEach(function (libs) {
             libs.forEach(function(lib) {
                 bundler.external(lib);
@@ -20,8 +19,12 @@ module.exports = exports = function(settings) {
         });
         function doBundle() {
             var bundle = bundler
-                .on('error', gutil.log.bind(gutil, 'Browserify Error'))
                 .bundle()
+                .on('update', doBundle)
+                .on('error', function(err) {
+                    console.log(err)
+                    this.emit('end')
+                })
                 .pipe(source('zzz.js'))
                 .pipe(buffer())
             return settings.dest([

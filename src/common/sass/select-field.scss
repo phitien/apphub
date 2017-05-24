@@ -1,14 +1,17 @@
 .select-field {
     z-index: 10;
+    box-sizing: border-box;
     .padding-left {padding-left: $select-field-margin/4;}
     .padding-right {padding-right: $select-field-margin/4;}
     display: inline-block;cursor: pointer;position: relative;
     .select-title {}
     .select-dropdown {
+        box-sizing: border-box;
         z-index: 10;position: absolute;top: 100%;left: 0;
         min-width: 100%;border-left: 1px solid $select-field-border-color;border-right: 1px solid $select-field-border-color;border-bottom: 1px solid $select-field-border-color;
     }
     .select-value {
+        box-sizing: border-box;
         display: flex;align-items: center;border: 1px solid $select-field-border-color;
         &.placeholder {font-style: italic;opacity: .5;}
     }

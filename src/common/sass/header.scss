@@ -86,4 +86,13 @@
     .user-box .wrapper:hover .menus {display: flex;}
     .help {
     }
+    .categories .wrapper {
+        .select-field {
+            $width: 250px;
+            width: $width;
+            .select-dropdown {
+                width: $width;
+            }
+        }
+    }
 }

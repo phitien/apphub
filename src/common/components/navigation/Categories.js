@@ -23,7 +23,7 @@ class Categories extends Style {
     }
 
     children = () => <div className='wrapper'>
-        <SelectField options={this.options} placeholder='Categories' searchable={true}/>
+        <SelectField options={this.options} value='' placeholder='All Categories' searchable={true}/>
     </div>
     render = () => {
         return <div className={this.className}>
